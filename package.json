@@ -5,9 +5,9 @@
   "main": "./frontend/index.js",
   "scripts": {
     "start": "npm run build-dev && npm run serve",
-    "build-dev": "NODE_ENV=development $(npm bin)/webpack -d --display-reasons --display-chunks --display-error-details",
+    "build-dev": "NODE_ENV=development $(npm bin)/webpack --config webpack.config.js -d --display-reasons --display-chunks --display-error-details",
     "serve": "NODE_ENV=development $(npm bin)/webpackwebpack-dev-server --config webpack.config.js --hot --inline --no-info",
-    "build": "NODE_ENV=production $(npm bin)/webpack -p --config webpack.production.config.js",
+    "build": "NODE_ENV=production $(npm bin)/webpack -p --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,6 +36,7 @@
   "devDependencies": {
     "babel-core": "^5.8.22",
     "babel-loader": "^5.3.2",
+    "lodash": "^3.10.1",
     "react-hot-loader": "^1.2.8",
     "redux-devtools": "^1.0.2",
     "webpack": "^1.11.0",

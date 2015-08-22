@@ -3,7 +3,8 @@
 app.yaml
 venv/
 gae_env/
-gae_app/static/
+gae_app/assets/*.js
+gae_app/assets/*.css
 
 
 ### General NodeJS ###
