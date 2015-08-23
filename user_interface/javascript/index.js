@@ -13,7 +13,7 @@ if (__DEV__) {
 
 
 function renderUserInterface () {
-  const mountPoint = document.getElementById('user-interface');
+  let mountPoint = document.getElementById('user-interface');
   React.render(<Root />, mountPoint);
 }
 

@@ -4,12 +4,12 @@ import * as reducers from '../reducers';
 
 
 function createStoreWithMiddleware () {
-    const reducer = combineReducers(reducers);
+    let reducer = combineReducers(reducers);
 
     if (__DEV__) {
-        const reduxDev     = require('redux-devtools');
+        let reduxDev = require('redux-devtools');
 
-        const finalCreateStore = compose(
+        let finalCreateStore = compose(
             reduxDev.devTools(),
             reduxDev.persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
             createStore

@@ -1,9 +1,23 @@
 // import $ from 'jquery';
+import { uniqueId } from '../utils/lodash_utils';
+// uniqueId could be used to help indicate to the reducers
+// when a particular optimistic update has finished:
+// the optimistic update and the real update will share
+// the same unique ID, which is information that can
+// help to coordinate a loading animation on the UI
+
 
 
 export function fetchAndAddName (delay = 300) {
     return dispatch => {
-        setTimeout(() => { dispatch(addName('Ryan')); } , delay);
+        const requestId = uniqueId();
+
+        dispatch(addName(null, { requestId }));
+
+        const complete = true;
+        let completeDispatch = () => { dispatch(addName('Ryan', { requestId, complete })); };
+        setTimeout(completeDispatch, delay);
+
         // return $.get('endpoint')
         //         .done(name => dispatch(addName(name)));
                 // .fail()
@@ -12,10 +26,12 @@ export function fetchAndAddName (delay = 300) {
 
 
 export const ADD_NAME = 'ADD_NAME';
-function addName (name) {
+function addName (name, meta, error) {
     return {
-        type: ADD_NAME,
-        payload: name
+        type:    ADD_NAME,
+        payload: error || name,
+        error:   Boolean(error),
+        meta:    meta
     };
 }
 

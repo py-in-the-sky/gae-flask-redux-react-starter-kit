@@ -34,10 +34,11 @@ export default class Root extends Component {
                     </DebugPanel>
 
                     <button
-                     onClick={() => { this.setState({ debugVisible: !this.state.debugVisible }) } }
+                     onTouchTap={() => { this.setState({ debugVisible: !this.state.debugVisible }) } }
                      style={{ position: 'fixed', bottom: 0, left: 0 }}>
                         HIDE/SHOW REDUX DEBUG PANEL
                     </button>
+
                 </div>
             );
         }

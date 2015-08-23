@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Greeting from './greeting';
-import { uniqueId } from '../utils/lodash_utils';
 
 
 export default class RootComponent extends Component {
