@@ -9,6 +9,8 @@ export default class Root extends Component {
         super(props);
         this.createMainComponent = this.createMainComponent.bind(this);
         this.createReduxProvider = this.createReduxProvider.bind(this);
+        if (__DEV__)
+            this.state = { debugVisible: true };
     }
 
     render() {
@@ -27,10 +29,15 @@ export default class Root extends Component {
 
                     {this.createReduxProvider()}
 
-                    <DebugPanel top right bottom>
+                    <DebugPanel top right bottom={this.state.debugVisible}>
                         <DevTools store={store} monitor={LogMonitor} />
                     </DebugPanel>
 
+                    <button
+                     onClick={() => { this.setState({ debugVisible: !this.state.debugVisible }) } }
+                     style={{ position: 'fixed', bottom: 0, left: 0 }}>
+                        HIDE/SHOW REDUX DEBUG PANEL
+                    </button>
                 </div>
             );
         }
