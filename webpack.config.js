@@ -8,7 +8,6 @@ var EnvironmentPlugin = new webpack.DefinePlugin({ __DEV__: __DEV__ });
 
 
 var entryPoint = path.join(__dirname, 'user_interface', 'javascript', 'index.js');
-var commonBundleName = 'common.js';
 var publicPath = 'http://localhost:8080/assets/';
 // trailing slash is critical
 // the JS, CSS, etc. serverd by the webpack dev server will
@@ -22,7 +21,7 @@ var outputTemplate = {
     path:     path.join(__dirname, 'gae_app', 'assets')
 };
 var resolveTemplate = { extensions: ['', '.js'] };
-var externalsTemplate = { $: 'jquery', jQuery: 'jquery' }
+var externalsTemplate = { jquery: '$' }
 
 
 function buildWebpackConfig () {
@@ -51,11 +50,7 @@ function buildWebpackConfig () {
             resolve:   resolveTemplate,
             externals: externalsTemplate,
 
-            plugins: [
-                EnvironmentPlugin,
-                new webpack.NoErrorsPlugin(),
-                new webpack.optimize.CommonsChunkPlugin(commonBundleName),
-            ],
+            plugins: [ EnvironmentPlugin ],
 
             module: {
                 loaders: [
@@ -78,7 +73,6 @@ function buildWebpackConfig () {
 
             plugins: [
                 EnvironmentPlugin,
-                new webpack.optimize.CommonsChunkPlugin(commonBundleName),
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.optimize.OccurenceOrderPlugin(),
             ],

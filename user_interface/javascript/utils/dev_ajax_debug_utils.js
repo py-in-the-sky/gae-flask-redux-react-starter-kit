@@ -1,3 +1,6 @@
+import $ from 'jquery';
+
+
 export function initializeAjaxDebuggingUtils () {
   if (document)
     ajaxErrorDebug();

@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Greeting from './greeting';
+import { uniqueId } from '../utils/lodash_utils';
 
 
 export default class RootComponent extends Component {
     constructor(props) {
         super(props);
-        this.renderGreetings = this.renderGreetings.bind(this);
-        this.addGreeting     = this.addGreeting.bind(this);
+        this.renderGreetings      = this.renderGreetings.bind(this);
+        this.addGreeting          = this.addGreeting.bind(this);
+        this.subtractLastGreeting = this.subtractLastGreeting.bind(this);
     }
 
     componentDidMount () {
@@ -26,6 +28,10 @@ export default class RootComponent extends Component {
                     ADD GREETING
                 </button>
 
+                <button onTouchTap={this.subtractLastGreeting}>
+                    SUBTRACT LAST GREETING
+                </button>
+
             </div>
         );
     }
@@ -36,6 +42,10 @@ export default class RootComponent extends Component {
 
     addGreeting () {
         this.props.fetchAndAddName();
+    }
+
+    subtractLastGreeting () {
+        this.props.subtractLastName();
     }
 }
 

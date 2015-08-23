@@ -1,4 +1,7 @@
-export function fetchAndAddName (delay = 1000) {
+// import $ from 'jquery';
+
+
+export function fetchAndAddName (delay = 300) {
     return dispatch => {
         setTimeout(() => { dispatch(addName('Ryan')); } , delay);
         // return $.get('endpoint')
