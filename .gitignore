@@ -5,6 +5,7 @@ venv/
 gae_env/
 gae_app/assets/*.js
 gae_app/assets/*.css
+gae_app/assets/*.map
 
 
 ### General NodeJS ###
