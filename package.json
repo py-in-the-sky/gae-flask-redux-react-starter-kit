@@ -2,7 +2,7 @@
   "name": "gae-flask-redux-react-starter-kit",
   "version": "1.0.0",
   "description": "",
-  "main": "./frontend/index.js",
+  "main": "./user_interface/javascript/index.js",
   "scripts": {
     "start": "npm run build-dev && npm run serve",
     "build-dev": "NODE_ENV=development $(npm bin)/webpack --config webpack.config.js -d --display-reasons --display-chunks --display-error-details",
