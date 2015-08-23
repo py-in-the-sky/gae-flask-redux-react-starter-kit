@@ -7,10 +7,10 @@ let emptySet  = Set();
 
 
 export function names (state = emptyList, action) {
-    const { type, payload, meta } = action;
-    const complete = meta && meta.complete;
+    const { type, payload, error, meta } = action;
+    const success = !error && meta && meta.complete;
 
-    if (type === ADD_NAME && complete)
+    if (type === ADD_NAME && success)
         return state.push(payload);
     else if (type === SUBTRACT_LAST_NAME)
         return state.pop();

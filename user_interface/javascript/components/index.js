@@ -8,6 +8,7 @@ export default class RootComponent extends Component {
         this.renderGreetings      = this.renderGreetings.bind(this);
         this.addGreeting          = this.addGreeting.bind(this);
         this.subtractLastGreeting = this.subtractLastGreeting.bind(this);
+        this.loadingVisibility    = this.loadingVisibility.bind(this);
     }
 
     componentDidMount () {
@@ -31,6 +32,10 @@ export default class RootComponent extends Component {
                     SUBTRACT LAST GREETING
                 </button>
 
+                <div style={{ visibility: this.loadingVisibility() }}>
+                    Waiting...
+                </div>
+
             </div>
         );
     }
@@ -46,11 +51,16 @@ export default class RootComponent extends Component {
     subtractLastGreeting () {
         this.props.subtractLastName();
     }
+
+    loadingVisibility () {
+        return this.props.requestsPending ? 'visible' : 'hidden'
+    }
 }
 
 
 RootComponent.propTypes = {
     names:            PropTypes.object.isRequired,
+    requestsPending:  PropTypes.bool.isRequired,
     fetchAndAddName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
 }

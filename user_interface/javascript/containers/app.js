@@ -8,8 +8,9 @@ import * as Actions from '../actions';
 
 
 function mapStateToProps (state) {
-    const { names } = state;
-    return { names };
+    let { names, pendingRequests } = state;
+    const requestsPending = pendingRequests.size > 0;
+    return { names, requestsPending };
 }
 
 
