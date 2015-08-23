@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import RootComponent from '../components';
+import PageOne from '../components/page_one';
 import * as Actions from '../actions';
 
 
-// construct the 'smart' App 'container' around the 'dumb' RootComponent
+// Construct a 'smart container' around a 'dumb' component.
+// The construction for PageOne and PageTwo are the same.
+// However, they could differ and probably would in any
+// real-world app.
 
 
 function mapStateToProps (state) {
@@ -20,7 +23,7 @@ function mapDispatchToProps(dispatch) {
 
 
 function createApp () {
-    return connect(mapStateToProps, mapDispatchToProps)(RootComponent);
+    return connect(mapStateToProps, mapDispatchToProps)(PageOne);
 }
 
 

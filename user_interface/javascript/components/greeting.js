@@ -9,7 +9,7 @@ export default class Greeting extends Component {
     render () {
         return (
             <div className="greeting">
-                {'Hello, ' + this.props.name + '!'}
+                {this.props.salutation + ', ' + this.props.name + '!'}
             </div>
         );
     }
@@ -17,5 +17,6 @@ export default class Greeting extends Component {
 
 
 Greeting.propTypes = {
-    name: PropTypes.string.isRequired
+    name:       PropTypes.string.isRequired,
+    salutation: PropTypes.string.isRequired,
 }

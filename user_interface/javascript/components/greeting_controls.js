@@ -1,28 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import Greeting from './greeting';
 
 
-export default class RootComponent extends Component {
+export default class GreetingControls extends Component {
     constructor(props) {
         super(props);
-        this.renderGreetings      = this.renderGreetings.bind(this);
         this.addGreeting          = this.addGreeting.bind(this);
         this.subtractLastGreeting = this.subtractLastGreeting.bind(this);
         this.loadingVisibility    = this.loadingVisibility.bind(this);
     }
 
-    componentDidMount () {
-        // request one name when component mounts
-        this.addGreeting();
-    }
-
     render () {
         return (
-            <div className="page">
-
-                <div className="greetings">
-                    {this.renderGreetings()}
-                </div>
+            <div style={{ float: 'left', marginLeft: 20 }}>
 
                 <button onTouchTap={this.addGreeting}>
                     ADD GREETING
@@ -40,10 +29,6 @@ export default class RootComponent extends Component {
         );
     }
 
-    renderGreetings () {
-        return this.props.names.map( (name, index) => <Greeting key={index} name={name} /> );
-    }
-
     addGreeting () {
         this.props.fetchAndAddName();
     }
@@ -53,13 +38,13 @@ export default class RootComponent extends Component {
     }
 
     loadingVisibility () {
+        // TODO: can this just return a Boolean?
         return this.props.requestsPending ? 'visible' : 'hidden'
     }
 }
 
 
-RootComponent.propTypes = {
-    names:            PropTypes.object.isRequired,
+GreetingControls.propTypes = {
     requestsPending:  PropTypes.bool.isRequired,
     fetchAndAddName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,

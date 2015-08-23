@@ -9,6 +9,9 @@ let emptySet  = Set();
 export function names (state = emptyList, action) {
     const { type, payload, error, meta } = action;
     const success = !error && meta && meta.complete;
+    // the interface for telling whether an action represents a
+    // success, error, or in-progress state should be simpler
+    // and more self-describing
 
     if (type === ADD_NAME && success)
         return state.push(payload);
