@@ -2,8 +2,8 @@ import { ADD_NAME, SUBTRACT_LAST_NAME } from '../actions';
 import { List, Set } from 'immutable';
 
 
-let emptyList = List();
-let emptySet  = Set();
+const emptyList = List();
+const emptySet  = Set();
 
 
 export function names (state = emptyList, action) {
