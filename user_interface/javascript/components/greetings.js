@@ -13,8 +13,9 @@ const emptyList = List();
 export default class Greetings extends Component {
     constructor(props) {
         super(props);
-        this.defaultValues = this.defaultValues.bind(this);
         this.endValues = this.endValues.bind(this);
+        this.willEnter = this.willEnter.bind(this);
+        this.willLeave = this.willLeave.bind(this);
         this.chooseSalutation = memoize( key => randomElement(salutations) );
     }
 
@@ -22,28 +23,29 @@ export default class Greetings extends Component {
     render () {
         return (
             <TransitionSpring
-             defaultValue={this.defaultValues()}
              endValue={this.endValues()}
-             willEnter={() => { return { val: 30 }}}
-             willLeave={() => { return { val: 0 }}} >
+             willEnter={this.willEnter}
+             willLeave={this.willLeave} >
 
-                {currentValues =>
+                {configs =>
 
                     <div className="greetings" style={{ float: 'left', marginLeft: 20 }}>
 
-                        {this.currentChildren(currentValues).map( ([name, index, currentValue]) =>
+                        {Object.keys(configs).map( index => {
+                            const { name, translateY } = configs[index];
 
-                            <div
-                             key={index}
-                             style={{ transform: `translateY(${currentValue.val}px)` }} >
+                            return (
+                                <div
+                                 key={index}
+                                 style={{ transform: `translateY(${translateY.val}px)` }} >
 
-                                <Greeting
-                                 name={name}
-                                 salutation={this.chooseSalutation(index)} />
+                                    <Greeting
+                                     name={name}
+                                     salutation={this.chooseSalutation(index)} />
 
-                            </div>
-
-                        )}
+                                </div>
+                            );
+                        })}
 
                     </div>
 
@@ -54,17 +56,19 @@ export default class Greetings extends Component {
     }
 
     endValues () {
-        return this.props.names.map( () => { return { val: 0 }} ).toObject();
+        return this.props.names.map( (name) => {
+                return { name, translateY: { val: 0 } };
+            }).toObject();
     }
 
-    defaultValues () {
-        return this.props.names.map( () => { return { val: 30 }} ).toObject();
+    willEnter (keyThatEnters, correspondingValueOfKey, endValueYouJustSpecified, currentInterpolatedValue, currentSpeed) {
+        const { name } = correspondingValueOfKey;
+        return { name, translateY: { val: 30 }};
     }
 
-    currentChildren (tweenValues) {
-        return this.props.names
-                   .filter( (_, index) => index in tweenValues )
-                   .map( (name, index) => [name, index, tweenValues[index]] );
+    willLeave (keyThatLeaves, correspondingValueOfKeyThatJustLeft, endValueYouJustSpecified, currentInterpolatedValue, currentSpeed) {
+        const { name, translateY } = correspondingValueOfKeyThatJustLeft;
+        return { name, translateY: { val: 30 }};
     }
 }
 
