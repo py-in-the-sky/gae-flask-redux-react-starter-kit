@@ -62,10 +62,9 @@ export default class Root extends Component {
                 {() =>
                     <Router history={this.props.history}>
                         <Route path="/" component={Page}>
-                            <Route path='/1'  component={PageOne} />
+                            <Route path='/1' component={PageOne} />
                             <Route path='/2' component={PageTwo} />
                         </Route>
-                        <Redirect from="*" to="/" />
                     </Router>
                 }
             </Provider>

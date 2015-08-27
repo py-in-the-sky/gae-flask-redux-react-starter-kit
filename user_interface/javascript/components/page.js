@@ -12,9 +12,6 @@ export default class Page extends Component {
     }
 
     render () {
-        const pathname = this.props.location.pathname;
-        const child = this.props.children;
-
         return (
             <div style={{ backgroundColor: '#FDFDFD' }}>
 
@@ -25,18 +22,19 @@ export default class Page extends Component {
                  willEnter={this.willEnter}
                  willLeave={this.willLeave} >
 
-                    {configs => {
-                        if (!configs[pathname])
-                            return null;
+                    {configs =>
+                        <div>
+                            {Object.keys(configs).map( pathname => {
+                                const { translateX, child } = configs[pathname];
+                                const style = {
+                                    position: 'relative',
+                                    transform: `translateX(${translateX.val}px)`,
+                                };
 
-                        const { opacity } = configs[pathname];
-                        const style = {
-                            position: 'relative',
-                            opacity:  opacity.val,
-                        };
-
-                        return <div style={style} key={pathname}>{child}</div>;
-                    }}
+                                return <div style={style} key={pathname}>{child}</div>;
+                            })}
+                        </div>
+                    }
 
                 </TransitionSpring>
 
@@ -45,19 +43,29 @@ export default class Page extends Component {
     }
 
     endValues () {
+        const { children, location: { pathname } } = this.props;
         return {
-            [this.props.location.pathname]: {
-                opacity: { val: 1 }
+            [pathname]: {
+                child: children,
+                translateX: { val: 0 },
             }
         };
     }
 
-    willEnter () {
-        return { opacity: { val: 0 } };
+    willEnter (key, value) {
+        const { child } = value;
+        return {
+            child,
+            translateX: { val: -window.innerWidth },
+        };
     }
 
-    willLeave () {
-        return { opacity: { val: 0 } };
+    willLeave (key, value) {
+        const { child } = value;
+        return {
+            child,
+            translateX: { val: window.innerWidth },
+        };
     }
 }
 
