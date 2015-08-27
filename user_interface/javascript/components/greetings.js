@@ -32,12 +32,14 @@ export default class Greetings extends Component {
                     <div className="greetings" style={{ float: 'left', marginLeft: 20 }}>
 
                         {Object.keys(configs).map( index => {
-                            const { name, translateY } = configs[index];
+                            const { name, translateY, opacity } = configs[index];
+                            const style = {
+                                transform: `translateY(${translateY.val}px)`,
+                                opacity: opacity.val
+                            };
 
                             return (
-                                <div
-                                 key={index}
-                                 style={{ transform: `translateY(${translateY.val}px)` }} >
+                                <div key={index} style={style} >
 
                                     <Greeting
                                      name={name}
@@ -57,18 +59,18 @@ export default class Greetings extends Component {
 
     endValues () {
         return this.props.names.map( (name) => {
-                return { name, translateY: { val: 0 } };
+                return { name, translateY: { val: 0 }, opacity: { val: 1 } };
             }).toObject();
     }
 
     willEnter (keyThatEnters, correspondingValueOfKey, endValueYouJustSpecified, currentInterpolatedValue, currentSpeed) {
         const { name } = correspondingValueOfKey;
-        return { name, translateY: { val: 30 }};
+        return { name, translateY: { val: 30 }, opacity: { val: 0 } };
     }
 
     willLeave (keyThatLeaves, correspondingValueOfKeyThatJustLeft, endValueYouJustSpecified, currentInterpolatedValue, currentSpeed) {
-        const { name, translateY } = correspondingValueOfKeyThatJustLeft;
-        return { name, translateY: { val: 30 }};
+        const { name } = correspondingValueOfKeyThatJustLeft;
+        return { name, translateY: { val: 30 }, opacity: { val: 0} };
     }
 }
 
