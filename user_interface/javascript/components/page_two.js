@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Greetings from './greetings';
 import GreetingControls from './greeting_controls';
-import Navigation from './navigation';
 
 
 export default class PageTwo extends Component {
@@ -17,8 +16,8 @@ export default class PageTwo extends Component {
     render () {
         const pageStyle = {
             backgroundColor: '#EFEBE9',
-            position: 'fixed',
-            top: 0,
+            position: 'absolute',
+            top: 70,
             bottom: 0,
             left: 0,
             right: 0,
@@ -27,8 +26,6 @@ export default class PageTwo extends Component {
 
         return (
             <div className="page" style={pageStyle}>
-
-                <Navigation />
 
                 <GreetingControls
                  requestsPending={this.props.requestsPending}

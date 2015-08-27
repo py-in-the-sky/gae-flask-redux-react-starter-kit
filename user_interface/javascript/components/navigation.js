@@ -11,7 +11,7 @@ export default class Navigation extends Component {
         return (
             <div className="links">
                 <ul>
-                    <li><Link to="/" >Page One</Link></li>
+                    <li><Link to="/1" >Page One</Link></li>
                     <li><Link to="/2">Page Two</Link></li>
                 </ul>
             </div>
