@@ -1,6 +1,11 @@
 import React, { Component, PropTypes, Children } from 'react';
-import { TransitionSpring } from 'react-motion';
+import { TransitionSpring, presets } from 'react-motion';
 import Navigation from './navigation';
+
+
+function windowWidthPlus (x) {
+    return window.innerWidth + x;
+}
 
 
 export default class Page extends Component {
@@ -27,8 +32,12 @@ export default class Page extends Component {
                             {Object.keys(configs).map( pathname => {
                                 const { translateX, child } = configs[pathname];
                                 const style = {
-                                    position: 'relative',
                                     transform: `translateX(${translateX.val}px)`,
+                                    position: 'absolute',
+                                    top: 70,
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
                                 };
 
                                 return <div style={style} key={pathname}>{child}</div>;
@@ -47,7 +56,7 @@ export default class Page extends Component {
         return {
             [pathname]: {
                 child: children,
-                translateX: { val: 0 },
+                translateX: { val: 0, config: [450, 35] },
             }
         };
     }
@@ -56,7 +65,7 @@ export default class Page extends Component {
         const { child } = value;
         return {
             child,
-            translateX: { val: -window.innerWidth },
+            translateX: { val: -windowWidthPlus(0) },
         };
     }
 
@@ -64,7 +73,7 @@ export default class Page extends Component {
         const { child } = value;
         return {
             child,
-            translateX: { val: window.innerWidth },
+            translateX: { val: windowWidthPlus(200) },
         };
     }
 }

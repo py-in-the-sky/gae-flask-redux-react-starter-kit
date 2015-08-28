@@ -17,7 +17,7 @@ export default class PageOne extends Component {
         const pageStyle = {
             backgroundColor: '#E8F5E9',
             position: 'absolute',
-            top: 70,
+            top: 0,
             bottom: 0,
             left: 0,
             right: 0,

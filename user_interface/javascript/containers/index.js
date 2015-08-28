@@ -39,7 +39,7 @@ export default class Root extends Component {
 
                     {this.createReduxProvider()}
 
-                    <DebugPanel top right bottom={this.state.debugVisible}>
+                    <DebugPanel right bottom top={this.state.debugVisible}>
                         <DevTools store={store} monitor={LogMonitor} />
                     </DebugPanel>
 

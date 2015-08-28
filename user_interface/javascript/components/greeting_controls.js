@@ -39,7 +39,7 @@ export default class GreetingControls extends Component {
 
     loadingVisibility () {
         // TODO: can this just return a Boolean?
-        return this.props.requestsPending ? 'visible' : 'hidden'
+        return this.props.requestsPending ? 'visible' : 'hidden';
     }
 }
 
