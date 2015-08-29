@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
 import { Router, Route, Redirect } from 'react-router';
 import store from '../store';
@@ -7,7 +8,7 @@ import PageTwoApp from './page_two_app';
 import PageHandler from '../components/page_handler';
 
 
-export default class Root extends Component {
+export default class Root extends PureComponent {
     constructor(props) {
         super(props);
         this.createMainComponent = this.createMainComponent.bind(this);

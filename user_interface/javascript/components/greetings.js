@@ -1,16 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
 import { TransitionSpring } from 'react-motion';
-import { List, Set } from 'immutable';
 import Greeting from './greeting';
 import { randomElement } from '../utils/array';
 import { memoize } from '../utils/lodash_utils';
 
 
 const salutations = [ 'Hello', 'Hi', 'Hey', 'Yo', ];
-const emptyList = List();
 
 
-export default class Greetings extends Component {
+export default class Greetings extends PureComponent {
     constructor(props) {
         super(props);
         this.endValues = this.endValues.bind(this);

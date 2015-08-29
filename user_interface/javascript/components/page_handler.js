@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, Children } from 'react';
+import React, { PropTypes, Children } from 'react';
+import PureComponent from 'react-pure-render/component';
 import { TransitionSpring, presets } from 'react-motion';
 import Navigation from './navigation';
 
@@ -8,7 +9,7 @@ function windowWidthPlus (x) {
 }
 
 
-export default class PageHandler extends Component {
+export default class PageHandler extends PureComponent {
     constructor(props) {
         super(props);
         this.endValues = this.endValues.bind(this);

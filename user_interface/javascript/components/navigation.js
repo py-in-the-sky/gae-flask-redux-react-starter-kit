@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
 import { Link } from 'react-router';
 
 
-export default class Navigation extends Component {
+export default class Navigation extends PureComponent {
     constructor(props) {
         super(props);
     }

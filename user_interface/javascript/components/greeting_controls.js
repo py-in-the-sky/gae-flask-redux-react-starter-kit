@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
 
 
-export default class GreetingControls extends Component {
+export default class GreetingControls extends PureComponent {
     constructor(props) {
         super(props);
         this.addGreeting          = this.addGreeting.bind(this);

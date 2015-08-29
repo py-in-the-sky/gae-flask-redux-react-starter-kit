@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
 import Greetings from './greetings';
 import GreetingControls from './greeting_controls';
 
 
-export default class PageTwo extends Component {
+export default class PageTwo extends PureComponent {
     constructor(props) {
         super(props);
     }
