@@ -1,5 +1,6 @@
 ### Project-Specific ###
 
+jquery.js
 app.yaml
 venv/
 gae_env/

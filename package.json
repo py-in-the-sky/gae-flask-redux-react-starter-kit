@@ -8,6 +8,7 @@
     "build-dev": "NODE_ENV=development $(npm bin)/webpack --config webpack.config.js -d --display-reasons --display-chunks --display-error-details",
     "serve": "NODE_ENV=development $(npm bin)/webpack-dev-server --config webpack.config.js --hot --inline --no-info",
     "build": "NODE_ENV=production $(npm bin)/webpack -p --config webpack.config.js",
+    "repl": "babel-node --stage 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

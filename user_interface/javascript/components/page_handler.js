@@ -8,7 +8,7 @@ function windowWidthPlus (x) {
 }
 
 
-export default class Page extends Component {
+export default class PageHandler extends Component {
     constructor(props) {
         super(props);
         this.endValues = this.endValues.bind(this);
@@ -79,6 +79,6 @@ export default class Page extends Component {
 }
 
 
-Page.propTypes = {
+PageHandler.propTypes = {
     children: PropTypes.object,
 }

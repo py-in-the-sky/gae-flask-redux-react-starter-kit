@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, Redirect } from 'react-router';
 import store from '../store';
-import PageOne from './page_one';
-import PageTwo from './page_two';
-import Page from '../components/page';
+import PageOneApp from './page_one_app';
+import PageTwoApp from './page_two_app';
+import PageHandler from '../components/page_handler';
 
 
 export default class Root extends Component {
@@ -61,9 +61,9 @@ export default class Root extends Component {
             <Provider store={store}>
                 {() =>
                     <Router history={this.props.history}>
-                        <Route path="/" component={Page}>
-                            <Route path='/1' component={PageOne} />
-                            <Route path='/2' component={PageTwo} />
+                        <Route path="/" component={PageHandler}>
+                            <Route path='/1' component={PageOneApp} />
+                            <Route path='/2' component={PageTwoApp} />
                         </Route>
                     </Router>
                 }
