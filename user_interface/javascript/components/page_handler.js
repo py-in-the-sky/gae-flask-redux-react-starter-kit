@@ -97,13 +97,13 @@ export default class PageHandler extends PureComponent {
     }
 
     willEnter (windowWidth) {
-        const translateXStart = windowWidth;
+        const translateXStart = -windowWidth;
 
         return (key, value) => {
             const { child } = value;
             return {
                 child,
-                translateX: { val: -translateXStart },
+                translateX: { val: translateXStart },
             };
         };
     }
