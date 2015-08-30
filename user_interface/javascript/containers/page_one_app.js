@@ -11,7 +11,7 @@ import * as Actions from '../actions';
 
 
 function mapStateToProps (state) {
-    let { names, pendingRequests } = state;
+    const { names, pendingRequests } = state;
     const requestsPending = pendingRequests.size > 0;
     return { names, requestsPending };
 }
