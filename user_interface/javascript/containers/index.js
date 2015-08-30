@@ -5,7 +5,7 @@ import { Router, Route, Redirect } from 'react-router';
 import store from '../store';
 import PageOneApp from './page_one_app';
 import PageTwoApp from './page_two_app';
-import PageHandler from '../components/page_handler';
+import Layout from '../components/layout';
 
 
 export default class Root extends PureComponent {
@@ -62,7 +62,7 @@ export default class Root extends PureComponent {
             <Provider store={store}>
                 {() =>
                     <Router history={this.props.history}>
-                        <Route path="/" component={PageHandler}>
+                        <Route path="/" component={Layout}>
                             <Route path='/1' component={PageOneApp} />
                             <Route path='/2' component={PageTwoApp} />
                         </Route>

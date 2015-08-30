@@ -1,7 +1,6 @@
-import React, { PropTypes, Children } from 'react';
+import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
-import { TransitionSpring, presets } from 'react-motion';
-import Navigation from './navigation';
+import { TransitionSpring } from 'react-motion';
 import { getWindowWidth } from '../utils/dom';
 
 
@@ -39,6 +38,13 @@ import { getWindowWidth } from '../utils/dom';
 //    object from `endValues` change to reflect the new URL path, and hence
 //    TransitionSpring will kick off the animation that we describe in `endValues`,
 //    `willEnter`, and `willLeave`.
+// 6) Note that in the TransitionSpring's children function, we map over the
+//    `configs` keys, producing a child for each key.  Even though in our
+//    `endValues` function, we return an object with only one key, under the
+//    hood TransitionSpring will be managing both page 1 and page 2 as children
+//    during the page-transition animation.  Therefore, `configs`, when passed to
+//    the children function, may have up to two keys in it, one for the entering
+//    page and one for the leaving page.
 
 
 export default class PageHandler extends PureComponent {
@@ -53,36 +59,30 @@ export default class PageHandler extends PureComponent {
         const windowWidth = getWindowWidth();
 
         return (
-            <div style={{ backgroundColor: '#FDFDFD' }}>
+            <TransitionSpring
+             endValue={this.endValues()}
+             willEnter={this.willEnter(windowWidth)}
+             willLeave={this.willLeave(windowWidth)} >
 
-                <Navigation />
+                {configs =>
+                    <div>
+                        {Object.keys(configs).map( pathname => {
+                            const { translateX, child } = configs[pathname];
+                            const style = {
+                                transform: `translateX(${translateX.val}px)`,
+                                position: 'absolute',
+                                top: 70,
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                            };
 
-                <TransitionSpring
-                 endValue={this.endValues()}
-                 willEnter={this.willEnter(windowWidth)}
-                 willLeave={this.willLeave(windowWidth)} >
+                            return <div style={style} key={pathname}>{child}</div>;
+                        })}
+                    </div>
+                }
 
-                    {configs =>
-                        <div>
-                            {Object.keys(configs).map( pathname => {
-                                const { translateX, child } = configs[pathname];
-                                const style = {
-                                    transform: `translateX(${translateX.val}px)`,
-                                    position: 'absolute',
-                                    top: 70,
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                };
-
-                                return <div style={style} key={pathname}>{child}</div>;
-                            })}
-                        </div>
-                    }
-
-                </TransitionSpring>
-
-            </div>
+            </TransitionSpring>
         );
     }
 
@@ -109,7 +109,7 @@ export default class PageHandler extends PureComponent {
     }
 
     willLeave (windowWidth) {
-        const translateXEnd = windowWidth + 200;
+        const translateXEnd = windowWidth;
 
         return (key, value) => {
             const { child } = value;
@@ -124,4 +124,5 @@ export default class PageHandler extends PureComponent {
 
 PageHandler.propTypes = {
     children: PropTypes.object,
+    location: PropTypes.object,
 }

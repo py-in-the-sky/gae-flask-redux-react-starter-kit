@@ -1,4 +1,4 @@
-export default {
-    uniqueId: require('lodash/utility/uniqueId'),
-    memoize:  require('lodash/function/memoize'),
-};
+import uniqueId from 'lodash/utility/uniqueId';
+import memoize  from 'lodash/function/memoize';
+
+export default { uniqueId, memoize };
