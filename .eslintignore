@@ -1,0 +1,4 @@
+**/gae_app/*
+**/node_modules/*
+**/jquery*.js
+**/webpack.config*.js

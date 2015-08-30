@@ -49,4 +49,4 @@ GreetingControls.propTypes = {
     requestsPending:  PropTypes.bool.isRequired,
     fetchAndAddName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
-}
+};

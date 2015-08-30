@@ -1,0 +1,36 @@
+{
+    "extends": "eslint:recommended",
+    // "extends": "airbnb",
+
+    "rules": {
+        "indent": [ 2, 4 ],
+        "quotes": [ 1, "single" ],
+        "linebreak-style": [ 2, "unix" ],
+        "semi": [ 1, "always" ],
+        "no-unused-vars": 1,
+        "valid-jsdoc": 2,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2,
+        // Disable until Flow supports let and const
+        "no-var": 0,
+        "vars-on-top": 0,
+        // Disable comma-dangle unless need to support it
+        "comma-dangle": 0
+    },
+
+    "env": {
+        "es6": true,
+        "browser": true,
+        "mocha": true,
+        "node": true
+    },
+
+    "ecmaFeatures": {
+        "modules": true,
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+    },
+
+    "plugins": [ "react" ]
+}

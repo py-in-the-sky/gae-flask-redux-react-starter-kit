@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
-import { Router, Route, Redirect } from 'react-router';
+import { Router, Route } from 'react-router';
 import store from '../store';
 import PageOneApp from './page_one_app';
 import PageTwoApp from './page_two_app';
@@ -45,7 +45,7 @@ export default class Root extends PureComponent {
                     </DebugPanel>
 
                     <button
-                     onTouchTap={() => { this.setState({ debugVisible: !this.state.debugVisible }) } }
+                     onTouchTap={() => { this.setState({ debugVisible: !this.state.debugVisible }); } }
                      style={toggleButtonStyle}>
                         HIDE/SHOW REDUX DEBUG PANEL
                     </button>
@@ -76,4 +76,4 @@ export default class Root extends PureComponent {
 
 Root.propTypes = {
     history: PropTypes.object.isRequired,
-}
+};

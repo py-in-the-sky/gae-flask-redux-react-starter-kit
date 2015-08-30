@@ -125,4 +125,4 @@ export default class PageHandler extends PureComponent {
 PageHandler.propTypes = {
     children: PropTypes.object,
     location: PropTypes.object,
-}
+};

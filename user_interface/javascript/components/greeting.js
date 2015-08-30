@@ -20,4 +20,4 @@ export default class Greeting extends PureComponent {
 Greeting.propTypes = {
     name:       PropTypes.string.isRequired,
     salutation: PropTypes.string.isRequired,
-}
+};

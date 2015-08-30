@@ -2,6 +2,7 @@ import Root from './containers';
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
+import $ from 'jquery';
 
 
 injectTapEventPlugin();
@@ -14,8 +15,8 @@ if (__DEV__) {
 
 
 function renderUserInterface () {
-  let mountPoint = document.getElementById('user-interface');
-  React.render(<Root history={new BrowserHistory()} />, mountPoint);
+    let mountPoint = document.getElementById('user-interface');
+    React.render(<Root history={new BrowserHistory()} />, mountPoint);
 }
 
 

@@ -76,4 +76,4 @@ export default class Greetings extends PureComponent {
 
 Greetings.propTypes = {
     names: PropTypes.object.isRequired,
-}
+};
