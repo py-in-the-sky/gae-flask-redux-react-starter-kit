@@ -2,6 +2,8 @@
     "extends": "eslint:recommended",
     // "extends": "airbnb",
 
+    "parser": "babel-eslint",
+
     "rules": {
         "indent": [ 2, 4 ],
         "quotes": [ 1, "single" ],
@@ -25,6 +27,9 @@
         "require-yield": 2,
         "prefer-reflect": 1,
         "no-console": 1,
+        "eol-last": 1,
+        "no-mixed-requires": 1,
+        "consistent-return": 1,
         "comma-dangle": 0
     },
 
