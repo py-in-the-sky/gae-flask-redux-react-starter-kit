@@ -1,6 +1,9 @@
 import $ from 'jquery';
 
 
+/* eslint-disable no-console */
+
+
 export function initializeAjaxDebuggingUtils () {
     if (document)
         ajaxErrorDebug();

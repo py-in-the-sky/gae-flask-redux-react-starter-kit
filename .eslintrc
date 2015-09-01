@@ -26,7 +26,7 @@
         "prefer-template": 1,
         "require-yield": 2,
         "prefer-reflect": 1,
-        "no-console": 1,
+        "no-console": 2,
         "eol-last": 1,
         "no-mixed-requires": 1,
         "consistent-return": 1,
