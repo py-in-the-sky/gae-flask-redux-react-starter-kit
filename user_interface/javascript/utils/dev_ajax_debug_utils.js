@@ -4,7 +4,7 @@ import $ from 'jquery';
 /* eslint-disable no-console */
 
 
-export function initializeAjaxDebuggingUtils () {
+export default function initializeAjaxDebuggingUtils () {
     if (document)
         ajaxErrorDebug();
 

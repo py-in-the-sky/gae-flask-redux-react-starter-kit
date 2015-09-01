@@ -7,11 +7,11 @@ function createStoreWithMiddleware () {
     const reducer = combineReducers(reducers);
 
     if (__DEV__) {
-        const reduxDev = require('redux-devtools');
+        const { devTools, persistState } = require('redux-devtools');
 
         const finalCreateStore = compose(
-            reduxDev.devTools(),
-            reduxDev.persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+            devTools(),
+            persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
             createStore
         );
 

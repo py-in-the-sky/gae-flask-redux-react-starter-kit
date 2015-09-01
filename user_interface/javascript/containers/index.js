@@ -23,10 +23,7 @@ export default class Root extends PureComponent {
 
     createMainComponent () {
         if (__DEV__) {
-            const reduxDev = require('redux-devtools/lib/react');
-            const DevTools = reduxDev.DevTools;
-            const DebugPanel = reduxDev.DebugPanel;
-            const LogMonitor = reduxDev.LogMonitor;
+            const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
             const toggleButtonStyle = {
                 backgroundColor: '#2A2F3A',
                 color: '#6FB3D2',

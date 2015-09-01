@@ -9,8 +9,8 @@ injectTapEventPlugin();
 
 
 if (__DEV__) {
-    const devAjaxDebugUtils = require('./utils/dev_ajax_debug_utils');
-    devAjaxDebugUtils.initializeAjaxDebuggingUtils();
+    const initializeAjaxDebuggingUtils = require('./utils/dev_ajax_debug_utils');
+    initializeAjaxDebuggingUtils();
 }
 
 
