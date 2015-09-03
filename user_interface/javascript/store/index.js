@@ -10,12 +10,21 @@ function createStoreWithMiddleware () {
         const { devTools, persistState } = require('redux-devtools');
 
         const finalCreateStore = compose(
+            applyMiddleware(thunkMiddleware),
             devTools(),
-            persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-            createStore
-        );
+            persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+        )(createStore);
 
-        return applyMiddleware(thunkMiddleware)(finalCreateStore)(reducer);
+        const store = finalCreateStore(reducer);
+
+        if (module.hot) {  // Enable Webpack hot module replacement for reducers
+            module.hot.accept('../reducers', () => {
+                const nextRootReducer = combineReducers(require('../reducers/index'));
+                store.replaceReducer(nextRootReducer);
+            });
+        }
+
+        return store;
     }
     else
         return applyMiddleware(thunkMiddleware)(createStore)(reducer);

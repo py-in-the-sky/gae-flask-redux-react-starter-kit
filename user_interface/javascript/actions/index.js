@@ -15,7 +15,7 @@ export function fetchAndAddName (delay = 300) {
         dispatch(addName(null, { requestId }));
 
         const complete = true;
-        const completeDispatch = () => { dispatch(addName('Ryan', { requestId, complete })); };
+        const completeDispatch = () => { dispatch(addName('World', { requestId, complete })); };
         setTimeout(completeDispatch, delay);
 
         // return $.get('endpoint')
