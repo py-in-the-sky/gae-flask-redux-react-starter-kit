@@ -5,6 +5,13 @@ import PageHandler from './page_handler';
 
 
 export default class Layout extends PureComponent {
+    // componentWillReceiveProps (newProps) {
+        // Calling this.setState() within this function will not
+        // trigger an additional render.
+        // console.log('incoming page', newProps.location.pathname);
+        // console.log('outgoing page', this.props.location.pathname);
+    // }
+
     render () {
         return (
             <div style={{ backgroundColor: '#FDFDFD' }}>

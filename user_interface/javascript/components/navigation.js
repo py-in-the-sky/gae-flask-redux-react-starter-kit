@@ -4,10 +4,6 @@ import { Link } from 'react-router';
 
 
 export default class Navigation extends PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
     render () {
         return (
             <div className="links">

@@ -3,10 +3,6 @@ import PureComponent from 'react-pure-render/component';
 
 
 export default class Greeting extends PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
     render () {
         return (
             <div className="greeting">

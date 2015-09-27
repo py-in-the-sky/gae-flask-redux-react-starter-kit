@@ -3,44 +3,26 @@ import PureComponent from 'react-pure-render/component';
 
 
 export default class GreetingControls extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.addGreeting          = this.addGreeting.bind(this);
-        this.subtractLastGreeting = this.subtractLastGreeting.bind(this);
-        this.loadingVisibility    = this.loadingVisibility.bind(this);
-    }
-
     render () {
+        const { fetchAndAddName, subtractLastName, requestsPending } = this.props;
+
         return (
             <div style={{ float: 'left', marginLeft: 20 }}>
 
-                <button onTouchTap={this.addGreeting}>
+                <button onTouchTap={fetchAndAddName}>
                     ADD GREETING
                 </button>
 
-                <button onTouchTap={this.subtractLastGreeting}>
+                <button onTouchTap={subtractLastName}>
                     SUBTRACT LAST GREETING
                 </button>
 
-                <div style={{ visibility: this.loadingVisibility() }}>
+                <div style={{ visibility: requestsPending ? 'visible' : 'hidden' }}>
                     Waiting...
                 </div>
 
             </div>
         );
-    }
-
-    addGreeting () {
-        this.props.fetchAndAddName();
-    }
-
-    subtractLastGreeting () {
-        this.props.subtractLastName();
-    }
-
-    loadingVisibility () {
-        // TODO: can this just return a Boolean?
-        return this.props.requestsPending ? 'visible' : 'hidden';
     }
 }
 
