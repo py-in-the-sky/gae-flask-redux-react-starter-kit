@@ -1,2 +1,3 @@
+bpython==0.14.2
 honcho==0.6.6
 wsgiref==0.1.2
