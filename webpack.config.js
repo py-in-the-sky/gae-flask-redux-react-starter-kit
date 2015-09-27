@@ -7,7 +7,7 @@ var __DEV__ = (process.env.NODE_ENV === 'development');
 var EnvironmentPlugin = new webpack.DefinePlugin({ __DEV__: __DEV__ });
 
 
-var entryPoint = path.join(__dirname, 'user_interface', 'javascript', 'index.js');
+var entryPoint = path.join(__dirname, 'browser_client', 'index.js');
 var publicPath = 'http://localhost:8080/assets/';
 // trailing slash is critical
 // the JS, CSS, etc. serverd by the webpack dev server will
@@ -18,7 +18,7 @@ var publicPath = 'http://localhost:8080/assets/';
 
 var outputTemplate = {
     filename: '[name].js',
-    path:     path.join(__dirname, 'gae_app', 'assets')
+    path:     path.join(__dirname, 'app', 'assets')
 };
 var resolveTemplate = { extensions: ['', '.js'] };
 var externalsTemplate = { jquery: '$' }

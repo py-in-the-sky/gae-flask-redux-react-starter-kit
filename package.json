@@ -1,10 +1,9 @@
 {
   "name": "gae-flask-redux-react-starter-kit",
   "version": "1.0.0",
-  "description": "",
-  "main": "./user_interface/javascript/index.js",
   "scripts": {
     "repl": "$(npm bin)/babel-node --stage 0",
+    "harmony": "node --harmony",
     "start": "make _npm-serve",
     "build-dev": "make _npm-build-dev",
     "build": "make _npm-build",

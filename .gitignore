@@ -3,10 +3,10 @@
 jquery.js
 app.yaml
 venv/
-gae_env/
-gae_app/assets/*.js
-gae_app/assets/*.css
-gae_app/assets/*.map
+app_env/
+app/assets/*.js
+app/assets/*.css
+app/assets/*.map
 
 
 ### General NodeJS ###
