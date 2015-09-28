@@ -9,11 +9,11 @@ export default class GreetingControls extends PureComponent {
         return (
             <div style={{ float: 'left', marginLeft: 20 }}>
 
-                <button onTouchTap={fetchAndAddName}>
+                <button onClick={fetchAndAddName}>
                     ADD GREETING
                 </button>
 
-                <button onTouchTap={subtractLastName}>
+                <button onClick={subtractLastName}>
                     SUBTRACT LAST GREETING
                 </button>
 

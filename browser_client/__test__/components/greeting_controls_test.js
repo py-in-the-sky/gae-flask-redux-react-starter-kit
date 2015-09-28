@@ -1,9 +1,5 @@
 import React from 'react/addons';
 import GreetingControls from '../../components/greeting_controls';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-
-injectTapEventPlugin();
 
 
 const {

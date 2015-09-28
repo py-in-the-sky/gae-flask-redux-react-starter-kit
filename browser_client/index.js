@@ -1,11 +1,7 @@
 import Root from './containers';
 import React from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import $ from 'jquery';
-
-
-injectTapEventPlugin();
 
 
 if (__DEV__) {

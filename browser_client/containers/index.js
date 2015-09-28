@@ -42,7 +42,7 @@ export default class Root extends PureComponent {
                     </DebugPanel>
 
                     <button
-                     onTouchTap={() => { this.setState({ debugVisible: !this.state.debugVisible }); } }
+                     onClick={() => { this.setState({ debugVisible: !this.state.debugVisible }); } }
                      style={toggleButtonStyle}>
                         HIDE/SHOW REDUX DEBUG PANEL
                     </button>
