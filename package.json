@@ -63,7 +63,7 @@
     "mocha-testcheck": "^0.1.2",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
-    "redbox-react": "^1.0.1",
+    "redbox-react": "^1.1.1",
     "redux-devtools": "^2.1.0",
     "testcheck": "^0.1.4",
     "webpack": "^1.11.0",
