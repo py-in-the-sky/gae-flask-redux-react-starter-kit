@@ -1,4 +1,7 @@
 """
+Adapted from Peter Norvig's Design of Computer Programs
+(https://www.udacity.com/course/design-of-computer-programs--cs212)
+
 Example use of `decorator`
 
     from utils.decorator import decorator as d
@@ -23,13 +26,13 @@ from functools import update_wrapper
 
 
 def decorator(d):
-
+    "make function `d` a decorator: `d` wraps function `f` and takes on metadata"
     def _d(f):
         _f = d(f)  # what `d` was designed to do
         update_wrapper(_f, f)
         _f.__wrapped__ = f.func_dict.get('__wrapped__', f)
         # the above line ensures base function is passed up entire chain of
-        # decorators for easy testing
+        # decorators for easy retrieval for testing
         return _f
 
     return _d
