@@ -49,6 +49,7 @@
     "plugins": [ "react" ],
 
     "globals": {
-        "__DEV__": false
+        "__DEV__": false,
+        "expect": false
     }
 }
