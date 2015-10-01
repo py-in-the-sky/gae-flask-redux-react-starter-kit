@@ -1,6 +1,3 @@
-start:
-	npm run build-dev && honcho start
-
 rehydrate: pip-install-app pip-install-dev npm-install
 
 pip-install-app:
