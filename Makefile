@@ -41,7 +41,7 @@ _npm-test:
 	NODE_ENV=test $(NPM_BIN)/mocha $(MOCHA_OPTS) --recursive $(opts) $(MOCHA_TARGET)
 
 _npm-test-watch:
-	NODE_ENV=test $(NPM_BIN)/mocha -w $(MOCHA_OPTS) --recursive $(MOCHA_TARGET)
+	NODE_ENV=test $(NPM_BIN)/mocha -w $(MOCHA_OPTS) --reporter=dot --recursive $(MOCHA_TARGET)
 
 _npm-test-cov:
 	$(NPM_BIN)/babel-node $(NPM_BIN)/isparta cover $(NPM_BIN)/_mocha -- --recursive
