@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 
 /* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 
 
 export default function initializeAjaxDebuggingUtils () {

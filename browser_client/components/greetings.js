@@ -6,6 +6,9 @@ import { randomElement } from '../utils/array';
 import { memoize } from '../utils/lodash_utils';
 
 
+/* eslint-disable no-unused-vars */
+
+
 const salutations = [ 'Hello', 'Hi', 'Hey', 'Yo', ];
 
 
