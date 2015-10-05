@@ -24,71 +24,71 @@ var resolveTemplate = { extensions: ['', '.js'] };
 var externalsTemplate = { jquery: '$' }
 
 
-function buildWebpackConfig () {
-    if (__DEV__) {
-        var devOutputAdditions = {
-            publicPath: publicPath,
-            devtoolModuleFilenameTemplate: '[resourcePath]',
-            devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
-        };
+function devWebpackConfig () {
+    var devOutputAdditions = {
+        publicPath: publicPath,
+        devtoolModuleFilenameTemplate: '[resourcePath]',
+        devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
+    };
 
-        return {
-            debug: true,
-            displayErrorDetails: true,
-            outputPathinfo: true,
-            devtool: 'eval',
+    return {
+        debug: true,
+        displayErrorDetails: true,
+        outputPathinfo: true,
+        devtool: 'eval',
 
-            context: __dirname,
+        context: __dirname,
 
-            entry: [
-                'webpack-dev-server/client?' + publicPath,  // for non-hot updates
-                'webpack/hot/only-dev-server',              // for hot updates
-                entryPoint
+        entry: [
+            'webpack-dev-server/client?' + publicPath,  // for non-hot updates
+            'webpack/hot/only-dev-server',              // for hot updates
+            entryPoint
+        ],
+
+        output:    _.merge({}, outputTemplate, devOutputAdditions),
+        resolve:   resolveTemplate,
+        externals: externalsTemplate,
+
+        plugins: [ EnvironmentPlugin ],
+
+        module: {
+            loaders: [
+                {
+                    test:    /\.js$/,
+                    exclude: /node_modules/,
+                    loaders: ['babel-loader', 'flowcheck']
+                },
             ],
-
-            output:    _.merge({}, outputTemplate, devOutputAdditions),
-            resolve:   resolveTemplate,
-            externals: externalsTemplate,
-
-            plugins: [ EnvironmentPlugin ],
-
-            module: {
-                loaders: [
-                    {
-                        test:    /\.js$/,
-                        exclude: /node_modules/,
-                        loaders: ['babel-loader']
-                    },
-                ],
-            },
-        };
-    }
-    else {
-        return {
-            context:   __dirname,
-            entry:     entryPoint,
-            output:    _.merge({}, outputTemplate, { publicPath: '/assets' }),
-            resolve:   resolveTemplate,
-            externals: externalsTemplate,
-
-            plugins: [
-                EnvironmentPlugin,
-                new webpack.optimize.UglifyJsPlugin(),
-                new webpack.optimize.OccurenceOrderPlugin(),
-            ],
-
-            module: {
-                loaders: [
-                    {
-                        test:    /\.js$/,
-                        exclude: /node_modules/,
-                        loader:  'babel-loader'
-                    },
-                ],
-            },
-        };
-    }
+        },
+    };
 }
 
 
-module.exports = buildWebpackConfig();
+function prodWebpackConfig () {
+    return {
+        context:   __dirname,
+        entry:     entryPoint,
+        output:    _.merge({}, outputTemplate, { publicPath: '/assets' }),
+        resolve:   resolveTemplate,
+        externals: externalsTemplate,
+
+        plugins: [
+            EnvironmentPlugin,
+            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.OccurenceOrderPlugin(),
+        ],
+
+        module: {
+            loaders: [
+                {
+                    test:    /\.js$/,
+                    exclude: /node_modules/,
+                    loader:  'babel-loader'
+                },
+            ],
+        },
+    };
+}
+
+
+module.exports = __DEV__ ? devWebpackConfig() : prodWebpackConfig();

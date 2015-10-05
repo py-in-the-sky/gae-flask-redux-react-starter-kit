@@ -4,6 +4,14 @@ import { ADD_NAME, SUBTRACT_LAST_NAME } from '../actions';
 import { List, Set } from 'immutable';
 
 
+type Action = {
+    type:     string,
+    payload?: mixed,
+    meta?:    mixed,
+    error?:   boolean
+};
+
+
 const emptyList = List();
 const emptySet  = Set();
 

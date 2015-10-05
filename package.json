@@ -58,6 +58,8 @@
     "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-react": "^3.3.0",
     "expect": "^1.9.0",
+    "flowcheck": "^0.2.7",
+    "flowcheck-loader": "^1.0.0",
     "jquery": "^2.1.4",
     "jsdom": "^6.5.1",
     "mocha": "^2.3.1",
