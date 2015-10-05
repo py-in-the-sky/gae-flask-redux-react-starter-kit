@@ -3,8 +3,6 @@ app/.*
 browser_client/__flowtypes__/.*
 
 [include]
-flow_test.js
-browser_client/.*
 
 [libs]
 browser_client/__flowtypes__/
