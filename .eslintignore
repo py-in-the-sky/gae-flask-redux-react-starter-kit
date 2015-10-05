@@ -2,3 +2,4 @@
 **/node_modules/*
 **/jquery*.js
 **/webpack.config*.js
+**/__flowtypes__/*

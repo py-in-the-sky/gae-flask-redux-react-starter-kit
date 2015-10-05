@@ -9,7 +9,7 @@ import isPlainObject from 'lodash.isplainobject';
 export const FETCH = Symbol('fetch-middleware');
 
 
-export default const fetchMiddleware = (opts = {}) => {
+export default (opts = {}) => {
 
     validateOptions(opts);
 
@@ -69,5 +69,5 @@ const validateOptions = opts => {
 
         if (typeof fn !== 'function' && typeof fn !== 'undefined')
             throw new Error(`\`${fnName}\` must be a function or left undefined.`);
-        });
+    });
 };

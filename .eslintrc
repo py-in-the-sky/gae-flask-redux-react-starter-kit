@@ -50,6 +50,8 @@
 
     "globals": {
         "__DEV__": false,
-        "expect": false
+        "expect": false,
+        "Action": false,
+        "ActionCreator": false
     }
 }
