@@ -5,7 +5,10 @@ import { jsdom } from 'jsdom';
 /* eslint-disable no-console */
 
 
-console.log('\n--- MOCHA SETUP START ---');
+const log = process.env.HONCHO === 'true' ? ( () => null ) : console.log;
+
+
+log('\n--- MOCHA SETUP START ---');
 
 
 // You'll need to use this test helper on React components that use their
@@ -17,26 +20,26 @@ if (GLOBAL.document === undefined) {
     GLOBAL.document  = jsdom('<!doctype html><html><body></body></html>');
     GLOBAL.window    = document.defaultView;
     GLOBAL.navigator = { userAgent: 'node.js' };
-    console.log('`jsdom` instance created for testing React components');
+    log('`jsdom` instance created for testing React components');
 }
 else
-    console.log('`GLOBAL.document` already taken');
+    log('`GLOBAL.document` already taken');
 
 
 if (GLOBAL.expect === undefined) {
     GLOBAL.expect = expect;
-    console.log('`expect` set as a GLOBAL');
+    log('`expect` set as a GLOBAL');
 }
 else
-    console.log('`GLOBAL.expect` already taken');
+    log('`GLOBAL.expect` already taken');
 
 
 if (GLOBAL.__DEV__ === undefined) {
     GLOBAL.__DEV__ = false;
-    console.log('`__DEV__ = false` set as a GLOBAL');
+    log('`__DEV__ = false` set as a GLOBAL');
 }
 else
-    console.log('`GLOBAL.__DEV__` already taken');
+    log('`GLOBAL.__DEV__` already taken');
 
 
-console.log('--- MOCHA SETUP END ---\n');
+log('--- MOCHA SETUP END ---\n');
