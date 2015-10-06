@@ -4,9 +4,11 @@ import PureComponent from 'react-pure-render/component';
 
 export default class Greeting extends PureComponent {
     render () {
+        const { salutation, name } = this.props;
+
         return (
             <div className="greeting">
-                {`${this.props.salutation}, ${this.props.name}!`}
+                {`${salutation}, ${name}!`}
             </div>
         );
     }

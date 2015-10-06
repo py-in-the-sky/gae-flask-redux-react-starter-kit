@@ -25,16 +25,23 @@ export default class PageTwo extends PureComponent {
             padding: 20
         };
 
+        const {
+            names,
+            requestsPending,
+            fetchAndAddName,
+            subtractLastName,
+        } = this.props;
+
         return (
             <div className="page" style={pageStyle}>
 
                 <GreetingControls
-                 requestsPending={this.props.requestsPending}
-                 fetchAndAddName={this.props.fetchAndAddName}
-                 subtractLastName={this.props.subtractLastName} />
+                 requestsPending={requestsPending}
+                 fetchAndAddName={fetchAndAddName}
+                 subtractLastName={subtractLastName} />
 
                 <Greetings
-                 names={this.props.names} />
+                 names={names} />
 
             </div>
         );

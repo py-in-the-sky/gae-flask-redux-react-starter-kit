@@ -60,9 +60,9 @@ export default class Greetings extends PureComponent {
     }
 
     endValues () {
-        return this.props.names.map( (name) => {
-            return { name, translateY: { val: 0 }, opacity: { val: 1 } };
-        }).toObject();
+        return this.props.names.map( name =>
+            ({ name, translateY: { val: 0 }, opacity: { val: 1 } })
+        ).toObject();
     }
 
     willEnter (keyThatEnters, correspondingValueOfKey, endValueYouJustSpecified, currentInterpolatedValue, currentSpeed) {

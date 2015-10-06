@@ -3,7 +3,7 @@
     https://github.com/rackt/redux/blob/master/examples/real-world/middleware/api.js
  */
 
-import isPlainObject from 'lodash.isplainobject';
+import { isPlainObject } from '../utils/lodash_utils';
 
 
 export const FETCH = Symbol('fetch-middleware');

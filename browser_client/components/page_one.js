@@ -5,10 +5,6 @@ import GreetingControls from './greeting_controls';
 
 
 export default class PageOne extends PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount () {
         if (this.props.names.size === 0)
             this.props.fetchAndAddName();
@@ -25,16 +21,23 @@ export default class PageOne extends PureComponent {
             padding: 20
         };
 
+        const {
+            names,
+            requestsPending,
+            fetchAndAddName,
+            subtractLastName,
+        } = this.props;
+
         return (
             <div className="page" style={pageStyle}>
 
                 <Greetings
-                 names={this.props.names} />
+                 names={names} />
 
                 <GreetingControls
-                 requestsPending={this.props.requestsPending}
-                 fetchAndAddName={this.props.fetchAndAddName}
-                 subtractLastName={this.props.subtractLastName} />
+                 requestsPending={requestsPending}
+                 fetchAndAddName={fetchAndAddName}
+                 subtractLastName={subtractLastName} />
 
             </div>
         );

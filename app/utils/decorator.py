@@ -39,6 +39,5 @@ def decorator(d):
 
 
 # apply `decorator` to itself so that it behaves like a proper decorator,
-# updating the metadata and setting the `__wrapped__` field of the wrapper
-# it returns
+# updating metadata and setting `__wrapped__` on the wrapper it returns
 decorator = decorator(decorator)
