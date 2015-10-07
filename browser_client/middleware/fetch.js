@@ -17,11 +17,11 @@ export default (opts = {}) => {
     const onFetchDone = opts.onFetchDone || ( (...args) => args );
     const onFetchFail = opts.onFetchFail || ( (...args) => args );
 
-    return ({ dispatch }) => next => action => {
+    return ({ dispatch, getState }) => next => action => {
         if (!isFetchCall(action))
             return next(action);
 
-        const fetchCall = beforeFetch(action.meta[FETCH], action);
+        const fetchCall = beforeFetch(action.meta[FETCH], action, dispatch, getState);
 
         if (!isPlainObject(fetchCall))
             throw new Error('`action.meta[FETCH]` must be a plain JavaScript object.');
@@ -32,12 +32,14 @@ export default (opts = {}) => {
             next(action);
 
         return callApi(fetchCall).then(
-            response => dispatch(
-                done( ...onFetchDone(response, fetchCall, action) )
-            ),
-            error => dispatch(
-                fail( ...onFetchFail(error, fetchCall, action) )
-            )
+            response => {
+                const args = onFetchDone(response, fetchCall, action, dispatch, getState);
+                return dispatch( done( ...args, dispatch, getState ) );
+            },
+            error => {
+                const args = onFetchFail(error, fetchCall, action, dispatch, getState);
+                return dispatch( fail( ...args, dispatch, getState ) );
+            }
         );
     };
 };
