@@ -11,17 +11,12 @@ import Layout from '../components/layout';
 export default class Root extends PureComponent {
     constructor(props) {
         super(props);
-        this.createMainComponent = this.createMainComponent.bind(this);
-        this.createReduxProvider = this.createReduxProvider.bind(this);
+        this.renderReduxProvider = this.renderReduxProvider.bind(this);
         if (__DEV__)
-            this.state = { debugVisible: true };
+            this.state = { debugVisible: false };
     }
 
     render() {
-        return this.createMainComponent();
-    }
-
-    createMainComponent () {
         if (__DEV__) {
             const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
             const toggleButtonStyle = {
@@ -35,7 +30,7 @@ export default class Root extends PureComponent {
             return (
                 <div>
 
-                    {this.createReduxProvider()}
+                    {this.renderReduxProvider()}
 
                     <DebugPanel right bottom top={this.state.debugVisible}>
                         <DevTools store={store} monitor={LogMonitor} />
@@ -51,20 +46,18 @@ export default class Root extends PureComponent {
             );
         }
         else
-            return this.createReduxProvider();
+            return this.renderReduxProvider();
     }
 
-    createReduxProvider () {
+    renderReduxProvider () {
         return (
             <Provider store={store}>
-                {() =>
-                    <Router history={this.props.history}>
-                        <Route path="/" component={Layout}>
-                            <Route path='/1' component={PageOneApp} />
-                            <Route path='/2' component={PageTwoApp} />
-                        </Route>
-                    </Router>
-                }
+                <Router history={this.props.history}>
+                    <Route path="/" component={Layout}>
+                        <Route path="/1" component={PageOneApp} />
+                        <Route path="/2" component={PageTwoApp} />
+                    </Route>
+                </Router>
             </Provider>
         );
     }

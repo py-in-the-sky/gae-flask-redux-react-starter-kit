@@ -11,16 +11,6 @@ export default class PageOne extends PureComponent {
     }
 
     render () {
-        const pageStyle = {
-            backgroundColor: '#E8F5E9',
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: 20
-        };
-
         const {
             names,
             requestsPending,
@@ -29,7 +19,7 @@ export default class PageOne extends PureComponent {
         } = this.props;
 
         return (
-            <div className="page" style={pageStyle}>
+            <div className="page">
 
                 <Greetings
                  names={names} />

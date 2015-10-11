@@ -1,123 +1,26 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Children } from 'react';
 import PureComponent from 'react-pure-render/component';
-import { TransitionSpring } from 'react-motion';
+import { VelocityTransitionGroup } from 'velocity-react';
 import { getWindowWidth } from '../utils/dom';
 
 
-// Notes on animations choices and using TransitionSpring:
-// 1) `willEnter` and `willLeave` take `windowWidth` and return
-//    functions that TransitionSpring can use for tweening and
-//    animating.  The reason for this is to prevent DOM thrashing
-//    (the interleaving of gets and sets on the DOM).  The get
-//    operation on the DOM of getting the window's width is performed
-//    only once at the beginning of the page transition; the rest
-//    of the animation is then sets on the (virtual) DOM by TransitionSpring.
-// 2) Note that inside TransitionSpring's children function ({configs => ...}),
-//    ALL variable data used to render children comes from `configs`.  Any
-//    variable data that comes from outside the children function's context
-//    is not guaranteed to sync/work well with the transition animation.
-//    And by all variable data, I mean ALL variable data: styles, child components,
-//    props for child components, etc.  Note in the children function below that
-//    the child React component that's rendered inside the div comes from `configs`,
-//    and hence was passed into TransitionSpring via the `endValues`, `willEnter`, and
-//    `willLeave` functions.
-// 3) Note that in the `endValues` function below we return an object that conatins only
-//    one key and one child.  This is because we intend that the end state of the animation
-//    leaves just one top-level page inside PageHandler.
-// 4) Note that even though we really only return one child component from
-//    `endValues`, we provide it under a key in an object.  TransitionSpring can
-//    handle multiple entering/exiting children and the API for `endValues`
-//    is to return an object with a key-value pair for each child that should be
-//    present at the end of the transition animation.
-// 5) Note that even though we only supply one child in the return value of
-//    `endValues`, we don't just give it an arbitrary key; in this case, we give it
-//    a key that identifies the URL path to the page.  TransitionSpring triggers a
-//    transition animation only when the keys of the object returned by `endValues`
-//    have changed.  Hence, in our case, providing the URL path as the key to the
-//    object ensures that when a new page is chosen by the user, the keys of the
-//    object from `endValues` change to reflect the new URL path, and hence
-//    TransitionSpring will kick off the animation that we describe in `endValues`,
-//    `willEnter`, and `willLeave`.
-// 6) Note that in the TransitionSpring's children function, we map over the
-//    `configs` keys, producing a child for each key.  Even though in our
-//    `endValues` function, we return an object with only one key, under the
-//    hood TransitionSpring will be managing both page 1 and page 2 as children
-//    during the page-transition animation.  Therefore, `configs`, when passed to
-//    the children function, may have up to two keys in it, one for the entering
-//    page and one for the leaving page.
-
-
 export default class PageHandler extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.endValues = this.endValues.bind(this);
-        this.willEnter = this.willEnter.bind(this);
-        this.willLeave = this.willLeave.bind(this);
-    }
-
     render () {
         const windowWidth = getWindowWidth();
+        const { children, location: { pathname } } = this.props;
 
         return (
-            <TransitionSpring
-             endValue={this.endValues()}
-             willEnter={this.willEnter(windowWidth)}
-             willLeave={this.willLeave(windowWidth)} >
+            <VelocityTransitionGroup
+             component="div"
+             enter={pageEnter(windowWidth)}
+             leave={pageLeave(windowWidth)}>
 
-                {configs =>
-                    <div>
-                        {Object.keys(configs).map( pathname => {
-                            const { translateX, child } = configs[pathname];
-                            const style = {
-                                transform: `translateX(${translateX.val}px)`,
-                                position: 'absolute',
-                                top: 70,
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                            };
+                <div key={pathname} style={pageStyle[pathname]}>
+                    {children}
+                </div>
 
-                            return <div style={style} key={pathname}>{child}</div>;
-                        })}
-                    </div>
-                }
-
-            </TransitionSpring>
+            </VelocityTransitionGroup>
         );
-    }
-
-    endValues () {
-        const { children, location: { pathname } } = this.props;
-        return {
-            [pathname]: {
-                child: children,
-                translateX: { val: 0, config: [450, 35] },
-            }
-        };
-    }
-
-    willEnter (windowWidth) {
-        const translateXStart = -windowWidth;
-
-        return (key, value) => {
-            const { child } = value;
-            return {
-                child,
-                translateX: { val: translateXStart },
-            };
-        };
-    }
-
-    willLeave (windowWidth) {
-        const translateXEnd = windowWidth;
-
-        return (key, value) => {
-            const { child } = value;
-            return {
-                child,
-                translateX: { val: translateXEnd },
-            };
-        };
     }
 }
 
@@ -125,4 +28,49 @@ export default class PageHandler extends PureComponent {
 PageHandler.propTypes = {
     children: PropTypes.object,
     location: PropTypes.object,
+};
+
+
+const pageEnter = windowWidth => ({
+    ...defaultAnimationOpts,
+    animation: {
+        translateX: [0, -windowWidth],
+    },
+});
+
+
+const pageLeave = windowWidth => ({
+    ...defaultAnimationOpts,
+    animation: {
+        translateX: [windowWidth, 0],
+    },
+});
+
+
+const defaultAnimationOpts = {
+    duration: 300,
+    // easing: [ 250, 15 ],  // could use spring instead
+    easing: 'easeOutExpo',
+};
+
+
+const defaultPageStyle = {
+    position: 'absolute',
+    top: 70,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 20,
+};
+
+
+const pageStyle = {
+    '/1': {
+        ...defaultPageStyle,
+        backgroundColor: '#E8F5E9',
+    },
+    '/2': {
+        ...defaultPageStyle,
+        backgroundColor: '#EFEBE9',
+    },
 };

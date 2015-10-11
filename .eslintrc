@@ -1,6 +1,5 @@
 {
     "extends": "eslint:recommended",
-    // "extends": "airbnb",
 
     "parser": "babel-eslint",
 
