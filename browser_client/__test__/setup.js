@@ -1,5 +1,6 @@
 import expect from 'expect';
 import { jsdom } from 'jsdom';
+// import { VelocityTransitionGroup } from 'velocity-react';
 
 
 /* eslint-disable no-console */
@@ -9,6 +10,10 @@ const log = process.env.HONCHO === 'true' ? ( () => null ) : console.log;
 
 
 log('\n--- MOCHA SETUP START ---');
+
+
+// VelocityTransitionGroup.disabledForTest = true;
+// log('`VelocityTransitionGroup.disabledForTest = true`');
 
 
 // You'll need to use this test helper on React components that use their
