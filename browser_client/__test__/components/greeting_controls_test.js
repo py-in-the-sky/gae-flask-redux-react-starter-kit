@@ -1,12 +1,10 @@
-import React from 'react/addons';
-import GreetingControls from '../../components/greeting_controls';
-
-
-const {
+import React from 'react';
+import {
     renderIntoDocument,
     scryRenderedDOMComponentsWithTag,
     Simulate,
-} = React.addons.TestUtils;
+} from 'react-addons-test-utils';
+import GreetingControls from '../../components/greeting_controls';
 
 
 function setup (requestsPending = false) {
@@ -20,7 +18,7 @@ function setup (requestsPending = false) {
     const buttons = scryRenderedDOMComponentsWithTag(greetingControls, 'button');
 
     const [ addButton, subtractButton ] = buttons;
-    const waitingIndicator = divs[1].getDOMNode();
+    const waitingIndicator = divs[1];
 
     return { props, addButton, subtractButton, waitingIndicator };
 }

@@ -1,6 +1,10 @@
-import 'babel/register';  // BabelJS polyfill: http://babeljs.io/docs/usage/require/
+import 'babel/register';
+// BabelJS polyfill: http://babeljs.io/docs/usage/require/
 import 'velocity-react';
-import 'velocity-animate/velocity.ui';  // make Velocity UI Pack available to velocity-react
+// activate Velocity context, and...
+import 'velocity-animate/velocity.ui';
+// ...make Velocity UI Pack available to Velocity and velocity-react
+
 import Root from './containers';
 import React from 'react';
 import ReactDOM from 'react-dom';

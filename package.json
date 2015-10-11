@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/py-in-the-sky/gae-flask-redux-react-starter-kit#readme",
   "dependencies": {
-    "humps": "^0.7.0",
+    "humps": "^1.0.0",
     "immutable": "^3.7.4",
     "lodash": "^3.10.1",
     "react": "^0.14.0",
@@ -63,6 +63,7 @@
     "jsdom": "^6.5.1",
     "mocha": "^2.3.1",
     "mocha-testcheck": "^0.1.2",
+    "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.1.1",
