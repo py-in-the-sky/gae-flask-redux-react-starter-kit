@@ -1,10 +1,13 @@
 rehydrate: pip-install-app pip-install-dev npm-install
 
 pip-install-app:
-	pip install --requirement=requirements.app.txt --target=./app/app_env
+	pip install --requirement=requirements.app.txt --target=./app/__app_env__
 
 pip-install-dev:
 	pip install --requirement=requirements.dev.txt
+
+# link-venv:
+# 	add2virtualenv ./app/__app_env__
 
 npm-install:
 	npm install

@@ -16,7 +16,18 @@
             "imports": ["react", "redbox-react"]
           }]
         }
-      }
+      },
+      "optional": [
+        "validation.react"
+      ]
+    },
+
+    "production": {
+      "optional": [
+        "validation.react",
+        "optimisation.react.inlineElements",
+        "minification.removeDebugger"
+      ]
     }
   }
 }

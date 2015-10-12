@@ -43,6 +43,12 @@ Greetings.propTypes = {
 const salutations = [ 'Hello', 'Hi', 'Hey', 'Yo', ];
 
 
+const defaultAnimationOpts = {
+    duration: 300,
+    easing:   'easeOutExpo',
+};
+
+
 const greetingEnter = {
     ...defaultAnimationOpts,
     animation: {
@@ -58,10 +64,4 @@ const greetingLeave = {
         translateY: [30, 0],
         opacity:    [0, 1],
     },
-};
-
-
-const defaultAnimationOpts = {
-    duration: 300,
-    easing:   'easeOutExpo',
 };
