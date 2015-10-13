@@ -10,8 +10,8 @@ import GreetingControls from '../../components/greeting_controls';
 function setup (requestsPending = false) {
     const props = {
         requestsPending,
-        fetchAndAddName:  expect.createSpy(),
-        subtractLastName: expect.createSpy(),
+        fetchAndAddName:  sinon.spy( x => x ),
+        subtractLastName: sinon.spy( x => x ),
     };
     const greetingControls = renderIntoDocument(<GreetingControls {...props} />);
     const divs = scryRenderedDOMComponentsWithTag(greetingControls, 'div');
@@ -28,7 +28,7 @@ describe('adding a greeting', () => {
     it('calls the `fetchAndAddName` action creator', () => {
         const { props, addButton } = setup();
         Simulate.click(addButton);
-        expect( props.fetchAndAddName.calls.length ).toBe( 1 );
+        expect( props.fetchAndAddName ).to.have.been.calledOnce;
     });
 });
 
@@ -37,7 +37,7 @@ describe('subtracting a greeting', () => {
     it('calls the `subtractLastName` action creator', () => {
         const { props, subtractButton } = setup();
         Simulate.click(subtractButton);
-        expect( props.subtractLastName.calls.length ).toBe( 1 );
+        expect( props.subtractLastName ).to.have.been.calledOnce;
     });
 });
 
@@ -47,14 +47,14 @@ describe('awaiting a greeting', () => {
     context('when there is not a pending greeting request', () => {
         it('does not show a waiting indicator', () => {
             const { waitingIndicator } = setup();
-            expect( waitingIndicator.style.visibility ).toBe( 'hidden' );
+            expect( waitingIndicator.style.visibility ).to.equal( 'hidden' );
         });
     });
 
     context('when there is a pending greeting request', () => {
         it('does show a waiting indicator', () => {
             const { waitingIndicator } = setup(true);
-            expect( waitingIndicator.style.visibility ).toBe( 'visible' );
+            expect( waitingIndicator.style.visibility ).to.equal( 'visible' );
         });
     });
 });

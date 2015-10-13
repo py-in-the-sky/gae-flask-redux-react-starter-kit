@@ -1,4 +1,4 @@
-import React, { PropTypes, Children } from 'react';
+import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { VelocityTransitionGroup } from 'velocity-react';
 import { getWindowWidth } from '../utils/dom';

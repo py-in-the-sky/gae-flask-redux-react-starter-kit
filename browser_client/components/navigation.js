@@ -1,5 +1,4 @@
 import React from 'react';
-import PureComponent from 'react-pure-render/component';
 import { VelocityTransitionGroup } from 'velocity-react';
 import { Link } from 'react-router';
 

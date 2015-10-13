@@ -1,8 +1,13 @@
-import expect from 'expect';
+import chai from 'chai';
 import { jsdom } from 'jsdom';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 
 
 /* eslint-disable no-console */
+
+
+chai.use(sinonChai);
 
 
 const log = process.env.HONCHO === 'true' ? ( () => null ) : console.log;
@@ -32,11 +37,19 @@ log('turned off Velocity animations with `Velocity.mock = true`');
 
 
 if (GLOBAL.expect === undefined) {
-    GLOBAL.expect = expect;
+    GLOBAL.expect = chai.expect;
     log('`expect` set as a GLOBAL');
 }
 else
     log('`GLOBAL.expect` already taken');
+
+
+if (GLOBAL.sinon === undefined) {
+    GLOBAL.sinon = sinon;
+    log('`sinon` set as a GLOBAL');
+}
+else
+    log('`GLOBAL.sinon` already taken');
 
 
 if (GLOBAL.__DEV__ === undefined) {
