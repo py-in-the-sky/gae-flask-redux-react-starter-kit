@@ -18,12 +18,14 @@
         }
       },
       "optional": [
+        "runtime",
         "validation.react"
       ]
     },
 
     "production": {
       "optional": [
+        "runtime",
         "validation.react",
         "optimisation.react.inlineElements",
         "minification.removeDebugger"

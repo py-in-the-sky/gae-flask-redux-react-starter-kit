@@ -1,5 +1,3 @@
-import 'babel/register';
-// BabelJS polyfill: http://babeljs.io/docs/usage/require/
 import 'velocity-react';
 // activate Velocity context, and...
 import 'velocity-animate/velocity.ui';
