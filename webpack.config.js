@@ -63,6 +63,33 @@ function buildWebpackConfig () {
             },
         };
     }
+    else if (process.env.NODE_ENV === 'test') {
+        const publicPath = 'http://localhost:8080/browser_client/__test__/integration';
+
+        return {
+            context:   __dirname,
+            entry: [
+                'webpack-dev-server/client?' + publicPath,
+                path.join(__dirname, 'browser_client', '__test__', 'integration', 'index.js')
+            ],
+            output: {
+                filename: 'integration-tests.js',
+                publicPath: publicPath
+            },
+            resolve:   resolveTemplate,
+            plugins: [ EnvironmentPlugin ],
+
+            module: {
+                loaders: [
+                    {
+                        test:    /\.js$/,
+                        exclude: /node_modules/,
+                        loader:  'babel-loader'
+                    },
+                ],
+            },
+        };
+    }
     else {
         return {
             context:   __dirname,

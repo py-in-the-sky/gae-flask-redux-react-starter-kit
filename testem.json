@@ -1,0 +1,17 @@
+{
+  "framework": "mocha",
+  "src_files": [
+    "./browser_client/**/*.js"
+  ],
+  "serve_files": [
+    "./browser_client/__test__/integration/integration-tests.js"
+  ],
+  "proxies": {
+    "/browser_client": {
+      "target": "http://localhost:8080",
+      "onlyContentTypes": [ "script" ]
+    }
+  },
+  "launch_in_dev": [ "chrome" ],
+  "launch_in_ci": []
+}

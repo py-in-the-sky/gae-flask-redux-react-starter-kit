@@ -1,5 +1,4 @@
 import chai from 'chai';
-import { jsdom } from 'jsdom';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
@@ -14,21 +13,6 @@ const log = process.env.HONCHO === 'true' ? ( () => null ) : console.log;
 
 
 log('\n--- MOCHA SETUP START ---');
-
-
-// You'll need to use this test helper on React components that use their
-// own `setState` method.  From the Redux docs:
-// "React seems to expect that, if you use `setState`, DOM is available.
-// To work around the issue, we use jsdom so React doesn’t throw [an]
-// exception when DOM isn’t available."
-if (GLOBAL.document === undefined) {
-    GLOBAL.document  = jsdom('<!doctype html><html><body></body></html>');
-    GLOBAL.window    = document.defaultView;
-    GLOBAL.navigator = { userAgent: 'node.js' };
-    log('`jsdom` instance created for testing React components');
-}
-else
-    log('`GLOBAL.document` already taken');
 
 
 // require('velocity-animate').mock = true;
