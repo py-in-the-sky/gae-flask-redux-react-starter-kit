@@ -23,6 +23,13 @@
       ]
     },
 
+    "test": {
+      "optional": [
+        "runtime",
+        "validation.react"
+      ]
+    },
+
     "production": {
       "optional": [
         "runtime",

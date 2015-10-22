@@ -15,7 +15,6 @@ export function names (state: Object = emptyList, action: Action): Object {
     // the interface for telling whether an action represents a
     // success, error, or in-progress state should be simpler
     // and more self-describing
-
     if (type === ADD_NAME && success)
         return state.push(payload);
     else if (type === SUBTRACT_LAST_NAME)

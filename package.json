@@ -13,7 +13,8 @@
     "test": "make _npm-test",
     "test:one": "make _npm-test-one",
     "test:watch": "make _npm-test-watch",
-    "test:cov": "make _npm-test-cov"
+    "test:cov": "make _npm-test-cov",
+    "test:integration": "NODE_ENV=test $(npm bin)/karma start"
   },
   "repository": {
     "type": "git",
@@ -62,8 +63,15 @@
     "eslint-plugin-react": "^3.3.0",
     "jquery": "^2.1.4",
     "jsdom": "^6.5.1",
+    "jsverify": "^0.7.1",
+    "karma": "^0.13.11",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-mocha": "^0.2.0",
+    "karma-sinon": "^1.0.4",
+    "karma-spec-reporter": "0.0.20",
+    "karma-webpack": "^1.7.0",
     "mocha": "^2.3.1",
-    "mocha-testcheck": "^0.1.2",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
@@ -71,7 +79,6 @@
     "redux-devtools": "^2.1.0",
     "sinon": "^1.17.1",
     "sinon-chai": "^2.8.0",
-    "testcheck": "^0.1.4",
     "webpack": "^1.11.0",
     "webpack-dev-server": "^1.10.1"
   }

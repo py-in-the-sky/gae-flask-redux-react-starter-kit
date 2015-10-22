@@ -2,81 +2,53 @@
     Property-based testing of the "greetings" aspect of the app.
  */
 
-import Root from '../../containers';
-import React from 'react';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
-import { Router } from 'react-router';
-import {
-    renderIntoDocument,
-    scryRenderedDOMComponentsWithTag,
-    scryRenderedDOMComponentsWithClass,
-    scryRenderedComponentsWithType,
-    Simulate,
-} from 'react-addons-test-utils';
-import { install } from 'mocha-testcheck';
+
+import { Simulate } from 'react-addons-test-utils';
+import jsc from 'jsverify';
+import _ from 'lodash';
+import Greeting from '../../components/greeting';
 
 
-function setup () {
-    return renderIntoDocument(<Root history={new BrowserHistory()} />);
-}
+describe('adding and subtracting greetings', function () {
+    beforeEach(function () {
+        findOnPage = this.findOnPage;
+        this.navigate('/1');
+        const [ addButton, subtractButton ] = findOnPage('button');
 
+        clickAddButton = function () {
+            Simulate.click(addButton);
+            return findOnPage(Greeting).length;
+        };
 
-function visitePageOne (UI) {
-    const router = scryRenderedComponentsWithType(UI, Router)[0];
-    router.transitionTo('/1');
-}
+        clickSubtractButton = function () {
+            Simulate.click(subtractButton);
+            return findOnPage(Greeting).length;
+        };
+    });
 
+    var clickAddButton, clickSubtractButton, findOnPage;
+    const [ ADD, SUBTRACT, FLOOR ] = [ 1, -1, 0 ];
 
-describe('navigating to page one', () => {
-    it('shows buttons for the greetings controls', () => {
-        const UI = setup();
+    describe('the number of greetings on the page', function () {
+        jsc.property('equals scan of sum of actions with a floor of 0',
+                     'array bool',
+                     function (arrayOfBooleans) {
 
-        expect( scryRenderedDOMComponentsWithTag(UI, 'button') ).to.be.empty;
+            const initialGreetingsCount = findOnPage(Greeting).length;
+            const inputStream = arrayOfBooleans.map( b => b ? ADD : SUBTRACT );
+            const sumScanWithFloor = inputStream.reduce(
+                (array, action) => array.concat(
+                    [ Math.max(FLOOR, action + array[array.length - 1]) ]
+                )
+            , [ initialGreetingsCount ]);
 
-        visitePageOne(UI);
+            const uiStateStream = inputStream.map( action =>
+                (action === ADD ? clickAddButton : clickSubtractButton)()
+            );
 
-        expect( scryRenderedDOMComponentsWithTag(UI, 'button') ).to.not.be.empty;
+            uiStateStream.unshift(initialGreetingsCount);
+
+            return _.isEqual(uiStateStream, sumScanWithFloor);
+        });
     });
 });
-
-// b=TestUtils.scryRenderedDOMComponentsWithTag(UI, 'button')[0]
-// Simulate.click(b)
-// scryRenderedDOMComponentsWithClass(UI, 'greeting')
-// Simulate.click(b)
-// scryRenderedDOMComponentsWithClass(UI, 'greeting')
-
-
-
-// function greetingsCount (UI) {
-//     return scryRenderedDOMComponentsWithClass(UI, 'greeting').length;
-// }
-
-
-// [rmw] here's an example of how to use testcheck
-// see: https://github.com/leebyron/testcheck-js
-// generator API: https://github.com/leebyron/testcheck-js/blob/master/type-definitions/testcheck.d.ts
-// Mocha API: https://github.com/leebyron/mocha-check/
-// on React components: https://vimeo.com/122070164
-// describe('testcheck of filterString', () => {
-
-//   install();  // install mocha-testcheck
-
-//   /* eslint-disable no-undef */
-
-//   const actionTypes = Object.values(ActionTypes);
-
-//   const randomPreviousStates = gen.alphaNumString;
-
-//   const randomActions = gen.object({
-//     type:    gen.returnOneOf(actionTypes),
-//     payload: gen.alphaNumString,
-//   });
-
-//   check.it('always returns a string',
-//            [randomPreviousStates, randomActions],
-//            (previousState, action) => {
-
-//     expect( filterString(previousState, action) ).to.be.a('string');
-
-//   });
-// });

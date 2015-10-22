@@ -1,5 +1,6 @@
 // import $ from 'jquery';
 import { uniqueId } from '../utils/lodash_utils';
+import { wrappedSetTimeout } from '../utils/time';
 // uniqueId could be used to help indicate to the reducers
 // when a particular optimistic update has finished:
 // the optimistic update and the real update will share
@@ -15,8 +16,12 @@ export function fetchAndAddName (delay = 300) {
         dispatch(addName(null, { requestId }));
 
         const complete = true;
-        const completeDispatch = () => { dispatch(addName('World', { requestId, complete })); };
-        setTimeout(completeDispatch, delay);
+
+        const completeDispatch = () => {
+            dispatch(addName('World', { requestId, complete }));
+        };
+
+        return wrappedSetTimeout(completeDispatch, delay);
 
         // return $.get('endpoint')
         //         .done(name => dispatch(addName(name)));

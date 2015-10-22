@@ -1,19 +1,13 @@
+/* eslint-disable no-console */
+
 import chai from 'chai';
 import { jsdom } from 'jsdom';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 
-/* eslint-disable no-console */
-
-
 chai.use(sinonChai);
 
-
-const log = process.env.HONCHO === 'true' ? ( () => null ) : console.log;
-
-
-log('\n--- MOCHA SETUP START ---');
 
 
 // You'll need to use this test helper on React components that use their
@@ -21,48 +15,27 @@ log('\n--- MOCHA SETUP START ---');
 // "React seems to expect that, if you use `setState`, DOM is available.
 // To work around the issue, we use jsdom so React doesn’t throw [an]
 // exception when DOM isn’t available."
-if (GLOBAL.document === undefined) {
-    GLOBAL.document  = jsdom('<!doctype html><html><body></body></html>');
-    GLOBAL.window    = document.defaultView;
-    GLOBAL.navigator = { userAgent: 'node.js' };
-    log('`jsdom` instance created for testing React components');
+if (global.document === undefined) {
+    global.document  = jsdom('<!doctype html><html><body></body></html>');
+    global.window    = document.defaultView;
+    global.navigator = { userAgent: 'node.js' };
 }
 else
-    log('`GLOBAL.document` already taken');
+    console.warn('`global.document` already taken');
 
 
+// require Velocity only after window/DOM context is created
 // require('velocity-animate').mock = true;
-// // require Velocity only after window/DOM context is created
-// log('turned off Velocity animations with `Velocity.mock = true`');
-
-
 require('velocity-react').VelocityTransitionGroup.disabledForTest = true;
-log('turned off VelocityTransitionGroup with ' +
-    '`VelocityTransitionGroup.disabledForTest = true`');
 
 
-if (GLOBAL.expect === undefined) {
-    GLOBAL.expect = chai.expect;
-    log('`expect` set as a GLOBAL');
-}
-else
-    log('`GLOBAL.expect` already taken');
+if (global.expect === undefined) global.expect = chai.expect;
+else console.warn('`global.expect` already taken');
 
 
-if (GLOBAL.sinon === undefined) {
-    GLOBAL.sinon = sinon;
-    log('`sinon` set as a GLOBAL');
-}
-else
-    log('`GLOBAL.sinon` already taken');
+if (global.sinon === undefined) global.sinon = sinon;
+else console.warn('`global.sinon` already taken');
 
 
-if (GLOBAL.__DEV__ === undefined) {
-    GLOBAL.__DEV__ = false;
-    log('`__DEV__ = false` set as a GLOBAL');
-}
-else
-    log('`GLOBAL.__DEV__` already taken');
-
-
-log('--- MOCHA SETUP END ---\n');
+if (global.__DEV__ === undefined) global.__DEV__ = false;
+else console.warn('`global.__DEV__` already taken');

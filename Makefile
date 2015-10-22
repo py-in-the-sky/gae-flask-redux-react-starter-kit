@@ -34,7 +34,7 @@ MOCHA_TARGET=./browser_client/__test__/**/*test.js
 WEBPACK_OPTS= --config webpack.config.js
 WEBPACK_PROD_OPTS= -p
 WEBPACK_DEV_OPTS= -d --display-reasons --display-chunks --display-error-details
-WEBPACK_SERVER_OPTS= --hot --inline --no-info
+WEBPACK_SERVER_OPTS= --history-api-fallback --hot --inline --no-info
 
 
 _npm-test-one:

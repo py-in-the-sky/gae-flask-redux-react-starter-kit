@@ -4,7 +4,10 @@ var _       = require('lodash');
 
 
 var __DEV__ = (process.env.NODE_ENV === 'development');
-var EnvironmentPlugin = new webpack.DefinePlugin({ __DEV__: __DEV__ });
+var EnvironmentPlugin = new webpack.DefinePlugin({
+    __DEV__: __DEV__,
+    __TEST__: false,
+});
 
 
 var entryPoint = path.join(__dirname, 'browser_client', 'index.js');
