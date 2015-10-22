@@ -10,11 +10,9 @@
     "check": "npm run lint && npm run flow && npm run test",
     "lint": "make _npm-lint",
     "flow": "flow check",
-    "test": "make _npm-test",
-    "test:one": "make _npm-test-one",
-    "test:watch": "make _npm-test-watch",
+    "test": "NODE_ENV=test $(npm bin)/karma start karma.unit.conf.js --single-run",
     "test:cov": "make _npm-test-cov",
-    "test:integration": "NODE_ENV=test $(npm bin)/karma start"
+    "test:integration": "NODE_ENV=test $(npm bin)/karma start --single-run"
   },
   "repository": {
     "type": "git",

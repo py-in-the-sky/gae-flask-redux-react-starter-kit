@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-
-
 import Root from '../../containers';
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
