@@ -1,9 +1,9 @@
 import React from 'react';
 import {
     renderIntoDocument,
-    scryRenderedDOMComponentsWithTag,
     Simulate,
 } from 'react-addons-test-utils';
+import { createFinder } from '../utils';
 import GreetingControls from '../../components/greeting_controls';
 
 
@@ -14,11 +14,9 @@ function setup (requestsPending = false) {
         subtractLastName: sinon.spy( x => x ),
     };
     const greetingControls = renderIntoDocument(<GreetingControls {...props} />);
-    const divs = scryRenderedDOMComponentsWithTag(greetingControls, 'div');
-    const buttons = scryRenderedDOMComponentsWithTag(greetingControls, 'button');
-
-    const [ addButton, subtractButton ] = buttons;
-    const waitingIndicator = divs[1];
+    const find = createFinder(greetingControls);
+    const [ addButton, subtractButton ] = find('button');
+    const waitingIndicator = find('div')[1];
 
     return { props, addButton, subtractButton, waitingIndicator };
 }
