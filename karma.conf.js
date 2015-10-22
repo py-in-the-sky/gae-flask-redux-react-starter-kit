@@ -18,7 +18,7 @@ var EnvironmentPlugin = new webpack.DefinePlugin({
 module.exports = function (config) {
   config.set({
     basePath: '',
-    reportSlowerThan: 150,
+    reportSlowerThan: 750,
     frameworks: ['mocha', 'chai', 'sinon'],
     reporters: ['dots'],
     browsers: ['Chrome'],
