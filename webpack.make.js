@@ -23,7 +23,7 @@ var configDefaults = {
         loaders: [
             {
                 test:    /\.js$/,
-                exclude: /node_modules/,
+                exclude: [ /node_modules/, /__flowtypes__/ ],
                 loader:  'babel-loader'
             },
         ],
@@ -31,16 +31,28 @@ var configDefaults = {
 };
 
 
+var codeCoveragePreloader = {
+    preLoaders: [
+        {
+            test: /\.js$/,
+            exclude: [ /node_modules/, /__test__/, /__flowtypes__/ ],
+            loader: 'isparta-instrumenter'
+        }
+    ]
+};
+
+
 module.exports = function makeWebpackConfig (opts) {
-    var __DEV__  = Boolean(opts.__DEV__);
-    var __TEST__ = Boolean(opts.__TEST__);
+    var __DEV__      = Boolean(opts.__DEV__);
+    var __TEST__     = Boolean(opts.__TEST__);
+    var __COVERAGE__ = Boolean(opts.__COVERAGE__);
 
     var EnvironmentPlugin = new webpack.DefinePlugin({
         __DEV__:  __DEV__,
         __TEST__: __TEST__,
     });
 
-    if (__DEV__)
+    if (__DEV__) {
         return Object.assign({}, configDefaults, {
             debug: true,
             displayErrorDetails: true,
@@ -58,24 +70,18 @@ module.exports = function makeWebpackConfig (opts) {
             }),
             plugins: [ EnvironmentPlugin ],
         });
+    }
+    else if (__TEST__) {
+        var preLoaders = __COVERAGE__ ? codeCoveragePreloader : {};
 
-    if (__TEST__)
         return {
             devtool: 'inline-source-map',
             resolve: configDefaults.resolve,
             plugins: [ EnvironmentPlugin ],
-            module:  Object.assign({}, configDefaults.module, {
-                preLoaders: [
-                    {
-                        test: /\.js$/,
-                        exclude: [ /node_modules/, /__test__/ ],
-                        loader: 'isparta-instrumenter'
-                    }
-                ]
-            }),
+            module:  Object.assign({}, configDefaults.module, preLoaders),
         };
-
-    else
+    }
+    else {
         return Object.assign({}, configDefaults, {
             output: Object.assign({}, configDefaults.output, {
                 publicPath: '/assets',
@@ -87,4 +93,5 @@ module.exports = function makeWebpackConfig (opts) {
                 new webpack.optimize.OccurenceOrderPlugin(),
             ],
         });
+    }
 }
