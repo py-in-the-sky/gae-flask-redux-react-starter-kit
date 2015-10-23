@@ -31,10 +31,10 @@ NPM_BIN=./node_modules/.bin
 MOCHA_OPTS= --opts ./browser_client/__test__/mocha.opts
 MOCHA_TARGET=./browser_client/__test__/**/*test.js
 
-WEBPACK_OPTS= --config webpack.config.js
+WEBPACK_BUILD_OPTS= --config webpack.build.js
 WEBPACK_PROD_OPTS= -p
 WEBPACK_DEV_OPTS= -d --display-reasons --display-chunks --display-error-details
-WEBPACK_SERVER_OPTS= --history-api-fallback --hot --inline --no-info
+WEBPACK_SERVE_OPTS= --config webpack.dev.js --history-api-fallback --hot --inline --no-info
 
 
 _npm-test-one:
@@ -53,10 +53,10 @@ _npm-lint:
 	$(NPM_BIN)/eslint browser_client/
 
 _npm-build:
-	NODE_ENV=production $(NPM_BIN)/webpack $(WEBPACK_PROD_OPTS) $(WEBPACK_OPTS)
+	NODE_ENV=production $(NPM_BIN)/webpack $(WEBPACK_PROD_OPTS) $(WEBPACK_BUILD_OPTS)
 
 _npm-build-dev:
-	NODE_ENV=development $(NPM_BIN)/webpack $(WEBPACK_OPTS) $(WEBPACK_DEV_OPTS)
+	NODE_ENV=development $(NPM_BIN)/webpack $(WEBPACK_BUILD_OPTS) $(WEBPACK_DEV_OPTS)
 
 _npm-serve:
-	NODE_ENV=development $(NPM_BIN)/webpack-dev-server $(WEBPACK_OPTS) $(WEBPACK_SERVER_OPTS)
+	NODE_ENV=development $(NPM_BIN)/webpack-dev-server $(WEBPACK_SERVE_OPTS)

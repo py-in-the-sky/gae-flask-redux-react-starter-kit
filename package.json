@@ -12,6 +12,7 @@
     "flow": "flow check",
     "test": "NODE_ENV=test $(npm bin)/karma start karma.unit.js --single-run",
     "test:cov": "make _npm-test-cov",
+    "test:watch": "NODE_ENV=test $(npm bin)/karma start karma.unit.js",
     "test:integration": "NODE_ENV=test $(npm bin)/karma start karma.integration.js --single-run"
   },
   "repository": {
