@@ -64,7 +64,15 @@ module.exports = function makeWebpackConfig (opts) {
             devtool: 'inline-source-map',
             resolve: configDefaults.resolve,
             plugins: [ EnvironmentPlugin ],
-            module: configDefaults.module,
+            module:  Object.assign({}, configDefaults.module, {
+                preLoaders: [
+                    {
+                        test: /\.js$/,
+                        exclude: [ /node_modules/, /__test__/ ],
+                        loader: 'isparta-instrumenter'
+                    }
+                ]
+            }),
         };
 
     else

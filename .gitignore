@@ -6,6 +6,7 @@ __app_env__/
 app/assets/*.js
 app/assets/*.css
 app/assets/*.map
+coverage/
 
 
 ### General NodeJS ###

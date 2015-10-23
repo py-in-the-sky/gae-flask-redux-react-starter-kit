@@ -18,12 +18,16 @@ module.exports = function makeKarmaConfig (opts) {
         basePath: '',
         reportSlowerThan: reportSlowerThan,
         frameworks: [ 'mocha', 'chai', 'sinon' ],
-        reporters: [ 'dots' ],
+        reporters: [ 'dots', 'coverage' ],
         browsers: [ 'Chrome' ],
         client: { useIframe: false },
         files: [ entryFile ],
-        preprocessors: { 'browser_client/**/*': [ 'webpack' ] },
+        preprocessors: { 'browser_client/**/*': [ 'webpack', 'sourcemap' ] },
         webpack: require('./webpack.test'),
         webpackMiddleware: { noInfo: true },
+        coverageReporter: {
+            dir:  'coverage/',
+            type: 'html'
+        },
     };
 }
