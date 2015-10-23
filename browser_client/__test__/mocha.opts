@@ -1,5 +1,0 @@
---reporter nyan
---es_staging
---compilers js:babel/register
---globals __DEV__
---require ./browser_client/__test__/setup.js
