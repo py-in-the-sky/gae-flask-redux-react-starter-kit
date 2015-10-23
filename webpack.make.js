@@ -74,6 +74,7 @@ module.exports = function makeWebpackConfig (opts) {
             }),
             plugins: [
                 EnvironmentPlugin,
+                new webpack.optimize.DedupePlugin(),
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.optimize.OccurenceOrderPlugin(),
             ],

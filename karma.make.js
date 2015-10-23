@@ -22,14 +22,8 @@ module.exports = function makeKarmaConfig (opts) {
         browsers: [ 'Chrome' ],
         client: { useIframe: false },
         files: [ entryFile ],
-        preprocessors: { 'browser_client/**/*': ['webpack'] },
-
+        preprocessors: { 'browser_client/**/*': [ 'webpack' ] },
         webpack: require('./webpack.test'),
-
-        webpackMiddleware: {
-            stats: {
-                colors: true
-            },
-        },
+        webpackMiddleware: { noInfo: true },
     };
 }
