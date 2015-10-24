@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { VelocityTransitionGroup } from 'velocity-react';
-import Greeting from './greeting';
+import Greeting from './Greeting';
 import { randomElement } from '../utils/array';
-import { memoize } from '../utils/lodash_utils';
+import { memoize } from '../utils/lodash';
 
 
 export default class Greetings extends PureComponent {

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
-import Navigation from './navigation';
-import PageHandler from './page_handler';
+import Navigation from './Navigation';
+import PageHandler from './PageHandler';
 
 
 export default class Layout extends PureComponent {

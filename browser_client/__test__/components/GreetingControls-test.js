@@ -4,7 +4,7 @@ import {
     Simulate,
 } from 'react-addons-test-utils';
 import { createFinder } from '../utils';
-import GreetingControls from '../../src/components/greeting_controls';
+import GreetingControls from '../../src/components/GreetingControls';
 
 
 function setup (requestsPending = false) {

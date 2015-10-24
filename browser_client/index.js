@@ -13,7 +13,7 @@ import $ from 'jquery';
 
 $(document).ready(() => {
     if (__DEV__)
-        require('./src/utils/dev_ajax_debug_utils')();
+        require('./src/utils/devAjaxDebug')();
 
     const mountPoint = document.getElementById('user-interface');
     ReactDOM.render(<Root history={new BrowserHistory()} />, mountPoint);

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PageOne from '../components/page_one';
+import PageTwo from '../components/PageTwo';
 import * as Actions from '../actions';
 
 
@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch) {
 
 
 function createApp () {
-    return connect(mapStateToProps, mapDispatchToProps)(PageOne);
+    return connect(mapStateToProps, mapDispatchToProps)(PageTwo);
 }
 
 

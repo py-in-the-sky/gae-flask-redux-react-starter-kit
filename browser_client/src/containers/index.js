@@ -3,9 +3,9 @@ import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
 import store from '../store';
-import PageOneApp from './page_one_app';
-import PageTwoApp from './page_two_app';
-import Layout from '../components/layout';
+import PageOneApp from './PageOneApp';
+import PageTwoApp from './PageTwoApp';
+import Layout from '../components/Layout';
 
 
 export default class Root extends PureComponent {

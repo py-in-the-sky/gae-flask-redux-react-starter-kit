@@ -1,5 +1,5 @@
 // import $ from 'jquery';
-import { uniqueId } from '../utils/lodash_utils';
+import { uniqueId } from '../utils/lodash';
 import { wrappedSetTimeout } from '../utils/time';
 // uniqueId could be used to help indicate to the reducers
 // when a particular optimistic update has finished:

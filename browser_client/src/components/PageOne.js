@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
-import Greetings from './greetings';
-import GreetingControls from './greeting_controls';
+import Greetings from './Greetings';
+import GreetingControls from './GreetingControls';
 
 
 export default class PageOne extends PureComponent {
