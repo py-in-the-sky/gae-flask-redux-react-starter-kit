@@ -1,4 +1,4 @@
-import Root from '../../containers';
+import Root from '../../src/containers';
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import { renderIntoDocument } from 'react-addons-test-utils';

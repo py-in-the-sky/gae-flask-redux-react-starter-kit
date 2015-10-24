@@ -10,12 +10,16 @@ var devPublicPath = 'http://localhost:8080/assets/';
 // your own JS, CSS, etc. bundles.
 
 
+
+var context = path.join(__dirname, '..', '..');
+
+
 var configDefaults = {
-    context: __dirname,
-    entry: path.join(__dirname, 'browser_client', 'index.js'),
+    context: context,
+    entry: path.join(context, 'browser_client', 'index.js'),
     output: {
         filename: '[name].js',
-        path:     path.join(__dirname, 'app', 'assets')
+        path:     path.join(context, 'app', 'assets')
     },
     resolve: { extensions: ['', '.js'] },
     externals: { jquery: '$' },
@@ -23,7 +27,7 @@ var configDefaults = {
         loaders: [
             {
                 test:    /\.js$/,
-                exclude: [ /node_modules/, /__flowtypes__/ ],
+                exclude: /node_modules/,
                 loader:  'babel-loader'
             },
         ],
@@ -35,7 +39,7 @@ var codeCoveragePreloader = {
     preLoaders: [
         {
             test: /\.js$/,
-            exclude: [ /node_modules/, /__test__/, /__flowtypes__/ ],
+            exclude: [ /node_modules/, /__test__/ ],
             loader: 'isparta-instrumenter'
         }
     ]

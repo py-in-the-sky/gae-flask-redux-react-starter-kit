@@ -6,7 +6,7 @@
 import { Simulate } from 'react-addons-test-utils';
 import jsc from 'jsverify';
 import _ from 'lodash';
-import Greeting from '../../components/greeting';
+import Greeting from '../../src/components/greeting';
 
 
 describe('adding and subtracting greetings', function () {

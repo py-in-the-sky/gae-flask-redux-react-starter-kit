@@ -27,27 +27,10 @@ npm-install:
 # npm helpers; don't call them directly
 
 NPM_BIN=./node_modules/.bin
-
-MOCHA_OPTS= --opts ./browser_client/__test__/mocha.opts
-MOCHA_TARGET=./browser_client/__test__/**/*test.js
-
-WEBPACK_BUILD_OPTS= --config webpack.build.js
+WEBPACK_BUILD_OPTS= --config browser_client/config/webpack.build.js
 WEBPACK_PROD_OPTS= -p
 WEBPACK_DEV_OPTS= -d --display-reasons --display-chunks --display-error-details
-WEBPACK_SERVE_OPTS= --config webpack.dev.js --history-api-fallback --hot --inline --no-info
-
-
-_npm-test-one:
-	NODE_ENV=test $(NPM_BIN)/mocha $(MOCHA_OPTS) $(file) $(opts)
-
-_npm-test:
-	NODE_ENV=test $(NPM_BIN)/mocha $(MOCHA_OPTS) --recursive $(opts) $(MOCHA_TARGET)
-
-_npm-test-watch:
-	NODE_ENV=test $(NPM_BIN)/mocha -w $(MOCHA_OPTS) --reporter=dot --recursive $(MOCHA_TARGET)
-
-_npm-test-cov:
-	$(NPM_BIN)/babel-node $(NPM_BIN)/isparta cover $(NPM_BIN)/_mocha -- --recursive
+WEBPACK_SERVE_OPTS= --config browser_client/config/webpack.dev.js --history-api-fallback --hot --inline --no-info
 
 _npm-lint:
 	$(NPM_BIN)/eslint browser_client/

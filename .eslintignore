@@ -1,5 +1,5 @@
 **/app/*
 **/node_modules/*
 **/jquery*.js
-**/webpack.config*.js
-**/__flowtypes__/*
+**/browser_client/config/*
+**/browser_client/__flowtypes__/*

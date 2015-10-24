@@ -1,11 +1,11 @@
 [ignore]
 app/.*
-config/__flowtypes__/.*
+browser_client/__flowtypes__/.*
 
 [include]
 
 [libs]
-config/__flowtypes__/
+browser_client/__flowtypes__/
 
 [options]
 module.name_mapper='^.*\.\(css\|less\|s[ac]ss\)$' -> 'empty/object'
