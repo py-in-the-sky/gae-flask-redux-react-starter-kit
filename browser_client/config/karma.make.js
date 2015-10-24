@@ -6,19 +6,19 @@
 
 
 module.exports = function makeKarmaConfig (opts) {
-    var __INTEGRATION__ = Boolean(opts.__INTEGRATION__);
-    var __COVERAGE__    = Boolean(opts.__COVERAGE__);
+    var __E2E__      = Boolean(opts.__E2E__);
+    var __COVERAGE__ = Boolean(opts.__COVERAGE__);
 
     var entryFile;
 
-    if (__INTEGRATION__)
-        entryFile = 'browser_client/__test__/integration.js';
+    if (__E2E__)
+        entryFile = 'browser_client/__test__/e2e.js';
     else if (__COVERAGE__)
         entryFile = 'browser_client/__test__/coverage.js';
     else
         entryFile = 'browser_client/__test__/unit.js';
 
-    var reportSlowerThan = (__INTEGRATION__ || __COVERAGE__) ? 750 : 150;
+    var reportSlowerThan = (__E2E__ || __COVERAGE__) ? 750 : 150;
 
     var config = {
         basePath: '../..',

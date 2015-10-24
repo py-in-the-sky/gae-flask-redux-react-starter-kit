@@ -12,7 +12,7 @@
     "test": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.unit.js --single-run",
     "test:watch": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.unit.js",
     "test:coverage": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.coverage.js --single-run",
-    "test:integration": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.integration.js --single-run"
+    "test:e2e": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.e2e.js --single-run"
   },
   "repository": {
     "type": "git",
