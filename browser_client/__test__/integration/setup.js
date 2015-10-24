@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow-callback */
+
 import Root from '../../src/containers';
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';

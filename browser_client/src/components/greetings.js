@@ -9,6 +9,7 @@ import { memoize } from '../utils/lodash_utils';
 export default class Greetings extends PureComponent {
     constructor(props) {
         super(props);
+        /* eslint-disable no-unused-vars */
         this.chooseSalutation = memoize( key => randomElement(salutations) );
     }
 

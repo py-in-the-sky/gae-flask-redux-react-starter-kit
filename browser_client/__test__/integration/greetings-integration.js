@@ -1,3 +1,6 @@
+/* eslint-disable prefer-arrow-callback */
+
+
 /*
     Property-based testing of the "greetings" aspect of the app.
  */
@@ -26,7 +29,7 @@ describe('adding and subtracting greetings', function () {
         };
     });
 
-    var clickAddButton, clickSubtractButton, findOnPage;
+    let clickAddButton, clickSubtractButton, findOnPage;
     const [ ADD, SUBTRACT, FLOOR ] = [ 1, -1, 0 ];
 
     describe('the number of greetings on the page', function () {

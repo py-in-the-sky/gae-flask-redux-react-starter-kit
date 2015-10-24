@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow-callback */
+
 import { VelocityTransitionGroup } from 'velocity-react';
 import sinonChai from 'sinon-chai';
 
