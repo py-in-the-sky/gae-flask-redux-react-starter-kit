@@ -38,6 +38,7 @@
     "humps": "^1.0.0",
     "immutable": "^3.7.4",
     "lodash": "^3.10.1",
+    "material-ui": "^0.13.0",
     "react": "^0.14.0",
     "react-addons-create-fragment": "^0.14.0",
     "react-addons-pure-render-mixin": "^0.14.0",
