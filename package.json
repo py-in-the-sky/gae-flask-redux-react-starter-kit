@@ -39,6 +39,7 @@
     "immutable": "^3.7.4",
     "lodash": "^3.10.1",
     "react": "^0.14.0",
+    "react-addons-transition-group": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-motion": "^0.3.0",
     "react-redux": "^4.0.0",
@@ -46,7 +47,7 @@
     "redux": "^3.0.2",
     "redux-thunk": "^1.0.0",
     "velocity-animate": "^1.2.3",
-    "velocity-react": "^1.1.0"
+    "velocity-react": "^1.1.1"
   },
   "devDependencies": {
     "babel": "^5.8.23",
