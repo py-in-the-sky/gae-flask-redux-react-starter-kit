@@ -9,8 +9,6 @@ var devPublicPath = 'http://localhost:8080/assets/';
 // Conceptually, devPublicPath will be your local dev CDN for
 // your own JS, CSS, etc. bundles.
 
-
-
 var context = path.join(__dirname, '..', '..');
 
 
@@ -18,8 +16,9 @@ var configDefaults = {
     context: context,
     entry: path.join(context, 'browser_client', 'index.js'),
     output: {
-        filename: '[name].js',
-        path:     path.join(context, 'app', 'assets')
+        filename:   '[name].js',
+        path:       path.join(context, 'app', 'assets'),
+        publicPath: '/assets',
     },
     resolve: { extensions: ['', '.js'] },
     externals: { jquery: '$' },
@@ -27,7 +26,10 @@ var configDefaults = {
         loaders: [
             {
                 test:    /\.js$/,
-                exclude: /node_modules/,
+                include: [
+                    /browser_client\/index\.js$/,
+                    /browser_client\/src/,
+                ],
                 loader:  'babel-loader'
             },
         ],
@@ -39,7 +41,7 @@ var codeCoveragePreloader = {
     preLoaders: [
         {
             test: /\.js$/,
-            exclude: [ /node_modules/, /__test__/ ],
+            include: /browser_client\/src/,
             loader: 'isparta-instrumenter'
         }
     ]
@@ -82,14 +84,22 @@ module.exports = function makeWebpackConfig (opts) {
             devtool: 'inline-source-map',
             resolve: configDefaults.resolve,
             plugins: [ EnvironmentPlugin ],
-            module:  Object.assign({}, configDefaults.module, preLoaders),
+            module:  Object.assign({}, preLoaders, {
+                loaders: [
+                    {
+                        test: /\.js$/,
+                        include: [
+                            /browser_client\/src/,
+                            /browser_client\/__test__/,
+                        ],
+                        loader: 'babel-loader'
+                    },
+                ],
+            }),
         };
     }
     else {
         return Object.assign({}, configDefaults, {
-            output: Object.assign({}, configDefaults.output, {
-                publicPath: '/assets',
-            }),
             plugins: [
                 EnvironmentPlugin,
                 new webpack.optimize.DedupePlugin(),
