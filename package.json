@@ -21,7 +21,7 @@
     "redux",
     "redux-devtools",
     "react",
-    "react-motion",
+    "velocity-react",
     "react-router",
     "immutable",
     "webpack",
