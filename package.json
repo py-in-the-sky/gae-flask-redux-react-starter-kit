@@ -60,7 +60,6 @@
     "eslint-plugin-react": "^3.3.0",
     "isparta-instrumenter-loader": "^0.2.1",
     "jquery": "^2.1.4",
-    "jsdom": "^6.5.1",
     "jsverify": "^0.7.1",
     "karma": "^0.13.11",
     "karma-chai": "^0.1.0",
