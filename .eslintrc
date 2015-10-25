@@ -59,8 +59,6 @@
         "__TEST__": false,
         "expect": false,
         "chai": false,
-        "sinon": false,
-        "Action": false,
-        "ActionCreator": false
+        "sinon": false
     }
 }

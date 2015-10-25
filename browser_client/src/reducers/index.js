@@ -1,5 +1,3 @@
-/* @flow */
-
 import { ADD_NAME, SUBTRACT_LAST_NAME } from '../actions';
 import { List, Set } from 'immutable';
 
@@ -8,8 +6,7 @@ const emptyList = List();
 const emptySet  = Set();
 
 
-export function names (state: Object = emptyList, action: Action): Object {
-    // $FlowIssue: https://github.com/facebook/flow/issues/844#issuecomment-142360400
+export function names (state = emptyList, action) {
     const { type, payload, error, meta } = action;
     const success = !error && meta && meta.complete;
     // the interface for telling whether an action represents a
@@ -24,8 +21,7 @@ export function names (state: Object = emptyList, action: Action): Object {
 }
 
 
-export function pendingRequests (state: Object = emptySet, action: Action): Object {
-    // $FlowIssue: https://github.com/facebook/flow/issues/844#issuecomment-142360400
+export function pendingRequests (state = emptySet, action) {
     const { error, meta } = action;
     const complete = meta && meta.complete;
     const requestId = meta && meta.requestId;
