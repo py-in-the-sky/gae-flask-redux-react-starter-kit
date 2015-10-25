@@ -39,6 +39,7 @@
     "immutable": "^3.7.4",
     "lodash": "^3.10.1",
     "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "react-motion": "^0.3.0",
     "react-redux": "^4.0.0",
     "react-router": "1.0.0-beta3",
