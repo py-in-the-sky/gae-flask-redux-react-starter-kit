@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 
 export default class GreetingControls extends PureComponent {
@@ -9,15 +10,19 @@ export default class GreetingControls extends PureComponent {
         return (
             <div style={{ float: 'left', marginLeft: 20 }}>
 
-                <button onClick={fetchAndAddName}>
-                    ADD GREETING
-                </button>
+                <RaisedButton
+                 primary={true}
+                 label="ADD GREETING"
+                 onClick={fetchAndAddName} />
 
-                <button onClick={subtractLastName}>
-                    SUBTRACT LAST GREETING
-                </button>
+                <RaisedButton
+                 secondary={true}
+                 label="SUBTRACT LAST GREETING"
+                 onClick={subtractLastName} />
 
-                <div style={{ visibility: requestsPending ? 'visible' : 'hidden' }}>
+                <div
+                 className="waiting"
+                 style={{ visibility: requestsPending ? 'visible' : 'hidden' }}>
                     Waiting...
                 </div>
 
