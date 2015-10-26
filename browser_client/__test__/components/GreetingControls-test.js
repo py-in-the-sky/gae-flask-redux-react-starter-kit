@@ -6,6 +6,7 @@ import {
 } from 'react-addons-test-utils';
 import { createFinder } from '../utils';
 import GreetingControls from '../../src/components/GreetingControls';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 
 function setup (requestsPending = false) {
@@ -17,7 +18,9 @@ function setup (requestsPending = false) {
     const greetingControls = renderIntoDocument(<GreetingControls {...props} />);
     const find = createFinder(greetingControls);
     const waitingIndicator = find('.waiting')[0];
-    const [ addButton, subtractButton ] = find('button');
+    const [ raisedAddButton, raisedSubtractButton ] = find(RaisedButton);
+    const addButton = createFinder(raisedAddButton)('button')[0];
+    const subtractButton = createFinder(raisedSubtractButton)('button')[0];
 
     return { props, addButton, subtractButton, waitingIndicator };
 }

@@ -10,14 +10,18 @@ import ReactDOM from 'react-dom';
 import { Simulate } from 'react-addons-test-utils';
 import jsc from 'jsverify';
 import _ from 'lodash';
+import RaisedButton from 'material-ui/lib/raised-button';
 import Greeting from '../../src/components/Greeting';
+import { createFinder } from '../utils';
 
 
 describe('adding and subtracting greetings', function () {
     beforeEach(function () {
         findOnPage = this.findOnPage;
         this.navigate('/1');
-        const [ addButton, subtractButton ] = findOnPage('button');
+        const [ raisedAddButton, raisedSubtractButton ] = findOnPage(RaisedButton);
+        const addButton = createFinder(raisedAddButton)('button')[0];
+        const subtractButton = createFinder(raisedSubtractButton)('button')[0];
 
         clickAddButton = function () {
             Simulate.click(addButton);
