@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { VelocityTransitionGroup } from 'velocity-react';
-import { throttledGetWindowWidth } from '../utils/dom';
 
 
 export default class PageHandler extends PureComponent {
     render () {
-        const windowWidth = throttledGetWindowWidth();
-        const { children, location: { pathname } } = this.props;
+        const { windowWidth, children, location: { pathname } } = this.props;
 
         return (
             <VelocityTransitionGroup
@@ -26,8 +24,9 @@ export default class PageHandler extends PureComponent {
 
 
 PageHandler.propTypes = {
-    children: PropTypes.object,
-    location: PropTypes.object,
+    children:    PropTypes.object,
+    location:    PropTypes.object,
+    windowWidth: PropTypes.number.isRequired,
 };
 
 

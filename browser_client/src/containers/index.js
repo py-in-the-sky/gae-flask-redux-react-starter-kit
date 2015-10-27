@@ -6,7 +6,7 @@ import store from '../store';
 import PageOneApp from './PageOneApp';
 import PageTwoApp from './PageTwoApp';
 import WindowResizeListener from './WindowResizeListener';
-import Layout from '../components/Layout';
+import Layout from './Layout';
 
 
 export default class Root extends PureComponent {
