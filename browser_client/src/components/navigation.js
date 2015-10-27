@@ -19,7 +19,7 @@ export default () => (
              enter={linkOnEnter}
              leave={linkOnLeave}>
 
-                <li><Link to="/1" >Page One</Link></li>
+                <li><Link to="/1">Page One</Link></li>
                 <li><Link to="/2">Page Two</Link></li>
 
             </VelocityTransitionGroup>

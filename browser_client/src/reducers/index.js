@@ -1,4 +1,4 @@
-import { ADD_NAME, SUBTRACT_LAST_NAME } from '../actions';
+import { ADD_NAME, SUBTRACT_LAST_NAME, WINDOW_WIDTH } from '../actions';
 import { List, Set } from 'immutable';
 
 
@@ -22,14 +22,25 @@ export function names (state = emptyList, action) {
 
 
 export function pendingRequests (state = emptySet, action) {
-    const { error, meta } = action;
+    const { type, error, meta } = action;
     const complete = meta && meta.complete;
     const requestId = meta && meta.requestId;
+    const addName = type === ADD_NAME;
 
-    if (complete && requestId)
+    if (addName && complete && requestId)
         return state.delete(requestId);
-    else if (!error && !complete && requestId)
+    else if (addName && !error && !complete && requestId)
         return state.add(requestId);
+    else
+        return state;
+}
+
+
+export function windowWidth (state = null, action) {
+    const { type, payload } = action;
+
+    if (type === WINDOW_WIDTH)
+        return payload;
     else
         return state;
 }
