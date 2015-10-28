@@ -14,6 +14,6 @@ export function getWindowWidth () {
 
 export const throttledGetWindowWidth = throttle(
     getWindowWidth,
-    300,
+    400,
     { leading: true, trailing: false }
 );

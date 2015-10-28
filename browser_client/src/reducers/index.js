@@ -1,9 +1,11 @@
 import { ADD_NAME, SUBTRACT_LAST_NAME, WINDOW_WIDTH } from '../actions';
 import { List, Set } from 'immutable';
+import { throttledGetWindowWidth } from '../utils/dom';
 
 
 const emptyList = List();
 const emptySet  = Set();
+const initialWindowWidth = throttledGetWindowWidth();
 
 
 export function names (state = emptyList, action) {
@@ -36,7 +38,7 @@ export function pendingRequests (state = emptySet, action) {
 }
 
 
-export function windowWidth (state = null, action) {
+export function windowWidth (state = initialWindowWidth, action) {
     const { type, payload } = action;
 
     if (type === WINDOW_WIDTH)

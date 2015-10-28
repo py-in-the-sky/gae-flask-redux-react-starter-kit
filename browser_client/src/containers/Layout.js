@@ -3,7 +3,6 @@ import PureComponent from 'react-pure-render/component';
 import { connect } from 'react-redux';
 import Navigation from '../components/Navigation';
 import PageHandler from '../components/PageHandler';
-import { throttledGetWindowWidth } from '../utils/dom';
 
 
 export class Layout extends PureComponent {
@@ -23,7 +22,7 @@ export class Layout extends PureComponent {
                 <Navigation />
 
                 <PageHandler
-                 windowWidth={windowWidth || throttledGetWindowWidth()}
+                 windowWidth={windowWidth}
                  location={location}>
                     {children}
                 </PageHandler>
@@ -37,7 +36,7 @@ export class Layout extends PureComponent {
 Layout.propTypes = {
     children:    PropTypes.object,
     location:    PropTypes.object,
-    windowWidth: PropTypes.number,
+    windowWidth: PropTypes.number.isRequired,
 };
 
 
