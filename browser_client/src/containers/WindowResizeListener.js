@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { on, off } from 'material-ui/lib/utils/events';
 import { debounce } from '../utils/lodash';
-import { getWindowWidth, throttledGetWindowWidth } from '../utils/dom';
+import { getWindowWidth } from '../utils/dom';
 import { windowWidth } from '../actions';
 
 
@@ -23,8 +23,11 @@ export class WindowResizeListener extends PureComponent {
     }
 
     componentDidMount () {
-        this.props.windowWidth(throttledGetWindowWidth());
         on(window, 'resize', this.debouncedWindowWidth);
+        // now that we're listening to the window-resize event,
+        // for correctness, we propagate the current window
+        // width to give the app the correct baseline
+        this.debouncedWindowWidth();
     }
 
     componentWillUnmount () {

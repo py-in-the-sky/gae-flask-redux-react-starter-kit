@@ -1,11 +1,11 @@
 import { ADD_NAME, SUBTRACT_LAST_NAME, WINDOW_WIDTH } from '../actions';
 import { List, Set } from 'immutable';
-import { throttledGetWindowWidth } from '../utils/dom';
+import { getWindowWidth } from '../utils/dom';
 
 
 const emptyList = List();
 const emptySet  = Set();
-const initialWindowWidth = throttledGetWindowWidth();
+const initialWindowWidth = getWindowWidth();
 
 
 export function names (state = emptyList, action) {

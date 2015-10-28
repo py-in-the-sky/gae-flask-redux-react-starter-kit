@@ -1,6 +1,3 @@
-import { throttle } from './lodash';
-
-
 // thanks to https://github.com/cesarandreu/react-window-resize-listener
 export function getWindowWidth () {
     if (__DEV__)
@@ -10,10 +7,3 @@ export function getWindowWidth () {
             document.documentElement.clientWidth ||
             document.body.clientWidth);
 }
-
-
-export const throttledGetWindowWidth = throttle(
-    getWindowWidth,
-    400,
-    { leading: true, trailing: false }
-);
