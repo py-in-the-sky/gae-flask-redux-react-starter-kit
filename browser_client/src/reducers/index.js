@@ -1,11 +1,9 @@
 import { ADD_NAME, SUBTRACT_LAST_NAME, WINDOW_WIDTH } from '../actions';
 import { List, Set } from 'immutable';
-import { getWindowWidth } from '../utils/dom';
 
 
 const emptyList = List();
 const emptySet  = Set();
-const initialWindowWidth = getWindowWidth();
 
 
 export function names (state = emptyList, action) {
@@ -33,16 +31,6 @@ export function pendingRequests (state = emptySet, action) {
         return state.delete(requestId);
     else if (addName && !error && !complete && requestId)
         return state.add(requestId);
-    else
-        return state;
-}
-
-
-export function windowWidth (state = initialWindowWidth, action) {
-    const { type, payload } = action;
-
-    if (type === WINDOW_WIDTH)
-        return payload;
     else
         return state;
 }

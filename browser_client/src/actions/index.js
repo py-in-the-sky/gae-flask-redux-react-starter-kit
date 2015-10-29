@@ -47,12 +47,3 @@ export function subtractLastName () {
         type: SUBTRACT_LAST_NAME
     };
 }
-
-
-export const WINDOW_WIDTH = 'WINDOW_WIDTH';
-export function windowWidth (width) {
-    return {
-        type:    WINDOW_WIDTH,
-        payload: width,
-    };
-}

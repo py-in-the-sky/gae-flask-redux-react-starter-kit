@@ -5,16 +5,50 @@ import { Router, Route } from 'react-router';
 import store from '../store';
 import PageOneApp from './PageOneApp';
 import PageTwoApp from './PageTwoApp';
-import WindowResizeListener from './WindowResizeListener';
-import Layout from './Layout';
+import Layout from '../components/Layout';
+import { on, off } from 'material-ui/lib/utils/events';
+import { debounce } from '../utils/lodash';
+import { getWindowWidth } from '../utils/dom';
+import { windowSize } from '../utils/styles';
 
 
 export default class Root extends PureComponent {
     constructor(props) {
         super(props);
         this.renderReduxProvider = this.renderReduxProvider.bind(this);
+        this.updateWindowData    = this.updateWindowData.bind(this);
         if (__DEV__)
             this.state = { debugVisible: false };
+
+        this.debouncedUpdateWindowData = debounce(
+            this.updateWindowData,
+            this.props.debounceTime,
+            { leading: false, trailing: true, maxWait: this.props.debounceTime * 2 }
+        );
+    }
+
+    updateWindowData () {
+        const windowWidth = getWindowWidth();
+        this.setState({ windowWidth, windowSize: windowSize(windowWidth) });
+    }
+
+    componentWillMount () {
+        on(window, 'resize', this.debouncedUpdateWindowData);
+        // now that we're listening to the window-resize event,
+        // for correctness, we set the current window
+        // width to give the app the correct baseline
+        this.updateWindowData();
+    }
+
+    componentWillUnmount () {
+        off(window, 'resize', this.debouncedUpdateWindowData);
+    }
+
+    getChildContext () {
+        return {
+            windowWidth: this.state.windowWidth,
+            windowSize:  this.state.windowSize,
+        };
     }
 
     render() {
@@ -53,18 +87,12 @@ export default class Root extends PureComponent {
     renderReduxProvider () {
         return (
             <Provider store={store}>
-                <div>
-
-                    <WindowResizeListener />
-
-                    <Router history={this.props.history}>
-                        <Route path="/" component={Layout}>
-                            <Route path="/1" component={PageOneApp} />
-                            <Route path="/2" component={PageTwoApp} />
-                        </Route>
-                    </Router>
-
-                </div>
+                <Router history={this.props.history}>
+                    <Route path="/" component={Layout}>
+                        <Route path="/1" component={PageOneApp} />
+                        <Route path="/2" component={PageTwoApp} />
+                    </Route>
+                </Router>
             </Provider>
         );
     }
@@ -72,5 +100,17 @@ export default class Root extends PureComponent {
 
 
 Root.propTypes = {
-    history: PropTypes.object.isRequired,
+    history:      PropTypes.object.isRequired,
+    debounceTime: PropTypes.number.isRequired,
+};
+
+
+Root.defaultProps = {
+    debounceTime: 350,
+};
+
+
+Root.childContextTypes = {
+    windowWidth: PropTypes.number.isRequired,
+    windowSize:  PropTypes.number.isRequired,
 };

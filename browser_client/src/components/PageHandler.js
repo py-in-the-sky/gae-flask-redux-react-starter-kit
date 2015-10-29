@@ -5,7 +5,8 @@ import { VelocityTransitionGroup } from 'velocity-react';
 
 export default class PageHandler extends PureComponent {
     render () {
-        const { windowWidth, children, location: { pathname } } = this.props;
+        const { children, location: { pathname } } = this.props;
+        const { windowWidth } = this.context;
 
         return (
             <VelocityTransitionGroup
@@ -24,10 +25,14 @@ export default class PageHandler extends PureComponent {
 
 
 PageHandler.propTypes = {
-    children:    PropTypes.object,
-    location:    PropTypes.object,
-    windowWidth: PropTypes.number.isRequired,
+    children: PropTypes.object,
+    location: PropTypes.object,
 };
+
+
+PageHandler.contextTypes = {
+    windowWidth: PropTypes.number.isRequired,
+}
 
 
 const pageEnter = windowWidth => ({
