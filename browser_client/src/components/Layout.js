@@ -3,6 +3,7 @@ import PureComponent from 'react-pure-render/component';
 import { connect } from 'react-redux';
 import Navigation from './Navigation';
 import PageHandler from './PageHandler';
+import WindowSizeProvider from './WindowSizeProvider';
 
 
 export default class Layout extends PureComponent {
@@ -17,21 +18,23 @@ export default class Layout extends PureComponent {
         const { location, children } = this.props;
 
         return (
-            <div style={{ backgroundColor: '#FDFDFD' }}>
+            <WindowSizeProvider>
+                <div style={{ backgroundColor: '#FDFDFD' }}>
 
-                <Navigation />
+                    <Navigation />
 
-                <PageHandler location={location}>
-                    {children}
-                </PageHandler>
+                    <PageHandler location={location}>
+                        {children}
+                    </PageHandler>
 
-            </div>
+                </div>
+            </WindowSizeProvider>
         );
     }
 }
 
 
 Layout.propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.element,
     location: PropTypes.object,
 };

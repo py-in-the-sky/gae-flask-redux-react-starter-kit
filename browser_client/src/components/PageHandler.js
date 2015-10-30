@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
+import React, { Component, PropTypes } from 'react';
 import { VelocityTransitionGroup } from 'velocity-react';
 
 
-export default class PageHandler extends PureComponent {
+// does not extend PureComponent because PureComponent's
+// `.shouldComponentUpdate` does not account for context
+export default class PageHandler extends Component {
     render () {
         const { children, location: { pathname } } = this.props;
         const { windowWidth } = this.context;
@@ -25,7 +26,7 @@ export default class PageHandler extends PureComponent {
 
 
 PageHandler.propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.element,
     location: PropTypes.object,
 };
 
