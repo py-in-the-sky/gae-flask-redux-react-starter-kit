@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 // navigation links first appear on the page
 
 
-export default () => (
+export default () =>
     <div className="links">
         <ul>
             <VelocityTransitionGroup
@@ -24,8 +24,7 @@ export default () => (
 
             </VelocityTransitionGroup>
         </ul>
-    </div>
-);
+    </div>;
 
 
 const linkOnEnter = {
