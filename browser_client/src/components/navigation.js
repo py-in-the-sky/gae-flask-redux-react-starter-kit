@@ -1,6 +1,12 @@
-import React from 'react';
-import { VelocityTransitionGroup } from 'velocity-react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import IconButton from 'material-ui/lib/icon-button';
+import MenuIcon from 'material-ui/lib/svg-icons/navigation/menu';
+
+
+const MenuButtonElement = <IconButton><MenuIcon /></IconButton>;
 
 
 // currently not using "optimisation.react.constantElements" in
@@ -10,34 +16,38 @@ import { Link } from 'react-router';
 // navigation links first appear on the page
 
 
-export default () =>
-    <div className="links">
-        <ul>
-            <VelocityTransitionGroup
-             component="div"
-             runOnMount={true}
-             enter={linkOnEnter}
-             leave={linkOnLeave}>
+export default class Navigation extends PureComponent {
+    constructor(props, context) {
+        super(props, context);
+        this.navigate = this.navigate.bind(this);
+    }
 
-                <li><Link to="/1">Page One</Link></li>
-                <li><Link to="/2">Page Two</Link></li>
+    componentWillMount () {
+        this.history = this.context.history;
+    }
 
-            </VelocityTransitionGroup>
-        </ul>
-    </div>;
+    render () {
+        return (
+            <div className="links">
+                <IconMenu
+                 onItemTouchTap={this.navigate}
+                 iconButtonElement={MenuButtonElement}
+                 openDirection="bottom-right">
+
+                    <MenuItem route="/1" primaryText="Page One" />
+                    <MenuItem route="/2" primaryText="Page Two" />
+
+                </IconMenu>
+            </div>
+        );
+    }
+
+    navigate (_, item) {
+        this.history.pushState(null, item.props.route);
+    }
+}
 
 
-const linkOnEnter = {
-    animation: 'transition.slideUpBigIn',
-    style: {
-        opacity: 0,
-    },
-    duration: 300,
-    stagger: 100,
-    drag: true,
-};
-
-
-const linkOnLeave = {
-    animation: 'transition.slideDownBigOut',
+Navigation.contextTypes = {
+    history: PropTypes.object.isRequired,
 };

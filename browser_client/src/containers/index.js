@@ -19,6 +19,10 @@ export default class Root extends PureComponent {
             this.state = { debugVisible: false };
     }
 
+    getChildContext () {
+        return { history: this.props.history };
+    }
+
     render() {
         if (__DEV__) {
             const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
@@ -73,3 +77,8 @@ export default class Root extends PureComponent {
 Root.propTypes = {
     history: PropTypes.object.isRequired,
 };
+
+
+Root.childContextTypes = {
+    history: PropTypes.object.isRequired,
+}
