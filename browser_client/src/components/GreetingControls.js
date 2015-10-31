@@ -13,12 +13,12 @@ export default class GreetingControls extends PureComponent {
                 <RaisedButton
                  primary={true}
                  label="ADD GREETING"
-                 onClick={fetchAndAddName} />
+                 onTouchTap={fetchAndAddName} />
 
                 <RaisedButton
                  secondary={true}
                  label="SUBTRACT LAST GREETING"
-                 onClick={subtractLastName} />
+                 onTouchTap={subtractLastName} />
 
                 <div
                  className="waiting"

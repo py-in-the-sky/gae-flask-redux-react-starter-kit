@@ -7,11 +7,13 @@ import { renderIntoDocument } from 'react-addons-test-utils';
 import { createFinder } from '../utils';
 import { VelocityTransitionGroup } from 'velocity-react';
 import sinonChai from 'sinon-chai';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 before(function () {  // GLOBAL BEFORE
     VelocityTransitionGroup.disabledForTest = true;
     chai.use(sinonChai);
+    injectTapEventPlugin();
 });
 
 

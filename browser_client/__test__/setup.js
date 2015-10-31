@@ -2,9 +2,11 @@
 
 import { VelocityTransitionGroup } from 'velocity-react';
 import sinonChai from 'sinon-chai';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 before(function () {
     VelocityTransitionGroup.disabledForTest = true;
     chai.use(sinonChai);
+    injectTapEventPlugin();
 });

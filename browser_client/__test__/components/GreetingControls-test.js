@@ -29,7 +29,7 @@ function setup (requestsPending = false) {
 describe('adding a greeting', () => {
     it('calls the `fetchAndAddName` action creator', () => {
         const { props, addButton } = setup();
-        Simulate.click(addButton);
+        Simulate.touchTap(addButton);
         expect( props.fetchAndAddName ).to.have.been.calledOnce;
     });
 });
@@ -38,7 +38,7 @@ describe('adding a greeting', () => {
 describe('subtracting a greeting', () => {
     it('calls the `subtractLastName` action creator', () => {
         const { props, subtractButton } = setup();
-        Simulate.click(subtractButton);
+        Simulate.touchTap(subtractButton);
         expect( props.subtractLastName ).to.have.been.calledOnce;
     });
 });

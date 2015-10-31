@@ -24,12 +24,12 @@ describe('adding and subtracting greetings', function () {
         const subtractButton = createFinder(raisedSubtractButton)('button')[0];
 
         clickAddButton = function () {
-            Simulate.click(addButton);
+            Simulate.touchTap(addButton);
             return findOnPage(Greeting).length;
         };
 
         clickSubtractButton = function () {
-            Simulate.click(subtractButton);
+            Simulate.touchTap(subtractButton);
             return findOnPage(Greeting).length;
         };
     });
