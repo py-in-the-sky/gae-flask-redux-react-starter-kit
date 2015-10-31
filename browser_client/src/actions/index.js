@@ -47,3 +47,12 @@ export function subtractLastName () {
         type: SUBTRACT_LAST_NAME
     };
 }
+
+
+export const WINDOW_DATA = 'WINDOW_DATA';
+export function windowData (payload) {
+    return {
+        type: WINDOW_DATA,
+        payload,
+    };
+}

@@ -1,13 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { VelocityTransitionGroup } from 'velocity-react';
+import PureComponent from 'react-pure-render/component';
 
 
-// does not extend PureComponent because PureComponent's
-// `.shouldComponentUpdate` does not account for context
-export default class PageHandler extends Component {
+export default class PageHandler extends PureComponent {
     render () {
-        const { children, location: { pathname } } = this.props;
-        const { windowWidth } = this.context;
+        const {
+            children,
+            location: { pathname },
+            windowWidth,
+        } = this.props;
 
         return (
             <VelocityTransitionGroup
@@ -26,14 +28,10 @@ export default class PageHandler extends Component {
 
 
 PageHandler.propTypes = {
-    children: PropTypes.element,
-    location: PropTypes.object,
-};
-
-
-PageHandler.contextTypes = {
+    children:    PropTypes.element,
+    location:    PropTypes.object,
     windowWidth: PropTypes.number.isRequired,
-}
+};
 
 
 const pageEnter = windowWidth => ({

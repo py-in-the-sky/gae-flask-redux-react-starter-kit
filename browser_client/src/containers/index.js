@@ -5,7 +5,8 @@ import { Router, Route } from 'react-router';
 import store from '../store';
 import PageOneApp from './PageOneApp';
 import PageTwoApp from './PageTwoApp';
-import Layout from '../components/Layout';
+import WindowResizeListener from './WindowResizeListener';
+import Layout from './Layout';
 
 
 export default class Root extends PureComponent {
@@ -54,12 +55,15 @@ export default class Root extends PureComponent {
     renderReduxProvider () {
         return (
             <Provider store={store}>
-                <Router history={this.props.history}>
-                    <Route path="/" component={Layout}>
-                        <Route path="/1" component={PageOneApp} />
-                        <Route path="/2" component={PageTwoApp} />
-                    </Route>
-                </Router>
+                <div>
+                    <WindowResizeListener/>
+                    <Router history={this.props.history}>
+                        <Route path="/" component={Layout}>
+                            <Route path="/1" component={PageOneApp} />
+                            <Route path="/2" component={PageTwoApp} />
+                        </Route>
+                    </Router>
+                </div>
             </Provider>
         );
     }
