@@ -68,12 +68,12 @@ const defaultPageStyle = {
 
 
 const pageStyle = {
-    '/1': {
+    '/shire': {
         ...defaultPageStyle,
-        backgroundColor: '#E8F5E9',
+        // backgroundColor: '#E8F5E9',
     },
-    '/2': {
+    '/mordor': {
         ...defaultPageStyle,
-        backgroundColor: '#EFEBE9',
+        // backgroundColor: '#EFEBE9',
     },
 };

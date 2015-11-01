@@ -1,3 +1,8 @@
+import Colors from 'material-ui/lib/styles/colors';
+import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
+import Spacing from 'material-ui/lib/styles/spacing';
+
+
 // thanks to material-ui
 export function windowSize (windowWidth) {
     if (windowWidth >= WindowWidthThresholds.LARGE)
@@ -21,3 +26,44 @@ export const WindowSizes = {
     MEDIUM: 2,
     LARGE:  3,
 };
+
+
+const Shire = {
+    spacing: Spacing,
+    fontFamily: 'Roboto, sans-serif',
+    palette: {
+        primary1Color: Colors.green500,
+        primary2Color: Colors.green700,
+        primary3Color: Colors.lightBlack,
+        accent1Color: Colors.amberA700,
+        accent2Color: Colors.grey100,
+        accent3Color: Colors.grey500,
+        textColor: Colors.darkBlack,
+        alternateTextColor: Colors.white,
+        canvasColor: Colors.green100,
+        borderColor: Colors.grey300,
+        disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
+    },
+};
+
+
+const Mordor = {
+    spacing: Spacing,
+    fontFamily: 'Roboto, sans-serif',
+    palette: {
+        primary1Color: Colors.blueGrey500,
+        primary2Color: Colors.blueGrey700,
+        primary3Color: Colors.grey600,
+        accent1Color: Colors.deepOrangeA400,
+        accent2Color: Colors.deepOrangeA700,
+        accent3Color: Colors.deepOrangeA200,
+        textColor: Colors.fullWhite,
+        alternateTextColor: Colors.darkWhite,
+        canvasColor: '#303030',
+        borderColor: ColorManipulator.fade(Colors.fullWhite, 0.3),
+        disabledColor: ColorManipulator.fade(Colors.fullWhite, 0.3)
+    },
+};
+
+
+export const Themes = { Shire, Mordor };

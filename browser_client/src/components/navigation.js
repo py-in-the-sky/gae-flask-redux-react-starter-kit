@@ -34,8 +34,8 @@ export default class Navigation extends PureComponent {
                  iconButtonElement={MenuButtonElement}
                  openDirection="bottom-right">
 
-                    <MenuItem route="/1" primaryText="Page One" />
-                    <MenuItem route="/2" primaryText="Page Two" />
+                    <MenuItem route="/shire" primaryText="Shire Theme" />
+                    <MenuItem route="/mordor" primaryText="Mordor Theme" />
 
                 </IconMenu>
             </div>

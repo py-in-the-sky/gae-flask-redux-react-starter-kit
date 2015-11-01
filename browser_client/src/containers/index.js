@@ -3,8 +3,8 @@ import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
 import store from '../store';
-import PageOneApp from './PageOneApp';
-import PageTwoApp from './PageTwoApp';
+import ShireApp from './ShireApp';
+import MordorApp from './MordorApp';
 import WindowResizeListener from './WindowResizeListener';
 import Layout from './Layout';
 
@@ -63,8 +63,8 @@ export default class Root extends PureComponent {
                     <WindowResizeListener/>
                     <Router history={this.props.history}>
                         <Route path="/" component={Layout}>
-                            <Route path="/1" component={PageOneApp} />
-                            <Route path="/2" component={PageTwoApp} />
+                            <Route path="/shire" component={ShireApp} />
+                            <Route path="/mordor" component={MordorApp} />
                         </Route>
                     </Router>
                 </div>

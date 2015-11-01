@@ -2,12 +2,21 @@ import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import Greetings from './Greetings';
 import GreetingControls from './GreetingControls';
+import Paper from 'material-ui/lib/paper';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import { Themes } from '../utils/styles';
 
 
-export default class PageOne extends PureComponent {
+export default class ShirePage extends PureComponent {
     componentDidMount () {
         if (this.props.names.size === 0)
             this.props.fetchAndAddName();
+    }
+
+    getChildContext () {
+        return {
+            muiTheme: ThemeManager.getMuiTheme(Themes.Shire),
+        };
     }
 
     render () {
@@ -19,7 +28,7 @@ export default class PageOne extends PureComponent {
         } = this.props;
 
         return (
-            <div className="page">
+            <Paper className="page">
 
                 <Greetings
                  names={names} />
@@ -29,15 +38,20 @@ export default class PageOne extends PureComponent {
                  fetchAndAddName={fetchAndAddName}
                  subtractLastName={subtractLastName} />
 
-            </div>
+            </Paper>
         );
     }
 }
 
 
-PageOne.propTypes = {
+ShirePage.propTypes = {
     names:            PropTypes.object.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     fetchAndAddName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
+};
+
+
+ShirePage.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
 };

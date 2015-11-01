@@ -8,7 +8,7 @@ export default class GreetingControls extends PureComponent {
         const { fetchAndAddName, subtractLastName, requestsPending } = this.props;
 
         return (
-            <div style={{ float: 'left', marginLeft: 20 }}>
+            <div>
 
                 <RaisedButton
                  primary={true}

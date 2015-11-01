@@ -2,16 +2,21 @@ import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import Greetings from './Greetings';
 import GreetingControls from './GreetingControls';
+import Paper from 'material-ui/lib/paper';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import { Themes } from '../utils/styles';
 
 
-export default class PageTwo extends PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
+export default class MordorPage extends PureComponent {
     componentDidMount () {
         if (this.props.names.size === 0)
             this.props.fetchAndAddName();
+    }
+
+    getChildContext () {
+        return {
+            muiTheme: ThemeManager.getMuiTheme(Themes.Mordor),
+        };
     }
 
     render () {
@@ -23,7 +28,7 @@ export default class PageTwo extends PureComponent {
         } = this.props;
 
         return (
-            <div className="page">
+            <Paper className="page" style={{ color: '#eeeeee' }}>
 
                 <GreetingControls
                  requestsPending={requestsPending}
@@ -33,15 +38,20 @@ export default class PageTwo extends PureComponent {
                 <Greetings
                  names={names} />
 
-            </div>
+            </Paper>
         );
     }
 }
 
 
-PageTwo.propTypes = {
+MordorPage.propTypes = {
     names:            PropTypes.object.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     fetchAndAddName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
 };
+
+
+MordorPage.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
+}

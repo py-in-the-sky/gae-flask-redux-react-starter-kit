@@ -17,7 +17,6 @@ export default class Greetings extends PureComponent {
         return (
             <VelocityTransitionGroup
              component="div"
-             style={{ float: 'left', marginLeft: 20 }}
              enter={greetingEnter}
              leave={greetingLeave}>
 

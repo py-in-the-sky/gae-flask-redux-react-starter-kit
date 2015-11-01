@@ -18,7 +18,7 @@ import { createFinder } from '../utils';
 describe('adding and subtracting greetings', function () {
     beforeEach(function () {
         findOnPage = this.findOnPage;
-        this.navigate('/1');
+        this.navigate('/shire');
         const [ raisedAddButton, raisedSubtractButton ] = findOnPage(RaisedButton);
         const addButton = createFinder(raisedAddButton)('button')[0];
         const subtractButton = createFinder(raisedSubtractButton)('button')[0];
