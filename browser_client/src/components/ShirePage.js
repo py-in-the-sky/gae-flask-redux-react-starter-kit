@@ -5,6 +5,7 @@ import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
+import { Flex } from 'jsxstyle';
 
 
 export default class ShirePage extends PureComponent {
@@ -28,17 +29,29 @@ export default class ShirePage extends PureComponent {
         } = this.props;
 
         return (
-            <Paper className="page">
+            <Flex
+             height="100vh"
+             position="relative"
+             overflow="hidden"
+             flex="1 1 auto"
+             flexFlow="row wrap"
+             flexWrap="nowrap"
+             alignItems="stretch"
+             justifyContent="center"
+             order={0}
+             backfaceVisibility="hidden">
+                <Paper className="page">
 
-                <Greetings
-                 names={names} />
+                    <Greetings
+                     names={names} />
 
-                <GreetingControls
-                 requestsPending={requestsPending}
-                 fetchAndAddName={fetchAndAddName}
-                 subtractLastName={subtractLastName} />
+                    <GreetingControls
+                     requestsPending={requestsPending}
+                     fetchAndAddName={fetchAndAddName}
+                     subtractLastName={subtractLastName} />
 
-            </Paper>
+                </Paper>
+            </Flex>
         );
     }
 }
