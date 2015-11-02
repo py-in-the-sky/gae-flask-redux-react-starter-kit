@@ -1,5 +1,6 @@
 var path    = require('path');
 var webpack = require('webpack');
+const assign = require('lodash').assign;
 
 
 var devPublicPath = 'http://localhost:8080/assets/';
@@ -59,7 +60,7 @@ module.exports = function makeWebpackConfig (opts) {
     });
 
     if (__DEV__) {
-        return Object.assign({}, configDefaults, {
+        return assign({}, configDefaults, {
             debug: true,
             displayErrorDetails: true,
             outputPathinfo: true,
@@ -69,7 +70,7 @@ module.exports = function makeWebpackConfig (opts) {
                 'webpack/hot/only-dev-server',                 // for hot updates
                 configDefaults.entry
             ],
-            output: Object.assign({}, configDefaults.output, {
+            output: assign({}, configDefaults.output, {
                 publicPath: devPublicPath,
                 devtoolModuleFilenameTemplate: '[resourcePath]',
                 devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
@@ -84,7 +85,7 @@ module.exports = function makeWebpackConfig (opts) {
             devtool: 'inline-source-map',
             resolve: configDefaults.resolve,
             plugins: [ EnvironmentPlugin ],
-            module:  Object.assign({}, preLoaders, {
+            module:  assign({}, preLoaders, {
                 loaders: [
                     {
                         test: /\.js$/,
@@ -99,7 +100,7 @@ module.exports = function makeWebpackConfig (opts) {
         };
     }
     else {
-        return Object.assign({}, configDefaults, {
+        return assign({}, configDefaults, {
             plugins: [
                 EnvironmentPlugin,
                 new webpack.optimize.DedupePlugin(),

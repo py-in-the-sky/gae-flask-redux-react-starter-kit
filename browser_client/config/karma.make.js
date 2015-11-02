@@ -3,6 +3,7 @@
         http://karma-runner.github.io/0.13/config/configuration-file.html
         https://github.com/webpack/karma-webpack/tree/master/example
  */
+const assign = require('lodash').assign;
 
 
 module.exports = function makeKarmaConfig (opts) {
@@ -33,7 +34,7 @@ module.exports = function makeKarmaConfig (opts) {
     };
 
     if (__COVERAGE__)
-        return Object.assign({}, config, {
+        return assign({}, config, {
             reporters: [ 'dots', 'coverage' ],
             coverageReporter: {
                 dir:  '__coverage_reports__/browser_client',
@@ -42,7 +43,7 @@ module.exports = function makeKarmaConfig (opts) {
             webpack: require('./webpack.coverage'),
         });
     else
-        return Object.assign({}, config, {
+        return assign({}, config, {
             webpack: require('./webpack.test'),
         });
 }
