@@ -7,7 +7,7 @@ export default class Greeting extends PureComponent {
         const { salutation, name } = this.props;
 
         return (
-            <div className="greeting">
+            <div>
                 {`${salutation}, ${name}!`}
             </div>
         );

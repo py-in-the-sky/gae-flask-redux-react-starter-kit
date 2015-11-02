@@ -41,7 +41,7 @@ export default class MordorPage extends PureComponent {
              order={0}
              backfaceVisibility="hidden"
              padding={30}>
-                <Paper className="page" zDepth={4} style={{ color: '#eeeeee' }}>
+                <Paper zDepth={4} style={{ color: '#eeeeee' }}>
 
                     <GreetingControls
                      requestsPending={requestsPending}

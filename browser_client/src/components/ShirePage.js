@@ -41,7 +41,7 @@ export default class ShirePage extends PureComponent {
              order={0}
              backfaceVisibility="hidden"
              padding={30}>
-                <Paper className="page" zDepth={4}>
+                <Paper zDepth={4}>
 
                     <Greetings
                      names={names} />
