@@ -30,7 +30,7 @@ export default class MordorPage extends PureComponent {
 
         return (
             <Flex
-             height="100vh"
+             height="70vh"
              position="relative"
              overflow="hidden"
              flex="1 1 auto"
@@ -39,8 +39,9 @@ export default class MordorPage extends PureComponent {
              alignItems="stretch"
              justifyContent="center"
              order={0}
-             backfaceVisibility="hidden">
-                <Paper className="page" style={{ color: '#eeeeee' }}>
+             backfaceVisibility="hidden"
+             padding={30}>
+                <Paper className="page" zDepth={4} style={{ color: '#eeeeee' }}>
 
                     <GreetingControls
                      requestsPending={requestsPending}
