@@ -28,17 +28,15 @@ export default class Navigation extends PureComponent {
 
     render () {
         return (
-            <div>
-                <IconMenu
-                 onItemTouchTap={this.navigate}
-                 iconButtonElement={MenuButtonElement}
-                 openDirection="bottom-right">
+            <IconMenu
+             onItemTouchTap={this.navigate}
+             iconButtonElement={MenuButtonElement}
+             openDirection="bottom-right">
 
-                    <MenuItem route="/shire" primaryText="Shire Theme" />
-                    <MenuItem route="/mordor" primaryText="Mordor Theme" />
+                <MenuItem route="/shire"  primaryText="Shire Theme" />
+                <MenuItem route="/mordor" primaryText="Mordor Theme" />
 
-                </IconMenu>
-            </div>
+            </IconMenu>
         );
     }
 

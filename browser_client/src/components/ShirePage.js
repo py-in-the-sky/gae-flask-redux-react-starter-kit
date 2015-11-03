@@ -30,7 +30,7 @@ export default class ShirePage extends PureComponent {
 
         return (
             <Flex
-             height="70vh"
+             height="100%"
              position="relative"
              overflow="hidden"
              flex="1 1 auto"
@@ -40,18 +40,59 @@ export default class ShirePage extends PureComponent {
              justifyContent="center"
              order={0}
              backfaceVisibility="hidden"
-             padding={30}>
+             padding={20}>
+
                 <Paper zDepth={4}>
 
-                    <Greetings
-                     names={names} />
+                    <Flex
+                     position="relative"
+                     overflow="hidden"
+                     flex="1 1 auto"
+                     flexFlow="row wrap"
+                     flexWrap="nowrap"
+                     alignItems="stretch"
+                     justifyContent="space-between"
+                     order={0}
+                     backfaceVisibility="hidden"
+                     padding={20}>
 
-                    <GreetingControls
-                     requestsPending={requestsPending}
-                     fetchAndAddName={fetchAndAddName}
-                     subtractLastName={subtractLastName} />
+                        <Flex
+                         position="relative"
+                         overflow="hidden"
+                         flex="1 1 auto"
+                         flexFlow="row wrap"
+                         flexWrap="nowrap"
+                         alignItems="stretch"
+                         order={0}
+                         backfaceVisibility="hidden"
+                         padding={names.size ? 20 : 0}>
+
+                            <Greetings names={names} />
+
+                        </Flex>
+
+                        <Flex
+                         position="relative"
+                         overflow="hidden"
+                         flex="1 1 auto"
+                         flexFlow="row wrap"
+                         flexWrap="nowrap"
+                         alignItems="stretch"
+                         order={0}
+                         backfaceVisibility="hidden"
+                         padding={20}>
+
+                            <GreetingControls
+                             requestsPending={requestsPending}
+                             fetchAndAddName={fetchAndAddName}
+                             subtractLastName={subtractLastName} />
+
+                        </Flex>
+
+                    </Flex>
 
                 </Paper>
+
             </Flex>
         );
     }

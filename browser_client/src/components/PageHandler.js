@@ -1,23 +1,20 @@
 import React, { PropTypes } from 'react';
 import { VelocityTransitionGroup } from 'velocity-react';
 import PureComponent from 'react-pure-render/component';
+import { Flex } from 'jsxstyle';
 
 
 export default class PageHandler extends PureComponent {
     render () {
-        const {
-            children,
-            location: { pathname },
-            windowWidth,
-        } = this.props;
+        const { children, location: { pathname } } = this.props;
 
         return (
             <VelocityTransitionGroup
              component="div"
-             enter={pageEnter(windowWidth)}
-             leave={pageLeave(windowWidth)}>
+             enter={pageEnter}
+             leave={pageLeave}>
 
-                <div key={pathname} style={pageStyle[pathname]}>
+                <div key={pathname} style={pageStyle}>
                     {children}
                 </div>
 
@@ -30,50 +27,36 @@ export default class PageHandler extends PureComponent {
 PageHandler.propTypes = {
     children:    PropTypes.element,
     location:    PropTypes.object,
-    windowWidth: PropTypes.number.isRequired,
 };
 
 
-const pageEnter = windowWidth => ({
-    ...defaultAnimationOpts,
-    animation: {
-        translateX: [0, -windowWidth],
-    },
-});
-
-
-const pageLeave = windowWidth => ({
-    ...defaultAnimationOpts,
-    animation: {
-        translateX: [windowWidth, 0],
-    },
-});
+const pageStyle = {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+};
 
 
 const defaultAnimationOpts = {
-    duration: 300,
+    duration: 700,
     // easing: [ 250, 15 ],  // could use spring instead
     easing: 'easeOutExpo',
 };
 
 
-const defaultPageStyle = {
-    position: 'absolute',
-    top: 70,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 20,
+const pageEnter = {
+    ...defaultAnimationOpts,
+    animation: {
+        translateX: [0, '-100%'],
+    },
 };
 
 
-const pageStyle = {
-    '/shire': {
-        ...defaultPageStyle,
-        // backgroundColor: '#E8F5E9',
-    },
-    '/mordor': {
-        ...defaultPageStyle,
-        // backgroundColor: '#EFEBE9',
+const pageLeave = {
+    ...defaultAnimationOpts,
+    animation: {
+        translateX: ['100%', 0],
     },
 };
