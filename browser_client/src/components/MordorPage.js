@@ -5,7 +5,7 @@ import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
-import { Flex } from 'jsxstyle';
+import { Frame } from './Flex';
 
 
 export default class MordorPage extends PureComponent {
@@ -29,18 +29,8 @@ export default class MordorPage extends PureComponent {
         } = this.props;
 
         return (
-            <Flex
-             height="100%"
-             position="relative"
-             overflow="hidden"
-             flex="1 1 auto"
-             flexFlow="row wrap"
-             flexWrap="nowrap"
-             alignItems="stretch"
-             justifyContent="center"
-             order={0}
-             backfaceVisibility="hidden"
-             padding={20}>
+            <Frame>
+
                 <Paper zDepth={4} style={{ color: '#eeeeee' }}>
 
                     <GreetingControls
@@ -52,7 +42,8 @@ export default class MordorPage extends PureComponent {
                      names={names} />
 
                 </Paper>
-            </Flex>
+
+            </Frame>
         );
     }
 }

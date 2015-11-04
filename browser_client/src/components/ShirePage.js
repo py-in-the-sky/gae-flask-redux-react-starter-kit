@@ -5,7 +5,7 @@ import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
-import { Flex } from 'jsxstyle';
+import { Frame, Container } from './Flex';
 
 
 export default class ShirePage extends PureComponent {
@@ -29,71 +29,32 @@ export default class ShirePage extends PureComponent {
         } = this.props;
 
         return (
-            <Flex
-             height="100%"
-             position="relative"
-             overflow="hidden"
-             flex="1 1 auto"
-             flexFlow="row wrap"
-             flexWrap="nowrap"
-             alignItems="stretch"
-             justifyContent="center"
-             order={0}
-             backfaceVisibility="hidden"
-             padding={20}>
+            <Frame>
 
                 <Paper zDepth={4}>
 
-                    <Flex
-                     position="relative"
-                     overflow="hidden"
-                     flex="1 1 auto"
-                     flexFlow="row wrap"
-                     flexWrap="nowrap"
-                     alignItems="stretch"
-                     justifyContent="space-between"
-                     order={0}
-                     backfaceVisibility="hidden"
-                     padding={20}>
+                    <Container justifyContent="space-between">
 
-                        <Flex
-                         position="relative"
-                         overflow="hidden"
-                         flex="1 1 auto"
-                         flexFlow="row wrap"
-                         flexWrap="nowrap"
-                         alignItems="stretch"
-                         order={0}
-                         backfaceVisibility="hidden"
-                         padding={names.size ? 20 : 0}>
+                        <Container padding={names.size ? '1rem' : 0}>
 
                             <Greetings names={names} />
 
-                        </Flex>
+                        </Container>
 
-                        <Flex
-                         position="relative"
-                         overflow="hidden"
-                         flex="1 1 auto"
-                         flexFlow="row wrap"
-                         flexWrap="nowrap"
-                         alignItems="stretch"
-                         order={0}
-                         backfaceVisibility="hidden"
-                         padding={20}>
+                        <Container>
 
                             <GreetingControls
                              requestsPending={requestsPending}
                              fetchAndAddName={fetchAndAddName}
                              subtractLastName={subtractLastName} />
 
-                        </Flex>
+                        </Container>
 
-                    </Flex>
+                    </Container>
 
                 </Paper>
 
-            </Flex>
+            </Frame>
         );
     }
 }
