@@ -34,7 +34,6 @@ export class WindowResizeListener extends PureComponent {
     }
 
     componentWillMount () {
-        // TODO: check whether any args are passed into a 'resize' callback
         on(window, 'resize', this.debouncedSendWindowData);
         // now that we're listening to the window-resize event,
         // for correctness, we set the current window
