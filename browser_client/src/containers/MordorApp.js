@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MordorPage from '../components/MordorPage';
+import { MordorPage } from '../components';
 import { ActionCreators } from '../actions';
 
 

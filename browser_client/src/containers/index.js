@@ -6,7 +6,7 @@ import store from '../store';
 import ShireApp from './ShireApp';
 import MordorApp from './MordorApp';
 import WindowResizeListener from './WindowResizeListener';
-import Layout from '../components/Layout';
+import { Layout } from '../components';
 
 
 export default class Root extends PureComponent {
