@@ -26,6 +26,6 @@ export const addName = (delay = 300) =>
 
 export const addNameDone = createAction(
     T.ADD_NAME_DONE,
-    name => name,
-    requestId => requestId
+    (name, _) => name,
+    (_, requestId) => requestId
 );
