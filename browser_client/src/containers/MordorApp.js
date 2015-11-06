@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MordorPage from '../components/MordorPage';
-import * as Actions from '../actions';
+import { ActionCreators } from '../actions';
 
 
 // Construct a 'smart container' around a 'dumb' component.
@@ -18,7 +18,7 @@ function mapStateToProps (state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(Actions, dispatch);
+    return bindActionCreators(ActionCreators, dispatch);
 }
 
 

@@ -11,7 +11,7 @@ import { Frame, Container } from './Flex';
 export default class ShirePage extends PureComponent {
     componentDidMount () {
         if (this.props.names.size === 0)
-            this.props.fetchAndAddName();
+            this.props.addName();
     }
 
     getChildContext () {
@@ -24,7 +24,7 @@ export default class ShirePage extends PureComponent {
         const {
             names,
             requestsPending,
-            fetchAndAddName,
+            addName,
             subtractLastName,
         } = this.props;
 
@@ -45,7 +45,7 @@ export default class ShirePage extends PureComponent {
 
                             <GreetingControls
                              requestsPending={requestsPending}
-                             fetchAndAddName={fetchAndAddName}
+                             addName={addName}
                              subtractLastName={subtractLastName} />
 
                         </Container>
@@ -63,7 +63,7 @@ export default class ShirePage extends PureComponent {
 ShirePage.propTypes = {
     names:            PropTypes.object.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
-    fetchAndAddName:  PropTypes.func.isRequired,
+    addName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
 };
 

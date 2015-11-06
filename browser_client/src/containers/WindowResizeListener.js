@@ -6,7 +6,10 @@ import { getWindowWidth } from '../utils/dom';
 import { windowSize } from '../utils/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { windowData } from '../actions';
+import { ActionCreators } from '../actions';
+
+
+const { windowData } = ActionCreators;
 
 
 /*

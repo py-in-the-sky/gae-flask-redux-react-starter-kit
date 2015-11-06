@@ -12,7 +12,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 function setup (requestsPending = false) {
     const props = {
         requestsPending,
-        fetchAndAddName:  sinon.spy( x => x ),
+        addName:  sinon.spy( x => x ),
         subtractLastName: sinon.spy( x => x ),
     };
     const greetingControls = renderIntoDocument(<GreetingControls {...props} />);
@@ -27,10 +27,10 @@ function setup (requestsPending = false) {
 
 
 describe('adding a greeting', () => {
-    it('calls the `fetchAndAddName` action creator', () => {
+    it('calls the `addName` action creator', () => {
         const { props, addButton } = setup();
         Simulate.touchTap(addButton);
-        expect( props.fetchAndAddName ).to.have.been.calledOnce;
+        expect( props.addName ).to.have.been.calledOnce;
     });
 });
 
