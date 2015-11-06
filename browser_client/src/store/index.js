@@ -4,9 +4,10 @@ import * as reducers from '../reducers';
 
 
 function createStoreWithMiddleware () {
-    const reducer = combineReducers(reducers);
-
     if (__DEV__) {
+        const logSlowReducers = require('../utils/devLogSlowReducers');
+        const reducer = combineReducers(logSlowReducers(reducers));
+
         const { devTools, persistState } = require('redux-devtools');
 
         const finalCreateStore = compose(
@@ -19,15 +20,19 @@ function createStoreWithMiddleware () {
 
         if (module.hot) {  // Enable Webpack hot module replacement for reducers
             module.hot.accept('../reducers', () => {
-                const nextRootReducer = combineReducers(require('../reducers/index'));
+                const nextRootReducer = combineReducers(
+                    logSlowReducers(require('../reducers/index'))
+                );
                 store.replaceReducer(nextRootReducer);
             });
         }
 
         return store;
     }
-    else
+    else {
+        const reducer = combineReducers(reducers);
         return applyMiddleware(thunkMiddleware)(createStore)(reducer);
+    }
 }
 
 
