@@ -48,11 +48,12 @@
     "react-dom": "^0.14.0",
     "react-motion": "^0.3.0",
     "react-redux": "^4.0.0",
-    "react-router": "1.0.0-beta3",
+    "react-router": "1.0.0-rc4",
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.2",
     "redux-actions": "^0.8.0",
     "redux-thunk": "^1.0.0",
+    "tcomb-form": "^0.7.6",
     "velocity-animate": "^1.2.3",
     "velocity-react": "^1.1.1"
   },

@@ -52,7 +52,7 @@ export default class MordorPage extends PureComponent {
 MordorPage.propTypes = {
     names:            PropTypes.object.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
-    addName:  PropTypes.func.isRequired,
+    addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
 };
 

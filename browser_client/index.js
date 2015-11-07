@@ -7,7 +7,7 @@ import 'velocity-animate/velocity.ui';
 import Root from './src/containers';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import $ from 'jquery';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -23,5 +23,5 @@ $(document).ready(() => {
     injectTapEventPlugin();
 
     const mountPoint = document.getElementById('user-interface');
-    ReactDOM.render(<Root history={new BrowserHistory()} />, mountPoint);
+    ReactDOM.render(<Root history={new createBrowserHistory()} />, mountPoint);
 });

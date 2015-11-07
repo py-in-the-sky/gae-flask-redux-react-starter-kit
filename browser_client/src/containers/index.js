@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 import store from '../store';
+import HomeApp from './HomeApp';
 import ShireApp from './ShireApp';
 import MordorApp from './MordorApp';
 import WindowResizeListener from './WindowResizeListener';
@@ -63,6 +64,7 @@ export default class Root extends PureComponent {
                     <WindowResizeListener/>
                     <Router history={this.props.history}>
                         <Route path="/" component={Layout}>
+                            <IndexRoute component={HomeApp} />
                             <Route path="/shire" component={ShireApp} />
                             <Route path="/mordor" component={MordorApp} />
                         </Route>

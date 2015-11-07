@@ -2,7 +2,7 @@
 
 import Root from '../../src/containers';
 import React from 'react';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { renderIntoDocument } from 'react-addons-test-utils';
 import { createFinder } from '../utils';
 import { VelocityTransitionGroup } from 'velocity-react';
@@ -18,7 +18,7 @@ before(function () {  // GLOBAL BEFORE
 
 
 beforeEach(function () {  // BEFORE EACH TEST
-    this.appHistory = new BrowserHistory();
+    this.appHistory = new createBrowserHistory();
     this.appRoot = renderIntoDocument(<Root history={this.appHistory} />);
     this.findOnPage = createFinder(this.appRoot);
     this.navigate = path => this.appHistory.pushState(null, path);

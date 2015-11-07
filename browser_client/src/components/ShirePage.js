@@ -63,7 +63,7 @@ export default class ShirePage extends PureComponent {
 ShirePage.propTypes = {
     names:            PropTypes.object.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
-    addName:  PropTypes.func.isRequired,
+    addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
 };
 
