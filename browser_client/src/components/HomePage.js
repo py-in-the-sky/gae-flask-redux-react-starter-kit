@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
+import AddNameForm from './AddNameForm';
 import Greetings from './Greetings';
 import Paper from 'material-ui/lib/paper';
 import { Frame, Container } from './Flex';
@@ -11,23 +12,16 @@ export default class HomePage extends PureComponent {
 
         return (
             <Frame>
-
                 <Paper zDepth={4}>
-
                     <Container justifyContent="space-between">
-
                         <Container padding={names.size ? '1rem' : 0}>
-
                             <Greetings names={names} />
-
                         </Container>
-
-                        <Container></Container>
-
+                        <Container>
+                            <AddNameForm addName={addName} />
+                        </Container>
                     </Container>
-
                 </Paper>
-
             </Frame>
         );
     }
