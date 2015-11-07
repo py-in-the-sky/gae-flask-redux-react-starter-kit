@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import Greetings from './Greetings';
-import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import { Themes } from '../utils/styles';
 import { Frame, Container } from './Flex';
 
 
