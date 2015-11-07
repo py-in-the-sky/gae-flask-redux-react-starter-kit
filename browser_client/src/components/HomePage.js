@@ -10,7 +10,7 @@ import { Frame, Container } from './Flex';
 
 export default class HomePage extends PureComponent {
     render () {
-        const { names, addName } = this.props;
+        const { names, addName, requestsPending } = this.props;
 
         return (
             <Frame>
@@ -38,6 +38,7 @@ export default class HomePage extends PureComponent {
 
 
 HomePage.propTypes = {
-    names:   PropTypes.object.isRequired,
-    addName: PropTypes.func.isRequired,
+    names:           PropTypes.object.isRequired,
+    addName:         PropTypes.func.isRequired,
+    requestsPending: PropTypes.bool.isRequired,
 };

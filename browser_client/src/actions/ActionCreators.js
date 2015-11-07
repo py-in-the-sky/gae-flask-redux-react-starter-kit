@@ -13,12 +13,12 @@ export const windowData       = createAction(T.WINDOW_DATA);
 export const subtractLastName = createAction(T.SUBTRACT_LAST_NAME);
 
 
-export const addName = (delay = 300) =>
+export const addName = (name = 'World', delay = 300) =>
     dispatch => {
         const requestId = uniqueId();
         dispatch({ type: T.ADD_NAME, meta: requestId });
         return wrappedSetTimeout(
-            () => dispatch(addNameDone('World', requestId)),
+            () => dispatch(addNameDone(name, requestId)),
             delay
         );
     };
