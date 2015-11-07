@@ -18,13 +18,13 @@ export default class GreetingControls extends PureComponent {
                  style={{ marginBottom: 5 }}
                  primary={true}
                  label="ADD GREETING"
-                 onTouchTap={addName} />
+                 onTouchTap={() => addName()} />
 
                 <RaisedButton
                  style={{ marginBottom: 5 }}
                  secondary={true}
                  label="SUBTRACT LAST GREETING"
-                 onTouchTap={subtractLastName} />
+                 onTouchTap={() => subtractLastName()} />
 
                 <div
                  className="waiting"
