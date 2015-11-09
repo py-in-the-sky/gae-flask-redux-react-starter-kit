@@ -1,7 +1,3 @@
-// TODO: copy notebook notes on thinking about parent-child techniques
-// and modelling when developing a layout
-
-
 /*
     NB: if children of a flexbox also have 'display: flex', then those
     children will have the same height by default.

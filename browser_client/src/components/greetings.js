@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { VelocityTransitionGroup } from 'velocity-react';
+import CircularProgress from 'material-ui/lib/circular-progress';
 import Greeting from './Greeting';
 import { randomElement } from '../utils/array';
 import { memoize } from '../utils/lodash';
+
+
+const circularProgress = <CircularProgress size={0.5} />;
 
 
 export default class Greetings extends PureComponent {
@@ -14,29 +18,35 @@ export default class Greetings extends PureComponent {
     }
 
     render () {
+        const { names, requestsPending } = this.props;
         return (
-            <VelocityTransitionGroup
-             component="div"
-             enter={greetingEnter}
-             leave={greetingLeave}>
+            <div>
+                <VelocityTransitionGroup
+                 component="div"
+                 enter={greetingEnter}
+                 leave={greetingLeave}>
 
-                {this.props.names.map( (name, index) =>
+                    {names.map( (name, index) =>
 
-                    <Greeting
-                     key={index}
-                     name={name}
-                     salutation={this.chooseSalutation(index)} />
+                        <Greeting
+                         key={index}
+                         name={name}
+                         salutation={this.chooseSalutation(index)} />
 
-                )}
+                    )}
 
-            </VelocityTransitionGroup>
+                </VelocityTransitionGroup>
+
+                {requestsPending ? circularProgress : null}
+            </div>
         );
     }
 }
 
 
 Greetings.propTypes = {
-    names: PropTypes.object.isRequired,
+    names:           PropTypes.object.isRequired,
+    requestsPending: PropTypes.bool,
 };
 
 

@@ -1,73 +1,71 @@
-import React, { PropTypes, Component } from 'react';
-// TODO: import PureComponent from 'react-pure-render/component';
-import t from 'tcomb-form';
-import TextField from 'material-ui/lib/text-field';
+import React, { PropTypes } from 'react';
+import PureComponent from 'react-pure-render/component';
+import { Form } from 'formsy-react';
+import { FormsyText } from 'formsy-material-ui';
 import RaisedButton from 'material-ui/lib/raised-button';
-import { Frame, Container } from './Flex';
+import { ShrinkWrap } from './Flex';
 
 
-const Form = t.form.Form;
-const Name = t.struct({
-    name: t.String,
-});
-var options = {
-    fields: {
-        name: {
-            // https://github.com/gcanti/tcomb-form/blob/master/GUIDE.md#custom-factories
-            factory: class extends Component {
-                render () {
-                    const { onChange, ctx: { path } } = this.props;
-
-                    return (
-                        <TextField
-                         ref="input"
-                         onChange={e => onChange(e.target.value, path)}
-                         hintText="Name" />
-                    );
-                }
-
-                validate () {
-                    // object schema: https://github.com/gcanti/tcomb-validation#validationresult
-                    return {
-                        errors: [],
-                        value: this.refs.input.getValue(),
-                    };
-                }
-            }
-        }
-    }
+const nameValidationErrors = {
+    isAlpha:   'You may only use letters',
+    minLength: 'The name is too short',
+    maxLength: 'The name is too long',
 };
 
 
-export default class AddNameForm extends Component {
+// external validation errors can come in from server
+// and be passed down as props
+// external validations take priority over interanal
+// form ones; internal form errors will only appear
+// if `externalValidationErrors` is falsy
+const externalValidationErrors = undefined;
+// const externalValidationErrors = {
+//     name: 'some error from server',
+// };
+
+
+export default class AddNameForm extends PureComponent {
     constructor(props) {
         super(props);
+        this.state  = { isValid: false };
         this.submit = this.submit.bind(this);
     }
 
     render () {
         return (
-            <div>
+            <Form
+             validationErrors={externalValidationErrors}
+             onValid={  () => this.setState({ isValid: true })}
+             onInvalid={() => this.setState({ isValid: false})}
+             onValidSubmit={this.submit}>
 
-                <Form
-                 ref="form"
-                 type={Name}
-                 options={options} />
+                <ShrinkWrap flexDirection="column">
 
-                <RaisedButton
-                 primary={true}
-                 label="ADD NAME"
-                 onTouchTap={this.submit} />
+                    <FormsyText
+                     style={{ marginBottom: '1rem' }}
+                     name="name"
+                     required
+                     formNoValidate
+                     hintText="Name"
+                     validationErrors={nameValidationErrors}
+                     validations="isAlpha,minLength:1,maxLength:10" />
 
-            </div>
+                    <RaisedButton
+                     type="submit"
+                     primary={true}
+                     disabled={!this.state.isValid}
+                     label="ADD NAME" />
+
+                </ShrinkWrap>
+
+            </Form>
         );
     }
 
-    submit () {
-        const maybeValue = this.refs.form.getValue();
-        if (maybeValue)
-            // maybeValue here is an instance of Name
-            this.props.addName(maybeValue.name);
+    submit (model, resetForm) {
+        const delayMS = 1100;
+        this.props.addName(model.name, delayMS);
+        resetForm();
     }
 }
 

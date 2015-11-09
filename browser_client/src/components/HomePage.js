@@ -12,10 +12,12 @@ export default class HomePage extends PureComponent {
 
         return (
             <Frame>
-                <Paper zDepth={4}>
+                <Paper style={{ overflow: 'hidden' }} zDepth={4}>
                     <Container justifyContent="space-between">
                         <Container padding={names.size ? '1rem' : 0}>
-                            <Greetings names={names} />
+                            <Greetings
+                             names={names}
+                             requestsPending={requestsPending} />
                         </Container>
                         <Container>
                             <AddNameForm addName={addName} />
