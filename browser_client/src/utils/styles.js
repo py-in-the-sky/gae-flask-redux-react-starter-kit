@@ -1,6 +1,7 @@
 import Colors from 'material-ui/lib/styles/colors';
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
 import Spacing from 'material-ui/lib/styles/spacing';
+import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
 
 
 // thanks to material-ui
@@ -25,6 +26,15 @@ export const WindowSizes = {
     SMALL:  1,
     MEDIUM: 2,
     LARGE:  3,
+};
+
+
+const Default = {
+    spacing: Spacing,
+    fontFamily: 'Roboto, sans-serif',
+    palette: Object.assign({}, LightRawTheme.palette, {
+        canvasColor: '#fdfdfd',
+    }),
 };
 
 
@@ -66,4 +76,4 @@ const Mordor = {
 };
 
 
-export const Themes = { Shire, Mordor };
+export const Themes = { Shire, Default, Mordor };

@@ -4,9 +4,17 @@ import AddNameForm from './AddNameForm';
 import Greetings from './Greetings';
 import Paper from 'material-ui/lib/paper';
 import { Frame, Container } from './Flex';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import { Themes } from '../utils/styles';
 
 
 export default class HomePage extends PureComponent {
+    getChildContext () {
+        return {
+            muiTheme: ThemeManager.getMuiTheme(Themes.Default),
+        };
+    }
+
     render () {
         const { names, addName, requestsPending } = this.props;
 
@@ -34,4 +42,9 @@ HomePage.propTypes = {
     names:           PropTypes.object.isRequired,
     addName:         PropTypes.func.isRequired,
     requestsPending: PropTypes.bool.isRequired,
+};
+
+
+HomePage.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
 };
