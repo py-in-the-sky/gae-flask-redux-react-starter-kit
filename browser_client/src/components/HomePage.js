@@ -8,10 +8,13 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
 
 
+const DefaultTheme = ThemeManager.getMuiTheme(Themes.Default);
+
+
 export default class HomePage extends PureComponent {
     getChildContext () {
         return {
-            muiTheme: ThemeManager.getMuiTheme(Themes.Default),
+            muiTheme: DefaultTheme,
         };
     }
 

@@ -8,6 +8,9 @@ import { Themes } from '../utils/styles';
 import { Frame, Container } from './Flex';
 
 
+const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire);
+
+
 export default class ShirePage extends PureComponent {
     componentDidMount () {
         if (this.props.names.size === 0)
@@ -16,7 +19,7 @@ export default class ShirePage extends PureComponent {
 
     getChildContext () {
         return {
-            muiTheme: ThemeManager.getMuiTheme(Themes.Shire),
+            muiTheme: ShireTheme,
         };
     }
 

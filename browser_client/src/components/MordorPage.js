@@ -8,6 +8,9 @@ import { Themes } from '../utils/styles';
 import { Frame } from './Flex';
 
 
+const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor);
+
+
 export default class MordorPage extends PureComponent {
     componentDidMount () {
         if (this.props.names.size === 0)
@@ -16,7 +19,7 @@ export default class MordorPage extends PureComponent {
 
     getChildContext () {
         return {
-            muiTheme: ThemeManager.getMuiTheme(Themes.Mordor),
+            muiTheme: MordorTheme,
         };
     }
 
