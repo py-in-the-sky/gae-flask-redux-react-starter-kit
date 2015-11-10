@@ -74,8 +74,20 @@ export const ColumnWise = curry(Flex, {
 });
 
 
+export const Column = curry(Flex, {
+    flexDirection: 'column',
+    alignItems:    'stretch',
+});
+
+
 export const RowWise = curry(Flex, {
     flexDirection: 'row',
+});
+
+
+export const Row = curry(Flex, {
+    flexDirection: 'row',
+    alignItems:    'stretch',
 });
 
 
