@@ -98,6 +98,7 @@ export const WindowFrame = curry(Flex, {
     flexDirection: 'column',
     flexWrap:      'nowrap',
     height:        '100vh',
+    minHeight:     '400px',
     overflow:      'hidden',
 });
 
