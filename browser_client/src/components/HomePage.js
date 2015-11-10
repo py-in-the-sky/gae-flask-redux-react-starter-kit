@@ -3,6 +3,7 @@ import PureComponent from 'react-pure-render/component';
 import AddNameForm from './AddNameForm';
 import Greetings from './Greetings';
 import Paper from 'material-ui/lib/paper';
+import Block from 'jsxstyle/Block';
 import { Frame, Container } from './Flex';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
@@ -22,20 +23,25 @@ export default class HomePage extends PureComponent {
         const { names, addName, requestsPending } = this.props;
 
         return (
-            <Frame>
-                <Paper style={{ overflow: 'hidden' }} zDepth={4}>
-                    <Container justifyContent="space-between">
-                        <Container padding={names.size ? '1rem' : 0}>
-                            <Greetings
-                             names={names}
-                             requestsPending={requestsPending} />
+            <Block height="100%">
+                <Frame>
+                    <Paper style={{ overflow: 'hidden' }} zDepth={4}>
+                        <Container justifyContent="space-between">
+                            <Container padding={names.size ? '1rem' : 0}>
+                                <Greetings
+                                 names={names}
+                                 requestsPending={requestsPending} />
+                            </Container>
+                            <Container>
+                                <AddNameForm addName={addName} />
+                            </Container>
                         </Container>
-                        <Container>
-                            <AddNameForm addName={addName} />
-                        </Container>
-                    </Container>
-                </Paper>
-            </Frame>
+                    </Paper>
+                </Frame>
+                <Container>
+                    <h1>Below the Fold</h1>
+                </Container>
+            </Block>
         );
     }
 }
