@@ -42,11 +42,11 @@ export default class AddNameForm extends PureComponent {
                 <ShrinkWrap flexDirection="column">
 
                     <FormsyText
-                     style={{ marginBottom: '1rem' }}
+                     style={{ marginBottom: '3rem' }}
                      name="name"
                      required
                      formNoValidate
-                     hintText="Name"
+                     floatingLabelText="Name"
                      validationErrors={nameValidationErrors}
                      validations="isAlpha,minLength:1,maxLength:10" />
 
