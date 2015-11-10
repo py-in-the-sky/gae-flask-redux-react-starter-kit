@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { VelocityTransitionGroup } from 'velocity-react';
 import PureComponent from 'react-pure-render/component';
-import { Flex } from 'jsxstyle';
 
 
 export default class PageHandler extends PureComponent {
