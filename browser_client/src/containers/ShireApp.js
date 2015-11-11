@@ -11,9 +11,9 @@ import { ActionCreators } from '../actions';
 
 
 function mapStateToProps (state) {
-    const { names, pendingRequests } = state;
+    const { names, windowSize, pendingRequests } = state;
     const requestsPending = pendingRequests.size > 0;
-    return { names, requestsPending };
+    return { names, windowSize, requestsPending };
 }
 
 
