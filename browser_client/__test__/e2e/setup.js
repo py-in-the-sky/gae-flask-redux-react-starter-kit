@@ -10,11 +10,7 @@ import sinonChai from 'sinon-chai';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
-before(function () {  // GLOBAL BEFORE
-    VelocityTransitionGroup.disabledForTest = true;
-    chai.use(sinonChai);
-    injectTapEventPlugin();
-});
+import '../setup';
 
 
 beforeEach(function () {  // BEFORE EACH TEST
