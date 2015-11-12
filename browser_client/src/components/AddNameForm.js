@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { Form } from 'formsy-react';
-import { FormsyText } from 'formsy-material-ui';
+import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { ShrinkWrap } from './Flex';
 
