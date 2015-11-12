@@ -5,18 +5,11 @@ import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes, WindowSizes } from '../utils/styles';
+import { shireBackgroundImageMarkup } from '../utils/images';
 import { Frame, Container } from './Flex';
 
 
 const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire);
-
-
-const baseImageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
-const imageUrls = {
-    [WindowSizes.SMALL]:  `${baseImageUrl}4/4c/Hobbiton%2C_New_Zealand.jpg/800px-Hobbiton%2C_New_Zealand.jpg`,
-    [WindowSizes.MEDIUM]: `${baseImageUrl}4/4c/Hobbiton%2C_New_Zealand.jpg/1024px-Hobbiton%2C_New_Zealand.jpg`,
-    [WindowSizes.LARGE]:  `${baseImageUrl}8/89/Hobbit_holes_reflected_in_water.jpg/1280px-Hobbit_holes_reflected_in_water.jpg`,
-};
 
 
 export default class ShirePage extends PureComponent {
@@ -40,12 +33,12 @@ export default class ShirePage extends PureComponent {
             subtractLastName,
         } = this.props;
 
-        const imageUrl = imageUrls[windowSize];
+        const imageUrlMarkup = shireBackgroundImageMarkup(windowSize);
 
         return (
             <Frame
              backgroundSize="cover"
-             background={`url(${imageUrl}) no-repeat center center fixed`}>
+             background={`${imageUrlMarkup} no-repeat center center fixed`}>
 
                 <Paper zDepth={4}>
 
