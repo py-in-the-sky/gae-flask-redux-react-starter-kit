@@ -34,7 +34,6 @@
       "optional": [
         "runtime",
         "validation.react",
-        "optimisation.react.inlineElements",
         "minification.removeDebugger"
       ]
     }
