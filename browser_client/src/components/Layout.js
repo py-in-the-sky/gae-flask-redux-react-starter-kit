@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
-import Navigation from './Navigation';
+import Navigation from '../containers/Navigation';
 import PageHandler from './PageHandler';
 import { Flex, WindowFrame, ShrinkWrap } from './Flex';
 

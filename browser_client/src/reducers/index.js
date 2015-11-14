@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { List, Set } from 'immutable';
+import { routerStateReducer } from 'redux-router';
 import { getWindowWidth } from '../utils/dom';
 import * as Styles from '../utils/styles';
 import { ActionTypes as T } from '../actions';
@@ -9,6 +10,9 @@ const emptyList = List();
 const emptySet  = Set();
 const initialWindowWidth = getWindowWidth();
 const initialWindowSize  = Styles.windowSize(initialWindowWidth);
+
+
+export const router = routerStateReducer;
 
 
 export const names = handleActions({

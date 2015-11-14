@@ -4,6 +4,12 @@ import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import IconButton from 'material-ui/lib/icon-button';
 import MenuIcon from 'material-ui/lib/svg-icons/navigation/menu';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
+
+
+const { navigate } = ActionCreators;
 
 
 const MenuButtonElement = <IconButton><MenuIcon /></IconButton>;
@@ -16,7 +22,7 @@ const MenuButtonElement = <IconButton><MenuIcon /></IconButton>;
 // navigation links first appear on the page
 
 
-export default class Navigation extends PureComponent {
+export class Navigation extends PureComponent {
     constructor(props, context) {
         super(props, context);
         this.navigate = this.navigate.bind(this);
@@ -42,11 +48,18 @@ export default class Navigation extends PureComponent {
     }
 
     navigate (_, item) {
-        this.history.pushState(null, item.props.route);
+        this.props.navigate(item.props.route);
     }
 }
 
 
-Navigation.contextTypes = {
-    history: PropTypes.object.isRequired,
+Navigation.propTypes = {
+    navigate: PropTypes.func.isRequired,
 };
+
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ navigate }, dispatch);
+
+
+export default connect(undefined, mapDispatchToProps)(Navigation);

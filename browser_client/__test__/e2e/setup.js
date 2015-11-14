@@ -1,29 +1,33 @@
 /* eslint-disable prefer-arrow-callback */
 
-import Root from '../../src/containers';
+
 import React from 'react';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { renderIntoDocument } from 'react-addons-test-utils';
+import { replaceState } from 'redux-router';
 import { createFinder } from '../utils';
-import { VelocityTransitionGroup } from 'velocity-react';
-import sinonChai from 'sinon-chai';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import Root from '../../src/containers';
+import store from '../../src/store';
+import { ActionCreators } from '../../src/actions';
 
 
 import '../setup';
 
 
+const { navigate } = ActionCreators;
+const { dispatch } = store;
+
+
 beforeEach(function () {  // BEFORE EACH TEST
-    this.appHistory = new createBrowserHistory();
-    this.appRoot = renderIntoDocument(<Root history={this.appHistory} />);
+    this.appRoot = renderIntoDocument(<Root />);
     this.findOnPage = createFinder(this.appRoot);
-    this.navigate = path => this.appHistory.pushState(null, path);
+    this.navigate = path => dispatch(navigate(path));
+    this.resetBrowserHistory = () => dispatch(replaceState(undefined, '/'));
 });
 
 
 afterEach(function () {  // AFTER EACH TEST
     // erase app's browsing history so it doesn't leak into next test
-    this.appHistory.replaceState(null, '/');
+    this.resetBrowserHistory();
 });
 
 

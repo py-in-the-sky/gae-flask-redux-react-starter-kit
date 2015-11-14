@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { pushState } from 'redux-router';
 import T from './ActionTypes';
 import { wrappedSetTimeout } from '../utils/time';
 import { uniqueId } from '../utils/lodash';
@@ -7,6 +8,9 @@ import { uniqueId } from '../utils/lodash';
 // the optimistic update and the real update will share
 // the same unique ID, which is information that can
 // help to coordinate a loading animation on the UI
+
+
+export const navigate = path => pushState(undefined, path);
 
 
 export const windowData       = createAction(T.WINDOW_DATA);

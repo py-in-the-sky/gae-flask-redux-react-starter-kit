@@ -35,8 +35,8 @@ export default class AddNameForm extends PureComponent {
         return (
             <Form
              validationErrors={externalValidationErrors}
-             onValid={  () => this.setState({ isValid: true })}
-             onInvalid={() => this.setState({ isValid: false})}
+             onValid={  () => { this.setState({ isValid: true }) }}
+             onInvalid={() => { this.setState({ isValid: false}) }}
              onValidSubmit={this.submit}>
 
                 <ShrinkWrap flexDirection="column">
