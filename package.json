@@ -4,7 +4,7 @@
   "scripts": {
     "repl": "$(npm bin)/babel-node --stage 0",
     "harmony": "node --harmony",
-    "start": "NODE_ENV=development $(npm bin)/webpack-dev-server --config browser_client/config/webpack.dev.js --history-api-fallback --hot --inline --no-info",
+    "start": "NODE_ENV=development $(npm bin)/webpack-dev-server --config browser_client/config/webpack.dev.js --port 8081 --history-api-fallback --hot --inline --no-info",
     "build": "NODE_ENV=production $(npm bin)/webpack -p --config browser_client/config/webpack.build.js",
     "check": "npm run lint && npm run test:coverage",
     "lint": "$(npm bin)/eslint browser_client/",
@@ -70,6 +70,7 @@
     "empty": "^0.10.1",
     "eslint": "^1.9.0",
     "eslint-plugin-react": "^3.8.0",
+    "html-webpack-plugin": "^1.6.2",
     "isparta-instrumenter-loader": "^0.2.1",
     "jquery": "^2.1.4",
     "jsverify": "^0.7.1",

@@ -1,11 +1,10 @@
 ### Project-Specific ###
 
-jquery.js
 app.yaml
 __app_env__/
-app/assets/*.js
-app/assets/*.css
-app/assets/*.map
+gae/static/index.html
+gae/static/*.js
+gae/static/*.map
 __coverage_reports__/
 
 

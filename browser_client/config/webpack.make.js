@@ -3,7 +3,7 @@ var webpack = require('webpack');
 const assign = require('lodash').assign;
 
 
-var devPublicPath = 'http://localhost:8080/assets/';
+var devPublicPath = 'http://localhost:8081/static/';
 // Trailing slash is critical.
 // The JS, CSS, etc. serverd by the webpack dev server will
 // be available at publicPath.
@@ -18,11 +18,11 @@ var configDefaults = {
     entry: path.join(context, 'browser_client', 'index.js'),
     output: {
         filename:   '[name].js',
-        path:       path.join(context, 'app', 'assets'),
-        publicPath: '/assets',
+        path:       path.join(context, 'gae', 'static'),
+        publicPath: '/static',
     },
     resolve: { extensions: ['', '.js'] },
-    externals: { jquery: '$' },
+    // externals: { jquery: '$' },
     module: {
         loaders: [
             {
@@ -60,6 +60,12 @@ module.exports = function makeWebpackConfig (opts) {
     });
 
     if (__DEV__) {
+        // SIDE EFFECT: copy `index.dev.html` to `gae/static/index.html`
+        var fs = require('fs');
+        var htmlTemplate = path.join('browser_client', 'html', 'index.dev.html');
+        var htmlTarget = path.join('gae', 'static', 'index.html');
+        fs.createReadStream(htmlTemplate).pipe(fs.createWriteStream(htmlTarget));
+
         return assign({}, configDefaults, {
             debug: true,
             displayErrorDetails: true,
@@ -100,9 +106,22 @@ module.exports = function makeWebpackConfig (opts) {
         };
     }
     else {
+        var HtmlWebpackPlugin = require('html-webpack-plugin');
+
         return assign({}, configDefaults, {
             plugins: [
                 EnvironmentPlugin,
+                new HtmlWebpackPlugin({
+                    template: path.join('browser_client', 'html', 'index.prod.html'),
+                    // favicon: '',
+                    inject: 'body',  // Inject all scripts into the body
+                    hash: true,
+                    minify: {
+                        collapseWhitespace: true,
+                        minifyJS: true,
+                        minifyCSS: true
+                    },
+                }),
                 new webpack.optimize.DedupePlugin(),
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.optimize.OccurenceOrderPlugin(),

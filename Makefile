@@ -1,7 +1,7 @@
 rehydrate: pip-app pip-dev npm
 
 pip-app:
-	pip install --requirement=requirements.app.txt --target=./app/__app_env__
+	pip install --requirement=requirements.app.txt --target=./gae/__app_env__
 
 pip-dev:
 	pip install --requirement=requirements.dev.txt
