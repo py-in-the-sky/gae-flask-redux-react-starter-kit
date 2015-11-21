@@ -70,8 +70,4 @@ WindowResizeListener.defaultProps = {
 };
 
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators({ windowData }, dispatch);
-
-
-export default connect(undefined, mapDispatchToProps)(WindowResizeListener);
+export default connect(undefined, { windowData })(WindowResizeListener);

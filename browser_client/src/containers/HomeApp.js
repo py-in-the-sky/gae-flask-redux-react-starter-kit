@@ -13,7 +13,7 @@ const createApp = () =>
             names: state.names,
             requestsPending: state.pendingRequests.size > 0
         }),
-        dispatch => bindActionCreators({ addName }, dispatch)
+        { addName }
     )(HomePage);
 
 

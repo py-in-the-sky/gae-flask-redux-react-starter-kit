@@ -17,13 +17,8 @@ function mapStateToProps (state) {
 }
 
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ActionCreators, dispatch);
-}
-
-
 function createApp () {
-    return connect(mapStateToProps, mapDispatchToProps)(MordorPage);
+    return connect(mapStateToProps, ActionCreators)(MordorPage);
 }
 
 
