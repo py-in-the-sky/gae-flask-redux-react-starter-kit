@@ -10,16 +10,11 @@ import { ActionCreators } from '../actions';
 // real-world app.
 
 
-function mapStateToProps (state) {
-    const { names, windowSize, pendingRequests } = state;
-    const requestsPending = pendingRequests.size > 0;
-    return { names, windowSize, requestsPending };
-}
+const mapStateToProps = ({ names, windowSize, pendingRequests }) =>
+    ({ names, windowSize, requestsPending: pendingRequests.size > 0 });
 
 
-function createApp () {
-    return connect(mapStateToProps, ActionCreators)(ShirePage);
-}
+const createApp = () => connect(mapStateToProps, ActionCreators)(ShirePage);
 
 
 export default createApp();

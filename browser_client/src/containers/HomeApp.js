@@ -7,14 +7,12 @@ import { ActionCreators } from '../actions';
 const { addName } = ActionCreators;
 
 
-const createApp = () =>
-    connect(
-        state => ({
-            names: state.names,
-            requestsPending: state.pendingRequests.size > 0
-        }),
-        { addName }
-    )(HomePage);
+const mapStateToProps = ({ names, pendingRequests }) =>
+    ({ names, requestsPending: pendingRequests.size > 0 });
+
+
+const createApp = () => connect(mapStateToProps, { addName })(HomePage);
+
 
 
 export default createApp();

@@ -10,16 +10,11 @@ import { ActionCreators } from '../actions';
 // real-world app.
 
 
-function mapStateToProps (state) {
-    const { names, pendingRequests } = state;
-    const requestsPending = pendingRequests.size > 0;
-    return { names, requestsPending };
-}
+const mapStateToProps  = ({ names, pendingRequests }) =>
+    ({ names, requestsPending: pendingRequests.size > 0 });
 
 
-function createApp () {
-    return connect(mapStateToProps, ActionCreators)(MordorPage);
-}
+const createApp = () => connect(mapStateToProps, ActionCreators)(MordorPage);
 
 
 export default createApp();
