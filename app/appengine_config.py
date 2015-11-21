@@ -1,9 +1,14 @@
 """
-Point appengine to third-party Python libraries in the project.
+`appengine_config.py` is automatically loaded when Google App Engine
+starts a new instance of your application. This runs before any
+WSGI applications specified in app.yaml are loaded.
+see: https://github.com/GoogleCloudPlatform/appengine-flask-skeleton
 """
 
 
-import os, sys
+from google.appengine.ext import vendor
 
 
-sys.path.insert(1, os.path.join(os.path.abspath('.'), '__app_env__'))
+# Third-party libraries are stored in "__app_env__", vendoring will make
+# sure that they are importable by the application.
+vendor.add('__app_env__')
