@@ -5,9 +5,6 @@ import React from 'react';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { renderIntoDocument } from 'react-addons-test-utils';
 import { createFinder } from '../utils';
-import { VelocityTransitionGroup } from 'velocity-react';
-import sinonChai from 'sinon-chai';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 import '../setup';
