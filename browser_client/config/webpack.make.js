@@ -60,6 +60,12 @@ module.exports = function makeWebpackConfig (opts) {
     });
 
     if (__DEV__) {
+        // SIDE EFFECT: copy `index.dev.html` to `app/static/index.html`
+        var fs = require('fs');
+        var htmlTemplate = path.join('browser_client', 'html', 'index.dev.html');
+        var htmlTarget = path.join('app', 'static', 'index.html');
+        fs.createReadStream(htmlTemplate).pipe(fs.createWriteStream(htmlTarget));
+
         return assign({}, configDefaults, {
             debug: true,
             displayErrorDetails: true,
@@ -100,9 +106,22 @@ module.exports = function makeWebpackConfig (opts) {
         };
     }
     else {
+        var HtmlWebpackPlugin = require('html-webpack-plugin');
+
         return assign({}, configDefaults, {
             plugins: [
                 EnvironmentPlugin,
+                new HtmlWebpackPlugin({
+                    template: path.join('browser_client', 'html', 'index.prod.html'),
+                    // favicon: '',
+                    inject: 'body',  // Inject all scripts into the body
+                    hash: true,
+                    minify: {
+                        collapseWhitespace: true,
+                        minifyJS: true,
+                        minifyCSS: true
+                    },
+                }),
                 new webpack.optimize.DedupePlugin(),
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.optimize.OccurenceOrderPlugin(),

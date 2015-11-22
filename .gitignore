@@ -1,6 +1,5 @@
 ### Project-Specific ###
 
-jquery.js
 app.yaml
 __app_env__/
 app/assets/*.js
