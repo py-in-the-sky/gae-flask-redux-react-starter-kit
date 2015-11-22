@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute, Redirect } from 'react-router';
 import store from '../store';
 import HomeApp from './HomeApp';
 import ShireApp from './ShireApp';
@@ -68,6 +68,7 @@ export default class Root extends PureComponent {
                             <Route path="/shire" component={ShireApp} />
                             <Route path="/mordor" component={MordorApp} />
                         </Route>
+                        <Redirect from="*" to="/" />
                     </Router>
                 </div>
             </Provider>
