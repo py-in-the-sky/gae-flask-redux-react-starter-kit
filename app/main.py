@@ -6,22 +6,16 @@ from werkzeug.debug import DebuggedApplication
 main = Flask(__name__)
 
 
-@main.route('/')
+@main.route('/api/')
 def hello():
     """Return a friendly HTTP greeting."""
     # assert False  # init Werkzeug debugger
     return 'Hello World!'
 
 
-@main.route('/api/')
 @main.route('/api/<path:path>')
-def api_catch_all(path=''):
+def api_catch_all(path):
     return 'You asked for an API path: %s' % path
-
-
-@main.route('/<path:path>')
-def catch_all(path):
-    return 'You want path: %s' % path
 
 
 @main.errorhandler(404)
