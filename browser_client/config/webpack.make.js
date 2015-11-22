@@ -3,7 +3,7 @@ var webpack = require('webpack');
 const assign = require('lodash').assign;
 
 
-var devPublicPath = 'http://localhost:8080/static/';
+var devPublicPath = 'http://localhost:8081/static/';
 // Trailing slash is critical.
 // The JS, CSS, etc. serverd by the webpack dev server will
 // be available at publicPath.
