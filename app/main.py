@@ -13,6 +13,17 @@ def hello():
     return 'Hello World!'
 
 
+@main.route('/api/')
+@main.route('/api/<path:path>')
+def api_catch_all(path=''):
+    return 'You asked for an API path: %s' % path
+
+
+@main.route('/<path:path>')
+def catch_all(path):
+    return 'You want path: %s' % path
+
+
 @main.errorhandler(404)
 def page_not_found(e):
     """Return a custom 404 error."""
