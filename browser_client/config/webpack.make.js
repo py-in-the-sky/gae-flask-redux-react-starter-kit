@@ -22,7 +22,7 @@ var configDefaults = {
         publicPath: '/static',
     },
     resolve: { extensions: ['', '.js'] },
-    externals: { jquery: '$' },
+    // externals: { jquery: '$' },
     module: {
         loaders: [
             {
