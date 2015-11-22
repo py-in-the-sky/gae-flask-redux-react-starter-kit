@@ -1,4 +1,3 @@
-# web: dev_appserver.py app/
-web: python -m SimpleHTTPServer 8080
+web: dev_appserver.py app/
 webpack: npm --silent start
-# karma: npm run --silent test:watch
+karma: npm run --silent test:watch

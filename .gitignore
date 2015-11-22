@@ -2,9 +2,9 @@
 
 app.yaml
 __app_env__/
-app/assets/*.js
-app/assets/*.css
-app/assets/*.map
+app/static/index.html
+app/static/*.js
+app/static/*.map
 __coverage_reports__/
 
 
