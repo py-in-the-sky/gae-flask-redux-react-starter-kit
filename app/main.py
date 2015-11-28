@@ -19,7 +19,7 @@ def create_app():
         return jsonify({ 'message': message }), 500
 
 
-    from api import api as api_blueprint
+    from api import api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api')
 
     from os import environ
