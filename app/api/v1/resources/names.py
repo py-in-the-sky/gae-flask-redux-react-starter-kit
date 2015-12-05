@@ -1,6 +1,7 @@
 from flask.ext.restful import \
     Resource, fields, marshal_with, reqparse, abort
 from datetime import datetime
+from models import name
 # from utils.werkzeug_debugger import werkzeug_debugger
 
 
