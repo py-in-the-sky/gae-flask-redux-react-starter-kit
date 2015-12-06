@@ -18,7 +18,7 @@ var configDefaults = {
     entry: path.join(context, 'browser_client', 'index.js'),
     output: {
         filename:   '[name].js',
-        path:       path.join(context, 'app', 'static'),
+        path:       path.join(context, 'gae', 'static'),
         publicPath: '/static',
     },
     resolve: { extensions: ['', '.js'] },
@@ -60,10 +60,10 @@ module.exports = function makeWebpackConfig (opts) {
     });
 
     if (__DEV__) {
-        // SIDE EFFECT: copy `index.dev.html` to `app/static/index.html`
+        // SIDE EFFECT: copy `index.dev.html` to `gae/static/index.html`
         var fs = require('fs');
         var htmlTemplate = path.join('browser_client', 'html', 'index.dev.html');
-        var htmlTarget = path.join('app', 'static', 'index.html');
+        var htmlTarget = path.join('gae', 'static', 'index.html');
         fs.createReadStream(htmlTemplate).pipe(fs.createWriteStream(htmlTarget));
 
         return assign({}, configDefaults, {
