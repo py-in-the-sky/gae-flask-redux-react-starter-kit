@@ -3,6 +3,7 @@ from google.appengine.ext import ndb
 
 class Name(ndb.Model):
     # TODO: check memcache after model `get` or `create`
+    # DONE: they appear in memcache after `get` but not `create`
     name    = ndb.StringProperty(required=True)
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
 

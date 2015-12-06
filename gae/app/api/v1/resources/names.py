@@ -1,6 +1,5 @@
 from flask.ext.restful import \
     Resource, fields, marshal_with, reqparse, abort
-from datetime import datetime
 import random
 from app import models
 from app.utils.werkzeug_debugger import werkzeug_debugger
@@ -29,7 +28,8 @@ class Name(Resource):
         "return random Name"
         # a = 4
         # werkzeug_debugger()
-        name_keys = models.Name.query().fetch(keys_only=True)
+        limit = 10
+        name_keys = models.Name.query().fetch(limit, keys_only=True)
         name = random.choice(name_keys).get()
         return {
             'name':    name.name,
