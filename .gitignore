@@ -1,6 +1,6 @@
 ### Project-Specific ###
 
-app.yaml
+TODO.txt
 __app_env__/
 gae/static/index.html
 gae/static/*.js

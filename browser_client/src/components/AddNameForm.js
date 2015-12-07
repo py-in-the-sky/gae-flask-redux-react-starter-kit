@@ -15,7 +15,7 @@ const nameValidationErrors = {
 
 // external validation errors can come in from server
 // and be passed down as props
-// external validations take priority over interanal
+// external validations take priority over internal
 // form ones; internal form errors will only appear
 // if `externalValidationErrors` is falsy
 const externalValidationErrors = undefined;

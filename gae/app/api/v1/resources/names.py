@@ -1,50 +1,52 @@
 from flask.ext.restful import \
-    Resource, fields, marshal_with, reqparse, abort
-import random
-from app import models
-from app.utils.werkzeug_debugger import werkzeug_debugger
+    Resource, fields, marshal_with, reqparse
+from google.appengine.ext import ndb
+from app.models import name
+from app.utils.reqparse import string_length
+from app.utils.func import compose
+# from app.utils.werkzeug_debugger import werkzeug_debugger
 
 
-parser = reqparse.RequestParser(trim=True, bundle_errors=True)
-parser.add_argument(
-    'name',
-    type=str,
-    # location='json',
-    required=True,
-    help='"name" must be a string'
+name_validation = compose(
+    name.Name.ensure_name_not_in_datastore,
+    string_length(min_len=1, max_len=10)
 )
 
 
-name_fields = {
-    'name':     fields.String,
-    'created':  fields.DateTime
+request_parser = reqparse.RequestParser(
+    trim=True,
+    bundle_errors=True,
+    namespace_class=dict
+)
+request_parser.add_argument(
+    'name',
+    type=name_validation,
+    # location='json',
+    required=True
+)
+
+
+response_body_schema = {
+    'name': fields.String
 }
 
 
 class Name(Resource):
-    decorators=[marshal_with(name_fields)]
+    decorators=[ marshal_with(response_body_schema) ]
 
     def get(self):
         "return random Name"
-        # a = 4
-        # werkzeug_debugger()
-        limit = 10
-        name_keys = models.Name.query().fetch(limit, keys_only=True)
-        name = random.choice(name_keys).get()
-        return {
-            'name':    name.name,
-            'foo':     'bar',
-            'created': name.created
-        }
+        random_name = name.Name.random_key().get()
+        return random_name
 
+    @ndb.transactional
     def post(self):
-        # abort(400, message='hi')
-        # TODO: https://cloud.google.com/appengine/docs/python/ndb/modelclass#Model_get_or_insert
-        args = parser.parse_args()
-        name = models.Name(name=args.name)
-        name.put()
-        return {
-            'name':    name.name,
-            'foo':     'bar',
-            'created': name.created
-        }
+        "create and return name; maintain no more than 11 names in datastore"
+        kwargs = request_parser.parse_args()
+        name_key = name.Name(parent=name.root, **kwargs).put()
+        new_name = name_key.get()
+
+        if name.Name.query(ancestor=name.root).count() > 10:
+            name.Name.random_key(excluding=name_key).delete()
+
+        return new_name

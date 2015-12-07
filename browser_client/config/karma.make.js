@@ -8,18 +8,21 @@ const assign = require('lodash').assign;
 
 module.exports = function makeKarmaConfig (opts) {
     var __E2E__      = Boolean(opts.__E2E__);
+    var __ALL__      = Boolean(opts.__ALL__);
     var __COVERAGE__ = Boolean(opts.__COVERAGE__);
 
     var entryFile;
 
     if (__E2E__)
         entryFile = 'browser_client/__test__/e2e.js';
+    else if (__ALL__)
+        entryFile = 'browser_client/__test__/all.js';
     else if (__COVERAGE__)
         entryFile = 'browser_client/__test__/coverage.js';
     else
         entryFile = 'browser_client/__test__/unit.js';
 
-    var reportSlowerThan = (__E2E__ || __COVERAGE__) ? 750 : 150;
+    var reportSlowerThan = (__E2E__ || __ALL__ || __COVERAGE__) ? 750 : 150;
 
     var config = {
         basePath: '../..',

@@ -42,6 +42,8 @@ api.add_resource(Name, '/names/')
 def output_json(data, status_code, headers=None):
     if isinstance(data, list):
         data = { 'array': data }
+    elif isinstance(data, tuple):
+        data = { 'array': list(data) }
     elif isinstance(data, GeneratorType):
         data = { 'array': list(data) }
     elif isinstance(data, (str, unicode)):
