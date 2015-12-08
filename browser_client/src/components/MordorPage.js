@@ -6,6 +6,7 @@ import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
 import { Frame } from './Flex';
+import { List } from 'immutable';
 
 
 const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor);
@@ -53,7 +54,7 @@ export default class MordorPage extends PureComponent {
 
 
 MordorPage.propTypes = {
-    names:            PropTypes.object.isRequired,
+    names:            PropTypes.instanceOf(List).isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,

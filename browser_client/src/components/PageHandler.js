@@ -24,8 +24,8 @@ export default class PageHandler extends PureComponent {
 
 
 PageHandler.propTypes = {
-    children:    PropTypes.element,
-    location:    PropTypes.object,
+    children:    PropTypes.element.isRequired,
+    location:    PropTypes.object.isRequired,
 };
 
 

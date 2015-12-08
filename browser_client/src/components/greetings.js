@@ -5,6 +5,7 @@ import CircularProgress from 'material-ui/lib/circular-progress';
 import Greeting from './Greeting';
 import { randomElement } from '../utils/array';
 import { memoize } from '../utils/lodash';
+import { List } from 'immutable';
 
 
 const circularProgress = <CircularProgress size={0.5} />;
@@ -45,7 +46,7 @@ export default class Greetings extends PureComponent {
 
 
 Greetings.propTypes = {
-    names:           PropTypes.object.isRequired,
+    names:           PropTypes.instanceOf(List).isRequired,
     requestsPending: PropTypes.bool,
 };
 

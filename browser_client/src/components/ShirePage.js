@@ -7,6 +7,7 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes, WindowSizes } from '../utils/styles';
 import { shireBackgroundImageMarkup } from '../utils/images';
 import { Frame, Container } from './Flex';
+import { List } from 'immutable';
 
 
 const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire);
@@ -70,7 +71,7 @@ export default class ShirePage extends PureComponent {
 
 
 ShirePage.propTypes = {
-    names:            PropTypes.object.isRequired,
+    names:            PropTypes.instanceOf(List).isRequired,
     windowSize:       PropTypes.number.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,

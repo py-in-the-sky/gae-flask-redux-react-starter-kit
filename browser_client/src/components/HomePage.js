@@ -7,6 +7,7 @@ import Block from 'jsxstyle/Block';
 import { Frame, Container } from './Flex';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from '../utils/styles';
+import { List } from 'immutable';
 
 
 const DefaultTheme = ThemeManager.getMuiTheme(Themes.Default);
@@ -48,7 +49,7 @@ export default class HomePage extends PureComponent {
 
 
 HomePage.propTypes = {
-    names:           PropTypes.object.isRequired,
+    names:           PropTypes.instanceOf(List).isRequired,
     addName:         PropTypes.func.isRequired,
     requestsPending: PropTypes.bool.isRequired,
 };
