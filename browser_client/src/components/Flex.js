@@ -51,6 +51,15 @@
     http://learnlayout.com/box-sizing.html
     https://css-tricks.com/the-lengths-of-css/
     http://stackoverflow.com/a/1655398/1941513
+
+    also see this flexbox-based grid system that uses React with inline sytles:
+    http://broucz.github.io/react-inline-grid/
+    https://github.com/broucz/react-inline-grid
+
+    flexbox playgrounds:
+    http://demo.agektmr.com/flexbox/
+    http://bennettfeely.com/flexplorer/
+    http://the-echoplex.net/flexyboxes/
 */
 
 
