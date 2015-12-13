@@ -1,1 +1,0 @@
-from name import Name
