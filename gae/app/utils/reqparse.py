@@ -1,4 +1,4 @@
-def string_with_length(min_len=None, max_len=None):
+def string_length(min_len=None, max_len=None):
     plural_min = '' if min_len == 1 else 's'
     plural_max = '' if max_len == 1 else 's'
 

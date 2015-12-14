@@ -6,11 +6,12 @@ root = ndb.Key('NameRoot', 'name_root')
 
 
 class Name(ndb.Model):
+    name    = ndb.StringProperty(required=True, indexed=True)
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
 
     @classmethod
-    def ensure_name_unique(cls, value):
-        if ndb.Key(cls, value, parent=root).get():
+    def ensure_name_not_in_datastore(cls, value):
+        if cls.query(cls.name == value, ancestor=root).count() > 0:
             raise ValueError('"{}" already exists'.format(value))
 
         return value
