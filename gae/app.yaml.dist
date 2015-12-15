@@ -33,6 +33,17 @@ handlers:
   static_files: static/index.html
   upload: static/index\.html
 
+skip_files:
+# appengine defaults
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+# custom additions
+- ^(config/test\.py)$
+- ^(config/development\.py)$
+
 builtins:
 - remote_api: on
 
