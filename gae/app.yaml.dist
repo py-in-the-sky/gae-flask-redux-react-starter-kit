@@ -43,6 +43,7 @@ skip_files:
 # custom additions
 - ^(config/test\.py)$
 - ^(config/development\.py)$
+- ^(__test__/.*)$
 
 builtins:
 - remote_api: on

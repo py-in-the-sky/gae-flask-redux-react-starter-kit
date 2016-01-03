@@ -25,9 +25,9 @@ and `jsonify` and `validate_form` are defined in the project -- e.g.:
 from functools import update_wrapper
 
 
-def decorator(d):
+def _decorator(d):
     "make function `d` a decorator: `d` wraps function `f` and takes on metadata"
-    def _d(f):
+    def decorator(f):
         _f = d(f)  # what `d` was designed to do
         update_wrapper(_f, f)
         _f.__wrapped__ = f.func_dict.get('__wrapped__', f)
@@ -35,9 +35,9 @@ def decorator(d):
         # decorators for easy retrieval for testing
         return _f
 
-    return _d
+    return decorator
 
 
-# apply `decorator` to itself so that it behaves like a proper decorator,
+# apply `_decorator` to itself so that it behaves like a proper decorator,
 # updating metadata and setting `__wrapped__` on the wrapper it returns
-decorator = decorator(decorator)
+decorator = _decorator(_decorator)
