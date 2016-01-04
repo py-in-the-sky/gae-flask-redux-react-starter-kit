@@ -1,8 +1,8 @@
 import pytest
 import json
+from app.models import name
 from app import create_app
 from config import config
-from app.models import name
 
 
 @pytest.fixture(scope='function')
