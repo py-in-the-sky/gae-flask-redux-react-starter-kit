@@ -35,6 +35,7 @@ def test_reqparse_string_length():
 def test_decorator():
     @decorator.decorator
     def a(f):
+        "a's doc string"
         def _f():
             return 'a' + f()
 
@@ -53,16 +54,15 @@ def test_decorator():
         "c's doc string"
         return 'c'
 
-    unwrapped_c = c.func_dict['__wrapped__']
+    unwrapped_a = a.func_dict['__wrapped__']
+    assert a.func_name == unwrapped_a.func_name == 'a'
+    assert a.func_doc == unwrapped_a.func_doc == "a's doc string"
 
+    unwrapped_c = c.func_dict['__wrapped__']
     assert c() == 'abc'
     assert unwrapped_c() == 'c'
-
-    assert c.func_name == 'c'
-    assert unwrapped_c.func_name == 'c'
-
-    assert c.func_doc == "c's doc string"
-    assert unwrapped_c.func_doc == "c's doc string"
+    assert c.func_name == unwrapped_c.func_name == 'c'
+    assert c.func_doc == unwrapped_c.func_doc == "c's doc string"
 
 
 def test_werkzeug_debugger():
