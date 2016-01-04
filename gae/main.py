@@ -14,8 +14,6 @@ server_software_name = environ['SERVER_SOFTWARE']
 
 if server_software_name.startswith('Development'):
     app_config = config['development']
-elif server_software_name.startswith('Test'):
-    app_config = config['test']
 else:
     app_config = config['production']
 
