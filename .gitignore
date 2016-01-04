@@ -7,8 +7,6 @@ gae/static/index.html
 gae/static/*.js
 gae/static/*.map
 __coverage_reports__/
-gae/__test__/.cache/
-gae/__test__/__pychache__/
 
 
 ### General NodeJS ###
