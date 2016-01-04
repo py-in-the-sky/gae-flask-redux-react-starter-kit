@@ -8,18 +8,21 @@ def test_func_compose():
     c = lambda x: x + 5
     assert func.compose(a, b, c)(5) == a(b(c(5)))
 
+    w = lambda s: s.upper()
     x = lambda s: ''.join(reversed(s))[-2:]
     y = lambda s: s + 'abc'
     z = lambda s: s * 3
-    assert func.compose(x, y, z)('abc') == x(y(z('abc')))
+    assert func.compose(w, x, y, z)('abc') == w(x(y(z('abc'))))
 
 
 def test_reqparse_string_length():
     no_validation = reqparse.string_length()
-    no_validation('')
-    no_validation('a' * 25)
+    assert no_validation('') == ''
+    assert no_validation('a' * 25) == 'a' * 25
 
     yes_validation = reqparse.string_length(min_len=1, max_len=10)
+
+    assert yes_validation('c3po') == 'c3po'
 
     with pytest.raises(ValueError) as excinfo:
         yes_validation('')

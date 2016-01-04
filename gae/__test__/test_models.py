@@ -10,6 +10,7 @@ def create_name(name_string):
 
 
 def test_name(testbed):
+    assert len(name.Name.query().fetch()) == 0
     create_name('c3po')
     assert len(name.Name.query().fetch()) == 1
     create_name('r2d2')
@@ -31,7 +32,8 @@ def test_name_created_auto_add(testbed):
 
 
 def test_name_ensure_name_not_in_datastore(testbed):
-    name.Name.ensure_name_not_in_datastore('c3po')
+    return_value = name.Name.ensure_name_not_in_datastore('c3po')
+    assert return_value == 'c3po'
 
     create_name('c3po')
 
@@ -42,6 +44,8 @@ def test_name_ensure_name_not_in_datastore(testbed):
 
 
 def test_name_random_key(testbed):
+    assert len(name.Name.query().fetch()) == 0
+
     with pytest.raises(IndexError) as excinfo1:
         name.Name.random_key()
 
@@ -49,6 +53,7 @@ def test_name_random_key(testbed):
 
     c3po_key = create_name('c3po')
 
+    assert len(name.Name.query().fetch()) == 1
     assert name.Name.random_key().get().name == 'c3po'
 
     with pytest.raises(IndexError) as excinfo2:
@@ -58,5 +63,6 @@ def test_name_random_key(testbed):
 
     create_name('r2d2')
 
-    assert name.Name.random_key().get().name in ('c3po', 'r2d2')
+    assert len(name.Name.query().fetch()) == 2
     assert name.Name.random_key(excluding=c3po_key).get().name == 'r2d2'
+    assert name.Name.random_key().get().name in ('c3po', 'r2d2')

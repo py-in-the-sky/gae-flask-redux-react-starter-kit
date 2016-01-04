@@ -1,29 +1,28 @@
 import pytest
 import os
-# import dev_appserver
 from google.appengine.ext.testbed import Testbed
 from google.appengine.ext import ndb
+# import dev_appserver
 
 
-@pytest.fixture(scope='session', autouse=True)
-def global_setup_and_teardown(request):
-    """
-    setup borrowed from:
-    https://cloud.google.com/appengine/docs/python/tools
-    /localunittesting#Python_Setting_up_a_testing_framework
+# @pytest.fixture(scope='session', autouse=True)
+# def global_setup_and_teardown(request):
+#     """
+#     setup borrowed from:
+#     https://cloud.google.com/appengine/docs/python/tools
+#     /localunittesting#Python_Setting_up_a_testing_framework
 
-    use of pytest fixture borrowed from:
-    http://stackoverflow.com/questions/14399908
-    /py-test-setup-teardown-for-whole-test-suite
-    """
-    # Ensure that the google.appengine.* packages are available
-    # in tests as well as all bundled third-party packages.
-    pass
-    # dev_appserver.fix_sys_path()
+#     use of pytest fixture borrowed from:
+#     http://stackoverflow.com/questions/14399908
+#     /py-test-setup-teardown-for-whole-test-suite
+#     """
+#     # Ensure that the google.appengine.* packages are available
+#     # in tests as well as all bundled third-party packages.
+#     dev_appserver.fix_sys_path()
 
 
 @pytest.yield_fixture(scope='function')
-def testbed(request):
+def testbed():
     testbed = Testbed()
     testbed.activate()
     # testbed.setup_env(app_id='_')
