@@ -1,5 +1,6 @@
 blessings==1.6
 bpython==0.14.2
+coverage==4.0.3
 curtsies==0.1.19
 greenlet==0.4.9
 honcho==0.6.6
