@@ -41,4 +41,5 @@ def testbed():
 
     yield testbed
 
+    ndb.get_context().clear_cache()
     testbed.deactivate()
