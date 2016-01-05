@@ -1,0 +1,7 @@
+[run]
+branch = True
+source = gae/app
+
+[html]
+directory = __coverage_reports__/gae_app
+title = GAE Flask App
