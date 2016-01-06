@@ -12,8 +12,7 @@ npm:
 coverage: browser-app-coverage gae-app-coverage
 
 gae-app-coverage:
-	coverage run -m py.test
-	coverage html
+	py.test --cov-report html --cov=gae/app --cov=gae/config
 	open __coverage_reports__/gae_app/index.html
 	# relies on configuration in `setup.cfg`
 

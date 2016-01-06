@@ -1,24 +1,27 @@
 import pytest
 import os
+import sys
+import dev_appserver
+
+dev_appserver.fix_sys_path()
+# GAE path setup borrowed from :
+# https://cloud.google.com/appengine/docs/python/tools
+# /localunittesting#Python_Setting_up_a_testing_framework
+# Now google.appengine.* packages are available, as well as
+# all GAE-bundled third-party packages.
+
 from google.appengine.ext.testbed import Testbed
 from google.appengine.ext import ndb
-# import dev_appserver
 
 
 # @pytest.fixture(scope='session', autouse=True)
 # def global_setup_and_teardown(request):
 #     """
-#     setup borrowed from:
-#     https://cloud.google.com/appengine/docs/python/tools
-#     /localunittesting#Python_Setting_up_a_testing_framework
-
 #     use of pytest fixture borrowed from:
 #     http://stackoverflow.com/questions/14399908
 #     /py-test-setup-teardown-for-whole-test-suite
 #     """
-#     # Ensure that the google.appengine.* packages are available
-#     # in tests as well as all bundled third-party packages.
-#     dev_appserver.fix_sys_path()
+#     pass
 
 
 @pytest.yield_fixture(scope='function')

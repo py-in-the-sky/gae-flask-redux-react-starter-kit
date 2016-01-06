@@ -1,7 +1,17 @@
 # gae-flask-redux-react-starter-kit
 
+## Getting Set up
 
-## Flask Callbacks and Decorators
+* Make virtualenv with virtualenvwrapper and ensure it's active.  E.g., `mkvirtualenv gae-flask-redux-react-starter-kit -a .`
+* `pip install --upgrade pip setuptools`
+* `add2virtualenv ./gae`
+* `add2virtualenv ./gae/__app_env__`
+* `add2virtualenv ${HOME}/google-cloud-sdk/platform/google_appengine/`
+* `make rehydrate`
+
+## Notes
+
+### Flask Callbacks and Decorators
 
 Using Flask-RESTful, the order in which callbacks and decorators are invoked in a request-response cycle is roughly this:
 

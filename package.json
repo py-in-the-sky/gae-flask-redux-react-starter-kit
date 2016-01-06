@@ -92,7 +92,6 @@
     "redux-devtools": "^2.1.5",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
-    "watch": "^0.17.1",
     "webpack": "^1.12.4",
     "webpack-dev-server": "^1.12.1"
   }
