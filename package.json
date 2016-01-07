@@ -6,12 +6,13 @@
     "harmony": "node --harmony",
     "start": "NODE_ENV=development $(npm bin)/webpack-dev-server --config browser_client/config/webpack.dev.js --port 8081 --history-api-fallback --hot --inline --no-info",
     "build": "NODE_ENV=production $(npm bin)/webpack -p --config browser_client/config/webpack.build.js",
-    "check": "npm run lint && npm run test:coverage",
+    "check": "npm run lint && npm run test:all",
     "lint": "$(npm bin)/eslint browser_client/",
     "test": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.unit.js --single-run",
     "test:watch": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.unit.js",
     "test:coverage": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.coverage.js --single-run",
-    "test:e2e": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.e2e.js --single-run"
+    "test:e2e": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.e2e.js --single-run",
+    "test:all": "NODE_ENV=test $(npm bin)/karma start browser_client/config/karma.all.js --single-run"
   },
   "repository": {
     "type": "git",
