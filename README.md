@@ -53,17 +53,26 @@ This command will lint and test the browser client and back end code.  If no lin
 
 * `py.test`
 
-This will perform a one-off test run of the Flask/GAE application.  (NB: local config for `pytest` is in `setup.cfg`.)
+This will perform a one-off test run of the GAE/Flask application.  (NB: local config for `pytest` is in `setup.cfg`.)
 
 * `npm test`
 
 This will perform a one-off test run of the browser client.  (NB: config for this command is in `package.json`.)
 
-* managing dependencies
+
+## Managing Dependencies
+
+### Browser Client
+
+After updating or adding npm packages, run `npm run test:coverage` in addition to running the app and verifying things still work as expected.  Then lock down the specific versions of the npm packages you're using with this command:
+
+* `npm shrinkwrap --dev`
+
+This will update `npm-shrinkwrap.json`; `npm install` uses this file by default, which will ensure you're using the exact same version of third-parth npm packages across environments.  (NB: if you're familiar with Ruby on Rails development with Bundler, you can think of `npm-shrinkwrap.json` as being like `Gemfile.lock`.)
+
+### GAE/Flask Application
 
 TODO: paragraph on updating/adding python packages and updating the `pip` requirements files
-
-TODO: paragraph on updating/adding node packages and updating `package.json` and `npm-shrinkwrap.json`
 
 
 ## Deployment
