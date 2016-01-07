@@ -22,9 +22,13 @@ browser-app-coverage:
 	# relies on configuration in `package.json` and
 	# in `browser_client/config/karma.make.js`
 
-# TODO:
-# 	clean:
-# 	build:
-# 	deploy:
-# 	test:  can this cover testing one and watching?
-# 	integration-test:  or functional testing, from the user's perspective
+check:
+	py.test --flakes --pep8
+	npm run check
+
+deploy: check clean
+	npm run build
+	appcfg.py -A your-app-id-here update gae/
+
+clean:
+	rm -vf gae/static/index.js gae/static/index.html
