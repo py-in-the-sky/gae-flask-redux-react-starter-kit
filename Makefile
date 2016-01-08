@@ -1,4 +1,6 @@
-rehydrate: pip-app pip-dev npm
+rehydrate: pip npm
+
+pip: pip-app pip-dev
 
 pip-app:
 	pip install --requirement=requirements.app.txt --target=./gae/__app_env__
@@ -23,7 +25,7 @@ browser-app-coverage:
 	# in `browser_client/config/karma.make.js`
 
 check:
-	py.test --flakes --pep8
+	py.test --flakes gae/app gae/config/ gae/__test__/
 	npm run check
 
 deploy: check clean

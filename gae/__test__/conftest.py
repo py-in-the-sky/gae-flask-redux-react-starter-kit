@@ -1,6 +1,5 @@
 import pytest
 import os
-import sys
 import dev_appserver
 
 dev_appserver.fix_sys_path()

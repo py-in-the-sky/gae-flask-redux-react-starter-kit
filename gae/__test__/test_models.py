@@ -26,9 +26,9 @@ def test_name_validation(testbed):
 
 def test_name_created_auto_add(testbed):
     c3po = name.Name(name='c3po')
-    assert type(c3po.created) == type(None)
+    assert c3po.created is None
     c3po.put()
-    assert type(c3po.created) == datetime.datetime
+    assert isinstance(c3po.created, datetime.datetime)
 
 
 def test_name_ensure_name_not_in_datastore(testbed):

@@ -39,7 +39,7 @@ If you're working solely on the back end and want to spin up only the relevant p
 
 * `dev_appserver.py gae/ --show_mail_body True --allow_skipped_files True`
 
-If you'd like to interact with the application via the command line, you'll need to run the application directly, instead of through `honcho`.  You can activate the [Python debugger](https://docs.python.org/2/library/pdb.html) by inserting this line `import pdb; pdb.set_trace();` in the code and calling an API endpoint that activates the line.  When the debugger is active, you'll find the `pdb` prompt in the terminal running the application.
+If you'd like to interact with the application via the command line, you'll need to run the application directly, instead of through `honcho`.  You can activate the [Python debugger](https://docs.python.org/2/library/pdb.html) by inserting this line `import pdb; pdb.set_trace();` in the code and calling an API endpoint that activates the line.  When the debugger is active, you'll find the `pdb` prompt in the terminal running the application.  See [Python debuggin with pdb](https://cloud.google.com/appengine/docs/python/tools/devserver#Python_Debugging_with_PDB).
 
 * `make coverage`
 
