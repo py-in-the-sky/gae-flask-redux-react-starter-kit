@@ -70,6 +70,12 @@ This is used in the tests to ensure all `google.appengine.*` packages are availa
 
 Use this command occasionally to check for style issues.  `pep8` is very strict, and it's fine not to try to correct all the errors it raises.
 
+* debug and profiling development modes
+
+In `gae/config/development.py`, the `DEBUG` and `PROFILE` feature flags control whether the development app runs in debug and profiling mode, respectively.  While the app is running, you can toggle these flags between `1` and `0` (meaning "on" and "off," respectively).  When you toggle these flags (or make any changes to the app), the GAE dev server's live reloading will ensure your app's config is up to date; there's no need to restart the server for your config changes to take effect.
+
+In debug mode, any uncaught errors will open a Werkzeug interactive stack trace in the browser, allowing you to execute code against the app and investigate errors.  In profiling mode, for each HTTP request, the app will log the slowest function calls involved in its processing the request-response cycle.
+
 
 ## Managing Dependencies
 
@@ -83,7 +89,13 @@ This will update `npm-shrinkwrap.json`; `npm install` uses this file by default,
 
 ### GAE/Flask Application
 
-TODO: paragraph on updating/adding python packages and updating the `pip` requirements files; note use of `pipdeptree` for clear structure of python dependencies
+* `make pip-app` or `make pip-dev`
+
+To add a new dependency to your project, add `<package name>==<version number>` to `requirements.app.txt` or `requirements.dev.txt`, and then run the corresponding command above to install the dependency.  `requirements.app.txt` is used to install your app's dependency in `gae/__app_env__`, which is deployed with your app to the GAE servers.  `requirements.dev.txt` is used to install all other dependencies (e.g., `pytest`), which are only needed for development and are installed in `virtualenvwrapper`'s default manner.
+
+* `pipdeptree`
+
+This command will produce a visualization of your pip-installed packages, which is useful for maintaining the `requirements.*.txt` files.  All of the package names that align to the left of the terminal window comprise the minimal set of names for your `requirements.dev.txt` and `requirements.app.txt` files.  If there are any sub-dependencies whose version numbers you'd like to pin, add them to the the relevant requirements files as well.
 
 
 ## Deployment
@@ -96,7 +108,9 @@ Then use this command to build and deploy your project:
 
 * `make deploy`
 
-TODO: make short note on https://cloud.google.com/appengine/docs/python/tools/remoteapi
+This will build and deploy your app.  (NB: the `make deploy` command runs `make check` as a dependency before the build and deploy steps are run.)
+
+Once the app is deployed you can use the [GAE console](https://console.cloud.google.com) (or [this alternative](https://appengine.google.com/)) and the [remote API](https://cloud.google.com/appengine/docs/python/tools/remoteapi) to manage and interact with the deployed application.
 
 
 ## Notes and Bookmarks
