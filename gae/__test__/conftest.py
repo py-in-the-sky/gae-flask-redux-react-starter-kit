@@ -1,14 +1,8 @@
+import fix_sys_path  # pragma: no flakes
+
+
 import pytest
 import os
-import dev_appserver
-
-dev_appserver.fix_sys_path()
-# GAE path setup borrowed from :
-# https://cloud.google.com/appengine/docs/python/tools
-# /localunittesting#Python_Setting_up_a_testing_framework
-# Now google.appengine.* packages are available, as well as
-# all GAE-bundled third-party packages.
-
 from google.appengine.ext.testbed import Testbed
 from google.appengine.ext import ndb
 
