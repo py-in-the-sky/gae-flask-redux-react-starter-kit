@@ -17,7 +17,6 @@
 * `pip install --upgrade pip setuptools`
 * `add2virtualenv ./gae`
 * `add2virtualenv ./gae/__app_env__`
-* `add2virtualenv ${HOME}/google-cloud-sdk/platform/google_appengine/` ([see](http://stackoverflow.com/questions/25525258/add-appengine-sdk-to-python-path))
 * `make rehydrate`
 
 
@@ -59,6 +58,18 @@ This will perform a one-off test run of the GAE/Flask application.  (NB: local c
 
 This will perform a one-off test run of the browser client.  (NB: config for this command is in `package.json`.)
 
+* `bpython` and `ptpython`
+
+These are both useful Python shells.  When you're using one of them, you may want to run the following `import` statement:
+
+* `import __test__.fix_sys_path`
+
+This is used in the tests to ensure all `google.appengine.*` packages are available for import, in addition to all GAE-bundled third-party packages.  There will be no live application as there is with the dev console (see notes under `honcho start gae pytest` above), so functionality that relies on a service backing it (e.g., many `google.appengine.nbd` functions rely on a datastore connection) will not be available.  Nevertheless, it's still useful to have these packages available for import because you can explore them easily thanks to the autocomplete feature of the Python shells listed above.  Futhermore, you can create a temporary fake application to play with, using `testbed`; see `gae/__test__/conftest.py` for an example.
+
+* `py.test --pep8 gae/__test__/ gae/app gae/config/`
+
+Use this command occasionally to check for style issues.  `pep8` is very strict, and it's fine not to try to correct all the errors it raises.
+
 
 ## Managing Dependencies
 
@@ -72,7 +83,7 @@ This will update `npm-shrinkwrap.json`; `npm install` uses this file by default,
 
 ### GAE/Flask Application
 
-TODO: paragraph on updating/adding python packages and updating the `pip` requirements files
+TODO: paragraph on updating/adding python packages and updating the `pip` requirements files; note use of `pipdeptree` for clear structure of python dependencies
 
 
 ## Deployment
@@ -84,6 +95,8 @@ Also make sure you've replaced "your-app-id-here" with your project's ID under t
 Then use this command to build and deploy your project:
 
 * `make deploy`
+
+TODO: make short note on https://cloud.google.com/appengine/docs/python/tools/remoteapi
 
 
 ## Notes and Bookmarks
