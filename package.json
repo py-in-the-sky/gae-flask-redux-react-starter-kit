@@ -38,7 +38,7 @@
   "dependencies": {
     "formsy-material-ui": "^0.3.2",
     "formsy-react": "^0.17.0",
-    "history": "^1.13.0",
+    "history": "^1.17.0",
     "humps": "^1.0.0",
     "immutable": "^3.7.5",
     "jsxstyle": "0.0.18",
@@ -53,7 +53,7 @@
     "react-motion": "^0.3.1",
     "react-pure-render": "^1.0.2",
     "react-redux": "^4.0.0",
-    "react-router": "^1.0.0",
+    "react-router": "^1.0.3",
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.4",
     "redux-actions": "^0.8.0",
