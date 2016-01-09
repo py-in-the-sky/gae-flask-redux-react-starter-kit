@@ -72,6 +72,7 @@
     "empty": "^0.10.1",
     "eslint": "^1.9.0",
     "eslint-plugin-react": "^3.8.0",
+    "fs-extra": "^0.26.4",
     "html-webpack-plugin": "^1.6.2",
     "isparta-instrumenter-loader": "^0.2.1",
     "jquery": "^2.1.4",

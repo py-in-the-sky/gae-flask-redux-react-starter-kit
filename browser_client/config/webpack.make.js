@@ -61,10 +61,11 @@ module.exports = function makeWebpackConfig (opts) {
 
     if (__DEV__) {
         // SIDE EFFECT: copy `index.dev.html` to `gae/static/index.html`
-        var fs = require('fs');
+        var fs = require('fs-extra');
         var htmlTemplate = path.join('browser_client', 'html', 'index.dev.html');
         var htmlTarget = path.join('gae', 'static', 'index.html');
-        fs.createReadStream(htmlTemplate).pipe(fs.createWriteStream(htmlTarget));
+        fs.ensureFileSync(htmlTarget);
+        fs.copy(htmlTemplate, htmlTarget, { clobber: true });
 
         return assign({}, configDefaults, {
             debug: true,
