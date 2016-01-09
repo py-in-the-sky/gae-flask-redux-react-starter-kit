@@ -28,8 +28,10 @@ check:
 	py.test --flakes gae/app gae/config/ gae/__test__/
 	npm run check
 
-deploy: check clean
+build: clean
 	npm run build
+
+deploy: check build
 	appcfg.py -A your-app-id-here update gae/
 
 clean:
