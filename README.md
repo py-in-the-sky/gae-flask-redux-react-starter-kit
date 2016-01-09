@@ -61,7 +61,7 @@ This will perform a one-off test run of the browser client.  (NB: config for thi
 
 These are both useful Python shells.  When you're using one of them, you may want to run the following `import` statement:
 
-* `import __test__.fix_sys_path`
+* `import __test__.fix_sys_path` (in Python file or shell)
 
 This is used in the tests to ensure all `google.appengine.*` packages are available for import, in addition to all GAE-bundled third-party packages.  There will be no live application as there is with the dev console (see notes under `honcho start gae pytest` above), so functionality that relies on a service backing it (e.g., many `google.appengine.nbd` functions rely on a datastore connection) will not be available.  Nevertheless, it's still useful to have these packages available for import because you can explore them easily thanks to the autocomplete feature of the Python shells listed above.  Futhermore, you can create a temporary fake application to play with, using `testbed` and a test app; see the `testbed` fixture in `gae/__test__/conftest.py` and the `app` fixture in `gae/__test__/test_app.py` for examples of how to set up a temporary test app.
 
