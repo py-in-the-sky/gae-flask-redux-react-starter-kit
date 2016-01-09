@@ -15,8 +15,7 @@
 * git clone this repo and then `cd` into it
 * make a virtualenv and ensure it's active.  E.g., `mkvirtualenv your-virtualenv-name -a .`
 * `pip install --upgrade pip setuptools`
-* `add2virtualenv ./gae`
-* `add2virtualenv ./gae/__app_env__`
+* `add2virtualenv ./gae ./gae/__app_env__`
 * `make rehydrate`
 
 
