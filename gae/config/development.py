@@ -21,8 +21,9 @@ class Development(Config):
             # In order for debug to work with GAE, use DebuggedApplication.
 
         if PROFILE:
-            app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=(10,))
-            # log top ten slowest functions on each HTTP request
+            app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=('gae/app', 10))
+            # For each HTTP request, log top ten slowest functions from the
+            # source code in the `gae/app` directory.
 
         for droid_name in ('bb8', 'r2d2', 'c3po'):
             if Name.query(Name.name == droid_name).count() == 0:
