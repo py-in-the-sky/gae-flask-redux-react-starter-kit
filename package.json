@@ -4,7 +4,7 @@
   "scripts": {
     "repl": "$(npm bin)/babel-node --stage 0",
     "harmony": "node --harmony",
-    "start": "NODE_ENV=development node ./browser_client/config/webpackDevServer.js",
+    "start": "NODE_ENV=development $(npm bin)/webpack-dev-server --config browser_client/config/webpack.dev.js --port 8081 --history-api-fallback --hot --inline --no-info",
     "build": "NODE_ENV=production $(npm bin)/webpack -p --config browser_client/config/webpack.build.js",
     "check": "npm run lint && npm run test:all",
     "lint": "$(npm bin)/eslint browser_client/",
@@ -94,7 +94,7 @@
     "redux-devtools": "^2.1.5",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
-    "webpack": "^1.12.10",
-    "webpack-dev-server": "^1.14.0"
+    "webpack": "1.12.4",
+    "webpack-dev-server": "1.12.1"
   }
 }
