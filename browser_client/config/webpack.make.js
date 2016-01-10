@@ -82,7 +82,10 @@ module.exports = function makeWebpackConfig (opts) {
                 devtoolModuleFilenameTemplate: '[resourcePath]',
                 devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
             }),
-            plugins: [ EnvironmentPlugin ],
+            plugins: [
+                EnvironmentPlugin,
+                new webpack.HotModuleReplacementPlugin(),
+            ],
         });
     }
     else if (__TEST__) {
