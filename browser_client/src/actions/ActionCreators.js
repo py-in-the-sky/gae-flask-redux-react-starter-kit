@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import T from './ActionTypes';
-import { FETCH } from '../middleware/fetch';
+import { API_CALL } from '../middleware/api';
 import { uniqueId } from '../utils/lodash';
 // uniqueId could be used to help indicate to the reducers
 // when a particular optimistic update has finished:
@@ -31,7 +31,7 @@ export const addName = createAction(
 
         return {
             requestId,
-            [FETCH]: fetchCall,
+            [API_CALL]: fetchCall,
         };
     }
 );

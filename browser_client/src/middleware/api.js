@@ -1,7 +1,11 @@
-import { ActionTypes } from '../../actions';
+import fetchMiddleware from './fetch';
+import { ActionTypes } from '../actions';
 
 
 const { SERVER_ERROR, NETWORK_ERROR } = ActionTypes;
+
+
+export const API_CALL = Symbol('api-middleware');
 
 
 export const beforeFetch = fetchCall => ({
@@ -19,7 +23,7 @@ export const beforeFetch = fetchCall => ({
 export const onFetchFail = (body, response, _fetchCall, _action, dispatch) => {
     if (response.status >= 500) {
         if (__DEV__) {
-            require('../../utils/devFetchDebug')(body, response.url);
+            require('../utils/devFetchDebug')(body, response.url);
         }
 
         dispatch({ type: SERVER_ERROR });
@@ -41,3 +45,12 @@ export const onNetworkError = (_error, _fetchCall, _action, dispatch) => {
 
     return [];
 }
+
+
+
+export default fetchMiddleware({
+    key: API_CALL,
+    beforeFetch,
+    onFetchFail,
+    onNetworkError,
+});
