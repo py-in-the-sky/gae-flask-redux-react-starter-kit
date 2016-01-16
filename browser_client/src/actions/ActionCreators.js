@@ -9,8 +9,9 @@ import { uniqueId } from '../utils/lodash';
 // help to coordinate a loading animation on the UI
 
 
-export const windowData       = createAction(T.WINDOW_DATA);
-export const subtractLastName = createAction(T.SUBTRACT_LAST_NAME);
+export const windowData            = createAction(T.WINDOW_DATA);
+export const subtractLastName      = createAction(T.SUBTRACT_LAST_NAME);
+export const clearServerValidation = createAction(T.CLEAR_SERVER_VALIDATION);
 
 
 export const addName = createAction(
@@ -37,14 +38,14 @@ export const addName = createAction(
 );
 
 
-export const addNameDone = createAction(  // TODO: change payload type to `responseBody`
+export const addNameDone = createAction(
     T.ADD_NAME_DONE,
     (responseBody, _) => responseBody,
     (_, requestId) => ({ requestId })
 );
 
 
-export const addNameFail = createAction(  // TODO: change payload type to `responseBody`
+export const addNameFail = createAction(
     T.ADD_NAME_FAIL,
     (responseBody, _) => responseBody,
     (_, requestId) => ({ requestId })

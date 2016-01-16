@@ -21,7 +21,13 @@ export default class HomePage extends PureComponent {
     }
 
     render () {
-        const { names, addName, requestsPending } = this.props;
+        const {
+            names,
+            serverValidation,
+            addName,
+            requestsPending,
+            clearServerValidation,
+        } = this.props;
 
         return (
             <Block height="100%">
@@ -34,7 +40,10 @@ export default class HomePage extends PureComponent {
                                  requestsPending={requestsPending} />
                             </Container>
                             <Container>
-                                <AddNameForm addName={addName} />
+                                <AddNameForm
+                                 addName={addName}
+                                 serverValidation={serverValidation}
+                                 clearServerValidation={clearServerValidation} />
                             </Container>
                         </Container>
                     </Paper>
@@ -49,9 +58,15 @@ export default class HomePage extends PureComponent {
 
 
 HomePage.propTypes = {
-    names:           PropTypes.instanceOf(List).isRequired,
-    addName:         PropTypes.func.isRequired,
-    requestsPending: PropTypes.bool.isRequired,
+    names:                 PropTypes.instanceOf(List).isRequired,
+    addName:               PropTypes.func.isRequired,
+    requestsPending:       PropTypes.bool.isRequired,
+    clearServerValidation: PropTypes.func.isRequired,
+    serverValidation: PropTypes.shape({
+        message: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
 };
 
 

@@ -16,6 +16,8 @@ export default class Greeting extends PureComponent {
 
 
 Greeting.propTypes = {
-    name:       PropTypes.object.isRequired,
     salutation: PropTypes.string.isRequired,
+    name: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+    }).isRequired,
 };

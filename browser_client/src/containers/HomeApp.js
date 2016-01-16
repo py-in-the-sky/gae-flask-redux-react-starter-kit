@@ -4,15 +4,16 @@ import { HomePage } from '../components';
 import { ActionCreators } from '../actions';
 
 
-const { addName } = ActionCreators;
+const { addName, clearServerValidation } = ActionCreators;
 
 
-const mapStateToProps = ({ names, pendingRequests }) =>
-    ({ names, requestsPending: pendingRequests.size > 0 });
+const mapStateToProps = ({ names, serverValidation, pendingRequests }) =>
+    ({ names, serverValidation, requestsPending: pendingRequests.size > 0 });
 
 
-const createApp = () => connect(mapStateToProps, { addName })(HomePage);
-
+const createApp = () => connect(mapStateToProps, {
+    addName, clearServerValidation
+})(HomePage);
 
 
 export default createApp();
