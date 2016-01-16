@@ -20,9 +20,21 @@ export const names = handleActions({
 export const serverValidation = handleActions({
     [T.ADD_NAME]:                () => ({}),
     [T.ADD_NAME_DONE]:           () => ({}),
-    [T.ADD_NAME_FAIL]:           (_, { payload }) => payload,
+    [T.ADD_NAME_FAIL]:           (_, { payload }) => payload || ({}),
     [T.CLEAR_SERVER_VALIDATION]: () => ({}),
 }, {});
+
+
+export const serverError = handleActions({
+    [T.SERVER_ERROR]:       () => true,
+    [T.CLEAR_SERVER_ERROR]: () => false,
+}, false);
+
+
+export const networkError = handleActions({
+    [T.NETWORK_ERROR]:       () => true,
+    [T.CLEAR_NETWORK_ERROR]: () => false,
+}, false);
 
 
 export const pendingRequests = handleActions({

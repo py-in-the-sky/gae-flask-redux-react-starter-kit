@@ -27,8 +27,6 @@ export const onFetchFail = (body, response, _fetchCall, _action, dispatch) => {
         }
 
         dispatch({ type: SERVER_ERROR });
-        // TODO: this action should result in the user being told
-        // "Could not connect to server.  Please try again."
 
         return [ undefined, response ];
     }
@@ -40,8 +38,6 @@ export const onFetchFail = (body, response, _fetchCall, _action, dispatch) => {
 
 export const onNetworkError = (_error, _fetchCall, _action, dispatch) => {
     dispatch({ type: NETWORK_ERROR });
-    // TODO: this action should result in the user being told
-    // "Cannot connect to the internet.  Please try again."
 
     return [];
 }

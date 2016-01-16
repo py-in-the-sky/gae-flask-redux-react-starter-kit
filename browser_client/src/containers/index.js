@@ -7,6 +7,7 @@ import HomeApp from './HomeApp';
 import ShireApp from './ShireApp';
 import MordorApp from './MordorApp';
 import WindowResizeListener from './WindowResizeListener';
+import CriticalErrorAlert from './CriticalErrorAlert';
 import { Layout } from '../components';
 
 
@@ -61,7 +62,8 @@ export default class Root extends PureComponent {
         return (
             <Provider store={store}>
                 <div>
-                    <WindowResizeListener/>
+                    <WindowResizeListener />
+                    <CriticalErrorAlert />
                     <Router history={this.props.history}>
                         <Route path="/" component={Layout}>
                             <IndexRoute component={HomeApp} />

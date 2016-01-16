@@ -11,6 +11,8 @@ import { uniqueId } from '../utils/lodash';
 
 export const windowData            = createAction(T.WINDOW_DATA);
 export const subtractLastName      = createAction(T.SUBTRACT_LAST_NAME);
+export const clearServerError      = createAction(T.CLEAR_SERVER_ERROR);
+export const clearNetworkError     = createAction(T.CLEAR_NETWORK_ERROR);
 export const clearServerValidation = createAction(T.CLEAR_SERVER_VALIDATION);
 
 

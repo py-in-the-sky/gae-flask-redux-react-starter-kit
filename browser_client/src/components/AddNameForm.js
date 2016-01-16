@@ -74,6 +74,10 @@ export default class AddNameForm extends PureComponent {
         resetForm();
     }
 
+    componentWillUnmount () {
+        this.clearServerValidation();
+    }
+
     clearServerValidation () {
         if (this.props.serverValidation.message) {
             this.props.clearServerValidation();
