@@ -22,11 +22,11 @@ export const addName = createAction(
         const requestId = uniqueId('addName');
 
         const fetchCall = {
-            endpoint: ,  // TODO
+            endpoint: '/api/v1/names/',
             method: name ? 'POST'   : 'GET',
             body:   name ? { name } : undefined,
-            done: ,  // TODO
-            fail: ,  // TODO
+            done: responseBody => addNameDone(responseBody, requestId),
+            fail: responseBody => addNameFail(responseBody, requestId),
         };
 
         return {
@@ -37,15 +37,15 @@ export const addName = createAction(
 );
 
 
-export const addNameDone = createAction(
+export const addNameDone = createAction(  // TODO: change payload type to `responseBody`
     T.ADD_NAME_DONE,
-    (name, _) => name,
-    (_, requestId) => requestId
+    (responseBody, _) => responseBody,
+    (_, requestId) => ({ requestId })
 );
 
 
-export const addNameFail = createAction(
+export const addNameFail = createAction(  // TODO: change payload type to `responseBody`
     T.ADD_NAME_FAIL,
-    (name, _) => name,
-    (_, requestId) => requestId
+    (responseBody, _) => responseBody,
+    (_, requestId) => ({ requestId })
 );

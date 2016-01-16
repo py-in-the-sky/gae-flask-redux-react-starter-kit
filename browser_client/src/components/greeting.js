@@ -8,7 +8,7 @@ export default class Greeting extends PureComponent {
 
         return (
             <div>
-                {`${salutation}, ${name}!`}
+                {`${salutation}, ${name.name}!`}
             </div>
         );
     }
@@ -16,6 +16,6 @@ export default class Greeting extends PureComponent {
 
 
 Greeting.propTypes = {
-    name:       PropTypes.string.isRequired,
+    name:       PropTypes.object.isRequired,
     salutation: PropTypes.string.isRequired,
 };

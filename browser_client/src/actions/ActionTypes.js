@@ -4,4 +4,6 @@ export default {
     ADD_NAME:           'ADD_NAME',
     ADD_NAME_DONE:      'ADD_NAME_DONE',
     ADD_NAME_FAIL:      'ADD_NAME_FAIL',
+    SERVER_ERROR:       'SERVER_ERROR',
+    NETWORK_ERROR:      'NETWORK_ERROR',
 };

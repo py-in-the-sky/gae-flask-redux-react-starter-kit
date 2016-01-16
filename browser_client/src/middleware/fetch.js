@@ -42,8 +42,6 @@ export default (opts = {}) => {
                     : dispatch( fail( ...onFetchFail(body, response, ...extraArgs) ) )
             )
             .catch( error => dispatch( fail( ...onNetworkError(error, ...extraArgs) ) ) );
-            // TODO: in `./api.js` catching the error should be done w/ an action creator
-            // and perhaps also call the provided `fail` callback
     };
 };
 

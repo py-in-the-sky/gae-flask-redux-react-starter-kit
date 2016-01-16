@@ -18,8 +18,8 @@ export const names = handleActions({
 
 
 export const pendingRequests = handleActions({
-    [T.ADD_NAME]:      (state, { meta }) => state.add(meta),
-    [T.ADD_NAME_DONE]: (state, { meta }) => state.delete(meta),
+    [T.ADD_NAME]:      (state, { meta }) => state.add(meta.requestId),
+    [T.ADD_NAME_DONE]: (state, { meta }) => state.delete(meta.requestId),
 }, emptySet);
 
 

@@ -1,9 +1,12 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import apiMiddleware from '../middleware/api';
 import * as reducers from '../reducers';
 
 
 function createStoreWithMiddleware () {
+    const middleware = applyMiddleware(thunkMiddleware, apiMiddleware);
+
     if (__DEV__) {
         const logSlowReducers = require('../utils/devLogSlowReducers');
         const reducer = combineReducers(logSlowReducers(reducers));
@@ -11,7 +14,7 @@ function createStoreWithMiddleware () {
         const { devTools, persistState } = require('redux-devtools');
 
         const finalCreateStore = compose(
-            applyMiddleware(thunkMiddleware),
+            middleware,
             devTools(),
             persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
         )(createStore);
@@ -31,7 +34,7 @@ function createStoreWithMiddleware () {
     }
     else {
         const reducer = combineReducers(reducers);
-        return applyMiddleware(thunkMiddleware)(createStore)(reducer);
+        return middleware(createStore)(reducer);
     }
 }
 
