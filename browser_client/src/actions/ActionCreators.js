@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import T from './ActionTypes';
-import { FETCH } from '../middleware/fetch';
+import { API_CALL } from '../middleware/api';
 import { uniqueId } from '../utils/lodash';
 // uniqueId could be used to help indicate to the reducers
 // when a particular optimistic update has finished:
@@ -9,8 +9,11 @@ import { uniqueId } from '../utils/lodash';
 // help to coordinate a loading animation on the UI
 
 
-export const windowData       = createAction(T.WINDOW_DATA);
-export const subtractLastName = createAction(T.SUBTRACT_LAST_NAME);
+export const windowData            = createAction(T.WINDOW_DATA);
+export const subtractLastName      = createAction(T.SUBTRACT_LAST_NAME);
+export const clearServerError      = createAction(T.CLEAR_SERVER_ERROR);
+export const clearNetworkError     = createAction(T.CLEAR_NETWORK_ERROR);
+export const clearServerValidation = createAction(T.CLEAR_SERVER_VALIDATION);
 
 
 export const addName = createAction(
@@ -31,20 +34,20 @@ export const addName = createAction(
 
         return {
             requestId,
-            [FETCH]: fetchCall,
+            [API_CALL]: fetchCall,
         };
     }
 );
 
 
-export const addNameDone = createAction(  // TODO: change payload type to `responseBody`
+export const addNameDone = createAction(
     T.ADD_NAME_DONE,
     (responseBody, _) => responseBody,
     (_, requestId) => ({ requestId })
 );
 
 
-export const addNameFail = createAction(  // TODO: change payload type to `responseBody`
+export const addNameFail = createAction(
     T.ADD_NAME_FAIL,
     (responseBody, _) => responseBody,
     (_, requestId) => ({ requestId })

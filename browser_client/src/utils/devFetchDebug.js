@@ -1,5 +1,5 @@
-const werkzeugDebugger = (flaskResponse, path) => {
-    const debuggerLocation = window.location.origin + path;
+const werkzeugDebugger = (flaskResponse, url) => {
+    const debuggerLocation = url;
     const debuggerWindow   = window.open(debuggerLocation, 'Werkzeug Debugger');
     debuggerWindow.document.open();
     debuggerWindow.location.href = debuggerLocation;

@@ -1,4 +1,4 @@
-import { Callbacks, Models } from '../../src/middleware/api';
+import * as API from '../../src/middleware/api';
 import { ActionTypes as T } from '../../src/actions';
 
 
@@ -10,7 +10,7 @@ describe('`beforeFetch`', () => {
             body:     { hello: 'world' },
         };
 
-        expect( Callbacks.beforeFetch(fetchCall) ).to.deep.eq({
+        expect( API.beforeFetch(fetchCall) ).to.deep.eq({
             endpoint: '/blah/',
             method:   'POST',
             body:     '{"hello":"world"}',
@@ -28,7 +28,7 @@ describe('`beforeFetch`', () => {
             method:   'GET',
         };
 
-        expect( Callbacks.beforeFetch(fetchCall).body ).to.be.undefined;
+        expect( API.beforeFetch(fetchCall).body ).to.be.undefined;
     });
 });
 
@@ -42,19 +42,19 @@ describe('`onFetchFail`', () => {
 
     it('returns a body-response pair', () => {
         const { body, response } = setup(400);
-        expect( Callbacks.onFetchFail(body, response) ).to.deep.eq( [body, response] );
+        expect( API.onFetchFail(body, response) ).to.deep.eq( [body, response] );
     });
 
     context('when the response represents a 500-level error', () => {
         it('returns an undefined-response pair', () => {
             const { body, response, dispatch } = setup(500);
-            expect( Callbacks.onFetchFail(body, response, undefined, undefined, dispatch) )
+            expect( API.onFetchFail(body, response, undefined, undefined, dispatch) )
                 .to.deep.eq( [undefined, response] );
         });
 
         it('dispatches the SERVER_ERROR action to the store', () => {
             const { body, response, dispatch } = setup(500);
-            Callbacks.onFetchFail(body, response, undefined, undefined, dispatch);
+            API.onFetchFail(body, response, undefined, undefined, dispatch);
             expect( dispatch ).to.have.been.calledWithMatch({ type: T.SERVER_ERROR });
         });
     });
@@ -63,13 +63,13 @@ describe('`onFetchFail`', () => {
 
 describe('`onNetworkError`', () => {
     it('returns an empty array', () => {
-        expect( Callbacks.onNetworkError(undefined, undefined, undefined, sinon.spy()) )
+        expect( API.onNetworkError(undefined, undefined, undefined, sinon.spy()) )
             .to.deep.eq( [] );
     });
 
     it('dispatches the NETWORK_ERROR action to the store', () => {
         const dispatch = sinon.spy();
-        Callbacks.onNetworkError(undefined, undefined, undefined, dispatch);
+        API.onNetworkError(undefined, undefined, undefined, dispatch);
         expect( dispatch ).to.have.been.calledWithMatch({ type: T.NETWORK_ERROR });
     });
 });

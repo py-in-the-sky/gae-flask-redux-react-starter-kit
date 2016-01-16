@@ -1,4 +1,7 @@
-import fetchMiddleware, { FETCH } from '../../src/middleware/fetch';
+import fetchMiddleware from '../../src/middleware/fetch';
+
+
+const MY_FETCH_KEY = Symbol('my-fetch-key');
 
 
 describe('fetchMiddleware', () => {
@@ -11,7 +14,10 @@ describe('fetchMiddleware', () => {
             .to.throw( Error );
     });
 
-    it('expects the option entries to be functions or undefined', () => {
+    it('validates option entries', () => {
+        expect( () => fetchMiddleware({ key: 'String is not the right type' }) )
+            .to.throw( Error );
+
         expect( () => fetchMiddleware({ beforeFetch: 'String is not the right type' }) )
             .to.throw( Error );
 
@@ -43,6 +49,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
         }
 
         const opts = {
+            key: MY_FETCH_KEY,
             beforeFetch: sinon.spy( x => x ),
             onFetchDone: sinon.spy( (...args) => args ),
             onFetchFail: sinon.spy( (...args) => args ),
@@ -60,7 +67,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
         const action = {
             type: 'TYPE',
             meta: {
-                [FETCH]: {
+                [MY_FETCH_KEY]: {
                     endpoint: '/test',
                     method: 'POST',
                     body: 'body',
@@ -87,7 +94,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
     it('calls `beforeFetch` with the expected arguments', () => {
         const { opts, middleware, action, store: { dispatch, getState } } = setup();
-        const call = action.meta[FETCH];
+        const call = action.meta[MY_FETCH_KEY];
         middleware(action);
 
         expect( opts.beforeFetch )
@@ -97,7 +104,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
     context('when `dispatchBaseAction` is `false`', () => {
         it('does not call the next middleware with the given action', () => {
             const { nextMiddleware, middleware, action } = setup();
-            action.meta[FETCH].dispatchBaseAction = false;
+            action.meta[MY_FETCH_KEY].dispatchBaseAction = false;
             middleware(action);
 
             expect( nextMiddleware ).to.not.have.been.called;
@@ -116,7 +123,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
     it('calls `fetch` with the expected arguments', () => {
         const { middleware, action } = setup();
         middleware(action);
-        const { endpoint, method, body } = action.meta[FETCH];
+        const { endpoint, method, body } = action.meta[MY_FETCH_KEY];
 
         expect( fetch )
             .to.have.been.calledWithMatch( endpoint, { method, body } );
@@ -132,7 +139,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup();
 
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -149,7 +156,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('calls `done` with the expected arguments', done => {
             const { opts, middleware, action } = setup();
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -164,7 +171,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('dispatches the "done" action', done => {
             const { middleware, action, store } = setup();
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -188,7 +195,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(makeResponse(400));
 
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -205,7 +212,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('calls `fail` with the expected arguments', done => {
             const { opts, middleware, action } = setup(makeResponse(400));
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -220,7 +227,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('dispatches the "fail" action', done => {
             const { middleware, action, store } = setup(makeResponse(400));
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -244,7 +251,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(makeResponse(500));
 
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -269,7 +276,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(undefined, true);
 
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -293,7 +300,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(undefined, true);
 
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -314,7 +321,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(undefined, true);
 
-            const fetchCall = action.meta[FETCH];
+            const fetchCall = action.meta[MY_FETCH_KEY];
 
             middleware(action).then(
                 () => {
@@ -329,7 +336,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
     });
 
     describe('input validations', () => {
-        it('expects `action.meta[FETCH]` to be a plain object or undefined', () => {
+        it('expects `action.meta[MY_FETCH_KEY]` to be a plain object or undefined', () => {
             const {
                 opts,
                 middleware,
@@ -337,7 +344,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(undefined, true);
 
-            action.meta[FETCH] = 'Not the right type';
+            action.meta[MY_FETCH_KEY] = 'Not the right type';
 
             expect( () => middleware(action) ).to.throw( Error );
         });
@@ -350,7 +357,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(undefined, true);
 
-            action.meta[FETCH].done = 'Not the right type';
+            action.meta[MY_FETCH_KEY].done = 'Not the right type';
 
             expect( () => middleware(action) ).to.throw( Error );
         });
@@ -363,7 +370,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 store: { dispatch, getState }
             } = setup(undefined, true);
 
-            action.meta[FETCH].fail = 'Not the right type';
+            action.meta[MY_FETCH_KEY].fail = 'Not the right type';
 
             expect( () => middleware(action) ).to.throw( Error );
         });

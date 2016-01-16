@@ -17,11 +17,13 @@ const nameValidationErrors = {
 // and be passed down as props
 // external validations take priority over internal
 // form ones; internal form errors will only appear
-// if `externalValidationErrors` is falsy
-const externalValidationErrors = undefined;
-// const externalValidationErrors = {
-//     name: 'some error from server',
-// };
+// if `validationErrors` is falsy
+// e.g.: const externalValidationErrors = {
+//           name: 'some error from server',
+//       };
+// this is another alternative:
+//  https://github.com/christianalfoni/formsy-react/blob
+//  /master/API.md#updateinputswitherrorerrors
 
 
 export default class AddNameForm extends PureComponent {
@@ -29,14 +31,18 @@ export default class AddNameForm extends PureComponent {
         super(props);
         this.state  = { isValid: false };
         this.submit = this.submit.bind(this);
+        this.clearServerValidation = this.clearServerValidation.bind(this);
+        this.setValid = () => this.setState({ isValid: true });
+        this.setInvalid = () => this.setState({ isValid: false});
     }
 
     render () {
         return (
             <Form
-             validationErrors={externalValidationErrors}
-             onValid={  () => this.setState({ isValid: true })}
-             onInvalid={() => this.setState({ isValid: false})}
+             validationErrors={this.props.serverValidation.message}
+             onChange={this.clearServerValidation}
+             onValid={this.setValid}
+             onInvalid={this.setInvalid}
              onValidSubmit={this.submit}>
 
                 <ShrinkWrap flexDirection="column">
@@ -67,9 +73,25 @@ export default class AddNameForm extends PureComponent {
         this.props.addName(model.name, delayMS);
         resetForm();
     }
+
+    componentWillUnmount () {
+        this.clearServerValidation();
+    }
+
+    clearServerValidation () {
+        if (this.props.serverValidation.message) {
+            this.props.clearServerValidation();
+        }
+    }
 }
 
 
 AddNameForm.propTypes = {
     addName: PropTypes.func.isRequired,
+    clearServerValidation: PropTypes.func.isRequired,
+    serverValidation: PropTypes.shape({
+        message: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
 };
