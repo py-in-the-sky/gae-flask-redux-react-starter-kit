@@ -23,7 +23,7 @@ export const beforeFetch = fetchCall => ({
 export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
     if (response.status >= 500) {
         if (__DEV__) {
-            require('../utils/devFetchDebug')(body, fetchCall.endpoint);
+            require('../utils/devFetchDebug')(body, response.url, fetchCall);
         }
 
         dispatch({ type: SERVER_ERROR });
