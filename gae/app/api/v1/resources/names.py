@@ -4,7 +4,7 @@ from google.appengine.ext import ndb
 from app.models import name
 from app.utils.reqparse import string_length
 from app.utils.func import compose
-from app.utils.werkzeug_debugger import werkzeug_debugger
+# from app.utils.werkzeug_debugger import werkzeug_debugger
 
 
 name_validation = compose(
@@ -42,7 +42,6 @@ class Name(Resource):
     @ndb.transactional
     def post(self):
         "create and return name; maintain no more than 11 names in datastore"
-        werkzeug_debugger()
         kwargs = request_parser.parse_args()
         name_key = name.Name(parent=name.root, **kwargs).put()
         new_name = name_key.get()
