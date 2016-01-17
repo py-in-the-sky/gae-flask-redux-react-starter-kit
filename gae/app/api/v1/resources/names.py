@@ -42,7 +42,6 @@ class Name(Resource):
     @ndb.transactional
     def post(self):
         "create and return name; maintain no more than 11 names in datastore"
-        werkzeug_debugger()
         kwargs = request_parser.parse_args()
         name_key = name.Name(parent=name.root, **kwargs).put()
         new_name = name_key.get()
