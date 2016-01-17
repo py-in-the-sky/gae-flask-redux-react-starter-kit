@@ -19,7 +19,7 @@ class Development(Config):
             app.debug = True
             app.wsgi_app = DebuggedApplication(app.wsgi_app,
                                                evalex=True,
-                                               console_path='/api/console')
+                                               console_path='/_console')
             # In order for debug to work with GAE, use DebuggedApplication.
 
         if PROFILE:
