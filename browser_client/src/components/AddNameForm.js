@@ -69,8 +69,7 @@ export default class AddNameForm extends PureComponent {
     }
 
     submit (model, resetForm) {
-        const delayMS = 1100;
-        this.props.addName(model.name, delayMS);
+        this.props.addName(model.name);
         resetForm();
     }
 

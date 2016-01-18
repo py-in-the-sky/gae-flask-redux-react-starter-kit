@@ -5,6 +5,12 @@ import { ColumnWise } from './Flex';
 
 
 export default class GreetingControls extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.addName = () => this.props.addName();
+        this.subtractLastName = () => this.props.subtractLastName();
+    }
+
     render () {
         const { addName, subtractLastName, requestsPending } = this.props;
 
@@ -18,13 +24,13 @@ export default class GreetingControls extends PureComponent {
                  style={{ marginBottom: 5 }}
                  primary={true}
                  label="ADD GREETING"
-                 onTouchTap={() => addName()} />
+                 onTouchTap={this.addName} />
 
                 <RaisedButton
                  style={{ marginBottom: 5 }}
                  secondary={true}
                  label="SUBTRACT LAST GREETING"
-                 onTouchTap={() => subtractLastName()} />
+                 onTouchTap={this.subtractLastName} />
 
                 <div
                  className="waiting"
