@@ -29,11 +29,11 @@ This will activate the project's virtualenv and `cd` you into its root directory
 
 This is at the heart of the devlopment process.  It will run the Google App Engine and Webpack development servers, as well as the Karma and Pytest test runners, both in watch mode.  You will have a live instance of the application and will see the logging output of each of the processes in the terminal, each process having its own color.  Use this development mode to implement new features in your app; the changes will be live reloaded as the app runs and cause relevant tests to re-run.
 
-Furthermore, if you'd like to interact with the app directly, you can instert a `werkzeug_debugger()` call in the code, and then when this code is activated by an HTTP request from the browser client, an interactive Werkzeug debugger stack trace will open in the browser.
+Furthermore, if you'd like to interact with the app directly, you can visit the `/_console` path in your browser (i.e., `localhost:8080/_console`).  You can also instert a `werkzeug_debugger()` call in the code to interact with the app at a specific point in execution, and then when this code is activated by an HTTP request from the browser client, an interactive Werkzeug debugger stack trace will open in the browser.
 
 * `honcho start gae pytest`
 
-If you're working solely on the back end and want to spin up only the relevant processes (i.e., the GAE dev server and Pytest test runner), you can run this command.  You can interact with the application via a client like [Postman](https://www.getpostman.com/).  You can also work interactively with the application via the GAE dev server's [console](https://cloud.google.com/appengine/docs/python/tools/devserver?hl=en#Python_The_Interactive_Console).
+If you're working solely on the back end and want to spin up only the relevant processes (i.e., the GAE dev server and Pytest test runner), you can run this command.  You can interact with the application via a client like [Postman](https://www.getpostman.com/).  You can also work interactively with the application via the GAE dev server's [console](https://cloud.google.com/appengine/docs/python/tools/devserver?hl=en#Python_The_Interactive_Console) or via `localhost:8080/_console`.
 
 * `dev_appserver.py gae/ --show_mail_body True --allow_skipped_files True`
 
