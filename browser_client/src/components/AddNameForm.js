@@ -39,6 +39,7 @@ export default class AddNameForm extends PureComponent {
     render () {
         return (
             <Form
+             ref="form"
              validationErrors={this.props.serverValidation.message}
              onChange={this.clearServerValidation}
              onValid={this.setValid}
@@ -49,6 +50,7 @@ export default class AddNameForm extends PureComponent {
 
                     <FormsyText
                      style={{ marginBottom: '3rem' }}
+                     ref="name"
                      name="name"
                      required
                      formNoValidate
@@ -57,6 +59,7 @@ export default class AddNameForm extends PureComponent {
                      validations="isAlpha,minLength:1,maxLength:10" />
 
                     <RaisedButton
+                     ref="submit"
                      type="submit"
                      primary={true}
                      disabled={!this.state.isValid}
