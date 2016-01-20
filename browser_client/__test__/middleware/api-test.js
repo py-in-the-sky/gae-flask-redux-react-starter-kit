@@ -1,5 +1,119 @@
 import * as API from '../../src/middleware/api';
-import { ActionTypes as T } from '../../src/actions';
+import apiMiddleware from '../../src/middleware/api';
+import { ActionCreators, ActionTypes as T } from '../../src/actions';
+import configureMockStore from 'redux-mock-store';
+
+
+describe('redux integration', () => {
+    afterEach(() => {
+        if (window.fetch.restore) window.fetch.restore();
+    });
+
+    const makeResponse = (status = 200) => new window.Response(
+        '{"name":"foo"}',
+        { status, headers: { 'Content-type': 'application/json' } }
+    );
+
+    const setup = (response, error = false) => {
+        if (error) {
+            sinon.stub(window, 'fetch', () => Promise.reject('error'));
+        }
+        else {
+            sinon.stub(window, 'fetch',
+                       () => Promise.resolve(response || makeResponse()));
+        }
+
+        return configureMockStore([ apiMiddleware ]);
+    };
+
+    it('dispatches the expected actions when successful', done => {
+        const mockStore = setup();
+
+        let requestId;
+
+        const expectedActions = [
+            firstAction => {
+                expect( firstAction.type ).to.equal( T.ADD_NAME );
+                expect( firstAction.meta ).to.have.all.keys( 'requestId' );
+
+                requestId = firstAction.meta.requestId;
+            },
+            secondAction => {
+                expect( secondAction.type ).to.equal( T.ADD_NAME_DONE );
+                expect( secondAction.payload ).to.deep.equal( { name: 'foo' } );
+                expect( secondAction.meta ).to.have.all.keys( 'requestId' );
+
+                expect( secondAction.meta.requestId ).to.equal( requestId );
+            },
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(ActionCreators.addName());
+    });
+
+    it('dispatches the expected actions when there is an error', done => {
+        const mockStore = setup(makeResponse(400));
+
+        let requestId;
+
+        const expectedActions = [
+            firstAction => {
+                expect( firstAction.type ).to.equal( T.ADD_NAME );
+                expect( firstAction.meta ).to.have.all.keys( 'requestId' );
+
+                requestId = firstAction.meta.requestId;
+            },
+            secondAction => {
+                expect( secondAction.type ).to.equal( T.ADD_NAME_FAIL );
+                expect( secondAction.meta ).to.have.all.keys( 'requestId' );
+
+                expect( secondAction.meta.requestId ).to.equal( requestId );
+            },
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(ActionCreators.addName());
+    });
+
+    it('dispatches `SERVER_ERROR` when there is a 500 error', done => {
+        const mockStore = setup(makeResponse(500));
+
+        const expectedActions = [
+            firstAction => {
+                expect( firstAction.type ).to.equal( T.ADD_NAME );
+            },
+            secondAction => {
+                expect( secondAction.type ).to.equal( T.SERVER_ERROR );
+            },
+            thirdAction => {
+                expect( thirdAction.type ).to.equal( T.ADD_NAME_FAIL );
+            },
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(ActionCreators.addName());
+    });
+
+    it('dispatches `NETWORK_ERROR` when fetch resolves to an error state', done => {
+        const error = true;
+        const mockStore = setup(undefined, error);
+
+        const expectedActions = [
+            firstAction => {
+                expect( firstAction.type ).to.equal( T.ADD_NAME );
+            },
+            secondAction => {
+                expect( secondAction.type ).to.equal( T.NETWORK_ERROR );
+            },
+            thirdAction => {
+                expect( thirdAction.type ).to.equal( T.ADD_NAME_FAIL );
+            },
+        ];
+
+        const store = mockStore({}, expectedActions, done);
+        store.dispatch(ActionCreators.addName());
+    });
+});
 
 
 describe('`beforeFetch`', () => {

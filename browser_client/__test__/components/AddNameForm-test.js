@@ -70,4 +70,8 @@ describe('user interaction', () => {
         fillInText(input, 'abc 123');
         expect( button.disabled ).to.be.true;
     });
+
+    // it('calls `clearServerValidation`', () => {
+
+    // });
 });
