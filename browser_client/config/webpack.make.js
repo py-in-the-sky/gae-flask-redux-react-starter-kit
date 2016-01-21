@@ -90,7 +90,19 @@ module.exports = function makeWebpackConfig (opts) {
 
         return {
             devtool: 'inline-source-map',
-            resolve: configDefaults.resolve,
+            resolve: assign({}, configDefaults.resolve, {
+                alias: { 'sinon': 'sinon/pkg/sinon' },  // NB: config for `enzyme`
+                // for getting `enzyme` up and running with `webpack` and `karma`, see:
+                //  https://github.com/davezuko/react-redux-starter-kit/issues/328
+                //  https://github.com/airbnb/enzyme/issues/47
+                //  http://spencerdixon.com/blog/test-driven-react-tutorial.html
+            }),
+            externals: {  // NB: config for `enzyme`
+                'jsdom': 'window',
+                'cheerio': 'window',
+                'react/lib/ExecutionEnvironment': true,
+                'react/lib/ReactContext': 'window',
+            },
             plugins: [ EnvironmentPlugin ],
             module:  assign({}, preLoaders, {
                 loaders: [
@@ -102,6 +114,13 @@ module.exports = function makeWebpackConfig (opts) {
                         ],
                         loader: 'babel-loader'
                     },
+                    {  // NB: config for `enzyme`
+                        test: /\.json$/,
+                        loader: 'json',
+                    },
+                ],
+                noParse: [  // NB: config for `enzyme`
+                    /node_modules\/sinon\//,
                 ],
             }),
         };
