@@ -1,8 +1,5 @@
 import fetchMiddleware from './fetch';
-import { ActionTypes } from '../actions';
-
-
-const { SERVER_ERROR, NETWORK_ERROR } = ActionTypes;
+import { ActionTypes as T } from '../actions';
 
 
 export const API_CALL = Symbol('api-middleware');
@@ -26,7 +23,7 @@ export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
             require('../utils/devFetchDebug')(body, response.url, fetchCall);
         }
 
-        dispatch({ type: SERVER_ERROR });
+        dispatch({ type: T.SERVER_ERROR });
 
         return [ undefined, response ];
     }
@@ -37,8 +34,7 @@ export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
 
 
 export const onNetworkError = (_error, _fetchCall, _action, dispatch) => {
-    dispatch({ type: NETWORK_ERROR });
-
+    dispatch({ type: T.NETWORK_ERROR });
     return [];
 }
 

@@ -2,8 +2,8 @@
 
 
 /*
-    Property-based testing of the "greetings" aspect of the app.
- */
+Property-based testing of the "greetings" aspect of the app.
+*/
 
 
 import ReactDOM from 'react-dom';
@@ -13,10 +13,35 @@ import _ from 'lodash';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Greeting from '../../src/components/Greeting';
 import { createFinder } from '../utils';
+import { ActionTypes as T } from '../../src/actions';
+import store from '../../src/store';
+
+
+const returnMockThenable = () => ({
+    then: returnMockThenable,
+    catch: returnMockThenable,
+});
+
+
+const mockFetch = () => {
+    store.dispatch({
+        type: T.ADD_NAME_DONE,
+        payload: { name: 'world' },
+        meta: {},
+    });
+
+    return returnMockThenable();
+};
 
 
 describe('adding and subtracting greetings', function () {
+    afterEach(() => {
+        if (window.fetch.restore) window.fetch.restore();
+    });
+
     beforeEach(function () {
+        sinon.stub(window, 'fetch', mockFetch);
+
         findOnPage = this.findOnPage;
         this.navigate('/shire');
         const [ raisedAddButton, raisedSubtractButton ] = findOnPage(RaisedButton);
