@@ -169,7 +169,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
             );
         });
 
-        it('dispatches the "done" action', done => {
+        it('dispatches the "done" action through the full middleware chain', done => {
             const { middleware, action, store } = setup();
             const fetchCall = action.meta[MY_FETCH_KEY];
 
@@ -225,7 +225,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
             );
         });
 
-        it('dispatches the "fail" action', done => {
+        it('dispatches the "fail" action through the full middleware chain', done => {
             const { middleware, action, store } = setup(makeResponse(400));
             const fetchCall = action.meta[MY_FETCH_KEY];
 
@@ -313,7 +313,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
             );
         });
 
-        it('dispatches the "fail" action', done => {
+        it('dispatches the "fail" action through the full middleware chain', done => {
             const {
                 opts,
                 middleware,
