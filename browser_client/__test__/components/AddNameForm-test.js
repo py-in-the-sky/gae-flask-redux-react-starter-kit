@@ -36,21 +36,21 @@ describe('user interaction', () => {
     it('enables the submit button when a name is filled in', () => {
         const { input, button } = setup();
         fillInText(input.node, 'hi');
-        expect( button.node.disabled ).to.be.false;
+        expect( button ).to.not.be.disabled();
     });
 
     it('enables the submit button when a name is filled in (alt)', () => {
         // same test as above, just a different way to simulate user input
         const { formsy, button } = setup();
         formsy.node.inputs.name.setValue('blah');
-        expect( button.node.disabled ).to.be.false;
+        expect( button ).to.not.be.disabled();
     });
 
     it('disables the submit button when no name is filled in', () => {
         const { button, input } = setup();
-        expect( button.node.disabled ).to.be.true;
+        expect( button ).to.be.disabled();
         fillInText(input.node, '');
-        expect( button.node.disabled ).to.be.true;
+        expect( button ).to.be.disabled();
     });
 
     it('disables the submit button when the name is too long', () => {
@@ -58,16 +58,16 @@ describe('user interaction', () => {
         const nameInput = formsy.node.inputs.name;
 
         nameInput.setValue('hi');
-        expect( button.node.disabled ).to.be.false;
+        expect( button ).to.not.be.disabled();
 
         nameInput.setValue('toooooooloooooong');
-        expect( button.node.disabled ).to.be.true;
+        expect( button ).to.be.disabled();
     });
 
     it('disables the submit button when the name is not just letters', () => {
         const { input, button } = setup();
         fillInText(input.node, 'abc 123');
-        expect( button.node.disabled ).to.be.true;
+        expect( button ).to.be.disabled();
     });
 
     it('calls `addName` when the form is submitted', () => {

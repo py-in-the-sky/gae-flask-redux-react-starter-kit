@@ -6,7 +6,6 @@ Property-based testing of the "greetings" aspect of the app.
 */
 
 
-import ReactDOM from 'react-dom';
 import { Simulate } from 'react-addons-test-utils';
 import jsc from 'jsverify';
 import _ from 'lodash';
