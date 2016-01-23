@@ -15,7 +15,7 @@ var context = path.join(__dirname, '..', '..');
 
 var configDefaults = {
     context: context,
-    entry: path.join(context, 'browser_client', 'index.js'),
+    entry: path.join(context, 'browser_client', 'src', 'index.js'),
     output: {
         filename:   '[name].js',
         path:       path.join(context, 'gae', 'static'),
@@ -30,10 +30,7 @@ var configDefaults = {
         loaders: [
             {
                 test:    /\.js$/,
-                include: [
-                    /browser_client\/index\.js$/,
-                    /browser_client\/src/,
-                ],
+                include: [ /browser_client\/src/ ],
                 loader:  'babel-loader'
             },
         ],
