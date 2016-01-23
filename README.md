@@ -96,6 +96,14 @@ To add a new dependency to your project, add `<package name>==<version number>` 
 
 This command will produce a visualization of your pip-installed packages, which is useful for maintaining the `requirements.*.txt` files.  All of the package names that align to the left of the terminal window comprise the minimal set of names for your `requirements.dev.txt` and `requirements.app.txt` files.  If there are any sub-dependencies whose version numbers you'd like to pin, add them to the the relevant requirements files as well.
 
+### Verify Everything's Working
+
+Installing new dependencies frequently comes with changes, sometimes radical, to how the development process or the app itself works.  A fairly quick and comprehensive way to verify everything's still working as expected is to follow these steps:
+
+* Run `make coverage` and verify all tests and coverage reports run successfully.
+* Run `make clean && honcho start gae webpack`, open the app in the browser with the devtools console open, and interact with a selection of features/pages in the app.  Look at the browser's devtools console as well as the log output in the terminal you've used to run the above command and verify no unexpected errors occur.
+* Run `make build && honcho start gae` and follow the same steps outlined in the point above.  Now you're verifying that the build version of the app works with no unexpected errors.
+
 
 ## Deployment
 
