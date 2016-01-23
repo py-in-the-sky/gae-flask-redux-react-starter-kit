@@ -10,10 +10,9 @@ import { Simulate } from 'react-addons-test-utils';
 import jsc from 'jsverify';
 import _ from 'lodash';
 import RaisedButton from 'material-ui/lib/raised-button';
-import Greeting from '../../src/components/Greeting';
+import Greeting from 'app/components/Greeting';
 import { createFinder } from '../utils';
-import { ActionTypes as T } from '../../src/actions';
-import store from '../../src/store';
+import { ActionTypes as T } from 'app/actions';
 
 
 const returnMockThenable = () => ({
@@ -22,7 +21,7 @@ const returnMockThenable = () => ({
 });
 
 
-const mockFetch = () => {
+const makeMockFetch = store => () => {
     store.dispatch({
         type: T.ADD_NAME_DONE,
         payload: { name: 'world' },
@@ -39,7 +38,7 @@ describe('adding and subtracting greetings', function () {
     });
 
     beforeEach(function () {
-        sinon.stub(window, 'fetch', mockFetch);
+        sinon.stub(window, 'fetch', makeMockFetch(this.store));
 
         findOnPage = this.findOnPage;
         this.navigate('/shire');

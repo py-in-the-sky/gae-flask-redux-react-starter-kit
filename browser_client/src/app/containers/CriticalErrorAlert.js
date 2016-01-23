@@ -4,7 +4,7 @@ import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
+import { ActionCreators } from 'app/actions';
 
 
 const { clearServerError, clearNetworkError } = ActionCreators;

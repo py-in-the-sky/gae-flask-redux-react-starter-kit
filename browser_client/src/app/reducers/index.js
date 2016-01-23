@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions';
 import { List, Set } from 'immutable';
-import { getWindowWidth } from '../utils/dom';
-import * as Styles from '../utils/styles';
-import { ActionTypes as T } from '../actions';
+import { getWindowWidth } from 'app/utils/dom';
+import * as Styles from 'app/utils/styles';
+import { ActionTypes as T } from 'app/actions';
 
 
 const emptyList = List();

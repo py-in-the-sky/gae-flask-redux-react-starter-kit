@@ -4,7 +4,7 @@
  */
 
 
-import { isPlainObject } from '../utils/lodash';
+import { isPlainObject } from 'app/utils/lodash';
 
 
 export const FETCH = Symbol('fetch-middleware');

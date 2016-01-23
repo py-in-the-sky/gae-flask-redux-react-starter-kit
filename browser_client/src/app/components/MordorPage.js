@@ -4,7 +4,7 @@ import Greetings from './Greetings';
 import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import { Themes } from '../utils/styles';
+import { Themes } from 'app/utils/styles';
 import { Frame } from './Flex';
 import { List } from 'immutable';
 

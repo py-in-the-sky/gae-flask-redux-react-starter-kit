@@ -1,14 +1,13 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import apiMiddleware from '../middleware/api';
-import * as reducers from '../reducers';
+import apiMiddleware from 'app/middleware/api';
+import * as reducers from 'app/reducers';
 
 
 function createStoreWithMiddleware () {
-    const middleware = applyMiddleware(thunkMiddleware, apiMiddleware);
+    const middleware = applyMiddleware(apiMiddleware);
 
     if (__DEV__) {
-        const logSlowReducers = require('../utils/devLogSlowReducers');
+        const logSlowReducers = require('app/utils/devLogSlowReducers');
         const reducer = combineReducers(logSlowReducers(reducers));
 
         const { devTools, persistState } = require('redux-devtools');
@@ -22,9 +21,9 @@ function createStoreWithMiddleware () {
         const store = finalCreateStore(reducer);
 
         if (module.hot) {  // Enable Webpack hot module replacement for reducers
-            module.hot.accept('../reducers', () => {
+            module.hot.accept('app/reducers', () => {
                 const nextRootReducer = combineReducers(
-                    logSlowReducers(require('../reducers/index'))
+                    logSlowReducers(require('app/reducers/index'))
                 );
                 store.replaceReducer(nextRootReducer);
             });

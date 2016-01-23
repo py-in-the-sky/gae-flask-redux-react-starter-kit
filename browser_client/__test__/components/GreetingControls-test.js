@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import GreetingControls from '../../src/components/GreetingControls';
 import RaisedButton from 'material-ui/lib/raised-button';
+import GreetingControls from 'app/components/GreetingControls';
 
 
 function setup (requestsPending = false) {

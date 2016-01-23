@@ -1,6 +1,6 @@
-import * as API from '../../src/middleware/api';
-import apiMiddleware from '../../src/middleware/api';
-import { ActionCreators, ActionTypes as T } from '../../src/actions';
+import * as API from 'app/middleware/api';
+import apiMiddleware from 'app/middleware/api';
+import { ActionCreators, ActionTypes as T } from 'app/actions';
 import configureMockStore from 'redux-mock-store';
 
 

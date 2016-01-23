@@ -2,13 +2,12 @@ import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, Redirect } from 'react-router';
-import store from '../store';
 import HomeApp from './HomeApp';
 import ShireApp from './ShireApp';
 import MordorApp from './MordorApp';
 import WindowResizeListener from './WindowResizeListener';
 import CriticalErrorAlert from './CriticalErrorAlert';
-import { Layout } from '../components';
+import { Layout } from 'app/components';
 
 
 export default class Root extends PureComponent {
@@ -42,7 +41,7 @@ export default class Root extends PureComponent {
                     {this.renderReduxProvider()}
 
                     <DebugPanel right bottom top={this.state.debugVisible}>
-                        <DevTools store={store} monitor={LogMonitor} />
+                        <DevTools store={this.props.store} monitor={LogMonitor} />
                     </DebugPanel>
 
                     <button
@@ -60,7 +59,7 @@ export default class Root extends PureComponent {
 
     renderReduxProvider () {
         return (
-            <Provider store={store}>
+            <Provider store={this.props.store}>
                 <div>
                     <WindowResizeListener />
                     <CriticalErrorAlert />
@@ -81,6 +80,7 @@ export default class Root extends PureComponent {
 
 Root.propTypes = {
     history: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
 };
 
 

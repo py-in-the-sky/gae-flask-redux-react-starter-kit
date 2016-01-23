@@ -17,12 +17,10 @@ module.exports = function makeKarmaConfig (opts) {
         entryFile = 'browser_client/__test__/e2e.js';
     else if (__ALL__)
         entryFile = 'browser_client/__test__/all.js';
-    else if (__COVERAGE__)
-        entryFile = 'browser_client/__test__/coverage.js';
     else
         entryFile = 'browser_client/__test__/unit.js';
 
-    var reportSlowerThan = (__E2E__ || __ALL__ || __COVERAGE__) ? 750 : 150;
+    var reportSlowerThan = (__E2E__ || __ALL__) ? 750 : 150;
 
     var config = {
         basePath: '../..',
