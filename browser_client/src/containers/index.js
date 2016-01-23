@@ -7,7 +7,7 @@ import ShireApp from './ShireApp';
 import MordorApp from './MordorApp';
 import WindowResizeListener from './WindowResizeListener';
 import CriticalErrorAlert from './CriticalErrorAlert';
-import { Layout } from '../components';
+import { Layout } from 'components';
 
 
 export default class Root extends PureComponent {

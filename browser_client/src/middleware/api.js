@@ -1,5 +1,5 @@
 import fetchMiddleware from './fetch';
-import { ActionTypes as T } from '../actions';
+import { ActionTypes as T } from 'actions';
 
 
 export const API_CALL = Symbol('api-middleware');
@@ -20,7 +20,7 @@ export const beforeFetch = fetchCall => ({
 export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
     if (response.status >= 500) {
         if (__DEV__) {
-            require('../utils/devFetchDebug')(body, response.url, fetchCall);
+            require('utils/devFetchDebug')(body, response.url, fetchCall);
         }
 
         dispatch({ type: T.SERVER_ERROR });

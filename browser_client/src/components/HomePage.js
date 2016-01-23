@@ -6,7 +6,7 @@ import Paper from 'material-ui/lib/paper';
 import Block from 'jsxstyle/Block';
 import { Frame, Container } from './Flex';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import { Themes } from '../utils/styles';
+import { Themes } from 'utils/styles';
 import { List } from 'immutable';
 
 

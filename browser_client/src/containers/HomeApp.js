@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { HomePage } from '../components';
-import { ActionCreators } from '../actions';
+import { HomePage } from 'components';
+import { ActionCreators } from 'actions';
 
 
 const { addName, clearServerValidation } = ActionCreators;
