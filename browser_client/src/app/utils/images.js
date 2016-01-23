@@ -22,7 +22,7 @@ const imageMarkup = (imageKey, windowSize = SMALL) => {
         return '';
 
     return `url(${ImageUrls[imageKey][windowSize]})`;
-}
+};
 
 
 export const shireBackgroundImageMarkup = memoize( windowSize =>

@@ -1,11 +1,10 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
 import { on, off } from 'material-ui/lib/utils/events';
 import { debounce } from 'app/utils/lodash';
 import { getWindowWidth } from 'app/utils/dom';
 import { windowSize } from 'app/utils/styles';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { ActionCreators } from 'app/actions';
 
 

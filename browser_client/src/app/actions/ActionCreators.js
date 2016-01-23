@@ -42,13 +42,13 @@ export const addName = createAction(
 
 export const addNameDone = createAction(
     T.ADD_NAME_DONE,
-    (responseBody, _) => responseBody,
+    (responseBody) => responseBody,
     (_, requestId) => ({ requestId })
 );
 
 
 export const addNameFail = createAction(
     T.ADD_NAME_FAIL,
-    (responseBody, _) => responseBody,
+    (responseBody) => responseBody,
     (_, requestId) => ({ requestId })
 );

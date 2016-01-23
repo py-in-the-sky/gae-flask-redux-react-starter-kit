@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { ShirePage } from 'app/components';
 import { ActionCreators } from 'app/actions';
 

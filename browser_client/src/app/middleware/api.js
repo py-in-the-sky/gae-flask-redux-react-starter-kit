@@ -36,7 +36,7 @@ export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
 export const onNetworkError = (_error, _fetchCall, _action, dispatch) => {
     dispatch({ type: T.NETWORK_ERROR });
     return [];
-}
+};
 
 
 

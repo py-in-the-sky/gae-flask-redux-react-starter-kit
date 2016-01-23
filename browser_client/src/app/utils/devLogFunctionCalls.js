@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+
+
 export default function devLogFunctionCalls (fn) {
     if (__DEV__)
         return (...args) => {
@@ -7,4 +10,4 @@ export default function devLogFunctionCalls (fn) {
         };
 
     return fn;
-};
+}

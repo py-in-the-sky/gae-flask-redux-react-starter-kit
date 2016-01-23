@@ -19,7 +19,7 @@ export function windowSize (windowWidth) {
 export const WindowWidthThresholds = {
     MEDIUM: 768,
     LARGE:  992,
-}
+};
 
 
 export const WindowSizes = {

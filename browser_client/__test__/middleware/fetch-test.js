@@ -297,7 +297,6 @@ describe('the middleware returned by `fetchMiddleware`', () => {
                 opts,
                 middleware,
                 action,
-                store: { dispatch, getState }
             } = setup(undefined, true);
 
             const fetchCall = action.meta[MY_FETCH_KEY];
@@ -315,10 +314,9 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('dispatches the "fail" action through the full middleware chain', done => {
             const {
-                opts,
                 middleware,
                 action,
-                store: { dispatch, getState }
+                store: { dispatch }
             } = setup(undefined, true);
 
             const fetchCall = action.meta[MY_FETCH_KEY];
@@ -338,10 +336,8 @@ describe('the middleware returned by `fetchMiddleware`', () => {
     describe('input validations', () => {
         it('expects `action.meta[MY_FETCH_KEY]` to be a plain object or undefined', () => {
             const {
-                opts,
                 middleware,
                 action,
-                store: { dispatch, getState }
             } = setup(undefined, true);
 
             action.meta[MY_FETCH_KEY] = 'Not the right type';
@@ -351,10 +347,8 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('expects `done` to be a function', () => {
             const {
-                opts,
                 middleware,
                 action,
-                store: { dispatch, getState }
             } = setup(undefined, true);
 
             action.meta[MY_FETCH_KEY].done = 'Not the right type';
@@ -364,10 +358,8 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         it('expects `fail` to be a function', () => {
             const {
-                opts,
                 middleware,
                 action,
-                store: { dispatch, getState }
             } = setup(undefined, true);
 
             action.meta[MY_FETCH_KEY].fail = 'Not the right type';

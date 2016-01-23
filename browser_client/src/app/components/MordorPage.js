@@ -63,4 +63,4 @@ MordorPage.propTypes = {
 
 MordorPage.childContextTypes = {
     muiTheme: PropTypes.object.isRequired,
-}
+};

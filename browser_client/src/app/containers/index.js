@@ -86,4 +86,4 @@ Root.propTypes = {
 
 Root.childContextTypes = {
     history: PropTypes.object.isRequired,
-}
+};

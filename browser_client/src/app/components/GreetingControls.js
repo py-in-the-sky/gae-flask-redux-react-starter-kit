@@ -12,7 +12,7 @@ export default class GreetingControls extends PureComponent {
     }
 
     render () {
-        const { addName, subtractLastName, requestsPending } = this.props;
+        const { requestsPending } = this.props;
 
         return (
             <ColumnWise

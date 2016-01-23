@@ -31,7 +31,7 @@ describe('user interaction', () => {
 
     const submitForm = component => {
         Simulate.submit(findRenderedDOMComponentWithTag(component, 'form'));
-    }
+    };
 
     it('enables the submit button when a name is filled in', () => {
         const { input, button } = setup();
