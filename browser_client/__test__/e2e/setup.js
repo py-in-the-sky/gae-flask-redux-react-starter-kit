@@ -1,6 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 import Root from '../../src/containers';
+import store from '../../src/store';
 import React from 'react';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { renderIntoDocument } from 'react-addons-test-utils';
@@ -12,7 +13,10 @@ import '../setup';
 
 beforeEach(function () {  // BEFORE EACH TEST
     this.appHistory = new createBrowserHistory();
-    this.appRoot = renderIntoDocument(<Root history={this.appHistory} />);
+    this.store = store;
+    this.appRoot = renderIntoDocument(
+        <Root history={this.appHistory} store={this.store} />
+    );
     this.findOnPage = createFinder(this.appRoot);
     this.navigate = path => this.appHistory.pushState(null, path);
 });

@@ -4,11 +4,12 @@ import 'velocity-animate/velocity.ui';
 // ...make Velocity UI Pack available to Velocity and velocity-react
 
 
-import Root from './src/containers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Root from 'containers';
+import store from 'store';
 
 
 //Needed for onTouchTap
@@ -19,6 +20,6 @@ injectTapEventPlugin();
 
 
 ReactDOM.render(
-    <Root history={new createBrowserHistory()} />,
+    <Root history={new createBrowserHistory()} store={store} />,
     document.getElementById('user-interface')
 );

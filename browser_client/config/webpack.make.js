@@ -21,7 +21,10 @@ var configDefaults = {
         path:       path.join(context, 'gae', 'static'),
         publicPath: '/static',
     },
-    resolve: { extensions: ['', '.js'] },
+    resolve: {
+        root: path.join(context, 'browser_client', 'src'),
+        extensions: ['', '.js'],
+    },
     // externals: { jquery: '$' },
     module: {
         loaders: [
