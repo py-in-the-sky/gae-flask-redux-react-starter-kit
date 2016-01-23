@@ -10,9 +10,9 @@ import { Simulate } from 'react-addons-test-utils';
 import jsc from 'jsverify';
 import _ from 'lodash';
 import RaisedButton from 'material-ui/lib/raised-button';
-import Greeting from 'components/Greeting';
+import Greeting from 'app/components/Greeting';
 import { createFinder } from '../utils';
-import { ActionTypes as T } from 'actions';
+import { ActionTypes as T } from 'app/actions';
 
 
 const returnMockThenable = () => ({

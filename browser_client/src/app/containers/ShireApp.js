@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ShirePage } from 'components';
-import { ActionCreators } from 'actions';
+import { ShirePage } from 'app/components';
+import { ActionCreators } from 'app/actions';
 
 
 // Construct a 'smart container' around a 'dumb' component.

@@ -4,8 +4,8 @@ import Greetings from './Greetings';
 import GreetingControls from './GreetingControls';
 import Paper from 'material-ui/lib/paper';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import { Themes, WindowSizes } from 'utils/styles';
-import { shireBackgroundImageMarkup } from 'utils/images';
+import { Themes, WindowSizes } from 'app/utils/styles';
+import { shireBackgroundImageMarkup } from 'app/utils/images';
 import { Frame, Container } from './Flex';
 import { List } from 'immutable';
 

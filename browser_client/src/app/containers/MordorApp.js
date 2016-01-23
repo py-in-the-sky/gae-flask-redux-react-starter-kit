@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { MordorPage } from 'components';
-import { ActionCreators } from 'actions';
+import { MordorPage } from 'app/components';
+import { ActionCreators } from 'app/actions';
 
 
 // Construct a 'smart container' around a 'dumb' component.

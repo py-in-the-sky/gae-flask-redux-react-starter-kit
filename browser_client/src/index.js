@@ -8,8 +8,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import Root from 'containers';
-import store from 'store';
+import Root from 'app/containers';
+import store from 'app/store';
 
 
 //Needed for onTouchTap

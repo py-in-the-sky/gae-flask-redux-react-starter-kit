@@ -1,4 +1,4 @@
-import fetchMiddleware from 'middleware/fetch';
+import fetchMiddleware from 'app/middleware/fetch';
 
 
 const MY_FETCH_KEY = Symbol('my-fetch-key');

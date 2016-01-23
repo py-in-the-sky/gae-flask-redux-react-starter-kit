@@ -1,7 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 
-import Root from 'containers';
-import store from 'store';
+import Root from 'app/containers';
+import store from 'app/store';
 import React from 'react';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { renderIntoDocument } from 'react-addons-test-utils';

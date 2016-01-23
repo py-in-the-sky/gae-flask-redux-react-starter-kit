@@ -1,4 +1,4 @@
-const appSrcFiles = require.context('..', true, /src\//);
+const appSrcFiles = require.context('app', true, /\.js/);
 appSrcFiles.keys().forEach(appSrcFiles);
 
 

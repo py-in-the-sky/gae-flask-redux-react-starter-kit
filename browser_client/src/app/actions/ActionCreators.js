@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import T from './ActionTypes';
-import { API_CALL } from 'middleware/api';
-import { uniqueId } from 'utils/lodash';
+import { API_CALL } from 'app/middleware/api';
+import { uniqueId } from 'app/utils/lodash';
 // uniqueId could be used to help indicate to the reducers
 // when a particular optimistic update has finished:
 // the optimistic update and the real update will share

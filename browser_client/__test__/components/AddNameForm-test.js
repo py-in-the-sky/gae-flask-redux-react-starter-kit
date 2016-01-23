@@ -5,7 +5,7 @@ import {
     Simulate,
     findRenderedDOMComponentWithTag,
 } from 'react-addons-test-utils';
-import AddNameForm from 'components/AddNameForm';
+import AddNameForm from 'app/components/AddNameForm';
 
 
 describe('user interaction', () => {
