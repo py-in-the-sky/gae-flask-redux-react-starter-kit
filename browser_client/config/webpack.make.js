@@ -82,7 +82,10 @@ module.exports = function makeWebpackConfig (opts) {
         null;
     }
     else {  // production
-        babelPlugins = babelPlugins.concat('transform-remove-debugger');
+        babelPlugins = babelPlugins.concat(
+            'transform-remove-debugger',
+            'transform-react-inline-elements'
+        );
     }
 
     configDefaults['module'] = {
