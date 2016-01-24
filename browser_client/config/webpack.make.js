@@ -84,7 +84,8 @@ module.exports = function makeWebpackConfig (opts) {
     else {  // production
         babelPlugins = babelPlugins.concat(
             'transform-remove-debugger',
-            'transform-react-inline-elements'
+            'transform-react-inline-elements',
+            'transform-react-constant-elements'
         );
     }
 
