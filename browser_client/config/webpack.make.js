@@ -26,16 +26,11 @@ var configDefaults = {
         extensions: ['', '.js'],
     },
     // externals: { jquery: '$' },
-    module: {
-        loaders: [
-            {
-                test:    /\.js$/,
-                include: [ /browser_client\/src/ ],
-                loader:  'babel-loader'
-            },
-        ],
-    },
 };
+
+
+var defautlBabelPresets = [ 'react', 'es2015', 'stage-2' ];
+var defaultBabelPlugins = [ 'transform-runtime', 'add-module-exports' ];
 
 
 var codeCoveragePreloader = {
@@ -43,7 +38,13 @@ var codeCoveragePreloader = {
         {
             test: /\.js$/,
             include: /browser_client\/src/,
-            loader: 'isparta-instrumenter'
+            loader: 'isparta-instrumenter',
+            query: {
+                babel: {
+                    presets: defautlBabelPresets,
+                    plugins: defaultBabelPlugins,
+                },
+            },
         }
     ]
 };
@@ -54,10 +55,53 @@ module.exports = function makeWebpackConfig (opts) {
     var __TEST__     = Boolean(opts.__TEST__);
     var __COVERAGE__ = Boolean(opts.__COVERAGE__);
 
+    var nodeEnv;
+    if (__DEV__) nodeEnv = 'development';
+    else if (__TEST__) nodeEnv = 'test';
+    else nodeEnv = 'production';
+
     var EnvironmentPlugin = new webpack.DefinePlugin({
         __DEV__:  __DEV__,
         __TEST__: __TEST__,
+        'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
+        // Set process.env.NODE_ENV to 'production' when not in dev mode.
+        // Must use this plugin and not an environment variable.
+        // Will optimize react build in production, including skipping
+        // proptype checks.
+        // https://github.com/webpack/react-starter/blob/master/make-webpack-config.js#L131
+        // https://facebook.github.io/react/downloads.html#npm
+        // https://github.com/facebook/react/issues/2938
     });
+
+    var babelPresets = defautlBabelPresets;
+    var babelPlugins = defaultBabelPlugins;
+    if (__DEV__) {
+        babelPresets = babelPresets.concat('react-hmre');
+    }
+    else if (__TEST__) {
+        null;
+    }
+    else {  // production
+        babelPlugins = babelPlugins.concat('transform-remove-debugger');
+    }
+
+    configDefaults['module'] = {
+        loaders: [
+            {
+                test:    /\.js$/,
+                include: __TEST__
+                    ? [ /browser_client\/src/,  /browser_client\/__test__/ ]
+                    : [ /browser_client\/src/ ],
+                exclude: /node_modules/,
+                loader:  'babel-loader',
+                query: {
+                    cacheDirectory: true,
+                    presets: babelPresets,
+                    plugins: babelPlugins,
+                },
+            },
+        ],
+    };
 
     if (__DEV__) {
         // SIDE EFFECT: copy `index.dev.html` to `gae/static/index.html`
@@ -105,20 +149,11 @@ module.exports = function makeWebpackConfig (opts) {
             },
             plugins: [ EnvironmentPlugin ],
             module:  assign({}, preLoaders, {
-                loaders: [
-                    {
-                        test: /\.js$/,
-                        include: [
-                            /browser_client\/src/,
-                            /browser_client\/__test__/,
-                        ],
-                        loader: 'babel-loader'
-                    },
-                    {  // NB: config for `enzyme`
-                        test: /\.json$/,
-                        loader: 'json',
-                    },
-                ],
+                loaders: configDefaults.module.loaders.concat({
+                    // NB: config for `enzyme`
+                    test: /\.json$/,
+                    loader: 'json',
+                }),
                 noParse: [  // NB: config for `enzyme`
                     /node_modules\/sinon\//,
                 ],
