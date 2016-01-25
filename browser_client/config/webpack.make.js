@@ -41,8 +41,8 @@ var codeCoveragePreloader = {
             loader: 'isparta-instrumenter',
             query: {
                 babel: {
-                    presets: defautlBabelPresets,
-                    plugins: defaultBabelPlugins,
+                    presets: defautlBabelPresets.concat(),
+                    plugins: defaultBabelPlugins.concat(),
                 },
             },
         }
@@ -73,8 +73,8 @@ module.exports = function makeWebpackConfig (opts) {
         // https://github.com/facebook/react/issues/2938
     });
 
-    var babelPresets = defautlBabelPresets;
-    var babelPlugins = defaultBabelPlugins;
+    var babelPresets = defautlBabelPresets.concat();
+    var babelPlugins = defaultBabelPlugins.concat();
     if (__DEV__) {
         babelPresets = babelPresets.concat('react-hmre');
     }
