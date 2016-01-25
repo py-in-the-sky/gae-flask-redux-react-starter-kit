@@ -4,6 +4,7 @@ import { Form } from 'formsy-react';
 import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { ShrinkWrap } from './Flex';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 const nameValidationErrors = {
@@ -40,7 +41,7 @@ export default class AddNameForm extends PureComponent {
         return (
             <Form
              ref="form"
-             validationErrors={this.props.serverValidation.message}
+             validationErrors={this.props.serverValidation}
              onChange={this.clearServerValidation}
              onValid={this.setValid}
              onInvalid={this.setInvalid}
@@ -81,7 +82,7 @@ export default class AddNameForm extends PureComponent {
     }
 
     clearServerValidation () {
-        if (this.props.serverValidation.message) {
+        if (this.props.serverValidation) {
             this.props.clearServerValidation();
         }
     }
@@ -91,9 +92,7 @@ export default class AddNameForm extends PureComponent {
 AddNameForm.propTypes = {
     addName: PropTypes.func.isRequired,
     clearServerValidation: PropTypes.func.isRequired,
-    serverValidation: PropTypes.shape({
-        message: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-        }),
-    }).isRequired,
+    serverValidation: ImmutablePropTypes.recordOf({
+        name: PropTypes.string.isRequired,
+    }),
 };

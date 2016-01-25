@@ -6,6 +6,7 @@ import Greeting from './Greeting';
 import { randomElement } from 'app/utils/array';
 import { memoize } from 'app/utils/lodash';
 import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 const circularProgress = <CircularProgress size={0.5} />;
@@ -46,7 +47,9 @@ export default class Greetings extends PureComponent {
 
 
 Greetings.propTypes = {
-    names:           PropTypes.instanceOf(List).isRequired,
+    names: ImmutablePropTypes.listOf( ImmutablePropTypes.recordOf({
+        name: PropTypes.string.isRequired,
+    }) ).isRequired,
     requestsPending: PropTypes.bool,
 };
 

@@ -7,6 +7,7 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from 'app/utils/styles';
 import { Frame } from './Flex';
 import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor);
@@ -54,7 +55,9 @@ export default class MordorPage extends PureComponent {
 
 
 MordorPage.propTypes = {
-    names:            PropTypes.instanceOf(List).isRequired,
+    names: ImmutablePropTypes.listOf( ImmutablePropTypes.recordOf({
+        name: PropTypes.string.isRequired,
+    }) ).isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,

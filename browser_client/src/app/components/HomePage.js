@@ -8,6 +8,7 @@ import { Frame, Container } from './Flex';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from 'app/utils/styles';
 import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 const DefaultTheme = ThemeManager.getMuiTheme(Themes.Default);
@@ -58,15 +59,15 @@ export default class HomePage extends PureComponent {
 
 
 HomePage.propTypes = {
-    names:                 PropTypes.instanceOf(List).isRequired,
+    names: ImmutablePropTypes.listOf( ImmutablePropTypes.recordOf({
+        name: PropTypes.string.isRequired,
+    }) ).isRequired,
     addName:               PropTypes.func.isRequired,
     requestsPending:       PropTypes.bool.isRequired,
     clearServerValidation: PropTypes.func.isRequired,
-    serverValidation: PropTypes.shape({
-        message: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-        }),
-    }).isRequired,
+    serverValidation: ImmutablePropTypes.recordOf({
+        name: PropTypes.string.isRequired,
+    }),
 };
 
 

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 export default class Greeting extends PureComponent {
@@ -17,7 +18,7 @@ export default class Greeting extends PureComponent {
 
 Greeting.propTypes = {
     salutation: PropTypes.string.isRequired,
-    name: PropTypes.shape({
+    name: ImmutablePropTypes.recordOf({
         name: PropTypes.string.isRequired,
     }).isRequired,
 };

@@ -8,6 +8,7 @@ import { Themes } from 'app/utils/styles';
 import { shireBackgroundImageMarkup } from 'app/utils/images';
 import { Frame, Container } from './Flex';
 import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire);
@@ -71,7 +72,9 @@ export default class ShirePage extends PureComponent {
 
 
 ShirePage.propTypes = {
-    names:            PropTypes.instanceOf(List).isRequired,
+    names: ImmutablePropTypes.listOf( ImmutablePropTypes.recordOf({
+        name: PropTypes.string.isRequired,
+    }) ).isRequired,
     windowSize:       PropTypes.number.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,
