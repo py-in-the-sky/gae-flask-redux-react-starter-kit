@@ -29,17 +29,20 @@ module.exports = function makeKarmaConfig (opts) {
         basePath: '../..',
         reportSlowerThan: reportSlowerThan,
         frameworks: [ 'mocha', 'chai', 'sinon' ],
-        reporters: [ 'dots' ],
+        reporters: [ 'mocha' ],
         browsers: [ 'Chrome' ],
         client: { useIframe: false },
         files: [ entryFile ],
         preprocessors: { 'browser_client/**/*': [ 'webpack', 'sourcemap' ] },
         webpackMiddleware: { noInfo: true },
+        mochaReporter: {
+            output: 'autowatch',
+        },
     };
 
     if (__COVERAGE__)
         return assign({}, config, {
-            reporters: [ 'dots', 'coverage' ],
+            reporters: [ 'mocha', 'coverage' ],
             coverageReporter: {
                 dir:  '__coverage_reports__/browser_client',
                 type: 'html'
