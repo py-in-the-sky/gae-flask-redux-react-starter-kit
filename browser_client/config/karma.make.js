@@ -5,7 +5,7 @@
     see:
         http://karma-runner.github.io/0.13/config/configuration-file.html
         https://github.com/webpack/karma-webpack/tree/master/example
- */
+*/
 const assign = require('lodash').assign;
 
 

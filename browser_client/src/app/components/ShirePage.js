@@ -71,7 +71,7 @@ export default class ShirePage extends PureComponent {
 
 
 ShirePage.propTypes = {
-    names: ImmutablePropTypes.listOf( ImmutablePropTypes.recordOf({
+    names: ImmutablePropTypes.listOf( PropTypes.shape({
         name: PropTypes.string.isRequired,
     }) ).isRequired,
     windowSize:       PropTypes.number.isRequired,

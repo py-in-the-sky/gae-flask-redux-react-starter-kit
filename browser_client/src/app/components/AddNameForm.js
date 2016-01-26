@@ -41,7 +41,7 @@ export default class AddNameForm extends PureComponent {
         return (
             <Form
              ref="form"
-             validationErrors={this.props.serverValidation}
+             validationErrors={this.props.serverValidation.message}
              onChange={this.clearServerValidation}
              onValid={this.setValid}
              onInvalid={this.setInvalid}
@@ -82,7 +82,7 @@ export default class AddNameForm extends PureComponent {
     }
 
     clearServerValidation () {
-        if (this.props.serverValidation) {
+        if (this.props.serverValidation.message) {
             this.props.clearServerValidation();
         }
     }
@@ -92,7 +92,9 @@ export default class AddNameForm extends PureComponent {
 AddNameForm.propTypes = {
     addName: PropTypes.func.isRequired,
     clearServerValidation: PropTypes.func.isRequired,
-    serverValidation: ImmutablePropTypes.recordOf({
-        name: PropTypes.string.isRequired,
-    }),
+    serverValidation: PropTypes.shape({
+        message: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
 };

@@ -58,15 +58,17 @@ export default class HomePage extends PureComponent {
 
 
 HomePage.propTypes = {
-    names: ImmutablePropTypes.listOf( ImmutablePropTypes.recordOf({
+    names: ImmutablePropTypes.listOf( PropTypes.shape({
         name: PropTypes.string.isRequired,
     }) ).isRequired,
+    serverValidation: PropTypes.shape({
+        message: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
     addName:               PropTypes.func.isRequired,
     requestsPending:       PropTypes.bool.isRequired,
     clearServerValidation: PropTypes.func.isRequired,
-    serverValidation: ImmutablePropTypes.recordOf({
-        name: PropTypes.string.isRequired,
-    }),
 };
 
 

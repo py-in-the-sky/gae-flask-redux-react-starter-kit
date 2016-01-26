@@ -5,15 +5,11 @@ import {
     Simulate,
     findRenderedDOMComponentWithTag,
 } from 'react-addons-test-utils';
-import { Record } from 'immutable';
 import AddNameForm from 'app/components/AddNameForm';
 
 
-const Name = Record({ name: undefined });
-
-
 describe('user interaction', () => {
-    const setup = (serverValidation = null) => {
+    const setup = (serverValidation = {}) => {
         const props = {
             addName: sinon.spy(),
             clearServerValidation: sinon.spy(),
@@ -86,7 +82,7 @@ describe('user interaction', () => {
     });
 
     context('when the component unmounts', () => {
-        const setup = (serverValidation = null) => {
+        const setup = (serverValidation = {}) => {
             const props = {
                 addName: sinon.spy(),
                 clearServerValidation: sinon.spy(),
@@ -105,7 +101,7 @@ describe('user interaction', () => {
         };
 
         it('calls `clearServerValidation` if server validations are present', () => {
-            const clearServerValidation = setup(new Name({ name: 'error' }));
+            const clearServerValidation = setup({ message: { name: 'error' } });
             expect( clearServerValidation ).to.have.been.called;
         });
 
@@ -117,7 +113,7 @@ describe('user interaction', () => {
 
     context('when server validation errors are present', () => {
         it('calls `clearServerValidation` when the user changes `name`', () => {
-            const { input, props } = setup(new Name({ name: 'error' }));
+            const { input, props } = setup({ message: { name: 'error' } });
             expect( props.clearServerValidation ).to.not.have.been.called;
             fillInText(input.node, 'hi');
             expect( props.clearServerValidation ).to.have.been.called;

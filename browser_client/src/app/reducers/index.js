@@ -1,31 +1,29 @@
 import { handleActions } from 'redux-actions';
-import { List, Set, Record } from 'immutable';
+import { List, Set } from 'immutable';
 import { getWindowWidth } from 'app/utils/dom';
 import * as Styles from 'app/utils/styles';
 import { ActionTypes as T } from 'app/actions';
-import { isPlainObject } from 'app/utils/lodash';
 
 
-const Name = Record({ name: undefined });
-const emptyList = List();
-const emptySet  = Set();
+const emptyList   = List();
+const emptySet    = Set();
+const emptyObject = {};
 const initialWindowWidth = getWindowWidth();
 const initialWindowSize  = Styles.windowSize(initialWindowWidth);
 
 
 export const names = handleActions({
-    [T.ADD_NAME_DONE]: (state, { payload }) => state.push(new Name(payload)),
+    [T.ADD_NAME_DONE]:      (state, { payload }) => state.push(payload),
     [T.SUBTRACT_LAST_NAME]: state => state.pop(),
 }, emptyList);
 
 
-export const serverValidation = handleActions({
-    [T.ADD_NAME]:                () => null,
-    [T.ADD_NAME_DONE]:           () => null,
-    [T.CLEAR_SERVER_VALIDATION]: () => null,
-    [T.ADD_NAME_FAIL]: (_, { payload }) =>
-        isPlainObject(payload) && payload.message ? new Name(payload.message) : null,
-}, null);
+ export const serverValidation = handleActions({
+    [T.ADD_NAME]:                () => emptyObject,
+    [T.ADD_NAME_DONE]:           () => emptyObject,
+    [T.ADD_NAME_FAIL]:           (_, { payload }) => payload || emptyObject,
+    [T.CLEAR_SERVER_VALIDATION]: () => emptyObject,
+}, emptyObject);
 
 
 export const serverError = handleActions({
