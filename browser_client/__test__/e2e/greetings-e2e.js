@@ -61,6 +61,8 @@ describe('adding and subtracting greetings', function () {
     const [ ADD, SUBTRACT, FLOOR ] = [ 1, -1, 0 ];
 
     describe('the number of greetings on the page', function () {
+        this.timeout(3000);  // see https://mochajs.org/#timeouts
+
         jsc.property('equals scan of sum of actions with a floor of 0',
                      'array bool',
                      function (arrayOfBooleans) {

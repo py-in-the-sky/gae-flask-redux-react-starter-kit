@@ -12,7 +12,6 @@ import '../setup';
 
 
 beforeEach(function () {  // BEFORE EACH TEST
-    this.timeout(5000);  // see https://mochajs.org/#timeouts
     this.appHistory = new createBrowserHistory();
     this.store = store;
     this.appRoot = renderIntoDocument(
