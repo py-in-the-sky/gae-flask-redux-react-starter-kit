@@ -5,7 +5,6 @@ import CircularProgress from 'material-ui/lib/circular-progress';
 import Greeting from './Greeting';
 import { randomElement } from 'app/utils/array';
 import { memoize } from 'app/utils/lodash';
-import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 

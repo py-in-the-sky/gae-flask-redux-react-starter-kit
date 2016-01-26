@@ -7,7 +7,6 @@ import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from 'app/utils/styles';
 import { shireBackgroundImageMarkup } from 'app/utils/images';
 import { Frame, Container } from './Flex';
-import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 

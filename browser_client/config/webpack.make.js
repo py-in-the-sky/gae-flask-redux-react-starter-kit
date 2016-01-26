@@ -1,3 +1,7 @@
+/* eslint-disable no-var */
+/* eslint-disable prefer-template */
+
+
 var path    = require('path');
 var webpack = require('webpack');
 const assign = require('lodash').assign;
@@ -187,4 +191,4 @@ module.exports = function makeWebpackConfig (opts) {
             ],
         });
     }
-}
+};

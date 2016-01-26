@@ -1,3 +1,6 @@
+/* eslint-disable no-var */
+
+
 /*
     see:
         http://karma-runner.github.io/0.13/config/configuration-file.html
@@ -47,4 +50,4 @@ module.exports = function makeKarmaConfig (opts) {
         return assign({}, config, {
             webpack: require('./webpack.test'),
         });
-}
+};

@@ -7,7 +7,6 @@ import Block from 'jsxstyle/Block';
 import { Frame, Container } from './Flex';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import { Themes } from 'app/utils/styles';
-import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 

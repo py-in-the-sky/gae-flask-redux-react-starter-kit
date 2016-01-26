@@ -1,4 +1,4 @@
+**/.cache/*
+**/__coverage_reports__/*
 **/gae/*
 **/node_modules/*
-**/jquery*.js
-**/browser_client/config/*
