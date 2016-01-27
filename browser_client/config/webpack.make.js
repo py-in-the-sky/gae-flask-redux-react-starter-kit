@@ -34,7 +34,7 @@ var configDefaults = {
 
 
 var defautlBabelPresets = [ 'react', 'es2015', 'stage-2' ];
-var defaultBabelPlugins = [ 'transform-runtime', 'add-module-exports' ];
+var defaultBabelPlugins = [ 'add-module-exports' ];
 
 
 var codeCoveragePreloader = {
@@ -87,6 +87,14 @@ module.exports = function makeWebpackConfig (opts) {
     }
     else {  // production
         babelPlugins = babelPlugins.concat(
+            // 'transform-runtime',
+            // Can use underlying core-js polyfill that this plugin
+            // provides after `Object.assign` is run in strict mode,
+            // hence thowing errors on mutation of frozen data.
+            // (core-js >= 2.0.3.  Right now, Babel uses v1.2.6.)
+            // see
+            //  https://github.com/zloirock/core-js/issues/154
+            //  https://github.com/zloirock/core-js/commit/7bf885b119b1db54154c40a3fcf327cf2438e016
             'transform-remove-debugger',
             'transform-react-inline-elements',
             'transform-react-constant-elements'

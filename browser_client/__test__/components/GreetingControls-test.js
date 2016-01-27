@@ -1,20 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { deepFreeze } from 'app/utils/deepFreeze';
 import RaisedButton from 'material-ui/lib/raised-button';
 import GreetingControls from 'app/components/GreetingControls';
 
 
-function setup (requestsPending = false) {
-    const props = {
+const setup = (requestsPending = false) => {
+    const props = deepFreeze({
         requestsPending,
         addName:  sinon.spy( x => x ),
         subtractLastName: sinon.spy( x => x ),
-    };
+    });
 
     const wrapper = shallow(<GreetingControls {...props} />);
 
     return { props, wrapper };
-}
+};
 
 
 describe('adding a greeting', () => {

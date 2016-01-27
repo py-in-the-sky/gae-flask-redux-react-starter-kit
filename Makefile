@@ -35,4 +35,4 @@ deploy: check build
 	appcfg.py -A your-app-id-here update gae/
 
 clean:
-	rm -vf gae/static/index.js gae/static/index.html
+	rm -vf gae/static/main.js gae/static/index.html

@@ -5,16 +5,17 @@ import {
     Simulate,
     findRenderedDOMComponentWithTag,
 } from 'react-addons-test-utils';
+import { deepFreeze } from 'app/utils/deepFreeze';
 import AddNameForm from 'app/components/AddNameForm';
 
 
 describe('user interaction', () => {
     const setup = (serverValidation = {}) => {
-        const props = {
+        const props = deepFreeze({
             addName: sinon.spy(),
             clearServerValidation: sinon.spy(),
             serverValidation,
-        };
+        });
 
         const wrapper = mount(<AddNameForm {...props} />);
         const input = wrapper.find('input').first();
@@ -81,13 +82,30 @@ describe('user interaction', () => {
         expect( props.addName ).to.have.been.calledWith( 'hi' );
     });
 
+    context('when server validation errors are present', () => {
+        it('calls `clearServerValidation` when the user changes `name`', () => {
+            const { input, props } = setup({ message: { name: 'error' } });
+            expect( props.clearServerValidation ).to.not.have.been.called;
+            fillInText(input.node, 'hi');
+            expect( props.clearServerValidation ).to.have.been.called;
+        });
+    });
+
+    context('when server validation errors are not present', () => {
+        it('does not call `clearServerValidation` when the user changes `name`', () => {
+            const { input, props } = setup();
+            fillInText(input.node, 'hi');
+            expect( props.clearServerValidation ).to.not.have.been.called;
+        });
+    });
+
     context('when the component unmounts', () => {
         const setup = (serverValidation = {}) => {
-            const props = {
+            const props = deepFreeze({
                 addName: sinon.spy(),
                 clearServerValidation: sinon.spy(),
                 serverValidation,
-            };
+            });
 
             // thanks to: http://stackoverflow.com/a/23974520/1941513
             const container = document.createElement('div');
@@ -108,23 +126,6 @@ describe('user interaction', () => {
         it('does not call `clearServerValidation` if server validations are not present', () => {
             const clearServerValidation = setup();
             expect( clearServerValidation ).to.not.have.been.called;
-        });
-    });
-
-    context('when server validation errors are present', () => {
-        it('calls `clearServerValidation` when the user changes `name`', () => {
-            const { input, props } = setup({ message: { name: 'error' } });
-            expect( props.clearServerValidation ).to.not.have.been.called;
-            fillInText(input.node, 'hi');
-            expect( props.clearServerValidation ).to.have.been.called;
-        });
-    });
-
-    context('when server validation errors are not present', () => {
-        it('does not call `clearServerValidation` when the user changes `name`', () => {
-            const { input, props } = setup();
-            fillInText(input.node, 'hi');
-            expect( props.clearServerValidation ).to.not.have.been.called;
         });
     });
 });

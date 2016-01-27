@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import PureComponent from 'react-pure-render/component';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 
 export default class Greeting extends PureComponent {

@@ -1,4 +1,5 @@
 import fetchMiddleware from 'app/middleware/fetch';
+import { deepFreeze } from 'app/utils/deepFreeze';
 
 
 const MY_FETCH_KEY = Symbol('my-fetch-key');
@@ -37,6 +38,23 @@ describe('the middleware returned by `fetchMiddleware`', () => {
         { status, headers: { 'Content-type': 'application/json' } }
     );
 
+    const makeAction = (frozen = true) => {
+        const maybeFreeze = frozen ? deepFreeze : (x => x);
+
+        return maybeFreeze({
+            type: 'TYPE',
+            meta: {
+                [MY_FETCH_KEY]: maybeFreeze({
+                    endpoint: '/test',
+                    method: 'POST',
+                    body: 'body',
+                    done: sinon.spy( x => x ),
+                    fail: sinon.spy( x => x ),
+                }),
+            },
+        });
+    };
+
     const setup = (response, error = false) => {
         let res;
 
@@ -63,19 +81,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
         const nextMiddleware = sinon.spy();
         const middleware = fetchMiddleware(opts)(store)(nextMiddleware);
-
-        const action = {
-            type: 'TYPE',
-            meta: {
-                [MY_FETCH_KEY]: {
-                    endpoint: '/test',
-                    method: 'POST',
-                    body: 'body',
-                    done: sinon.spy( x => x ),
-                    fail: sinon.spy( x => x ),
-                },
-            },
-        };
+        const action = makeAction();
 
         return { response: res, opts, store, nextMiddleware, middleware, action };
     };
@@ -83,7 +89,7 @@ describe('the middleware returned by `fetchMiddleware`', () => {
     context('when a fetch call is not requested', () => {
         it('calls the next middleware with the action and returns', () => {
             const { opts, store, nextMiddleware, middleware } = setup();
-            const action = { type: 'TYPE' };
+            const action = deepFreeze({ type: 'TYPE' });
             middleware(action);
 
             expect( nextMiddleware ).to.have.been.calledWith( action );
@@ -103,7 +109,8 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
     context('when `dispatchBaseAction` is `false`', () => {
         it('does not call the next middleware with the given action', () => {
-            const { nextMiddleware, middleware, action } = setup();
+            const { nextMiddleware, middleware } = setup();
+            const action = makeAction(false);
             action.meta[MY_FETCH_KEY].dispatchBaseAction = false;
             middleware(action);
 
@@ -335,33 +342,27 @@ describe('the middleware returned by `fetchMiddleware`', () => {
 
     describe('input validations', () => {
         it('expects `action.meta[MY_FETCH_KEY]` to be a plain object or undefined', () => {
-            const {
-                middleware,
-                action,
-            } = setup(undefined, true);
+            const { middleware } = setup(undefined, true);
 
+            const action = makeAction(false);
             action.meta[MY_FETCH_KEY] = 'Not the right type';
 
             expect( () => middleware(action) ).to.throw( Error );
         });
 
         it('expects `done` to be a function', () => {
-            const {
-                middleware,
-                action,
-            } = setup(undefined, true);
+            const { middleware } = setup(undefined, true);
 
+            const action = makeAction(false);
             action.meta[MY_FETCH_KEY].done = 'Not the right type';
 
             expect( () => middleware(action) ).to.throw( Error );
         });
 
         it('expects `fail` to be a function', () => {
-            const {
-                middleware,
-                action,
-            } = setup(undefined, true);
+            const { middleware } = setup(undefined, true);
 
+            const action = makeAction(false);
             action.meta[MY_FETCH_KEY].fail = 'Not the right type';
 
             expect( () => middleware(action) ).to.throw( Error );

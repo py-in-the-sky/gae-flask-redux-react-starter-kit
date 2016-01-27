@@ -1,7 +1,5 @@
-import './e2e/setup';
+import './setup';
 
 
-const e2eTestsContext = require.context('./e2e', true, /-e2e$/);
-
-
-e2eTestsContext.keys().forEach(e2eTestsContext);
+const e2eTests = require.context('./e2e', true, /-e2e\.js$/);
+e2eTests.keys().forEach(e2eTests);

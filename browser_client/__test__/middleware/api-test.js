@@ -1,7 +1,11 @@
-import * as API from 'app/middleware/api';
-import apiMiddleware from 'app/middleware/api';
+import apiMiddleware, {
+    beforeFetch,
+    onFetchFail,
+    onNetworkError,
+} from 'app/middleware/api';
 import { ActionCreators, ActionTypes as T } from 'app/actions';
 import configureMockStore from 'redux-mock-store';
+import { deepFreeze } from 'app/utils/deepFreeze';
 
 
 describe('`beforeFetch`', () => {
@@ -12,7 +16,7 @@ describe('`beforeFetch`', () => {
             body:     { hello: 'world' },
         };
 
-        expect( API.beforeFetch(fetchCall) ).to.deep.eq({
+        expect( beforeFetch(fetchCall) ).to.deep.eq({
             endpoint: '/blah/',
             method:   'POST',
             body:     '{"hello":"world"}',
@@ -30,7 +34,7 @@ describe('`beforeFetch`', () => {
             method:   'GET',
         };
 
-        expect( API.beforeFetch(fetchCall).body ).to.be.undefined;
+        expect( beforeFetch(fetchCall).body ).to.be.undefined;
     });
 });
 
@@ -44,19 +48,19 @@ describe('`onFetchFail`', () => {
 
     it('returns a body-response pair', () => {
         const { body, response } = setup(400);
-        expect( API.onFetchFail(body, response) ).to.deep.eq( [body, response] );
+        expect( onFetchFail(body, response) ).to.deep.eq( [body, response] );
     });
 
     context('when the response represents a 500-level error', () => {
         it('returns an undefined-response pair', () => {
             const { body, response, dispatch } = setup(500);
-            expect( API.onFetchFail(body, response, undefined, undefined, dispatch) )
+            expect( onFetchFail(body, response, undefined, undefined, dispatch) )
                 .to.deep.eq( [undefined, response] );
         });
 
         it('dispatches the SERVER_ERROR action to the store', () => {
             const { body, response, dispatch } = setup(500);
-            API.onFetchFail(body, response, undefined, undefined, dispatch);
+            onFetchFail(body, response, undefined, undefined, dispatch);
             expect( dispatch ).to.have.been.calledWithMatch({ type: T.SERVER_ERROR });
         });
     });
@@ -65,13 +69,13 @@ describe('`onFetchFail`', () => {
 
 describe('`onNetworkError`', () => {
     it('returns an empty array', () => {
-        expect( API.onNetworkError(undefined, undefined, undefined, sinon.spy()) )
+        expect( onNetworkError(undefined, undefined, undefined, sinon.spy()) )
             .to.deep.eq( [] );
     });
 
     it('dispatches the NETWORK_ERROR action to the store', () => {
         const dispatch = sinon.spy();
-        API.onNetworkError(undefined, undefined, undefined, dispatch);
+        onNetworkError(undefined, undefined, undefined, dispatch);
         expect( dispatch ).to.have.been.calledWithMatch({ type: T.NETWORK_ERROR });
     });
 });
@@ -120,7 +124,7 @@ describe('redux integration', () => {
             },
         ];
 
-        const store = mockStore({}, expectedActions, done);
+        const store = mockStore(deepFreeze({}), expectedActions, done);
         store.dispatch(ActionCreators.addName());
     });
 
@@ -144,7 +148,7 @@ describe('redux integration', () => {
             },
         ];
 
-        const store = mockStore({}, expectedActions, done);
+        const store = mockStore(deepFreeze({}), expectedActions, done);
         store.dispatch(ActionCreators.addName());
     });
 
@@ -163,7 +167,7 @@ describe('redux integration', () => {
             },
         ];
 
-        const store = mockStore({}, expectedActions, done);
+        const store = mockStore(deepFreeze({}), expectedActions, done);
         store.dispatch(ActionCreators.addName());
     });
 
@@ -183,7 +187,7 @@ describe('redux integration', () => {
             },
         ];
 
-        const store = mockStore({}, expectedActions, done);
+        const store = mockStore(deepFreeze({}), expectedActions, done);
         store.dispatch(ActionCreators.addName());
     });
 });

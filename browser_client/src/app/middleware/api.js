@@ -5,7 +5,7 @@ import { ActionTypes as T } from 'app/actions';
 export const API_CALL = Symbol('api-middleware');
 
 
-export const beforeFetch = fetchCall => ({
+let _beforeFetch = fetchCall => ({
     ...fetchCall,
     credentials: 'same-origin',
     headers: {
@@ -17,7 +17,7 @@ export const beforeFetch = fetchCall => ({
 });
 
 
-export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
+let _onFetchFail = (body, response, fetchCall, _action, dispatch) => {
     if (response.status >= 500) {
         if (__DEV__) {
             require('app/utils/devFetchDebug')(body, response.url, fetchCall);
@@ -33,11 +33,23 @@ export const onFetchFail = (body, response, fetchCall, _action, dispatch) => {
 };
 
 
-export const onNetworkError = (_error, _fetchCall, _action, dispatch) => {
+let _onNetworkError = (_error, _fetchCall, _action, dispatch) => {
     dispatch({ type: T.NETWORK_ERROR });
     return [];
 };
 
+
+if (__TEST__) {
+    const { deepFreezeFunction } = require('app/utils/deepFreeze');
+    _beforeFetch    = deepFreezeFunction(_beforeFetch);
+    _onFetchFail    = deepFreezeFunction(_onFetchFail);
+    _onNetworkError = deepFreezeFunction(_onNetworkError);
+}
+
+
+export const beforeFetch    = _beforeFetch;
+export const onFetchFail    = _onFetchFail;
+export const onNetworkError = _onNetworkError;
 
 
 export default fetchMiddleware({

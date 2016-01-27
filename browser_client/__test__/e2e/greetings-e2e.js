@@ -6,12 +6,17 @@ Property-based testing of the "greetings" aspect of the app.
 */
 
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Root from 'app/containers';
+import store from 'app/store';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { createFinder } from '../utils';
 import { Simulate } from 'react-addons-test-utils';
 import jsc from 'jsverify';
 import _ from 'lodash';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Greeting from 'app/components/Greeting';
-import { createFinder } from '../utils';
 import { ActionTypes as T } from 'app/actions';
 
 
@@ -33,15 +38,24 @@ const makeMockFetch = store => () => {
 
 
 describe('adding and subtracting greetings', function () {
-    afterEach(() => {
+    afterEach(function () {
+        this.appHistory.replaceState(null, '/');
+        ReactDOM.unmountComponentAtNode(this.container);
         if (window.fetch.restore) window.fetch.restore();
     });
 
     beforeEach(function () {
-        sinon.stub(window, 'fetch', makeMockFetch(this.store));
+        sinon.stub(window, 'fetch', makeMockFetch(store));
 
-        findOnPage = this.findOnPage;
-        this.navigate('/shire');
+        this.appHistory = new createBrowserHistory();
+        this.container = document.createElement('div');
+        const appRoot = ReactDOM.render(
+            <Root history={this.appHistory} store={store} />,
+            this.container
+        );
+
+        findOnPage = createFinder(appRoot);
+        this.appHistory.pushState(null, '/shire');
         const [ raisedAddButton, raisedSubtractButton ] = findOnPage(RaisedButton);
         const addButton = createFinder(raisedAddButton)('button')[0];
         const subtractButton = createFinder(raisedSubtractButton)('button')[0];

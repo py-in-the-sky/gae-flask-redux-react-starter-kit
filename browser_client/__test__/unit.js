@@ -1,7 +1,5 @@
 import './setup';
 
 
-const unitTestsContext = require.context('.', true, /-test$/);
-
-
-unitTestsContext.keys().forEach(unitTestsContext);
+const unitTests = require.context('.', true, /-test\.js$/);
+unitTests.keys().forEach(unitTests);
