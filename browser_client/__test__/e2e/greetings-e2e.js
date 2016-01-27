@@ -9,7 +9,7 @@ Property-based testing of the "greetings" aspect of the app.
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from 'app/containers';
-import store from 'app/store';
+import { createStoreWithMiddleware } from 'app/store';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { createFinder } from '../utils';
 import { Simulate } from 'react-addons-test-utils';
@@ -45,6 +45,8 @@ describe('adding and subtracting greetings', function () {
     });
 
     beforeEach(function () {
+        const store = createStoreWithMiddleware();
+
         sinon.stub(window, 'fetch', makeMockFetch(store));
 
         this.appHistory = new createBrowserHistory();

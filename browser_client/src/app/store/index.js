@@ -3,7 +3,7 @@ import apiMiddleware from 'app/middleware/api';
 import * as reducers from 'app/reducers';
 
 
-function createStoreWithMiddleware () {
+export const createStoreWithMiddleware = () => {
     const middleware = applyMiddleware(apiMiddleware);
 
     if (__DEV__) {
