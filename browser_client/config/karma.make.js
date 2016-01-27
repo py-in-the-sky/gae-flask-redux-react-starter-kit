@@ -17,11 +17,11 @@ module.exports = function makeKarmaConfig (opts) {
     var entryFile;
 
     if (__E2E__)
-        entryFile = 'browser_client/__test__/e2e.js';
+        entryFile = 'browser_client/__test__/index.e2e.js';
     else if (__ALL__)
-        entryFile = 'browser_client/__test__/all.js';
+        entryFile = 'browser_client/__test__/index.all.js';
     else
-        entryFile = 'browser_client/__test__/unit.js';
+        entryFile = 'browser_client/__test__/index.unit.js';
 
     var reportSlowerThan = (__E2E__ || __ALL__) ? 750 : 150;
 

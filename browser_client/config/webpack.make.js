@@ -88,9 +88,10 @@ module.exports = function makeWebpackConfig (opts) {
     else {  // production
         babelPlugins = babelPlugins.concat(
             // 'transform-runtime',
-            // Can use underlying core-js polyfill that this plugin
-            // provides after `Object.assign` is run in strict mode,
-            // hence thowing errors on mutation of frozen data.
+            // Can use transform-runtime and the underlying core-js
+            // polyfill that this plugin provides after its `Object.assign`
+            // is run in strict mode, which will make it
+            // thow an error on mutation of frozen data.
             // (core-js >= 2.0.3.  Right now, Babel uses v1.2.6.)
             // see
             //  https://github.com/zloirock/core-js/issues/154
