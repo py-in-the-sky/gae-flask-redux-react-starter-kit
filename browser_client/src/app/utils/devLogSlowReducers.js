@@ -8,22 +8,25 @@
 
 
 const logSlowReducers = (reducers, thresholdMs = 4) =>
-    Object.entries(reducers).reduce( (obj, [ name, reducer ]) => ({
+    Object.keys(reducers).reduce( (obj, key) => {
+        const reducer = reducers[key];
 
-        ...obj,
+        return {
+            ...obj,
 
-        [name]: (state, action) => {
-            const t0 = Date.now();
-            const newState = reducer(state, action);
-            const diffMs = Date.now() - t0;
+            [key]: (state, action) => {
+                const t0 = Date.now();
+                const newState = reducer(state, action);
+                const diffMs = Date.now() - t0;
 
-            if (diffMs > thresholdMs)
-                console.warn(`Reducer \`${name}\` took ${diffMs}ms for \`${action.type}\`.`);
+                if (diffMs > thresholdMs)
+                    console.warn(`Reducer \`${key}\` took ${diffMs}ms for \`${action.type}\`.`);
 
-            return newState;
-        },
+                return newState;
+            },
 
-    }), {});
+        };
+    }, {});
 
 
 export default logSlowReducers;
