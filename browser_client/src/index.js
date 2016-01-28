@@ -23,3 +23,8 @@ ReactDOM.render(
     <Root history={new createBrowserHistory()} store={store} />,
     document.getElementById('user-interface')
 );
+
+
+if (__DEV__) {
+    window.Perf = require('react-addons-perf');
+}
