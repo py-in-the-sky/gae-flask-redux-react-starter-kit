@@ -34,6 +34,17 @@ describe('`deepFreezeFunction`', () => {
         expect( () => impure({}) ).to.not.throw( Error );
         expect( () => ip({}) ).to.throw( Error );
     });
+
+    it('does not otherwise change the function signature', () => {
+        const { pure } = setup();
+
+        const normalReturnValue = pure({ a: 'b' });
+        const frozenReturnValue = deepFreezeFunction(pure)({ a: 'b' });
+
+        expect( frozenReturnValue ).to.deep.equal( normalReturnValue );
+        expect( Object.isFrozen(frozenReturnValue) ).to.be.true;
+        expect( Object.isFrozen(normalReturnValue) ).to.be.false;
+    });
 });
 
 
@@ -46,18 +57,6 @@ describe('`deepFreezeFunctions`', () => {
 
         expect( Object.isFrozen(p({})) ).to.be.true;
         expect( () => ip({}) ).to.throw( Error );
-    });
-
-    it('does not otherwise change the function signature', () => {
-        const { pure } = setup();
-
-        const normalReturnValue = pure({ a: 'b' });
-        const { pure: p } = deepFreezeFunctions({ pure });
-        const frozenReturnValue = p({ a: 'b' });
-
-        expect( frozenReturnValue ).to.deep.equal( normalReturnValue );
-        expect( Object.isFrozen(frozenReturnValue) ).to.be.true;
-        expect( Object.isFrozen(normalReturnValue) ).to.be.false;
     });
 
     it('does not alter non-functions', () => {
