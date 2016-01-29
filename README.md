@@ -134,7 +134,7 @@ Once the app is deployed you can use the [GAE console](https://console.cloud.goo
 
 ## Notes and Bookmarks
 
-### use of `deepFreeze` in test mode for the browser client
+### Use of `deepFreeze` in test mode for the browser client
 
 Sharing mutable data among your components is bad only if the data is actually mutated.  And it's worse if it's mutated without your knowing!  Using [`deepFreeze`](https://github.com/AnatoliyGatt/deep-freeze-node) in your tests will let you know if any mutations happen in your app's runtime.
 
