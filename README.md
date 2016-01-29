@@ -75,6 +75,18 @@ In `gae/config/development.py`, the `DEBUG` and `PROFILE` feature flags control 
 
 In debug mode, any uncaught errors will open a Werkzeug interactive stack trace in the browser, allowing you to execute code against the app and investigate errors.  In profiling mode, for each HTTP request, the app will log the slowest function calls involved in its processing the request-response cycle.
 
+* `Perf` in browser's dev console
+
+You can profile your React components by running the app in dev mode, opening it in the browser, and using the global `Perf` object from the browser's dev console.  The `Perf` object is attached to the `window` object by the app, and [it allows](https://facebook.github.io/react/docs/perf.html) you gather different profiling statistics on your React components.  Here's an example usage from the browser's dev console that could be very useful:
+
+```js
+Perf.start()
+// perform some user interactions in the app...
+Perf.stop()
+Perf.printWasted()
+// view table of the time spent, and where, on unnecessary re-renders
+```
+
 
 ## Managing Dependencies
 
@@ -121,6 +133,15 @@ Once the app is deployed you can use the [GAE console](https://console.cloud.goo
 
 
 ## Notes and Bookmarks
+
+### use of `deepFreeze` in test mode for the browser client
+
+Sharing mutable data among your components is bad only if the data is actually mutated.  And it's worse if it's mutated without your knowing!  Using [`deepFreeze`](https://github.com/AnatoliyGatt/deep-freeze-node) in your tests will let you know if any mutations happen in your app's runtime.
+
+The browser client's tests make extensive use of `deepFreeze`.  This means that any unexpected mutative behavior in the app will throw an error during test time, warning you of this undesirable behavior.  Continuing to write tests like this as your app develops will protect you from accidentally introducing undesirable behavior in your app (maybe passing your state as the first argument to `Object.assign`).
+
+This has the added benefit of freeing you from having to always use ImmutableJS structures, or some other immutable structures, just for the sake of implementing an app that treats data as immutable.  Then you're free to choose ImmutableJS only when there's a clear performance or convenience benefit.  Sometimes it's convenient just to use plain JS objects for read-only state that will not be updated during the app's life.
+
 
 ### Flask Callbacks and Decorators
 
