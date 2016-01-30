@@ -80,7 +80,32 @@ module.exports = function makeWebpackConfig (opts) {
     var babelPresets = defautlBabelPresets.concat()
     var babelPlugins = defaultBabelPlugins.concat()
     if (__DEV__) {
-        babelPresets = babelPresets.concat('react-hmre')
+        var devReactTransforms = [
+            {
+                'transform': 'react-transform-hmr',
+                'imports': [ 'react' ],
+                'locals': [ 'module' ],
+            }, {
+                'transform': 'react-transform-catch-errors',
+                'imports': [ 'react', 'redbox-react' ],
+            },
+        ]
+
+        if (process.env.hasOwnProperty('REACT_VIS')) {
+            devReactTransforms = devReactTransforms.concat({
+                'transform': 'react-transform-render-visualizer',
+            })
+        } else {
+            console.log('****************************************************')
+            console.log('*** To enable visualization of React re-renders, ***')
+            console.log('*** run this process with the `REACT_VIS=true`   ***')
+            console.log('*** environment variable.                        ***')
+            console.log('****************************************************')
+        }
+
+        babelPlugins = babelPlugins.concat([[
+            'react-transform', { 'transforms': devReactTransforms }
+        ]])
     } else if (__TEST__) {
         null
         // babelPlugins = babelPlugins.concat('transform-runtime')
