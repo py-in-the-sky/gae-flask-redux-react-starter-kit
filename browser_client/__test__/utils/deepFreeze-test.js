@@ -6,7 +6,7 @@ import {
 
 const setup = () => ({
     pure:   obj => ({ ...obj, foo: 'bar' }),
-    impure: obj => { obj.foo = 'bar'; return obj },
+    impure: obj => Object.assign(obj, { foo: 'bar' }),
 })
 
 

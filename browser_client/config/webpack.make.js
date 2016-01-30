@@ -83,6 +83,11 @@ module.exports = function makeWebpackConfig (opts) {
         babelPresets = babelPresets.concat('react-hmre')
     } else if (__TEST__) {
         null
+        // babelPlugins = babelPlugins.concat('transform-runtime')
+        // This plugin will cause test failures right now because
+        // the core-js implementation of `Object.assign` does not
+        // use strict mode and so will silently fail when trying
+        // to mutate frozen data.
     } else {  // production
         babelPlugins = babelPlugins.concat(
             // 'transform-runtime',
