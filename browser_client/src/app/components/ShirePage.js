@@ -15,8 +15,7 @@ const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire)
 
 export default class ShirePage extends Component {
     componentDidMount () {
-        if (this.props.names.size === 0)
-            this.props.addName()
+        if (this.props.names.size === 0) this.props.addName()
     }
 
     getChildContext () {

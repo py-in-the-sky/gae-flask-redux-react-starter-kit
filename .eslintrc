@@ -8,8 +8,7 @@
     ],
 
     "plugins": [
-        "react",
-        "babel"
+        "react"
     ],
 
     "ecmaFeatures": {

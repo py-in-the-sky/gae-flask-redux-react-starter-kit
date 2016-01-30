@@ -29,6 +29,8 @@ export default class Layout extends Component {
 
 
 Layout.propTypes = {
-    children:    PropTypes.element.isRequired,
-    location:    PropTypes.object.isRequired,
+    children: PropTypes.element.isRequired,
+    location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired,
+    }).isRequired,
 }

@@ -16,8 +16,12 @@ export default class Root extends Component {
 
         this.renderReduxProvider = this.renderReduxProvider.bind(this)
 
-        if (__DEV__)
+        if (__DEV__) {
             this.state = { debugVisible: false }
+            this.toggleDebugVisible = () => {
+                this.setState({ debugVisible: !this.state.debugVisible })
+            }
+        }
     }
 
     getChildContext () {
@@ -45,16 +49,16 @@ export default class Root extends Component {
                     </DebugPanel>
 
                     <button
-                     onClick={() => { this.setState({ debugVisible: !this.state.debugVisible }) } }
+                     onClick={this.toggleDebugVisible}
                      style={toggleButtonStyle}>
                         HIDE/SHOW REDUX DEBUG PANEL
                     </button>
 
                 </div>
             )
-        }
-        else
+        } else {
             return this.renderReduxProvider()
+        }
     }
 
     renderReduxProvider () {
@@ -79,11 +83,20 @@ export default class Root extends Component {
 
 
 Root.propTypes = {
-    history: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+        pushState: PropTypes.func.isRequired,
+    }).isRequired,
+    store: PropTypes.shape({
+        dispatch: PropTypes.func.isRequired,
+        subscribe: PropTypes.func.isRequired,
+        getState: PropTypes.func.isRequired,
+        replaceReducer: PropTypes.func.isRequired,
+    }).isRequired,
 }
 
 
 Root.childContextTypes = {
-    history: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+        pushState: PropTypes.func.isRequired,
+    }).isRequired,
 }

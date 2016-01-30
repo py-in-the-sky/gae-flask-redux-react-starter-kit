@@ -6,10 +6,11 @@ import {
 
 
 export const createFinder = reactTree => query => {
-    if (typeof query !== 'string')
+    if (typeof query !== 'string') {
         return scryRenderedComponentsWithType(reactTree, query)
-    else if (query.startsWith('.'))
+    } else if (query.startsWith('.')) {
         return scryRenderedDOMComponentsWithClass(reactTree, query.substring(1))
-    else
+    } else {
         return scryRenderedDOMComponentsWithTag(reactTree, query)
+    }
 }

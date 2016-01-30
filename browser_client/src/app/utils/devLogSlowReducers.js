@@ -19,8 +19,9 @@ const logSlowReducers = (reducers, thresholdMs = 4) =>
                 const newState = reducer(state, action)
                 const diffMs = Date.now() - t0
 
-                if (diffMs > thresholdMs)
+                if (diffMs > thresholdMs) {
                     console.warn(`Reducer \`${key}\` took ${diffMs}ms for \`${action.type}\`.`)
+                }
 
                 return newState
             },

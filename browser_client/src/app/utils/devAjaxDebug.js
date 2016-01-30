@@ -6,18 +6,21 @@ import $ from 'jquery'
 
 
 export default function initializeAjaxDebuggingUtils () {
-    if (document)
+    if (document) {
         ajaxErrorDebug()
+    }
 
-    if (document && console && console.log)
+    if (document && console && console.log) {
         ajaxCompleteLog()
+    }
 }
 
 
 function ajaxErrorDebug () {
     $(document).ajaxError((event, jqXHR, settings, error) => {
-        if (jqXHR.status >= 500 && !settings.crossDomain)
+        if (jqXHR.status >= 500 && !settings.crossDomain) {
             werkzeugDebugger(jqXHR.responseText, settings.url)
+        }
     })
 }
 

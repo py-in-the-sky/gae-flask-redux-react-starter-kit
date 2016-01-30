@@ -37,15 +37,12 @@ export class WindowResizeListener extends Component {
 
     componentWillMount () {
         on(window, 'resize', this.debouncedSendWindowData)
-        // now that we're listening to the window-resize event,
-        // for correctness, we set the current window
-        // width to give the app the correct baseline:
-        // this.debouncedSendWindowData();
-        // for performance over correctness, we do not query
-        // the window size on `componentWillUnmount` since
-        // the store will have done so on its initialization
-        // just a fraction of a  second prior to this component
-        // mounting
+        // Now we're listening to the window-resize event.
+        // For performance over correctness, we do not actually
+        // query the window size upon `componentWillMount` since
+        // our Redux store will have done so on its initialization
+        // just a fraction of a second prior to this component
+        // mounting.
     }
 
     componentWillUnmount () {

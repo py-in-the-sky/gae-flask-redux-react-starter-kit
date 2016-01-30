@@ -80,9 +80,9 @@ describe('adding and subtracting greetings', function () {
     describe('the number of greetings on the page', function () {
         this.timeout(3000)  // see https://mochajs.org/#timeouts
 
-        jsc.property('equals scan of sum of actions with a floor of 0',
-                     'array bool',
-                     function (arrayOfBooleans) {
+        const testDescription = 'equals scan of sum of actions with a floor of 0'
+
+        jsc.property(testDescription, 'array bool', function (arrayOfBooleans) {
             const initialGreetingsCount = findOnPage(Greeting).length
             const inputStream = arrayOfBooleans.map( b => b ? ADD : SUBTRACT )
             const sumScanWithFloor = inputStream.reduce(

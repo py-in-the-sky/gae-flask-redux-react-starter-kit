@@ -16,12 +16,13 @@ module.exports = function makeKarmaConfig (opts) {
 
     var entryFile
 
-    if (__E2E__)
+    if (__E2E__) {
         entryFile = 'browser_client/__test__/index.e2e.js'
-    else if (__ALL__)
+    } else if (__ALL__) {
         entryFile = 'browser_client/__test__/index.all.js'
-    else
+    } else {
         entryFile = 'browser_client/__test__/index.unit.js'
+    }
 
     var reportSlowerThan = (__E2E__ || __ALL__) ? 750 : 150
 
@@ -40,7 +41,7 @@ module.exports = function makeKarmaConfig (opts) {
         },
     }
 
-    if (__COVERAGE__)
+    if (__COVERAGE__) {
         return assign({}, config, {
             reporters: [ 'mocha', 'coverage' ],
             coverageReporter: {
@@ -49,8 +50,9 @@ module.exports = function makeKarmaConfig (opts) {
             },
             webpack: require('./webpack.coverage'),
         })
-    else
+    } else {
         return assign({}, config, {
             webpack: require('./webpack.test'),
         })
+    }
 }

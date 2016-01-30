@@ -20,7 +20,7 @@ const nameValidationErrors = {
 // if `validationErrors` is falsy
 // e.g.: const externalValidationErrors = {
 //           name: 'some error from server',
-//       };
+//       }
 // this is another alternative:
 //  https://github.com/christianalfoni/formsy-react/blob
 //  /master/API.md#updateinputswitherrorerrors

@@ -55,29 +55,31 @@ const OPTION_KEYS = [ 'beforeFetch', 'onFetchDone', 'onFetchFail', 'onNetworkErr
 
 
 const validateOptions = opts => {
-    if (!isPlainObject(opts))
+    if (!isPlainObject(opts)) {
         throw new Error('The argument to `fetchMiddleware` must be a plain ' +
                         'JavaScript object or left undefined.')
+    }
 
-    if (typeof opts.key !== 'symbol' && typeof opts.key !== 'undefined')
+    if (typeof opts.key !== 'symbol' && typeof opts.key !== 'undefined') {
         throw new Error('`key` must be a symbol or left undefined.')
+    }
 
     OPTION_KEYS.forEach( fnName => {
         const fn = opts[fnName]
 
-        if (typeof fn !== 'function' && typeof fn !== 'undefined')
+        if (typeof fn !== 'function' && typeof fn !== 'undefined') {
             throw new Error(`\`${fnName}\` must be a function or left undefined.`)
+        }
     })
 }
 
 
 const validateFetchCall = fetchCall => {
-    if (!isPlainObject(fetchCall))
+    if (!isPlainObject(fetchCall)) {
         throw new Error('`action.meta[<fetch key>]` must be a plain JavaScript object.')
-
-    if (typeof fetchCall.done !== 'function')
+    } else if (typeof fetchCall.done !== 'function') {
         throw new Error('`action.meta[<fetch key>].done` must be an action-creator function.')
-
-    if (typeof fetchCall.fail !== 'function')
+    } else if (typeof fetchCall.fail !== 'function') {
         throw new Error('`action.meta[<fetch key>].fail` must be an action-creator function.')
+    }
 }

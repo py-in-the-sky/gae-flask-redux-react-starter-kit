@@ -18,8 +18,9 @@ export const ImageUrls = {
 
 
 const imageMarkup = (imageKey, windowSize = SMALL) => {
-    if (__TEST__)
+    if (__TEST__) {
         return ''
+    }
 
     return `url(${ImageUrls[imageKey][windowSize]})`
 }

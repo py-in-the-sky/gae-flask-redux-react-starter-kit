@@ -14,8 +14,7 @@ const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor)
 
 export default class MordorPage extends Component {
     componentDidMount () {
-        if (this.props.names.size === 0)
-            this.props.addName()
+        if (this.props.names.size === 0) this.props.addName()
     }
 
     getChildContext () {

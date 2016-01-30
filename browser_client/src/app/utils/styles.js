@@ -6,13 +6,13 @@ import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme'
 
 // thanks to material-ui
 export function windowSize (windowWidth) {
-    if (windowWidth >= WindowWidthThresholds.LARGE)
+    if (windowWidth >= WindowWidthThresholds.LARGE) {
         return WindowSizes.LARGE
-
-    if (windowWidth >= WindowWidthThresholds.MEDIUM)
+    } else if (windowWidth >= WindowWidthThresholds.MEDIUM) {
         return WindowSizes.MEDIUM
-
-    return WindowSizes.SMALL
+    } else {
+        return WindowSizes.SMALL
+    }
 }
 
 

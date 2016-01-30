@@ -24,8 +24,10 @@ export default class PageHandler extends Component {
 
 
 PageHandler.propTypes = {
-    children:    PropTypes.element.isRequired,
-    location:    PropTypes.object.isRequired,
+    children: PropTypes.element.isRequired,
+    location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired,
+    }).isRequired,
 }
 
 
