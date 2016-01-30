@@ -1,1 +1,1 @@
-module.exports = require('./webpack.make')({});
+module.exports = require('./webpack.make')({})

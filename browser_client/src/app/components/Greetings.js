@@ -1,25 +1,25 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import { VelocityTransitionGroup } from 'velocity-react';
-import CircularProgress from 'material-ui/lib/circular-progress';
-import Greeting from './Greeting';
-import { randomElement } from 'app/utils/array';
-import { memoize } from 'app/utils/lodash';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import { VelocityTransitionGroup } from 'velocity-react'
+import CircularProgress from 'material-ui/lib/circular-progress'
+import Greeting from './Greeting'
+import { randomElement } from 'app/utils/array'
+import { memoize } from 'app/utils/lodash'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 
 
-const circularProgress = <CircularProgress size={0.5} />;
+const circularProgress = <CircularProgress size={0.5} />
 
 
-export default class Greetings extends PureComponent {
-    constructor(props) {
-        super(props);
+export default class Greetings extends Component {
+    constructor (props) {
+        super(props)
         /* eslint-disable no-unused-vars */
-        this.chooseSalutation = memoize( key => randomElement(salutations) );
+        this.chooseSalutation = memoize( key => randomElement(salutations) )
     }
 
     render () {
-        const { names, requestsPending } = this.props;
+        const { names, requestsPending } = this.props
         return (
             <div>
                 <VelocityTransitionGroup
@@ -40,7 +40,7 @@ export default class Greetings extends PureComponent {
 
                 {requestsPending ? circularProgress : null}
             </div>
-        );
+        )
     }
 }
 
@@ -50,16 +50,16 @@ Greetings.propTypes = {
         name: PropTypes.string.isRequired,
     }) ).isRequired,
     requestsPending: PropTypes.bool,
-};
+}
 
 
-const salutations = [ 'Hello', 'Hi', 'Hey', 'Yo', ];
+const salutations = [ 'Hello', 'Hi', 'Hey', 'Yo', ]
 
 
 const defaultAnimationOpts = {
     duration: 300,
     easing:   'easeOutExpo',
-};
+}
 
 
 const greetingEnter = {
@@ -68,7 +68,7 @@ const greetingEnter = {
         translateY: [0, 30],
         opacity:    [1, 0],
     },
-};
+}
 
 
 const greetingLeave = {
@@ -77,4 +77,4 @@ const greetingLeave = {
         translateY: [30, 0],
         opacity:    [0, 1],
     },
-};
+}

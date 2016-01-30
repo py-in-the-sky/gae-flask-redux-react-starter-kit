@@ -1,7 +1,7 @@
-import Layout from './Layout';
-import HomePage from './HomePage';
-import MordorPage from './MordorPage';
-import ShirePage from './ShirePage';
+import Layout from './Layout'
+import HomePage from './HomePage'
+import MordorPage from './MordorPage'
+import ShirePage from './ShirePage'
 
 
 export default {
@@ -9,4 +9,4 @@ export default {
     HomePage,
     MordorPage,
     ShirePage,
-};
+}

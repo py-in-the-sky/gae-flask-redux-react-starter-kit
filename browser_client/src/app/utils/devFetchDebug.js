@@ -8,30 +8,29 @@ thanks to:
     http://stackoverflow.com/a/3340186/1941513
 */
 const werkzeugDebugger = (flaskResponse, url, fetchCall) => {
-    if (!sameOrigin(url)) return;
+    if (!sameOrigin(url)) return
 
-    if(!confirm('__DEV__: Server Error!  Open Werkzeug Debugger?')) return;
+    if (!confirm('__DEV__: Server Error!  Open Werkzeug Debugger?')) return
 
-    window.history.pushState({}, 'Werkzeug Debugger', fetchCall.endpoint);
+    window.history.pushState({}, 'Werkzeug Debugger', fetchCall.endpoint)
 
     try {
-        window.document.open();
-        window.document.write(flaskResponse);
+        window.document.open()
+        window.document.write(flaskResponse)
+    } finally {
+        window.document.close()
     }
-    finally {
-        window.document.close();
-    }
-};
+}
 
 
 /*
 thanks to: https://gist.github.com/jlong/2428561
 */
 const sameOrigin = url => {
-    const parser = document.createElement('a');
-    parser.href = url;
-    return parser.origin === window.location.origin;
-};
+    const parser = document.createElement('a')
+    parser.href = url
+    return parser.origin === window.location.origin
+}
 
 
-export default werkzeugDebugger;
+export default werkzeugDebugger

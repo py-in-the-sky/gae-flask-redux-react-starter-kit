@@ -1,28 +1,27 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import Greetings from './Greetings';
-import GreetingControls from './GreetingControls';
-import Paper from 'material-ui/lib/paper';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import { Themes } from 'app/utils/styles';
-import { shireBackgroundImageMarkup } from 'app/utils/images';
-import { Frame, Container } from './Flex';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import Greetings from './Greetings'
+import GreetingControls from './GreetingControls'
+import Paper from 'material-ui/lib/paper'
+import ThemeManager from 'material-ui/lib/styles/theme-manager'
+import { Themes } from 'app/utils/styles'
+import { shireBackgroundImageMarkup } from 'app/utils/images'
+import { Frame, Container } from './Flex'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 
 
-const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire);
+const ShireTheme = ThemeManager.getMuiTheme(Themes.Shire)
 
 
-export default class ShirePage extends PureComponent {
+export default class ShirePage extends Component {
     componentDidMount () {
-        if (this.props.names.size === 0)
-            this.props.addName();
+        if (this.props.names.size === 0) this.props.addName()
     }
 
     getChildContext () {
         return {
             muiTheme: ShireTheme,
-        };
+        }
     }
 
     render () {
@@ -32,9 +31,9 @@ export default class ShirePage extends PureComponent {
             requestsPending,
             addName,
             subtractLastName,
-        } = this.props;
+        } = this.props
 
-        const imageUrlMarkup = shireBackgroundImageMarkup(windowSize);
+        const imageUrlMarkup = shireBackgroundImageMarkup(windowSize)
 
         return (
             <Frame
@@ -65,7 +64,7 @@ export default class ShirePage extends PureComponent {
                 </Paper>
 
             </Frame>
-        );
+        )
     }
 }
 
@@ -78,9 +77,9 @@ ShirePage.propTypes = {
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
-};
+}
 
 
 ShirePage.childContextTypes = {
     muiTheme: PropTypes.object.isRequired,
-};
+}

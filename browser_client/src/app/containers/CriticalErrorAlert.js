@@ -1,38 +1,37 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-import { connect } from 'react-redux';
-import { ActionCreators } from 'app/actions';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import Dialog from 'material-ui/lib/dialog'
+import FlatButton from 'material-ui/lib/flat-button'
+import { connect } from 'react-redux'
+import { ActionCreators } from 'app/actions'
 
 
-const { clearServerError, clearNetworkError } = ActionCreators;
+const { clearServerError, clearNetworkError } = ActionCreators
 
 
-export class CriticalErrorAlert extends PureComponent {
+export class CriticalErrorAlert extends Component {
     render () {
         const {
             serverError,
             networkError,
             clearServerError,
             clearNetworkError,
-        } = this.props;
+        } = this.props
 
-        const open = serverError || networkError;
+        const open = serverError || networkError
 
-        let closeAction;
+        let closeAction
         if (open) {
-            closeAction = serverError ? clearServerError : clearNetworkError;
+            closeAction = serverError ? clearServerError : clearNetworkError
         }
 
-        let message;
+        let message
         if (serverError) {
             message = `A problem occurred on the server.
-                       Please try again later.`;
-        }
-        else if (networkError) {
+                       Please try again later.`
+        } else if (networkError) {
             message = `Cannot connect to internet.
-                       Please ensure you're connected and try again.`;
+                       Please ensure you're connected and try again.`
         }
 
         const closeButton = (
@@ -41,7 +40,7 @@ export class CriticalErrorAlert extends PureComponent {
              label="Close"
              primary={true}
              onTouchTap={closeAction} />
-        );
+        )
 
         // TODO: no need to wrap `closeAction` in array
         // after upgrading to `material-ui` v0.14.x
@@ -56,7 +55,7 @@ export class CriticalErrorAlert extends PureComponent {
               {message}
 
             </Dialog>
-        );
+        )
     }
 }
 
@@ -66,13 +65,13 @@ CriticalErrorAlert.propTypes = {
     networkError: PropTypes.bool.isRequired,
     clearServerError: PropTypes.func.isRequired,
     clearNetworkError: PropTypes.func.isRequired,
-};
+}
 
 
 const mapStateToProps = ({ serverError, networkError }) =>
-    ({ serverError, networkError });
+    ({ serverError, networkError })
 
 
 export default connect(mapStateToProps, {
     clearServerError, clearNetworkError
-})(CriticalErrorAlert);
+})(CriticalErrorAlert)

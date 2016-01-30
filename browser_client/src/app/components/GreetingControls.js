@@ -1,18 +1,18 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import RaisedButton from 'material-ui/lib/raised-button';
-import { ColumnWise } from './Flex';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import RaisedButton from 'material-ui/lib/raised-button'
+import { ColumnWise } from './Flex'
 
 
-export default class GreetingControls extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.addName = () => this.props.addName();
-        this.subtractLastName = () => this.props.subtractLastName();
+export default class GreetingControls extends Component {
+    constructor (props) {
+        super(props)
+        this.addName = () => this.props.addName()
+        this.subtractLastName = () => this.props.subtractLastName()
     }
 
     render () {
-        const { requestsPending } = this.props;
+        const { requestsPending } = this.props
 
         return (
             <ColumnWise
@@ -39,7 +39,7 @@ export default class GreetingControls extends PureComponent {
                 </div>
 
             </ColumnWise>
-        );
+        )
     }
 }
 
@@ -48,4 +48,4 @@ GreetingControls.propTypes = {
     requestsPending:  PropTypes.bool.isRequired,
     addName:  PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
-};
+}

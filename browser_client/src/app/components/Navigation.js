@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import IconButton from 'material-ui/lib/icon-button';
-import MenuIcon from 'material-ui/lib/svg-icons/navigation/menu';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import IconMenu from 'material-ui/lib/menus/icon-menu'
+import MenuItem from 'material-ui/lib/menus/menu-item'
+import IconButton from 'material-ui/lib/icon-button'
+import MenuIcon from 'material-ui/lib/svg-icons/navigation/menu'
 
 
-const MenuButtonElement = <IconButton><MenuIcon /></IconButton>;
+const MenuButtonElement = <IconButton><MenuIcon /></IconButton>
 
 
 // currently not using "optimisation.react.constantElements" in
@@ -16,14 +16,14 @@ const MenuButtonElement = <IconButton><MenuIcon /></IconButton>;
 // navigation links first appear on the page
 
 
-export default class Navigation extends PureComponent {
-    constructor(props, context) {
-        super(props, context);
-        this.navigate = this.navigate.bind(this);
+export default class Navigation extends Component {
+    constructor (props, context) {
+        super(props, context)
+        this.navigate = this.navigate.bind(this)
     }
 
     componentWillMount () {
-        this.history = this.context.history;
+        this.history = this.context.history
     }
 
     render () {
@@ -38,15 +38,15 @@ export default class Navigation extends PureComponent {
                 <MenuItem route="/mordor" primaryText="Mordor Theme" />
 
             </IconMenu>
-        );
+        )
     }
 
     navigate (_, item) {
-        this.history.pushState(null, item.props.route);
+        this.history.pushState(null, item.props.route)
     }
 }
 
 
 Navigation.contextTypes = {
     history: PropTypes.object.isRequired,
-};
+}

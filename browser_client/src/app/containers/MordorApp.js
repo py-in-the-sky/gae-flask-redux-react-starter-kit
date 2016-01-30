@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { MordorPage } from 'app/components';
-import { ActionCreators } from 'app/actions';
+import { connect } from 'react-redux'
+import { MordorPage } from 'app/components'
+import { ActionCreators } from 'app/actions'
 
 
 // Construct a 'smart container' around a 'dumb' component.
@@ -10,10 +10,10 @@ import { ActionCreators } from 'app/actions';
 
 
 const mapStateToProps  = ({ names, pendingRequests }) =>
-    ({ names, requestsPending: pendingRequests.size > 0 });
+    ({ names, requestsPending: pendingRequests.size > 0 })
 
 
-const createApp = () => connect(mapStateToProps, ActionCreators)(MordorPage);
+const createApp = () => connect(mapStateToProps, ActionCreators)(MordorPage)
 
 
-export default createApp();
+export default createApp()

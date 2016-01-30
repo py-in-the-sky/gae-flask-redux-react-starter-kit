@@ -1,32 +1,32 @@
-import Colors from 'material-ui/lib/styles/colors';
-import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
-import Spacing from 'material-ui/lib/styles/spacing';
-import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
+import Colors from 'material-ui/lib/styles/colors'
+import ColorManipulator from 'material-ui/lib/utils/color-manipulator'
+import Spacing from 'material-ui/lib/styles/spacing'
+import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme'
 
 
 // thanks to material-ui
 export function windowSize (windowWidth) {
-    if (windowWidth >= WindowWidthThresholds.LARGE)
-        return WindowSizes.LARGE;
-
-    if (windowWidth >= WindowWidthThresholds.MEDIUM)
-        return WindowSizes.MEDIUM;
-
-    return WindowSizes.SMALL;
+    if (windowWidth >= WindowWidthThresholds.LARGE) {
+        return WindowSizes.LARGE
+    } else if (windowWidth >= WindowWidthThresholds.MEDIUM) {
+        return WindowSizes.MEDIUM
+    } else {
+        return WindowSizes.SMALL
+    }
 }
 
 
 export const WindowWidthThresholds = {
     MEDIUM: 768,
     LARGE:  992,
-};
+}
 
 
 export const WindowSizes = {
     SMALL:  1,
     MEDIUM: 2,
     LARGE:  3,
-};
+}
 
 
 const Default = {
@@ -35,7 +35,7 @@ const Default = {
     palette: Object.assign({}, LightRawTheme.palette, {
         canvasColor: '#fdfdfd',
     }),
-};
+}
 
 
 const Shire = {
@@ -54,7 +54,7 @@ const Shire = {
         borderColor: Colors.grey300,
         disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
     },
-};
+}
 
 
 const Mordor = {
@@ -73,7 +73,7 @@ const Mordor = {
         borderColor: ColorManipulator.fade(Colors.fullWhite, 0.3),
         disabledColor: ColorManipulator.fade(Colors.fullWhite, 0.3)
     },
-};
+}
 
 
-export const Themes = { Shire, Default, Mordor };
+export const Themes = { Shire, Default, Mordor }

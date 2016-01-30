@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from 'jquery'
 
 
 /* eslint-disable no-console */
@@ -6,29 +6,32 @@ import $ from 'jquery';
 
 
 export default function initializeAjaxDebuggingUtils () {
-    if (document)
-        ajaxErrorDebug();
+    if (document) {
+        ajaxErrorDebug()
+    }
 
-    if (document && console && console.log)
-        ajaxCompleteLog();
+    if (document && console && console.log) {
+        ajaxCompleteLog()
+    }
 }
 
 
 function ajaxErrorDebug () {
     $(document).ajaxError((event, jqXHR, settings, error) => {
-        if (jqXHR.status >= 500 && !settings.crossDomain)
-            werkzeugDebugger(jqXHR.responseText, settings.url);
-    });
+        if (jqXHR.status >= 500 && !settings.crossDomain) {
+            werkzeugDebugger(jqXHR.responseText, settings.url)
+        }
+    })
 }
 
 
 function werkzeugDebugger (flaskResponse, path) {
-    const debuggerLocation = window.location.origin + path;
-    const debuggerWindow   = window.open(debuggerLocation, 'Werkzeug Debugger');
-    debuggerWindow.document.open();
-    debuggerWindow.location.href = debuggerLocation;
-    debuggerWindow.document.write(flaskResponse);
-    debuggerWindow.document.close();
+    const debuggerLocation = window.location.origin + path
+    const debuggerWindow   = window.open(debuggerLocation, 'Werkzeug Debugger')
+    debuggerWindow.document.open()
+    debuggerWindow.location.href = debuggerLocation
+    debuggerWindow.document.write(flaskResponse)
+    debuggerWindow.document.close()
 }
 
 
@@ -38,7 +41,7 @@ function ajaxCompleteLog () {
             event:    event,
             jqXHR:    jqXHR,
             settings: settings
-        };
-        console.log('[AJAX Complete]', data);
-    });
+        }
+        console.log('[AJAX Complete]', data)
+    })
 }
