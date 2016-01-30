@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import Component from 'react-pure-render/component'
 import { Form } from 'formsy-react'
-import FormsyText from 'formsy-material-ui/lib/FormsyText'
 import RaisedButton from 'material-ui/lib/raised-button'
 import { ShrinkWrap } from './Flex'
+import FormsyText from './FormsyText'
 
 
 const nameValidationErrors = {
@@ -48,7 +48,6 @@ export default class AddNameForm extends Component {
                 <ShrinkWrap flexDirection="column">
 
                     <FormsyText
-                     style={{ marginBottom: '3rem' }}
                      autoFocus={true}
                      name="name"
                      required
