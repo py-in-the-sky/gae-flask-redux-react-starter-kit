@@ -20,6 +20,7 @@ injectTapEventPlugin()
 
 
 ReactDOM.render(
+    /* eslint-disable new-cap */
     <Root history={new createBrowserHistory()} store={store} />,
     document.getElementById('user-interface')
 )

@@ -49,6 +49,7 @@ describe('adding and subtracting greetings', function () {
 
         sinon.stub(window, 'fetch', makeMockFetch(store))
 
+        /* eslint-disable new-cap */
         this.appHistory = new createBrowserHistory()
         this.container = document.createElement('div')
         const appRoot = ReactDOM.render(
