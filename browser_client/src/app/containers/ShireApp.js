@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { ShirePage } from 'app/components';
-import { ActionCreators } from 'app/actions';
+import { connect } from 'react-redux'
+import { ShirePage } from 'app/components'
+import { ActionCreators } from 'app/actions'
 
 
 // Construct a 'smart container' around a 'dumb' component.
@@ -10,10 +10,10 @@ import { ActionCreators } from 'app/actions';
 
 
 const mapStateToProps = ({ names, windowSize, pendingRequests }) =>
-    ({ names, windowSize, requestsPending: pendingRequests.size > 0 });
+    ({ names, windowSize, requestsPending: pendingRequests.size > 0 })
 
 
-const createApp = () => connect(mapStateToProps, ActionCreators)(ShirePage);
+const createApp = () => connect(mapStateToProps, ActionCreators)(ShirePage)
 
 
-export default createApp();
+export default createApp()

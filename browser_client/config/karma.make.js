@@ -6,24 +6,24 @@
         http://karma-runner.github.io/0.13/config/configuration-file.html
         https://github.com/webpack/karma-webpack/tree/master/example
 */
-const assign = require('lodash').assign;
+const assign = require('lodash').assign
 
 
 module.exports = function makeKarmaConfig (opts) {
-    var __E2E__      = Boolean(opts.__E2E__);
-    var __ALL__      = Boolean(opts.__ALL__);
-    var __COVERAGE__ = Boolean(opts.__COVERAGE__);
+    var __E2E__      = Boolean(opts.__E2E__)
+    var __ALL__      = Boolean(opts.__ALL__)
+    var __COVERAGE__ = Boolean(opts.__COVERAGE__)
 
-    var entryFile;
+    var entryFile
 
     if (__E2E__)
-        entryFile = 'browser_client/__test__/index.e2e.js';
+        entryFile = 'browser_client/__test__/index.e2e.js'
     else if (__ALL__)
-        entryFile = 'browser_client/__test__/index.all.js';
+        entryFile = 'browser_client/__test__/index.all.js'
     else
-        entryFile = 'browser_client/__test__/index.unit.js';
+        entryFile = 'browser_client/__test__/index.unit.js'
 
-    var reportSlowerThan = (__E2E__ || __ALL__) ? 750 : 150;
+    var reportSlowerThan = (__E2E__ || __ALL__) ? 750 : 150
 
     var config = {
         basePath: '../..',
@@ -38,7 +38,7 @@ module.exports = function makeKarmaConfig (opts) {
         mochaReporter: {
             output: 'autowatch',
         },
-    };
+    }
 
     if (__COVERAGE__)
         return assign({}, config, {
@@ -48,9 +48,9 @@ module.exports = function makeKarmaConfig (opts) {
                 type: 'html'
             },
             webpack: require('./webpack.coverage'),
-        });
+        })
     else
         return assign({}, config, {
             webpack: require('./webpack.test'),
-        });
-};
+        })
+}

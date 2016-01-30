@@ -1,14 +1,14 @@
-import { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import { on, off } from 'material-ui/lib/utils/events';
-import { debounce } from 'app/utils/lodash';
-import { getWindowWidth } from 'app/utils/dom';
-import { windowSize } from 'app/utils/styles';
-import { connect } from 'react-redux';
-import { ActionCreators } from 'app/actions';
+import { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import { on, off } from 'material-ui/lib/utils/events'
+import { debounce } from 'app/utils/lodash'
+import { getWindowWidth } from 'app/utils/dom'
+import { windowSize } from 'app/utils/styles'
+import { connect } from 'react-redux'
+import { ActionCreators } from 'app/actions'
 
 
-const { windowData } = ActionCreators;
+const { windowData } = ActionCreators
 
 
 /*
@@ -17,26 +17,26 @@ const { windowData } = ActionCreators;
 * is a user action via the DOM, telling the app, "Hey, I'm
 * adjusting my window size, please adjust your styling accordingly."
 */
-export class WindowResizeListener extends PureComponent {
-    constructor(props) {
-        super(props);
+export class WindowResizeListener extends Component {
+    constructor (props) {
+        super(props)
 
-        this.sendWindowData = this.sendWindowData.bind(this);
+        this.sendWindowData = this.sendWindowData.bind(this)
 
         this.debouncedSendWindowData = debounce(
             this.sendWindowData,
             this.props.debounceTime,
             { leading: false, trailing: true, maxWait: this.props.debounceTime * 2 }
-        );
+        )
     }
 
     sendWindowData () {
-        const windowWidth = getWindowWidth();
-        this.props.windowData({ windowWidth, windowSize: windowSize(windowWidth) });
+        const windowWidth = getWindowWidth()
+        this.props.windowData({ windowWidth, windowSize: windowSize(windowWidth) })
     }
 
     componentWillMount () {
-        on(window, 'resize', this.debouncedSendWindowData);
+        on(window, 'resize', this.debouncedSendWindowData)
         // now that we're listening to the window-resize event,
         // for correctness, we set the current window
         // width to give the app the correct baseline:
@@ -49,11 +49,11 @@ export class WindowResizeListener extends PureComponent {
     }
 
     componentWillUnmount () {
-        off(window, 'resize', this.debouncedSendWindowData);
+        off(window, 'resize', this.debouncedSendWindowData)
     }
 
     render () {
-        return null;
+        return null
     }
 }
 
@@ -61,12 +61,12 @@ export class WindowResizeListener extends PureComponent {
 WindowResizeListener.propTypes = {
     debounceTime: PropTypes.number.isRequired,
     windowData:   PropTypes.func.isRequired,
-};
+}
 
 
 WindowResizeListener.defaultProps = {
     debounceTime: 350,
-};
+}
 
 
-export default connect(undefined, { windowData })(WindowResizeListener);
+export default connect(undefined, { windowData })(WindowResizeListener)

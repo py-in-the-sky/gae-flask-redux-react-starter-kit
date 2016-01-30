@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import Navigation from './Navigation';
-import PageHandler from './PageHandler';
-import { Flex, WindowFrame, ShrinkWrap } from './Flex';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import Navigation from './Navigation'
+import PageHandler from './PageHandler'
+import { Flex, WindowFrame, ShrinkWrap } from './Flex'
 
 
-export default class Layout extends PureComponent {
+export default class Layout extends Component {
     render () {
-        const { location, children } = this.props;
+        const { location, children } = this.props
 
         return (
             <WindowFrame>
@@ -23,7 +23,7 @@ export default class Layout extends PureComponent {
                 </Flex>
 
             </WindowFrame>
-        );
+        )
     }
 }
 
@@ -31,4 +31,4 @@ export default class Layout extends PureComponent {
 Layout.propTypes = {
     children:    PropTypes.element.isRequired,
     location:    PropTypes.object.isRequired,
-};
+}

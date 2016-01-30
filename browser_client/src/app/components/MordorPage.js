@@ -1,27 +1,27 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import Greetings from './Greetings';
-import GreetingControls from './GreetingControls';
-import Paper from 'material-ui/lib/paper';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import { Themes } from 'app/utils/styles';
-import { Frame } from './Flex';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import Greetings from './Greetings'
+import GreetingControls from './GreetingControls'
+import Paper from 'material-ui/lib/paper'
+import ThemeManager from 'material-ui/lib/styles/theme-manager'
+import { Themes } from 'app/utils/styles'
+import { Frame } from './Flex'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 
 
-const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor);
+const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor)
 
 
-export default class MordorPage extends PureComponent {
+export default class MordorPage extends Component {
     componentDidMount () {
         if (this.props.names.size === 0)
-            this.props.addName();
+            this.props.addName()
     }
 
     getChildContext () {
         return {
             muiTheme: MordorTheme,
-        };
+        }
     }
 
     render () {
@@ -30,7 +30,7 @@ export default class MordorPage extends PureComponent {
             requestsPending,
             addName,
             subtractLastName,
-        } = this.props;
+        } = this.props
 
         return (
             <Frame>
@@ -48,7 +48,7 @@ export default class MordorPage extends PureComponent {
                 </Paper>
 
             </Frame>
-        );
+        )
     }
 }
 
@@ -60,9 +60,9 @@ MordorPage.propTypes = {
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,
-};
+}
 
 
 MordorPage.childContextTypes = {
     muiTheme: PropTypes.object.isRequired,
-};
+}

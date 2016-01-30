@@ -63,8 +63,8 @@
 */
 
 
-import BaseFlex from 'jsxstyle/Flex';
-import curry from 'jsxstyle/curry';
+import BaseFlex from 'jsxstyle/Flex'
+import curry from 'jsxstyle/curry'
 
 
 export const Flex = curry(BaseFlex, {
@@ -75,29 +75,29 @@ export const Flex = curry(BaseFlex, {
     justifyContent:     'flex-start',
     order:              0,
     position:           'relative',
-});
+})
 
 
 export const ColumnWise = curry(Flex, {
     flexDirection: 'column',
-});
+})
 
 
 export const Column = curry(Flex, {
     flexDirection: 'column',
     alignItems:    'stretch',
-});
+})
 
 
 export const RowWise = curry(Flex, {
     flexDirection: 'row',
-});
+})
 
 
 export const Row = curry(Flex, {
     flexDirection: 'row',
     alignItems:    'stretch',
-});
+})
 
 
 export const Container = curry(Flex, {
@@ -106,7 +106,7 @@ export const Container = curry(Flex, {
     flexWrap:      'nowrap',
     overflow:      'hidden',
     padding:       '1rem',
-});
+})
 
 
 /*
@@ -122,13 +122,13 @@ export const WindowFrame = curry(Flex, {
     minHeight:     '400px',
     overflowX:     'hidden',
     overflowY:     'auto',
-});
+})
 
 
 export const Frame = curry(Container, {
     height:         '100%',
     justifyContent: 'center',
-});
+})
 
 
 /*
@@ -149,4 +149,4 @@ export const ShrinkWrap = curry(Flex, {
     flex:          '0 0 auto',
     flexDirection: 'row',
     flexWrap:      'wrap',
-});
+})

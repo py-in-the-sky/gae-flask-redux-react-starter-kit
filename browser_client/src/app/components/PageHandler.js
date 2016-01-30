@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
-import { VelocityTransitionGroup } from 'velocity-react';
-import PureComponent from 'react-pure-render/component';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import { VelocityTransitionGroup } from 'velocity-react'
 
 
-export default class PageHandler extends PureComponent {
+export default class PageHandler extends Component {
     render () {
-        const { children, location: { pathname } } = this.props;
+        const { children, location: { pathname } } = this.props
 
         return (
             <VelocityTransitionGroup
@@ -18,7 +18,7 @@ export default class PageHandler extends PureComponent {
                 </div>
 
             </VelocityTransitionGroup>
-        );
+        )
     }
 }
 
@@ -26,7 +26,7 @@ export default class PageHandler extends PureComponent {
 PageHandler.propTypes = {
     children:    PropTypes.element.isRequired,
     location:    PropTypes.object.isRequired,
-};
+}
 
 
 const pageStyle = {
@@ -35,14 +35,14 @@ const pageStyle = {
     bottom: 0,
     left: 0,
     right: 0,
-};
+}
 
 
 const defaultAnimationOpts = {
     duration: 700,
     // easing: [ 250, 15 ],  // could use spring instead
     easing: 'easeOutExpo',
-};
+}
 
 
 const pageEnter = {
@@ -50,7 +50,7 @@ const pageEnter = {
     animation: {
         translateX: [0, '-100%'],
     },
-};
+}
 
 
 const pageLeave = {
@@ -58,4 +58,4 @@ const pageLeave = {
     animation: {
         translateX: ['100%', 0],
     },
-};
+}

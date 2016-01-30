@@ -1,16 +1,16 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
-import { Form } from 'formsy-react';
-import FormsyText from 'formsy-material-ui/lib/FormsyText';
-import RaisedButton from 'material-ui/lib/raised-button';
-import { ShrinkWrap } from './Flex';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
+import { Form } from 'formsy-react'
+import FormsyText from 'formsy-material-ui/lib/FormsyText'
+import RaisedButton from 'material-ui/lib/raised-button'
+import { ShrinkWrap } from './Flex'
 
 
 const nameValidationErrors = {
     isAlpha:   'You may only use letters',
     minLength: 'The name is too short',
     maxLength: 'The name is too long',
-};
+}
 
 
 // external validation errors can come in from server
@@ -26,14 +26,14 @@ const nameValidationErrors = {
 //  /master/API.md#updateinputswitherrorerrors
 
 
-export default class AddNameForm extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state  = { isValid: false };
-        this.submit = this.submit.bind(this);
-        this.clearServerValidation = this.clearServerValidation.bind(this);
-        this.setValid = () => this.setState({ isValid: true });
-        this.setInvalid = () => this.setState({ isValid: false});
+export default class AddNameForm extends Component {
+    constructor (props) {
+        super(props)
+        this.state  = { isValid: false }
+        this.submit = this.submit.bind(this)
+        this.clearServerValidation = this.clearServerValidation.bind(this)
+        this.setValid = () => this.setState({ isValid: true })
+        this.setInvalid = () => this.setState({ isValid: false })
     }
 
     render () {
@@ -68,21 +68,21 @@ export default class AddNameForm extends PureComponent {
                 </ShrinkWrap>
 
             </Form>
-        );
+        )
     }
 
     submit (model, resetForm) {
-        this.props.addName(model.name);
-        resetForm();
+        this.props.addName(model.name)
+        resetForm()
     }
 
     componentWillUnmount () {
-        this.clearServerValidation();
+        this.clearServerValidation()
     }
 
     clearServerValidation () {
         if (this.props.serverValidation.message) {
-            this.props.clearServerValidation();
+            this.props.clearServerValidation()
         }
     }
 }
@@ -96,4 +96,4 @@ AddNameForm.propTypes = {
             name: PropTypes.string.isRequired,
         }),
     }).isRequired,
-};
+}

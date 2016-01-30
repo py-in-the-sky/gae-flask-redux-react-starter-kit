@@ -1,42 +1,21 @@
 {
-    "extends": "eslint:recommended",
-
     "parser": "babel-eslint",
 
-    "rules": {
-        "no-debugger": 2,
-        "react/jsx-uses-react": 2,
-        "react/jsx-uses-vars": 2,
-        "react/react-in-jsx-scope": 2,
-        "react/prop-types": [ 2, { "ignore": "children" } ],
-        "react/jsx-no-duplicate-props": 2,
-        "react/jsx-no-undef": 2,
-        "react/no-direct-mutation-state": 2,
-        "react/no-unknown-property": 2,
-        "linebreak-style": [ 2, "unix" ],
-        "no-console": 2,
-        "eqeqeq": 2,
-        "prefer-const": 2,
-        "require-yield": 2,
-        "quotes": [ 1, "single" ],
-        "semi": [ 1, "always" ],
-        "no-unused-vars": 1,
-        "no-cond-assign": 1,
-        "constructor-super": 1,
-        "no-this-before-super": 1,
-        "valid-jsdoc": 1,
-        "no-var": 1,
-        "prefer-arrow-callback": 1,
-        "vars-on-top": 0,
-        "prefer-template": 1,
-        "prefer-reflect": 1,
-        "eol-last": 1,
-        "no-mixed-requires": 1,
-        "consistent-return": 1,
-        "no-mixed-spaces-and-tabs": 1,
-        "camelcase": 1,
-        "indent": [ 0, 4 ],
-        "comma-dangle": 0
+    "extends": [
+        "eslint:recommended",
+        "standard",
+        "standard-react"
+    ],
+
+    "plugins": [
+        "react",
+        "babel"
+    ],
+
+    "ecmaFeatures": {
+        "modules": true,
+        "jsx": true,
+        "experimentalObjectRestSpread": true
     },
 
     "env": {
@@ -46,19 +25,30 @@
         "node": true
     },
 
-    "ecmaFeatures": {
-        "modules": true,
-        "jsx": true,
-        "experimentalObjectRestSpread": true
-    },
-
-    "plugins": [ "react" ],
-
     "globals": {
         "__DEV__": false,
         "__TEST__": false,
         "expect": false,
         "chai": false,
         "sinon": false
+    },
+
+    "rules": {
+        "comma-dangle": 0,
+        "indent": [ 0, 4 ],
+        "jsx-quotes": [ 2, "prefer-double" ],
+        "key-spacing": 0,
+        "no-multiple-empty-lines": 0,
+        "no-multi-spaces": 0,
+        "react/jsx-boolean-value": 0,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2,
+        "react/prop-types": 2,
+        "react/jsx-no-duplicate-props": 2,
+        "react/jsx-no-undef": 2,
+        "react/no-direct-mutation-state": 2,
+        "react/no-unknown-property": 2,
+        "space-in-parens": 0
     }
 }

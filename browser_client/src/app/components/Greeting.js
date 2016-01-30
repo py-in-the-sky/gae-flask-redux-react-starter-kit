@@ -1,16 +1,16 @@
-import React, { PropTypes } from 'react';
-import PureComponent from 'react-pure-render/component';
+import React, { PropTypes } from 'react'
+import Component from 'react-pure-render/component'
 
 
-export default class Greeting extends PureComponent {
+export default class Greeting extends Component {
     render () {
-        const { salutation, name } = this.props;
+        const { salutation, name } = this.props
 
         return (
             <div>
                 {`${salutation}, ${name.name}!`}
             </div>
-        );
+        )
     }
 }
 
@@ -20,4 +20,4 @@ Greeting.propTypes = {
     name: PropTypes.shape({
         name: PropTypes.string.isRequired,
     }).isRequired,
-};
+}

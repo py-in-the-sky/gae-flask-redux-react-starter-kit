@@ -2,19 +2,19 @@
 /* eslint-disable prefer-template */
 
 
-var path    = require('path');
-var webpack = require('webpack');
-const assign = require('lodash').assign;
+var path    = require('path')
+var webpack = require('webpack')
+const assign = require('lodash').assign
 
 
-var devPublicPath = 'http://localhost:8081/static/';
+var devPublicPath = 'http://localhost:8081/static/'
 // Trailing slash is critical.
 // The JS, CSS, etc. serverd by the webpack dev server will
 // be available at publicPath.
 // Conceptually, devPublicPath will be your local dev CDN for
 // your own JS, CSS, etc. bundles.
 
-var context = path.join(__dirname, '..', '..');
+var context = path.join(__dirname, '..', '..')
 
 
 var configDefaults = {
@@ -30,11 +30,11 @@ var configDefaults = {
         extensions: ['', '.js'],
     },
     // externals: { jquery: '$' },
-};
+}
 
 
-var defautlBabelPresets = [ 'react', 'es2015', 'stage-2' ];
-var defaultBabelPlugins = [ 'add-module-exports' ];
+var defautlBabelPresets = [ 'react', 'es2015', 'stage-2' ]
+var defaultBabelPlugins = [ 'add-module-exports' ]
 
 
 var codeCoveragePreloader = {
@@ -51,18 +51,18 @@ var codeCoveragePreloader = {
             },
         }
     ]
-};
+}
 
 
 module.exports = function makeWebpackConfig (opts) {
-    var __DEV__      = Boolean(opts.__DEV__);
-    var __TEST__     = Boolean(opts.__TEST__);
-    var __COVERAGE__ = Boolean(opts.__COVERAGE__);
+    var __DEV__      = Boolean(opts.__DEV__)
+    var __TEST__     = Boolean(opts.__TEST__)
+    var __COVERAGE__ = Boolean(opts.__COVERAGE__)
 
-    var nodeEnv;
-    if (__DEV__) nodeEnv = 'development';
-    else if (__TEST__) nodeEnv = 'test';
-    else nodeEnv = 'production';
+    var nodeEnv
+    if (__DEV__) nodeEnv = 'development'
+    else if (__TEST__) nodeEnv = 'test'
+    else nodeEnv = 'production'
 
     var EnvironmentPlugin = new webpack.DefinePlugin({
         __DEV__:  __DEV__,
@@ -75,17 +75,15 @@ module.exports = function makeWebpackConfig (opts) {
         // https://github.com/webpack/react-starter/blob/master/make-webpack-config.js#L131
         // https://facebook.github.io/react/downloads.html#npm
         // https://github.com/facebook/react/issues/2938
-    });
+    })
 
-    var babelPresets = defautlBabelPresets.concat();
-    var babelPlugins = defaultBabelPlugins.concat();
+    var babelPresets = defautlBabelPresets.concat()
+    var babelPlugins = defaultBabelPlugins.concat()
     if (__DEV__) {
-        babelPresets = babelPresets.concat('react-hmre');
-    }
-    else if (__TEST__) {
-        null;
-    }
-    else {  // production
+        babelPresets = babelPresets.concat('react-hmre')
+    } else if (__TEST__) {
+        null
+    } else {  // production
         babelPlugins = babelPlugins.concat(
             // 'transform-runtime',
             // Can use transform-runtime and the underlying core-js
@@ -99,7 +97,7 @@ module.exports = function makeWebpackConfig (opts) {
             'transform-remove-debugger',
             'transform-react-inline-elements',
             'transform-react-constant-elements'
-        );
+        )
     }
 
     configDefaults['module'] = {
@@ -118,15 +116,15 @@ module.exports = function makeWebpackConfig (opts) {
                 },
             },
         ],
-    };
+    }
 
     if (__DEV__) {
         // SIDE EFFECT: copy `index.dev.html` to `gae/static/index.html`
-        var fs = require('fs-extra');
-        var htmlTemplate = path.join('browser_client', 'html', 'index.dev.html');
-        var htmlTarget = path.join('gae', 'static', 'index.html');
-        fs.ensureFileSync(htmlTarget);
-        fs.copy(htmlTemplate, htmlTarget, { clobber: true });
+        var fs = require('fs-extra')
+        var htmlTemplate = path.join('browser_client', 'html', 'index.dev.html')
+        var htmlTarget = path.join('gae', 'static', 'index.html')
+        fs.ensureFileSync(htmlTarget)
+        fs.copy(htmlTemplate, htmlTarget, { clobber: true })
 
         return assign({}, configDefaults, {
             debug: true,
@@ -144,10 +142,9 @@ module.exports = function makeWebpackConfig (opts) {
                 devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
             }),
             plugins: [ EnvironmentPlugin ],
-        });
-    }
-    else if (__TEST__) {
-        var preLoaders = __COVERAGE__ ? codeCoveragePreloader : {};
+        })
+    } else if (__TEST__) {
+        var preLoaders = __COVERAGE__ ? codeCoveragePreloader : {}
 
         return {
             devtool: 'inline-source-map',
@@ -175,10 +172,9 @@ module.exports = function makeWebpackConfig (opts) {
                     /node_modules\/sinon\//,
                 ],
             }),
-        };
-    }
-    else {
-        var HtmlWebpackPlugin = require('html-webpack-plugin');
+        }
+    } else {
+        var HtmlWebpackPlugin = require('html-webpack-plugin')
 
         return assign({}, configDefaults, {
             plugins: [
@@ -198,6 +194,6 @@ module.exports = function makeWebpackConfig (opts) {
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.optimize.OccurenceOrderPlugin(),
             ],
-        });
+        })
     }
-};
+}

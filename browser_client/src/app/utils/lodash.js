@@ -1,7 +1,7 @@
-import uniqueId from 'lodash/utility/uniqueId';
-import memoize  from 'lodash/function/memoize';
-import isPlainObject from 'lodash/lang/isPlainObject';
-import debounce from 'lodash/function/debounce';
+import uniqueId from 'lodash/utility/uniqueId'
+import memoize  from 'lodash/function/memoize'
+import isPlainObject from 'lodash/lang/isPlainObject'
+import debounce from 'lodash/function/debounce'
 
 
 const defaultExport = {
@@ -9,7 +9,7 @@ const defaultExport = {
     memoize,
     isPlainObject,
     debounce,
-};
+}
 
 
 const makeExport = () => {
@@ -18,15 +18,14 @@ const makeExport = () => {
         // allows us to make use of sinon's fake time and control functions
         // whose timing is regulated by certain lodash functions, such as
         // `debounce` and `throttle`.
-        const lodash = require('lodash').runInContext(window);
+        const lodash = require('lodash').runInContext(window)
         return Object.keys(defaultExport).reduce((obj, key) =>
             ({ ...obj, [key]: lodash[key] })
-        , {});
+        , {})
+    } else {
+        return defaultExport
     }
-    else {
-        return defaultExport;
-    }
-};
+}
 
 
-export default makeExport();
+export default makeExport()

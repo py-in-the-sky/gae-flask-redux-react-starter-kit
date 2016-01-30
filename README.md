@@ -142,6 +142,9 @@ The browser client's tests make extensive use of `deepFreeze`.  This means that 
 
 This has the added benefit of freeing you from having to always use ImmutableJS structures, or some other immutable structures, just for the sake of implementing an app that treats data as immutable.  Then you're free to choose ImmutableJS only when there's a clear performance or convenience benefit.  Sometimes it's convenient just to use plain JS objects for read-only state that will not be updated during the app's life.
 
+### Importing from `react-pure-render/component`
+
+When importing this class, I bind it to the name "Component" rather than "PureComponent"; this is to [help](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md#about-component-detection) eslint detect React components in the code and enforce important lint rules.
 
 ### Flask Callbacks and Decorators
 
