@@ -80,7 +80,26 @@ module.exports = function makeWebpackConfig (opts) {
     var babelPresets = defautlBabelPresets.concat()
     var babelPlugins = defaultBabelPlugins.concat()
     if (__DEV__) {
-        babelPresets = babelPresets.concat('react-hmre')
+        var devReactTransforms = [
+            {
+                'transform': 'react-transform-hmr',
+                'imports': [ 'react' ],
+                'locals': [ 'module' ],
+            }, {
+                'transform': 'react-transform-catch-errors',
+                'imports': [ 'react', 'redbox-react' ],
+            },
+        ]
+
+        if (process.env.hasOwnProperty('VIS')) {
+            devReactTransforms = devReactTransforms.concat({
+                'transform': 'react-transform-render-visualizer',
+            })
+        }
+
+        babelPlugins = babelPlugins.concat([[
+            'react-transform', { 'transforms': devReactTransforms }
+        ]])
     } else if (__TEST__) {
         null
         // babelPlugins = babelPlugins.concat('transform-runtime')
