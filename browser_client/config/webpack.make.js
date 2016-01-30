@@ -91,7 +91,7 @@ module.exports = function makeWebpackConfig (opts) {
             },
         ]
 
-        if (process.env.hasOwnProperty('VIS')) {
+        if (process.env.hasOwnProperty('REACT_VIS')) {
             devReactTransforms = devReactTransforms.concat({
                 'transform': 'react-transform-render-visualizer',
             })
