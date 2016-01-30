@@ -39,7 +39,6 @@ export default class AddNameForm extends Component {
     render () {
         return (
             <Form
-             ref="form"
              validationErrors={this.props.serverValidation.message}
              onChange={this.clearServerValidation}
              onValid={this.setValid}
@@ -50,7 +49,7 @@ export default class AddNameForm extends Component {
 
                     <FormsyText
                      style={{ marginBottom: '3rem' }}
-                     ref="name"
+                     autoFocus={true}
                      name="name"
                      required
                      formNoValidate
@@ -59,7 +58,6 @@ export default class AddNameForm extends Component {
                      validations="isAlpha,minLength:1,maxLength:10" />
 
                     <RaisedButton
-                     ref="submit"
                      type="submit"
                      primary={true}
                      disabled={!this.state.isValid}

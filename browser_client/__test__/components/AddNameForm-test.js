@@ -6,6 +6,7 @@ import {
     findRenderedDOMComponentWithTag,
 } from 'react-addons-test-utils'
 import { deepFreeze } from 'app/utils/deepFreeze'
+import { Form } from 'formsy-react'
 import AddNameForm from 'app/components/AddNameForm'
 
 
@@ -20,7 +21,7 @@ describe('user interaction', () => {
         const wrapper = mount(<AddNameForm {...props} />)
         const input = wrapper.find('input').first()
         const button = wrapper.find('button').first()
-        const formsy = wrapper.ref('form')
+        const formsy = wrapper.find(Form)
 
         return { props, wrapper, input, button, formsy }
     }
