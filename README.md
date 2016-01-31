@@ -150,7 +150,13 @@ This has the added benefit of freeing you from having to always use ImmutableJS 
 
 When importing this class, I bind it to the name "Component" rather than "PureComponent"; this is to [help](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md#about-component-detection) eslint detect React components in the code and enforce important lint rules.
 
-### Flask Callbacks and Decorators
+### [Redux principles](https://egghead.io/series/getting-started-with-redux)
+
+* Minimal actions and state
+
+Actions carry just enough information for the store to generate the right state; the store carries just enough state for the React components to provide the right UI.  Any state that can be computed from other pieces of state in the store should be taken out of the store and left implicit; this data can be computed later by containers or components of the app, using the explicit state of the store.  Even if this implicit data is costly to compute and the same data may need to be recomputed several times throughout the life of the app, it's better left implicit; you can use pure-rendering components and memoized pure functions down the line to compute the data.  This provides a good solution: your app is kept simple by managing the fewest pieces of state as possible, and your app is kept performant by using memoized pure functions and pure-rendering components to calculate and render implicit state the fewest number of times as possible for the UI.
+
+### Flask callbacks and decorators
 
 Using Flask-RESTful, the order in which callbacks and decorators are invoked in a request-response cycle is roughly this:
 
