@@ -31,6 +31,10 @@ This is at the heart of the devlopment process.  It will run the Google App Engi
 
 Furthermore, if you'd like to interact with the app directly, you can visit the `/_console` path in your browser (i.e., `localhost:8080/_console`).  You can also instert a `werkzeug_debugger()` call in the code to interact with the app at a specific point in execution, and then when this code is activated by an HTTP request from the browser client, an interactive Werkzeug debugger stack trace will open in the browser.
 
+* `REACT_VIS=true honcho start gae webpack`
+
+The same as the previous command with the addition of setting the `REACT_VIS` environment variable.  This will transform your React components with [react-transform-render-visualizer](https://github.com/spredfast/react-transform-render-visualizer).  Then when you interact with your app in the browser, your React components will show where, why, and how often they re-render.  You can use this information to find bottlenecks or hogs in your app's UI that could possibly use some refactoring and optimization.
+
 * `honcho start gae pytest`
 
 If you're working solely on the back end and want to spin up only the relevant processes (i.e., the GAE dev server and Pytest test runner), you can run this command.  You can interact with the application via a client like [Postman](https://www.getpostman.com/).  You can also work interactively with the application via the GAE dev server's [console](https://cloud.google.com/appengine/docs/python/tools/devserver?hl=en#Python_The_Interactive_Console) or via `localhost:8080/_console`.
