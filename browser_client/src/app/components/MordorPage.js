@@ -33,7 +33,7 @@ export default class MordorPage extends Component {
         } = this.props
 
         return (
-            <Frame>
+            <Frame backgroundColor="gray">
 
                 <Paper zDepth={4} style={darkWhiteText}>
 

@@ -126,7 +126,7 @@ export const WindowFrame = curry(Flex, {
 
 
 export const Frame = curry(Container, {
-    height:         '100%',
+    minHeight:      '100%',
     justifyContent: 'center',
 })
 

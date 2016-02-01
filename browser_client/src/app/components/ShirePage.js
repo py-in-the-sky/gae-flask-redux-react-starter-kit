@@ -37,6 +37,7 @@ export default class ShirePage extends Component {
 
         return (
             <Frame
+             backgroundColor="gray"
              backgroundSize="cover"
              background={`${imageUrlMarkup} no-repeat center center fixed`}>
 

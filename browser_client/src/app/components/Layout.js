@@ -16,7 +16,7 @@ export default class Layout extends Component {
                     <Navigation />
                 </ShrinkWrap>
 
-                <Flex backgroundColor="gray">
+                <Flex>
                     <PageHandler location={location}>
                         {children}
                     </PageHandler>

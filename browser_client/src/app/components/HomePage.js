@@ -31,7 +31,7 @@ export default class HomePage extends Component {
 
         return (
             <Block height="100%">
-                <Frame>
+                <Frame backgroundColor="gray">
                     <Paper zDepth={4}>
                         <Container justifyContent="space-between">
                             <Container padding={names.size ? '1rem' : 0}>
