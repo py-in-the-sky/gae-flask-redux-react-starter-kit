@@ -6,6 +6,7 @@ gae/static/index.html
 gae/static/*.js
 gae/static/*.map
 __coverage_reports__/
+__stats__/
 
 
 ### General NodeJS ###

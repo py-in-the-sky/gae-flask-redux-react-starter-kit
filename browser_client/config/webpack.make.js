@@ -205,6 +205,7 @@ module.exports = function makeWebpackConfig (opts) {
         }
     } else {
         var HtmlWebpackPlugin = require('html-webpack-plugin')
+        var StatsPlugin       = require('stats-webpack-plugin')
 
         return assign({}, configDefaults, {
             plugins: [
@@ -223,6 +224,10 @@ module.exports = function makeWebpackConfig (opts) {
                 new webpack.optimize.DedupePlugin(),
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.optimize.OccurenceOrderPlugin(),
+                new StatsPlugin(path.join('..', '..', '__stats__', 'webpack.json'), {
+                    chunkModules: true,
+                    exclude: [/node_modules[\\\/]react/],
+                }),
             ],
         })
     }
