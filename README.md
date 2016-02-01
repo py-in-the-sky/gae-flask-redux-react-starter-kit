@@ -91,6 +91,10 @@ Perf.printWasted()
 // view table of the time spent, and where, on unnecessary re-renders
 ```
 
+* `make build && honcho start gae`
+
+This will run the app locally with a production build of the browser client.  The `make build` part will also write stats about the Webpack bundle's build to `__stats__/webpack.json`, relative to the project root.  Use the `webpack.json` file along with [Webpack's analyse tool](http://webpack.github.io/analyse/) to see how various libraries and modules contribute to your production bundle's size.
+
 
 ## Managing Dependencies
 
