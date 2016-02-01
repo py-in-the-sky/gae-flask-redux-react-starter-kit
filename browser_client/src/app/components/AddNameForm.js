@@ -48,7 +48,6 @@ export default class AddNameForm extends Component {
                 <ShrinkWrap flexDirection="column">
 
                     <FormsyText
-                     autoFocus={true}
                      name="name"
                      required
                      formNoValidate

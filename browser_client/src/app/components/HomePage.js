@@ -10,7 +10,8 @@ import { Themes } from 'app/utils/styles'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 
-const DefaultTheme = ThemeManager.getMuiTheme(Themes.Default)
+const DefaultTheme   = ThemeManager.getMuiTheme(Themes.Default)
+const overflowHidden = { overflow: 'hidden' }
 
 
 export default class HomePage extends Component {
@@ -32,7 +33,7 @@ export default class HomePage extends Component {
         return (
             <Block height="100%">
                 <Frame>
-                    <Paper style={{ overflow: 'hidden' }} zDepth={4}>
+                    <Paper style={overflowHidden} zDepth={4}>
                         <Container justifyContent="space-between">
                             <Container padding={names.size ? '1rem' : 0}>
                                 <Greetings

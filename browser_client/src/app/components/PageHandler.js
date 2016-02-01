@@ -41,7 +41,7 @@ const pageStyle = {
 
 
 const defaultAnimationOpts = {
-    duration: 700,
+    duration: 1000,
     // easing: [ 250, 15 ],  // could use spring instead
     easing: 'easeOutExpo',
 }

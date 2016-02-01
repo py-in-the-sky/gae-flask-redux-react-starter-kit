@@ -58,6 +58,7 @@
     "react-redux": "^4.0.6",
     "react-router": "^1.0.3",
     "react-tap-event-plugin": "^0.2.1",
+    "recompose": "^0.14.5",
     "redux": "^3.0.5",
     "redux-actions": "^0.9.0",
     "redux-thunk": "^1.0.3",

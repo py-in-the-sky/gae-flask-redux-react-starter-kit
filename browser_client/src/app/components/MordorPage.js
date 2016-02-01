@@ -9,7 +9,8 @@ import { Frame } from './Flex'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 
-const MordorTheme = ThemeManager.getMuiTheme(Themes.Mordor)
+const MordorTheme   = ThemeManager.getMuiTheme(Themes.Mordor)
+const darkWhiteText = { color: '#eeeeee' }
 
 
 export default class MordorPage extends Component {
@@ -34,7 +35,7 @@ export default class MordorPage extends Component {
         return (
             <Frame>
 
-                <Paper zDepth={4} style={{ color: '#eeeeee' }}>
+                <Paper zDepth={4} style={darkWhiteText}>
 
                     <GreetingControls
                      requestsPending={requestsPending}
