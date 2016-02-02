@@ -3,16 +3,24 @@ import Component from 'react-pure-render/component'
 import Navigation from './Navigation'
 import PageHandler from './PageHandler'
 import { Flex, WindowFrame, ShrinkWrap } from './Flex'
+import { imageMarkup } from 'app/utils/images'
 
 
 export default class Layout extends Component {
     render () {
-        const { location, children } = this.props
+        const { location: { pathname }, children, windowSize } = this.props
+        const imageUrl = imageMarkup(pathname, windowSize)
+        const background = imageUrl
+            ? `${imageUrl} no-repeat center center fixed`
+            : undefined
 
         return (
-            <WindowFrame>
+            <WindowFrame
+             backgroundColor="white"
+             backgroundSize="cover"
+             background={background}>
 
-                <ShrinkWrap>
+                <ShrinkWrap backgroundColor="white">
                     <Navigation />
                 </ShrinkWrap>
 
@@ -29,6 +37,7 @@ export default class Layout extends Component {
 
 
 Layout.propTypes = {
+    windowSize: PropTypes.number.isRequired,
     children: PropTypes.element.isRequired,
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,

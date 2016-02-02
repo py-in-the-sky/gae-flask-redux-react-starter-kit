@@ -9,8 +9,8 @@ import { ActionCreators } from 'app/actions'
 // real-world app.
 
 
-const mapStateToProps = ({ names, windowSize, pendingRequests }) =>
-    ({ names, windowSize, requestsPending: pendingRequests.size > 0 })
+const mapStateToProps = ({ names, pendingRequests }) =>
+    ({ names, requestsPending: pendingRequests.size > 0 })
 
 
 const createApp = () => connect(mapStateToProps, ActionCreators)(ShirePage)

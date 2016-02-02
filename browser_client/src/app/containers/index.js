@@ -7,7 +7,8 @@ import ShireApp from './ShireApp'
 import MordorApp from './MordorApp'
 import WindowResizeListener from './WindowResizeListener'
 import CriticalErrorAlert from './CriticalErrorAlert'
-import { Layout } from 'app/components'
+import LayoutApp from './LayoutApp'
+import { HOME, SHIRE, MORDOR } from 'app/utils/Routes'
 
 
 export default class Root extends Component {
@@ -68,12 +69,12 @@ export default class Root extends Component {
                     <WindowResizeListener />
                     <CriticalErrorAlert />
                     <Router history={this.props.history}>
-                        <Route path="/" component={Layout}>
+                        <Route path={HOME} component={LayoutApp}>
                             <IndexRoute component={HomeApp} />
-                            <Route path="/shire" component={ShireApp} />
-                            <Route path="/mordor" component={MordorApp} />
+                            <Route path={SHIRE}  component={ShireApp} />
+                            <Route path={MORDOR} component={MordorApp} />
                         </Route>
-                        <Redirect from="*" to="/" />
+                        <Redirect from="*" to={HOME} />
                     </Router>
                 </div>
             </Provider>

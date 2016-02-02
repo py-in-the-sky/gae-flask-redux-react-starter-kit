@@ -4,6 +4,7 @@ import IconMenu from 'material-ui/lib/menus/icon-menu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 import IconButton from 'material-ui/lib/icon-button'
 import MenuIcon from 'material-ui/lib/svg-icons/navigation/menu'
+import { HOME, SHIRE, MORDOR } from 'app/utils/Routes'
 
 
 const MenuButtonElement = <IconButton><MenuIcon /></IconButton>
@@ -33,9 +34,9 @@ export default class Navigation extends Component {
              iconButtonElement={MenuButtonElement}
              openDirection="bottom-right">
 
-                <MenuItem route="/"       primaryText="Home" />
-                <MenuItem route="/shire"  primaryText="Shire Theme" />
-                <MenuItem route="/mordor" primaryText="Mordor Theme" />
+                <MenuItem route={HOME}   primaryText="Home" />
+                <MenuItem route={SHIRE}  primaryText="Shire Theme" />
+                <MenuItem route={MORDOR} primaryText="Mordor Theme" />
 
             </IconMenu>
         )

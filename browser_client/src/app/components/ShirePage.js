@@ -5,7 +5,6 @@ import GreetingControls from './GreetingControls'
 import Paper from 'material-ui/lib/paper'
 import ThemeManager from 'material-ui/lib/styles/theme-manager'
 import { Themes } from 'app/utils/styles'
-import { shireBackgroundImageMarkup } from 'app/utils/images'
 import { Frame, Container } from './Flex'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
@@ -27,19 +26,13 @@ export default class ShirePage extends Component {
     render () {
         const {
             names,
-            windowSize,
             requestsPending,
             addName,
             subtractLastName,
         } = this.props
 
-        const imageUrlMarkup = shireBackgroundImageMarkup(windowSize)
-
         return (
-            <Frame
-             backgroundColor="gray"
-             backgroundSize="cover"
-             background={`${imageUrlMarkup} no-repeat center center fixed`}>
+            <Frame>
 
                 <Paper zDepth={4}>
 
@@ -74,7 +67,6 @@ ShirePage.propTypes = {
     names: ImmutablePropTypes.listOf( PropTypes.shape({
         name: PropTypes.string.isRequired,
     }) ).isRequired,
-    windowSize:       PropTypes.number.isRequired,
     requestsPending:  PropTypes.bool.isRequired,
     addName:          PropTypes.func.isRequired,
     subtractLastName: PropTypes.func.isRequired,

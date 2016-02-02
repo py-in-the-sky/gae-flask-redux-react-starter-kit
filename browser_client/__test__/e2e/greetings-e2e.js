@@ -18,6 +18,7 @@ import _ from 'lodash'
 import RaisedButton from 'material-ui/lib/raised-button'
 import Greeting from 'app/components/Greeting'
 import { ActionTypes as T } from 'app/actions'
+import { SHIRE, HOME } from 'app/utils/Routes'
 
 
 const returnMockThenable = () => ({
@@ -39,7 +40,7 @@ const makeMockFetch = store => () => {
 
 describe('adding and subtracting greetings', function () {
     afterEach(function () {
-        this.appHistory.replaceState(null, '/')
+        this.appHistory.replaceState(null, HOME)
         ReactDOM.unmountComponentAtNode(this.container)
         if (window.fetch.restore) window.fetch.restore()
     })
@@ -58,7 +59,7 @@ describe('adding and subtracting greetings', function () {
         )
 
         findOnPage = createFinder(appRoot)
-        this.appHistory.pushState(null, '/shire')
+        this.appHistory.pushState(null, SHIRE)
         const [ raisedAddButton, raisedSubtractButton ] = findOnPage(RaisedButton)
         const addButton = createFinder(raisedAddButton)('button')[0]
         const subtractButton = createFinder(raisedSubtractButton)('button')[0]
