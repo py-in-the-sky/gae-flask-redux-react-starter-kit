@@ -3,7 +3,10 @@ import Component from 'react-pure-render/component'
 import { Form } from 'formsy-react'
 import RaisedButton from 'material-ui/lib/raised-button'
 import { ShrinkWrap } from './Flex'
-import FormsyText from './FormsyText'
+import FormsyText from 'formsy-material-ui/lib/FormsyText'
+
+
+const FormsyTextStyle = { marginBottom: '3rem' }
 
 
 const nameValidationErrors = {
@@ -48,6 +51,7 @@ export default class AddNameForm extends Component {
                 <ShrinkWrap flexDirection="column">
 
                     <FormsyText
+                     style={FormsyTextStyle}
                      name="name"
                      required
                      formNoValidate
