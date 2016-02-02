@@ -1,5 +1,6 @@
 /* eslint-disable no-var */
 /* eslint-disable prefer-template */
+/* eslint-disable no-console */
 
 
 var path    = require('path')
