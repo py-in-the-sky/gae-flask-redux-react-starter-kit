@@ -37,6 +37,7 @@ export default class AddNameForm extends Component {
         this.clearServerValidation = this.clearServerValidation.bind(this)
         this.setValid = () => this.setState({ isValid: true })
         this.setInvalid = () => this.setState({ isValid: false })
+        this.setNameInput = c => this.nameInput = c
     }
 
     render () {
@@ -51,6 +52,7 @@ export default class AddNameForm extends Component {
                 <ShrinkWrap flexDirection="column">
 
                     <FormsyText
+                     ref={this.setNameInput}
                      style={FormsyTextStyle}
                      name="name"
                      required
@@ -74,6 +76,7 @@ export default class AddNameForm extends Component {
     submit (model, resetForm) {
         this.props.addName(model.name)
         resetForm()
+        this.nameInput.muiComponent.focus()
     }
 
     componentWillUnmount () {
