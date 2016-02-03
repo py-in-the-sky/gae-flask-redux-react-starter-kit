@@ -10,13 +10,25 @@ import { Themes } from 'app/utils/styles'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 
-const DefaultTheme   = ThemeManager.getMuiTheme(Themes.Default)
+const DefaultTheme = ThemeManager.getMuiTheme(Themes.Default)
 
 
 export default class HomePage extends Component {
+    constructor (props) {
+        super(props)
+        this.refAddNameForm = c => this.addNameForm = c
+    }
+
     getChildContext () {
         return {
             muiTheme: DefaultTheme,
+        }
+    }
+
+    componentDidUpdate (prevProps) {
+        const { pageHasEntered } = this.props
+        if (pageHasEntered && !prevProps.pageHasEntered) {
+            this.addNameForm.focus()
         }
     }
 
@@ -30,7 +42,7 @@ export default class HomePage extends Component {
         } = this.props
 
         return (
-            <Block height="100%">
+            <Block height="95%">
                 <Frame backgroundColor="gray">
                     <Paper zDepth={4}>
                         <Container justifyContent="space-between">
@@ -41,6 +53,7 @@ export default class HomePage extends Component {
                             </Container>
                             <Container>
                                 <AddNameForm
+                                 ref={this.refAddNameForm}
                                  addName={addName}
                                  serverValidation={serverValidation}
                                  clearServerValidation={clearServerValidation} />
@@ -58,6 +71,7 @@ export default class HomePage extends Component {
 
 
 HomePage.propTypes = {
+    pageHasEntered: PropTypes.bool.isRequired,
     names: ImmutablePropTypes.listOf( PropTypes.shape({
         name: PropTypes.string.isRequired,
     }) ).isRequired,
@@ -69,6 +83,11 @@ HomePage.propTypes = {
     addName:               PropTypes.func.isRequired,
     requestsPending:       PropTypes.bool.isRequired,
     clearServerValidation: PropTypes.func.isRequired,
+}
+
+
+HomePage.defaultProps = {
+    pageHasEntered: false,
 }
 
 
