@@ -76,7 +76,7 @@ export default class AddNameForm extends Component {
     submit (model, resetForm) {
         this.props.addName(model.name)
         resetForm()
-        this.nameInput.muiComponent.focus()
+        this.nameInput.focus()
     }
 
     componentWillUnmount () {
