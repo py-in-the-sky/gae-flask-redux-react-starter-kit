@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/py-in-the-sky/gae-flask-redux-react-starter-kit#readme",
   "dependencies": {
-    "formsy-material-ui": "file:/Users/ryanwise/learning/web-experiments/clones/formsy-material-ui",
+    "formsy-material-ui": "file:../formsy-material-ui",
     "formsy-react": "^0.17.0",
     "history": "^1.17.0",
     "humps": "^1.0.0",
