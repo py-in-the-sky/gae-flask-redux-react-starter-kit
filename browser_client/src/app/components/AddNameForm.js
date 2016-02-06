@@ -37,7 +37,8 @@ export default class AddNameForm extends Component {
         this.clearServerValidation = this.clearServerValidation.bind(this)
         this.setValid = () => this.setState({ isValid: true })
         this.setInvalid = () => this.setState({ isValid: false })
-        this.setNameInput = c => this.nameInput = c
+        this.refNameInput = c => this.nameInput = c
+        this.focus = () => this.nameInput.focus()
     }
 
     render () {
@@ -52,7 +53,7 @@ export default class AddNameForm extends Component {
                 <ShrinkWrap flexDirection="column">
 
                     <FormsyText
-                     ref={this.setNameInput}
+                     ref={this.refNameInput}
                      style={FormsyTextStyle}
                      name="name"
                      required

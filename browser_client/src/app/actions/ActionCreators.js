@@ -14,6 +14,7 @@ export const subtractLastName      = createAction(T.SUBTRACT_LAST_NAME)
 export const clearServerError      = createAction(T.CLEAR_SERVER_ERROR)
 export const clearNetworkError     = createAction(T.CLEAR_NETWORK_ERROR)
 export const clearServerValidation = createAction(T.CLEAR_SERVER_VALIDATION)
+export const enteredPagePath       = createAction(T.ENTERED_PAGE_PATH)
 
 
 export const addName = createAction(

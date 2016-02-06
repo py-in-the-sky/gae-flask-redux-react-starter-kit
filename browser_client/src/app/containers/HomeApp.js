@@ -6,8 +6,22 @@ import { ActionCreators } from 'app/actions'
 const { addName, clearServerValidation } = ActionCreators
 
 
-const mapStateToProps = ({ names, serverValidation, pendingRequests }) =>
-    ({ names, serverValidation, requestsPending: pendingRequests.size > 0 })
+const mapStateToProps = (state, ownProps) => {
+    const { location: { pathname } } = ownProps
+    const {
+        names,
+        serverValidation,
+        pendingRequests,
+        enteredPagePath,
+    } = state
+
+    return {
+        names,
+        serverValidation,
+        requestsPending: pendingRequests.size > 0,
+        pageHasEntered: pathname === enteredPagePath,
+    }
+}
 
 
 const createApp = () => connect(mapStateToProps, {

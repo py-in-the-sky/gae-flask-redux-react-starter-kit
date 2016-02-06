@@ -4,13 +4,22 @@ import { VelocityTransitionGroup } from 'velocity-react'
 
 
 export default class PageHandler extends Component {
+    constructor (props) {
+        super(props)
+        const complete = () => this.props.enteredPagePath(this.props.location.pathname)
+        this.pageEnter = {
+            ...pageEnter,
+            complete
+        }
+    }
+
     render () {
         const { children, location: { pathname } } = this.props
 
         return (
             <VelocityTransitionGroup
              component="div"
-             enter={pageEnter}
+             enter={this.pageEnter}
              leave={pageLeave}>
 
                 <div key={pathname} style={pageStyle}>
@@ -28,6 +37,7 @@ PageHandler.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
     }).isRequired,
+    enteredPagePath: PropTypes.func.isRequired,
 }
 
 

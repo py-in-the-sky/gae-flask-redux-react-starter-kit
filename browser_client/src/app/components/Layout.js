@@ -8,7 +8,13 @@ import { imageMarkup } from 'app/utils/images'
 
 export default class Layout extends Component {
     render () {
-        const { location: { pathname }, children, windowSize } = this.props
+        const {
+            location: { pathname },
+            children,
+            windowSize,
+            enteredPagePath,
+        } = this.props
+
         const imageUrl = imageMarkup(pathname, windowSize)
         const background = imageUrl
             ? `${imageUrl} no-repeat center center fixed`
@@ -25,7 +31,7 @@ export default class Layout extends Component {
                 </ShrinkWrap>
 
                 <Flex>
-                    <PageHandler location={location}>
+                    <PageHandler location={location} enteredPagePath={enteredPagePath}>
                         {children}
                     </PageHandler>
                 </Flex>
@@ -42,4 +48,5 @@ Layout.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
     }).isRequired,
+    enteredPagePath: PropTypes.func.isRequired,
 }

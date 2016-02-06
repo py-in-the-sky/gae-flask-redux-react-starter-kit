@@ -53,3 +53,8 @@ export const windowWidth = handleActions({
 export const windowSize = handleActions({
     [T.WINDOW_DATA]: (_, { payload }) => payload.windowSize,
 }, initialWindowSize)
+
+
+export const enteredPagePath = handleActions({
+    [T.ENTERED_PAGE_PATH]: (_, { payload }) => payload,
+}, null)
