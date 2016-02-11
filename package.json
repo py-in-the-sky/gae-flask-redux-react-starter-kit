@@ -61,6 +61,7 @@
     "recompose": "^0.14.5",
     "redux": "^3.0.5",
     "redux-actions": "^0.9.0",
+    "redux-form": "^4.1.9",
     "redux-thunk": "^1.0.3",
     "velocity-animate": "^1.2.3",
     "velocity-react": "twitter-fabric/velocity-react"
