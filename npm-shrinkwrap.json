@@ -789,15 +789,15 @@
                     }
                   }
                 },
-                "ansi-regex": {
-                  "version": "2.0.0",
-                  "from": "ansi-regex@^2.0.0",
-                  "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.0.0.tgz"
-                },
                 "ansi": {
                   "version": "0.3.0",
                   "from": "ansi@~0.3.0",
                   "resolved": "https://registry.npmjs.org/ansi/-/ansi-0.3.0.tgz"
+                },
+                "ansi-regex": {
+                  "version": "2.0.0",
+                  "from": "ansi-regex@^2.0.0",
+                  "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.0.0.tgz"
                 },
                 "ansi-styles": {
                   "version": "2.1.0",
@@ -11201,15 +11201,15 @@
                   "from": "gauge@~1.2.0",
                   "resolved": "https://registry.npmjs.org/gauge/-/gauge-1.2.2.tgz"
                 },
-                "generate-object-property": {
-                  "version": "1.2.0",
-                  "from": "generate-object-property@^1.1.0",
-                  "resolved": "https://registry.npmjs.org/generate-object-property/-/generate-object-property-1.2.0.tgz"
-                },
                 "generate-function": {
                   "version": "2.0.0",
                   "from": "generate-function@^2.0.0",
                   "resolved": "https://registry.npmjs.org/generate-function/-/generate-function-2.0.0.tgz"
+                },
+                "generate-object-property": {
+                  "version": "1.2.0",
+                  "from": "generate-object-property@^1.1.0",
+                  "resolved": "https://registry.npmjs.org/generate-object-property/-/generate-object-property-1.2.0.tgz"
                 },
                 "graceful-fs": {
                   "version": "4.1.2",
@@ -11271,15 +11271,15 @@
                   "from": "is-property@^1.0.0",
                   "resolved": "https://registry.npmjs.org/is-property/-/is-property-1.0.2.tgz"
                 },
-                "isarray": {
-                  "version": "0.0.1",
-                  "from": "isarray@0.0.1",
-                  "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
-                },
                 "is-typedarray": {
                   "version": "1.0.0",
                   "from": "is-typedarray@~1.0.0",
                   "resolved": "https://registry.npmjs.org/is-typedarray/-/is-typedarray-1.0.0.tgz"
+                },
+                "isarray": {
+                  "version": "0.0.1",
+                  "from": "isarray@0.0.1",
+                  "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
                 },
                 "isstream": {
                   "version": "0.1.2",
@@ -14627,9 +14627,9 @@
       "resolved": "https://registry.npmjs.org/velocity-animate/-/velocity-animate-1.2.3.tgz"
     },
     "velocity-react": {
-      "version": "1.1.1",
-      "from": "twitter-fabric/velocity-react",
-      "resolved": "git://github.com/twitter-fabric/velocity-react.git#2e9dffa5191ae893983ae23f778b7bb6dd6603de"
+      "version": "1.1.2",
+      "from": "velocity-react@*",
+      "resolved": "https://registry.npmjs.org/velocity-react/-/velocity-react-1.1.2.tgz"
     },
     "webpack": {
       "version": "1.12.10",
@@ -15495,15 +15495,15 @@
                       "from": "ansi@~0.3.0",
                       "resolved": "https://registry.npmjs.org/ansi/-/ansi-0.3.0.tgz"
                     },
-                    "ansi-regex": {
-                      "version": "2.0.0",
-                      "from": "ansi-regex@^2.0.0",
-                      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.0.0.tgz"
-                    },
                     "ansi-styles": {
                       "version": "2.1.0",
                       "from": "ansi-styles@^2.1.0",
                       "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-2.1.0.tgz"
+                    },
+                    "ansi-regex": {
+                      "version": "2.0.0",
+                      "from": "ansi-regex@^2.0.0",
+                      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.0.0.tgz"
                     },
                     "are-we-there-yet": {
                       "version": "1.0.4",

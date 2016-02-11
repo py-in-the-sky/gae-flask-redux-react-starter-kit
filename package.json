@@ -64,7 +64,7 @@
     "redux-form": "^4.1.9",
     "redux-thunk": "^1.0.3",
     "velocity-animate": "^1.2.3",
-    "velocity-react": "twitter-fabric/velocity-react"
+    "velocity-react": "^1.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
