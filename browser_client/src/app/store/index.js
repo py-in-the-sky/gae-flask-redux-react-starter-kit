@@ -1,21 +1,24 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import apiMiddleware from 'app/middleware/api'
+import thunkMiddleware from 'redux-thunk'
 import * as reducers from 'app/reducers'
 
 
 export const createStoreWithMiddleware = () => {
-    const middleware = applyMiddleware(apiMiddleware)
+    const middleware = applyMiddleware(thunkMiddleware)
 
     if (__DEV__) {
         const logSlowReducers = require('app/utils/devLogSlowReducers')
         const reducer = combineReducers(logSlowReducers(reducers))
 
-        const { devTools, persistState } = require('redux-devtools')
+        const {
+            devTools,
+            // persistState
+        } = require('redux-devtools')
 
         const finalCreateStore = compose(
             middleware,
-            devTools(),
-            persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+            devTools()
+            // persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
         )(createStore)
 
         const store = finalCreateStore(reducer)
