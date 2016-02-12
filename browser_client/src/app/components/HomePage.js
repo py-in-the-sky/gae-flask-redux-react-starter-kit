@@ -25,18 +25,12 @@ export default class HomePage extends Component {
         }
     }
 
-    componentDidUpdate (prevProps) {
-        const { pageHasEntered } = this.props
-        if (pageHasEntered && !prevProps.pageHasEntered) {
-            this.addNameForm.focus()
-        }
-    }
-
     render () {
         const {
             names,
             serverValidation,
             addName,
+            pageHasEntered,
             requestsPending,
             clearServerValidation,
         } = this.props
@@ -47,16 +41,21 @@ export default class HomePage extends Component {
                     <Paper zDepth={4}>
                         <Container justifyContent="space-between">
                             <Container padding={names.size ? '1rem' : 0}>
+
                                 <Greetings
-                                 names={names}
-                                 requestsPending={requestsPending} />
+                                    names={names}
+                                    requestsPending={requestsPending}
+                                />
+
                             </Container>
                             <Container>
+
                                 <AddNameForm
-                                 ref={this.refAddNameForm}
-                                 addName={addName}
-                                 serverValidation={serverValidation}
-                                 clearServerValidation={clearServerValidation} />
+                                    ref={this.refAddNameForm}
+                                    onSubmit={addName}
+                                    formHasEntered={pageHasEntered}
+                                />
+
                             </Container>
                         </Container>
                     </Paper>
@@ -75,14 +74,8 @@ HomePage.propTypes = {
     names: ImmutablePropTypes.listOf( PropTypes.shape({
         name: PropTypes.string.isRequired,
     }) ).isRequired,
-    serverValidation: PropTypes.shape({
-        message: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-        }),
-    }).isRequired,
     addName:               PropTypes.func.isRequired,
     requestsPending:       PropTypes.bool.isRequired,
-    clearServerValidation: PropTypes.func.isRequired,
 }
 
 

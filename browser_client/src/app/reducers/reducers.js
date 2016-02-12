@@ -3,6 +3,7 @@ import { List, Set } from 'immutable'
 import { getWindowWidth } from 'app/utils/dom'
 import * as Styles from 'app/utils/styles'
 import { ActionTypes as T } from 'app/actions'
+import { reducer as formReducer } from 'redux-form'
 
 
 const emptyList   = List()
@@ -10,6 +11,9 @@ const emptySet    = Set()
 const emptyObject = {}
 const initialWindowWidth = getWindowWidth()
 const initialWindowSize  = Styles.windowSize(initialWindowWidth)
+
+
+export const form = formReducer
 
 
 export const names = handleActions({

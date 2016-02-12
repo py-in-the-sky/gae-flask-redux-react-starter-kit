@@ -21,7 +21,7 @@ export const addName = createAction(
 
     undefined,
 
-    name => {
+    ({ name }) => {
         const requestId = uniqueId('addName')
 
         const fetchCall = {

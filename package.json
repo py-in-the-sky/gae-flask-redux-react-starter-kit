@@ -62,7 +62,7 @@
     "redux": "^3.0.5",
     "redux-actions": "^0.9.0",
     "redux-form": "^4.1.9",
-    "redux-thunk": "^1.0.3",
+    "redux-thunk": "https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.3.tgz",
     "velocity-animate": "^1.2.3",
     "velocity-react": "^1.1.2"
   },

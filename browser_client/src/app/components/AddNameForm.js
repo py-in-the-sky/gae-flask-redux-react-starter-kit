@@ -1,103 +1,104 @@
 import React, { PropTypes } from 'react'
 import Component from 'react-pure-render/component'
-import { Form } from 'formsy-react'
-import RaisedButton from 'material-ui/lib/raised-button'
 import { ShrinkWrap } from './Flex'
-import FormsyText from 'formsy-material-ui/lib/FormsyText'
+import { reduxForm } from 'redux-form'
+import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 
-const FormsyTextStyle = { marginBottom: '3rem' }
+const textFieldStyle = { marginBottom: '3rem' }
 
 
-const nameValidationErrors = {
-    isAlpha:   'You may only use letters',
-    minLength: 'The name is too short',
-    maxLength: 'The name is too long',
+const fields = [ 'name' ]
+const nonAlphaRe = /[^a-zA-Z]/
+const validate = values => {
+    const errors = {}
+
+    const { name } = values
+    if (!name) {
+        errors.name = 'A name is required'
+    }
+    else if (nonAlphaRe.test(name)) {
+        errors.name = 'You may only use letters'
+    } else if (name.length > 10) {
+        errors.name = 'The name is too long (10 characters max)'
+    }
+
+    return errors
 }
 
 
-// external validation errors can come in from server
-// and be passed down as props
-// external validations take priority over internal
-// form ones; internal form errors will only appear
-// if `validationErrors` is falsy
-// e.g.: const externalValidationErrors = {
-//           name: 'some error from server',
-//       }
-// this is another alternative:
-//  https://github.com/christianalfoni/formsy-react/blob
-//  /master/API.md#updateinputswitherrorerrors
-
-
-export default class AddNameForm extends Component {
+export class AddNameForm extends Component {
     constructor (props) {
         super(props)
-        this.state  = { isValid: false }
         this.submit = this.submit.bind(this)
-        this.clearServerValidation = this.clearServerValidation.bind(this)
-        this.setValid = () => this.setState({ isValid: true })
-        this.setInvalid = () => this.setState({ isValid: false })
         this.refNameInput = c => this.nameInput = c
-        this.focus = () => this.nameInput.focus()
+    }
+
+    componentDidUpdate (prevProps) {
+        const { formHasEntered } = this.props
+        if (formHasEntered && !prevProps.formHasEntered) {
+            this.nameInput.focus()
+        }
     }
 
     render () {
+        const { fields: { name }, submitting, valid } = this.props
+
         return (
-            <Form
-             validationErrors={this.props.serverValidation.message}
-             onChange={this.clearServerValidation}
-             onValid={this.setValid}
-             onInvalid={this.setInvalid}
-             onValidSubmit={this.submit}>
+            <form onSubmit={this.submit}>
 
                 <ShrinkWrap flexDirection="column">
 
-                    <FormsyText
-                     ref={this.refNameInput}
-                     style={FormsyTextStyle}
-                     name="name"
-                     required
-                     formNoValidate
-                     floatingLabelText="Name"
-                     validationErrors={nameValidationErrors}
-                     validations="isAlpha,minLength:1,maxLength:10" />
+                    <TextField
+                        ref={this.refNameInput}
+                        style={textFieldStyle}
+                        floatingLabelText="Name"
+                        errorText={name.touched && name.error}
+                        {...name}
+                    />
 
                     <RaisedButton
-                     type="submit"
-                     primary={true}
-                     disabled={!this.state.isValid}
-                     label="ADD NAME" />
+                        type="submit"
+                        primary={true}
+                        disabled={submitting || !valid}
+                        label="ADD NAME"
+                    />
 
                 </ShrinkWrap>
 
-            </Form>
+            </form>
         )
     }
 
-    submit (model, resetForm) {
-        this.props.addName(model.name)
+    submit (e) {
+        const { handleSubmit, resetForm } = this.props
+        handleSubmit(e)
         resetForm()
         this.nameInput.focus()
-    }
-
-    componentWillUnmount () {
-        this.clearServerValidation()
-    }
-
-    clearServerValidation () {
-        if (this.props.serverValidation.message) {
-            this.props.clearServerValidation()
-        }
     }
 }
 
 
 AddNameForm.propTypes = {
-    addName: PropTypes.func.isRequired,
-    clearServerValidation: PropTypes.func.isRequired,
-    serverValidation: PropTypes.shape({
-        message: PropTypes.shape({
-            name: PropTypes.string.isRequired,
+    formHasEntered: PropTypes.bool.isRequired,
+    fields: PropTypes.shape({
+        name: PropTypes.shape({
+            value: PropTypes.string,
+            error: PropTypes.string,
+            visited: PropTypes.bool,
+            touched: PropTypes.bool,
         }),
-    }).isRequired,
+    }),
+    handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    valid: PropTypes.bool.isRequired,
 }
+
+
+export default reduxForm({
+    form: 'addName',
+    fields: [ 'name' ],
+    validate,
+})(AddNameForm)
