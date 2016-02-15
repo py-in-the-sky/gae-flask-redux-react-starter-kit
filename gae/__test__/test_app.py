@@ -1,6 +1,6 @@
 import pytest
 import json
-from app.models import name
+from app.models.ndb import name
 from app import create_app
 from config import config
 

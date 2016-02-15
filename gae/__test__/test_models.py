@@ -1,4 +1,4 @@
-from app.models import name
+from app.models.ndb import name
 import pytest
 import datetime
 from google.appengine.ext.db import datastore_errors

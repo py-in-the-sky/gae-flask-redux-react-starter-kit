@@ -1,7 +1,7 @@
 from .config import Config
 from werkzeug.debug import DebuggedApplication
 from werkzeug.contrib.profiler import ProfilerMiddleware
-from app.models.name import Name, root
+from app.models.ndb.name import Name, root
 
 
 DEBUG = 1

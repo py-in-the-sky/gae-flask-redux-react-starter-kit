@@ -1,6 +1,10 @@
 aniso8601==1.1.0
 Flask==0.10.1
+Flask-GraphQL==1.1.0
 Flask-RESTful==0.3.4
+graphene==0.7.2
+graphql-core==0.4.12.1
+graphql-relay==0.3.3
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23

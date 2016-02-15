@@ -1,7 +1,7 @@
 from flask.ext.restful import \
     Resource, fields, marshal_with, reqparse
 from google.appengine.ext import ndb
-from app.models import name
+from app.models.ndb import name
 from app.utils.reqparse import string_length
 from app.utils.func import compose
 # from app.utils.werkzeug_debugger import werkzeug_debugger

@@ -17,16 +17,21 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /static/
-  secure: always
-  static_dir: static
-
 # This handler tells app engine how to route requests to a WSGI application.
 # The script value is in the format <path.to.module>.<wsgi_application>
 # where <wsgi_application> is a WSGI application object.
-- url: (/api/.*|/_ah/warmup|/_console)
+- url: (/graphql|/api/.*|/_ah/warmup)
   script: main.app
   secure: always
+
+- url: (/_console|/graphiql|/static/graphql/.*)
+  script: main.app
+  secure: always
+  # login: admin
+
+- url: /static/
+  secure: always
+  static_dir: static
 
 - url: .*
   secure: always

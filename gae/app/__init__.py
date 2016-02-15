@@ -8,6 +8,10 @@ def create_app(config):
     from .api import api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api')
 
+    from .graphql import schema
+    from flask_graphql import GraphQL
+    GraphQL(app, schema=schema)  # creates and registers graphql blueprint
+
 
     @app.route('/_ah/warmup')
     def warmup():
