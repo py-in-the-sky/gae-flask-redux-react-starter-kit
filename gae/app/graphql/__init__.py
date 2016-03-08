@@ -1,9 +1,13 @@
 import graphene
-from app.models.ndb import name
+
+from app.models.ndb.name import Name as NdbName
+from .custom_types.compound import NdbObjectType
+from .custom_types.scalar import DateTime
 
 
-class Name(graphene.ObjectType):
+class Name(NdbObjectType):
     name = graphene.String()
+    created = graphene.Field(DateTime())
 
 
 class Query(graphene.ObjectType):
@@ -22,7 +26,8 @@ class Query(graphene.ObjectType):
         return 'Blah' * args.get('n')
 
     def resolve_name(self, args, info):
-        return Name(name.Name.random_key().get().name)
+        random_name = NdbName.random_key().get()
+        return Name.from_ndb_entity(random_name)
 
 
 schema = graphene.Schema(query=Query)

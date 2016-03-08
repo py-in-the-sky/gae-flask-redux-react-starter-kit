@@ -5,7 +5,7 @@ from app.models.ndb.name import Name, root
 
 
 DEBUG = 1
-PROFILE = 1
+PROFILE = 0
 
 
 class Development(Config):
