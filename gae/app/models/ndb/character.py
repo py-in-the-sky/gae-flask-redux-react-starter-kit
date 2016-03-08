@@ -1,6 +1,6 @@
 from google.appengine.ext import ndb
 
-from friendship import Friendship
+from .friendship import Friendship
 
 
 root = ndb.Key('CharacterRoot', 'character_root')
@@ -10,9 +10,9 @@ class Character(ndb.Model):
     name = ndb.StringProperty(required=True, indexed=True)
     description = ndb.TextProperty(required=True)
     faction = ndb.KeyProperty(required=True, kind='Faction', indexed=True)
-    # image = ndb.BlobProperty()  # TODO: make a separate, linked entity that holds the image
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
+    # image = ndb.BlobProperty()  # TODO: make a separate, linked entity that holds the image
 
     def get_friends(self):
         return Friendship.get_friends(self)

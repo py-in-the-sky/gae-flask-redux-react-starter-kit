@@ -11,37 +11,49 @@ class Friendship(ndb.Model):
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
 
     def get_friend(self, character):
-        # TODO: After rewriting `get_friends` if this is no longer used anywhere, remove it.
+        return self._get_friend_key(character).get()
+
+    def _get_friend_key(self, character):
         character_key = character.key
         friend_key = self.character2 if self.character1 == character_key else self.character1
-        return friend_key.get()
+        return friend_key
 
     @classmethod
-    def get_friends(cls, character, cursor=None, page_size=4):
-        # TODO: Try a projection query that returns character2 if character is character1 and
-        # character1 otherwise.
-        # TODO: Wrap this up in a sync tasklet that'll fetch the two queries concurrently
-        # and get all the characters from the character keys concurrently and in batches
-        # before returning all the characters.
-        # TODO: The structure of Friendship doesn't seem to support query cursors very well.
-        # Additionally, the current query is already complex and may be hard to change in
-        # the future.  Instead, look into having a single `character` property that's a
-        # repeated KeyProperty with a custom validator to ensure only two values are
-        # stored under it (one key for each friend).
-        # See:
-        #   https://cloud.google.com/appengine/docs/python/ndb/properties#options
-        #   https://cloud.google.com/appengine/docs/python/ndb/properties#repeated
-        # This may not work.  See:
-        #   https://cloud.google.com/appengine/docs/python/ndb/projectionqueries#Python_Limitations_on_projections
-        # perhaps order by `created`
+    def get_friends(cls, character):
+        friends_keys = cls._get_friends_keys(character)
+        return ndb.get_multi(friends_keys)
+
+    @classmethod
+    def _get_friends_keys(cls, character):
         character_key = character.key
-        q = cls.query(ndb.OR(cls.character1 == character_key, cls.character2 == character_key))
-        friendships = q.order(cls.character1).order(cls.character2).fetch()
-        return [fs.get_friend(character) for fs in friendships]  # TODO: async and batched
+        q = cls.query(ndb.OR(
+            cls.character1 == character_key,
+            cls.character2 == character_key
+        ))
+        friendships = q.fetch()
+        return [fs._get_friend_key(character) for fs in friendships]
 
     @classmethod
-    def get_friends_of_friends(cls, character, cursor=None, page_size=4):
-        friends = cls.get_friends(character, None, None)
+    def get_friends_of_friends(cls, character):
+        character_key = character.key
+        friends_keys = cls._get_friends_keys(character)
+        q1 = cls.query(
+            ndb.AND(cls.character1.IN(friends_keys), cls.character1 != character_key),
+            projection=[cls.character2],
+            distinct=True
+        )
+        q2 = cls.query(
+            ndb.AND(
+                cls.character2.IN(friends_keys),
+                cls.character2 != character_key
+            ),
+            projection=[cls.character2],
+            distinct=True
+        )
+        q = cls.query(ndb.OR(q1, q2), distinct=True)
+
+
+        friends = cls.get_friends(character)
         friends_keys = [f.key for f in friends]
         q1 = cls.query(cls.character1.IN(friends_keys), projection=[cls.character2], distinct=True)
         q2 = cls.query(cls.character2.IN(friends_keys), projection=[cls.character1], distinct=True)
