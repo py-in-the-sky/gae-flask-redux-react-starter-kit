@@ -10,11 +10,6 @@ class Friendship(ndb.Model):
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
 
-    def _get_friend_key(self, character):
-        character_key = character.key
-        friend_key = self.character2 if self.character1 == character_key else self.character1
-        return friend_key
-
     @classmethod
     def get_friends(cls, character):
         friends_keys = cls._get_friends_keys(character)
@@ -28,7 +23,11 @@ class Friendship(ndb.Model):
             cls.character2 == character_key
         ))
         friendships = q.fetch()
-        return [fs._get_friend_key(character) for fs in friendships]
+        return [fs._get_friend_key(character_key) for fs in friendships]
+
+    def _get_friend_key(self, character_key):
+        friend_key = self.character2 if self.character1 == character_key else self.character1
+        return friend_key
 
     @classmethod
     def get_friends_of_friends(cls, character):
