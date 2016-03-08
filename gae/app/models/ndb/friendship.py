@@ -46,9 +46,9 @@ class Friendship(ndb.Model):
         ))
         friendships = q.fetch()
         keys = set(ch_key for fs in friendships for ch_key in (fs.character1, fs.character2))
-        friends_of_friends_keys = set(keys) - set(friends_keys) - {character.key}
+        friends_of_friends_keys = (set(keys) - set(friends_keys)) - {character.key}
         friends_of_friends = ndb.get_multi(friends_of_friends_keys)
-        return sorted(friends_of_friends, key=lambda ch: ch.name)
+        return sorted(friends_of_friends, key=lambda character: character.name)
 
     @classmethod
     @ndb.transactional
