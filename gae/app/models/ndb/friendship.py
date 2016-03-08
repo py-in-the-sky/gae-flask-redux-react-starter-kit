@@ -10,9 +10,6 @@ class Friendship(ndb.Model):
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
 
-    def get_friend(self, character):
-        return self._get_friend_key(character).get()
-
     def _get_friend_key(self, character):
         character_key = character.key
         friend_key = self.character2 if self.character1 == character_key else self.character1
@@ -35,29 +32,24 @@ class Friendship(ndb.Model):
 
     @classmethod
     def get_friends_of_friends(cls, character):
-        character_key = character.key
+        # For scalability, this should be periodically calculated and stored in
+        # the datastore by a cron job.  Then in a request-response cycle for an
+        # app request, the calculated value of friends-of-friends' keys can just
+        # be fetched and then the actual entities retrieved in a batched get.
+        # This would also allow the calculation of friends-of-friends to be
+        # more sophisticated without worrying about the runtime of the calculation
+        # since it wouldn't affect the performance of the app in responding to
+        # requests.
         friends_keys = cls._get_friends_keys(character)
-        q1 = cls.query(
-            ndb.AND(cls.character1.IN(friends_keys), cls.character1 != character_key),
-            projection=[cls.character2],
-            distinct=True
-        )
-        q2 = cls.query(
-            ndb.AND(
-                cls.character2.IN(friends_keys),
-                cls.character2 != character_key
-            ),
-            projection=[cls.character2],
-            distinct=True
-        )
-        q = cls.query(ndb.OR(q1, q2), distinct=True)
-
-
-        friends = cls.get_friends(character)
-        friends_keys = [f.key for f in friends]
-        q1 = cls.query(cls.character1.IN(friends_keys), projection=[cls.character2], distinct=True)
-        q2 = cls.query(cls.character2.IN(friends_keys), projection=[cls.character1], distinct=True)
-        # TODO
+        q = cls.query(ndb.OR(
+            cls.character1.IN(friends_keys),
+            cls.character2.IN(friends_keys)
+        ))
+        friendships = q.fetch()
+        keys = set(ch_key for fs in friendships for ch_key in (fs.character1, fs.character2))
+        friends_of_friends_keys = set(keys) - set(friends_keys) - {character.key}
+        friends_of_friends = ndb.get_multi(friends_of_friends_keys)
+        return sorted(friends_of_friends, key=lambda ch: ch.name)
 
     @classmethod
     @ndb.transactional

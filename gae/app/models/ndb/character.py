@@ -18,17 +18,7 @@ class Character(ndb.Model):
         return Friendship.get_friends(self)
 
     def get_friends_of_friends(self):
-        # TODO: Defer to efficient Friendship query:
-        # return Friendship.get_friends_of_friends(self)
-        friends = self.get_friends()
-
-        own_key = self.key
-        friends_keys = [f.key for f in friends]
-        friends_of_friends_keys = set(f2.key for f1 in friends for f2 in f1.get_friends())
-
-        friends_of_friends = [key.get() for key in friends_of_friends_keys
-                              if key not in friends_keys and key != own_key]
-        return friends_of_friends
+        return Friendship.get_friends_of_friends(self)
 
     @classmethod
     @ndb.transactional

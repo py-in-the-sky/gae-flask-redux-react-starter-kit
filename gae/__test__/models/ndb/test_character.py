@@ -7,7 +7,7 @@ from app.models.ndb import friendship, character, faction
 
 
 @pytest.yield_fixture(scope='function')
-def test_setup(testbed):
+def setup(testbed):
     TestSetup = namedtuple(
         'TestSetup',
         ('own_friendship', 'other_friendship', 'c3po', 'r2d2', 'bb8', 'resistance')
@@ -39,22 +39,25 @@ def create_faction(name_string):
     return faction_key.get()
 
 
-def test_properties(test_setup):
-    assert test_setup.c3po.name == 'C3PO'
-    assert test_setup.c3po.description == 'blah'
-    assert test_setup.c3po.faction.get().name == 'The Resistance'
-    assert isinstance(test_setup.c3po.created, datetime.datetime)
+def test_properties(setup):
+    assert setup.c3po.name == 'C3PO'
+    assert setup.c3po.description == 'blah'
+    assert setup.c3po.faction.get().name == 'The Resistance'
+    assert isinstance(setup.c3po.created, datetime.datetime)
 
 
-def test_get_friends(test_setup):
-    assert test_setup.c3po.get_friends() == [test_setup.r2d2]
+def test_get_friends(setup):
+    # TODO: move to test_friendship
+    assert setup.c3po.get_friends() == [setup.r2d2]
 
 
-def test_get_friends_of_friends(test_setup):
-    assert test_setup.c3po.get_friends_of_friends() == [test_setup.bb8]
+def test_get_friends_of_friends(setup):
+    # TODO: move to test_friendship
+    # TODO: have at least two characters in result
+    assert setup.c3po.get_friends_of_friends() == [setup.bb8]
 
 
-def test_ensure_character_name_not_in_datastore(test_setup):
+def test_ensure_character_name_not_in_datastore(setup):
     with pytest.raises(ValueError) as excinfo:
         character.Character.ensure_character_name_not_in_datastore('C3PO')
 
@@ -64,11 +67,11 @@ def test_ensure_character_name_not_in_datastore(test_setup):
     assert name == 'Han'
 
 
-def test_create_character(test_setup):
+def test_create_character(setup):
     kwargs = dict(
         name='C3PO',
         description='blah',
-        faction=test_setup.resistance.key
+        faction=setup.resistance.key
     )
 
     with pytest.raises(ValueError) as excinfo:
