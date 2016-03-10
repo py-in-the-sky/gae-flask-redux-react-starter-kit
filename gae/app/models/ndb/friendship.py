@@ -31,14 +31,14 @@ class Friendship(ndb.Model):
 
     @classmethod
     def get_friends_of_friends(cls, character):
-        # NB: For scalability, this should be periodically calculated and stored in
-        # the datastore by a cron job.  Then in a request-response cycle for an
-        # app request, the calculated value of friends-of-friends' keys can just
-        # be fetched and then the actual entities retrieved in a batched get.
-        # This would also allow the calculation of friends-of-friends to be
-        # more sophisticated without worrying about the runtime of the calculation
-        # since it wouldn't affect the performance of the app in responding to
-        # requests.
+        # NB: For scalability, the keys of friends-of-friends for each character
+        # should be periodically calculated and stored in the datastore by a cron job.
+        # Then for an HTTP request by a user, the calculated value of the keys of
+        # friends-of-friends could just be fetched and then the actual entities
+        # retrieved in a batched get.
+        # For this example app, though, the scalability concern is not a central
+        # issue, so the app will be left to simply make this calculation in
+        # response to a user request.
         friends_keys = cls._get_friends_keys(character)
         q = cls.query(ndb.OR(
             cls.character1.IN(friends_keys),
