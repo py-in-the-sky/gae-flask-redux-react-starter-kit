@@ -6,17 +6,29 @@ import pytest
 from app.models.ndb import friendship, character, faction
 
 
-@pytest.yield_fixture(scope='function')
-def setup(testbed):
-    TestSetup = namedtuple(
-        'TestSetup',
-        ('friendship', 'c3po', 'r2d2', 'resistance')
-    )
+@pytest.fixture(scope='function')
+def setup(testbed, data_wrapper):
     resistance = create_faction('The Resistance')
     c3po = create_character('C3PO', resistance)
     r2d2 = create_character('R2D2', resistance)
     f = friendship.Friendship.create_friendship(c3po, r2d2)
-    yield TestSetup(f, c3po, r2d2, resistance)
+
+    bb8 = create_character('BB8', resistance)
+    han = create_character('Han', resistance)
+    friendship.Friendship.create_friendship(bb8, r2d2)
+    friendship.Friendship.create_friendship(han, r2d2)
+
+    create_character('Mr. McNofriends', resistance)
+
+    return data_wrapper(f, c3po, r2d2, bb8, han, resistance)
+
+
+@pytest.fixture(scope='module')
+def data_wrapper():
+    return namedtuple(
+        'DataWrapper',
+        ('friendship', 'c3po', 'r2d2', 'bb8', 'han', 'resistance')
+    )
 
 
 def create_character(name_string, faction):
@@ -46,10 +58,28 @@ def test_properties(setup):
 def test_get_friends(setup):
     assert friendship.Friendship.get_friends(setup.c3po) == [setup.r2d2]
 
-    bb8 = create_character('BB8', setup.resistance)
-    friendship.Friendship.create_friendship(setup.r2d2, bb8)
+    friendship.Friendship.create_friendship(setup.c3po, setup.bb8)
+    assert friendship.Friendship.get_friends(setup.c3po) == [setup.r2d2, setup.bb8]
 
-    assert friendship.Friendship.get_friends(setup.r2d2) == [setup.c3po, bb8]
+
+def test_get_friends_of_friends(setup):
+    """
+    Tested:
+        * just friends-of-friends returned; not self or friends
+        * friends-of-friends returned in lexicographic order by name
+    """
+    fof = friendship.Friendship.get_friends_of_friends(setup.c3po)
+    assert fof == [setup.bb8, setup.han]
+
+    abc = create_character('ABC', setup.resistance)
+    friendship.Friendship.create_friendship(setup.r2d2, abc)
+    fof = friendship.Friendship.get_friends_of_friends(setup.c3po)
+    assert fof == [abc, setup.bb8, setup.han]
+
+    xyz = create_character('XYZ', setup.resistance)
+    friendship.Friendship.create_friendship(xyz, setup.r2d2)
+    fof = friendship.Friendship.get_friends_of_friends(setup.c3po)
+    assert fof == [abc, setup.bb8, setup.han, xyz]
 
 
 def test_ensure_friendship_not_in_datastore(setup):

@@ -31,7 +31,7 @@ class Friendship(ndb.Model):
 
     @classmethod
     def get_friends_of_friends(cls, character):
-        # For scalability, this should be periodically calculated and stored in
+        # NB: For scalability, this should be periodically calculated and stored in
         # the datastore by a cron job.  Then in a request-response cycle for an
         # app request, the calculated value of friends-of-friends' keys can just
         # be fetched and then the actual entities retrieved in a batched get.

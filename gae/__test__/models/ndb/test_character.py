@@ -3,22 +3,19 @@ from collections import namedtuple
 
 import pytest
 
-from app.models.ndb import friendship, character, faction
+from app.models.ndb import character, faction
 
 
-@pytest.yield_fixture(scope='function')
-def setup(testbed):
-    TestSetup = namedtuple(
-        'TestSetup',
-        ('own_friendship', 'other_friendship', 'c3po', 'r2d2', 'bb8', 'resistance')
-    )
+@pytest.fixture(scope='function')
+def setup(testbed, data_wrapper):
     resistance = create_faction('The Resistance')
     c3po = create_character('C3PO', resistance)
-    r2d2 = create_character('R2D2', resistance)
-    own_friendship = friendship.Friendship.create_friendship(c3po, r2d2)
-    bb8 = create_character('BB8', resistance)
-    other_friendship = friendship.Friendship.create_friendship(r2d2, bb8)
-    yield TestSetup(own_friendship, other_friendship, c3po, r2d2, bb8, resistance)
+    return data_wrapper(c3po, resistance)
+
+
+@pytest.fixture(scope='module')
+def data_wrapper():
+    return namedtuple('DataWrapper', ('c3po', 'resistance'))
 
 
 def create_character(name_string, faction):
@@ -44,17 +41,6 @@ def test_properties(setup):
     assert setup.c3po.description == 'blah'
     assert setup.c3po.faction.get().name == 'The Resistance'
     assert isinstance(setup.c3po.created, datetime.datetime)
-
-
-def test_get_friends(setup):
-    # TODO: move to test_friendship
-    assert setup.c3po.get_friends() == [setup.r2d2]
-
-
-def test_get_friends_of_friends(setup):
-    # TODO: move to test_friendship
-    # TODO: have at least two characters in result
-    assert setup.c3po.get_friends_of_friends() == [setup.bb8]
 
 
 def test_ensure_character_name_not_in_datastore(setup):
