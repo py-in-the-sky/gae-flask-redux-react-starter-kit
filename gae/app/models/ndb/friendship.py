@@ -52,7 +52,7 @@ class Friendship(ndb.Model):
 
     @classmethod
     @ndb.transactional
-    def create_friendship(cls, character_a, character_b):
+    def create(cls, character_a, character_b):
         if character_a == character_b:
             raise ValueError('"Friending" oneself is not allowed')
 
@@ -73,3 +73,18 @@ class Friendship(ndb.Model):
             raise ValueError('{}-{} friendship already exists'.format(character_a.name, character_b.name))
 
         return character_a, character_b
+
+    @classmethod
+    @ndb.transactional
+    def create_or_get(cls, character_a, character_b):
+        try:
+            return cls.create(character_a, character_b)
+        except ValueError:
+            return cls.get_by_characters(character_a, character_b)
+
+    @classmethod
+    def get_by_characters(cls, character_a, character_b):
+        return cls.query(ndb.OR(
+            ndb.AND(cls.character1 == character_a.key, cls.character2 == character_b.key),
+            ndb.AND(cls.character1 == character_b.key, cls.character2 == character_a.key)
+        ), ancestor=root).get()

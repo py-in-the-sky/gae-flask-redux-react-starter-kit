@@ -22,15 +22,15 @@ class Character(ndb.Model):
 
     @classmethod
     @ndb.transactional
-    def create_character(cls, **kwargs):
-        cls.ensure_character_name_not_in_datastore(kwargs.get('name'))
+    def create(cls, **kwargs):
+        cls.ensure_name_not_in_datastore(kwargs.get('name'))
 
         character_key = cls(parent=root, **kwargs).put()
         new_character = character_key.get()
         return new_character
 
     @classmethod
-    def ensure_character_name_not_in_datastore(cls, name):
+    def ensure_name_not_in_datastore(cls, name):
         if not name:
             return name
 
@@ -38,3 +38,16 @@ class Character(ndb.Model):
             raise ValueError('"{}" already exists'.format(name))
 
         return name
+
+    @classmethod
+    @ndb.transactional
+    def create_or_get(cls, **kwargs):
+        try:
+            return cls.create(**kwargs)
+        except ValueError:
+            name = kwargs['name']
+            return cls.get_by_name(name)
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query(cls.name == name, ancestor=root).get()

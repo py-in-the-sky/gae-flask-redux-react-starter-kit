@@ -13,4 +13,8 @@ def construct_from_ndb_entity(object_type, ndb_entity):
 class NdbObjectType(graphene.ObjectType):
     id = graphene.Field(NdbKey())
 
+    @property
+    def ndb_key(self):
+        return self.id
+
     from_ndb_entity = classmethod(construct_from_ndb_entity)

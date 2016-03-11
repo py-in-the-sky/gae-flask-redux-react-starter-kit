@@ -15,3 +15,13 @@ class Faction(ndb.Model):
             .query(Character.faction == self.key)\
             .order(Character.name)\
             .fetch()
+
+    @classmethod
+    def get_by_name_or_create(cls, name, description):
+        faction = cls.query(cls.name == name).get()
+        if faction:
+            return faction
+
+        faction_key = cls(name=name, description=description).put()
+        new_faction = faction_key.get()
+        return new_faction

@@ -1,7 +1,9 @@
-from .config import Config
 from werkzeug.debug import DebuggedApplication
 from werkzeug.contrib.profiler import ProfilerMiddleware
+
 from app.models.ndb.name import Name, root
+from __fixtures__ import ensure_minimal_data_in_datastore
+from .config import Config
 
 
 DEBUG = 1
@@ -27,7 +29,9 @@ class Development(Config):
             # For each HTTP request, log top ten slowest functions from the
             # source code in the `gae/app` directory.
 
-        for droid_name in ('bb8', 'r2d2', 'c3po'):
+        ensure_minimal_data_in_datastore()
+
+        for droid_name in ('bb8', 'r2d2', 'c3po'):  # TODO: delete
             if Name.query(Name.name == droid_name).count() == 0:
                 Name(parent=root, name=droid_name).put()
                 # ensure minimal data for dev in datastore
