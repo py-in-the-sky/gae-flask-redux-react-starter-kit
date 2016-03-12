@@ -1,10 +1,9 @@
 import graphene
 
-from app.models.ndb.name import Name as NdbName
 from app.models.ndb.faction import Faction as NdbFaction
 from app.models.ndb.character import Character as NdbCharacter
 from .custom_types.compound import NdbObjectType
-from .custom_types.scalar import DateTime
+from .custom_types.scalar import DateTime, NdbKey
 
 
 class Character(NdbObjectType):
@@ -17,15 +16,15 @@ class Character(NdbObjectType):
     faction = graphene.Field('Faction')
 
     def resolve_friends(self, args, info):
-        friends = self.ndb_key.get().get_friends()
+        friends = self.key.get().get_friends()
         return [Character.from_ndb_entity(f) for f in friends]
 
     def resolve_suggested(self, args, info):
-        suggested = self.ndb_key.get().get_friends_of_friends()
+        suggested = self.key.get().get_friends_of_friends()
         return [Character.from_ndb_entity(s) for s in suggested]
 
     def resolve_faction(self, args, info):
-        faction = self.ndb_key.get().faction.get()
+        faction = self.key.get().faction.get()
         return Faction.from_ndb_entity(faction)
 
 
@@ -37,27 +36,27 @@ class Faction(NdbObjectType):
     characters = graphene.List(Character)
 
     def resolve_characters(self, args, info):
-        characters = self.ndb_key.get().get_characters()
+        characters = self.key.get().get_characters()
         return [Character.from_ndb_entity(c) for c in characters]
 
 
-class Name(NdbObjectType):
-    name = graphene.String()
-    created = graphene.Field(DateTime)
-
-
 class Query(graphene.ObjectType):
-    name = graphene.Field(Name)
+    faction = graphene.Field(Faction, key=graphene.Argument(NdbKey))
     factions = graphene.List(Faction)
+    character = graphene.Field(Character, key=graphene.Argument(NdbKey))
     characters = graphene.List(Character)
 
-    def resolve_name(self, args, info):
-        random_name = NdbName.random_key().get()
-        return Name.from_ndb_entity(random_name)
+    def resolve_faction(self, args, info):
+        faction_key = args['key']
+        return Faction.from_ndb_entity(faction_key.get())
 
     def resolve_factions(self, args, info):
         factions = NdbFaction.query().fetch()
         return [Faction.from_ndb_entity(f) for f in factions]
+
+    def resolve_character(self, args, info):
+        character_key = args['key']
+        return Character.from_ndb_entity(character_key.get())
 
     def resolve_characters(self, args, info):
         characters = NdbCharacter.query().fetch()
