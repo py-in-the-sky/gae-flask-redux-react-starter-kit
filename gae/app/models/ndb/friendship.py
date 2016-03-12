@@ -10,6 +10,9 @@ class Friendship(ndb.Model):
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
 
+    def get_friends(self):
+        return ndb.get_multi([self.character1, self.character2])
+
     @classmethod
     def get_friends(cls, character):
         friends_keys = cls._get_friends_keys(character)
@@ -53,6 +56,8 @@ class Friendship(ndb.Model):
     @classmethod
     @ndb.transactional
     def create(cls, character_a, character_b):
+        # TODO: change to just take character keys
+
         if character_a == character_b:
             raise ValueError('"Friending" oneself is not allowed')
 
