@@ -54,6 +54,7 @@ skip_files:
 
 builtins:
 - remote_api: on
+- appstats: on
 
 inbound_services:
 - warmup
