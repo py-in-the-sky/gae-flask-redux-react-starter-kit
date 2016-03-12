@@ -12,7 +12,6 @@ class Character(ndb.Model):
     faction = ndb.KeyProperty(required=True, kind='Faction', indexed=True)
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
-    # image = ndb.BlobProperty()  # TODO: make a separate, linked entity that holds the image
 
     def get_friends(self):
         return Friendship.get_friends(self)

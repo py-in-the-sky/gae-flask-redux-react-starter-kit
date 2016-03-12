@@ -8,7 +8,6 @@ class Faction(ndb.Model):
     description = ndb.TextProperty(required=True)
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
-    # image = ndb.BlobProperty(required=True)  # TODO: make a separate, linked entity that holds the image
 
     def get_characters(self):
         return Character\
