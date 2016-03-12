@@ -16,8 +16,12 @@ class Faction(ndb.Model):
             .fetch()
 
     @classmethod
+    def get_by_name(cls, name):
+        return cls.query(cls.name == name).get()
+
+    @classmethod
     def get_by_name_or_create(cls, name, description):
-        faction = cls.query(cls.name == name).get()
+        faction = cls.get_by_name(name)
         if faction:
             return faction
 
