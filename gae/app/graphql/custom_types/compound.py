@@ -10,7 +10,7 @@ def construct_from_ndb_entity(object_type, ndb_entity):
     return object_type(**kwargs)
 
 
-class NdbObjectType(graphene.ObjectType):
+class NdbObjectType(graphene.Interface):
     key = graphene.Field(NdbKey())
 
     from_ndb_entity = classmethod(construct_from_ndb_entity)
