@@ -50,7 +50,7 @@ skip_files:
 - ^(config/test\.py)$
 - ^(config/development\.py)$
 - ^(__test__/.*)$
-- ^(__fixtures__/.*)$
+- ^(dev_data/.*)$
 
 builtins:
 - remote_api: on

@@ -2,7 +2,7 @@ from werkzeug.debug import DebuggedApplication
 from werkzeug.contrib.profiler import ProfilerMiddleware
 
 from app.models.ndb.name import Name, root
-from __fixtures__ import ensure_minimal_data_in_datastore
+from dev_data import ensure_minimal_data_in_datastore
 from .config import Config
 
 
