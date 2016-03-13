@@ -1,5 +1,4 @@
 import graphene
-from google.appengine.ext import ndb
 
 from app.models.ndb.character import Character as NdbCharacter
 from app.models.ndb.friendship import Friendship as NdbFriendship
@@ -19,7 +18,10 @@ class CreateCharacter(graphene.Mutation):
     @classmethod
     def mutate(cls, instance, args, info):
         character = NdbCharacter.create(**args)
-        return cls(character=Character.from_ndb_entity(character), ok=True)
+        return cls(
+            character=Character.from_ndb_entity(character),
+            ok=bool(character)
+        )
 
 
 class CreateFriendship(graphene.Mutation):
@@ -28,16 +30,11 @@ class CreateFriendship(graphene.Mutation):
         character_b = graphene.NonNull(NdbKey)
 
     ok = graphene.Boolean().NonNull
-    character_a = graphene.NonNull(Character)
-    character_b = graphene.NonNull(Character)
 
     @classmethod
     def mutate(cls, instance, args, info):
-        characters = ndb.get_multi([args['character_a'], args['character_b']])
-        # TODO: see TODO in frienship model about create taking keys instead of entities
-        friendship = NdbFriendship.create(*characters)
-        character_a, character_b = [Character.from_ndb_entity(f) for f in friendship.get_friends()]
-        return cls(ok=True, character_a=character_a, character_b=character_b)
+        friendship = NdbFriendship.create_from_keys(args['character_a'], args['character_b'])
+        return cls(ok=bool(friendship))
 
 
 class Mutation(graphene.ObjectType):

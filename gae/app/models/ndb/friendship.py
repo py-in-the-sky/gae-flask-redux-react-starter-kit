@@ -10,7 +10,7 @@ class Friendship(ndb.Model):
     created = ndb.DateTimeProperty(required=True, auto_now_add=True)
     updated = ndb.DateTimeProperty(required=True, auto_now_add=True, auto_now=True)
 
-    def get_friends(self):
+    def get_characters(self):
         return ndb.get_multi([self.character1, self.character2])
 
     @classmethod
@@ -43,6 +43,10 @@ class Friendship(ndb.Model):
         # issue, so the app will be left to simply make this calculation in
         # response to a user request.
         friends_keys = cls._get_friends_keys(character)
+
+        if not friends_keys:
+            return []
+
         q = cls.query(ndb.OR(
             cls.character1.IN(friends_keys),
             cls.character2.IN(friends_keys)
@@ -54,10 +58,14 @@ class Friendship(ndb.Model):
         return sorted(friends_of_friends, key=lambda character: character.name)
 
     @classmethod
+    @ndb.transactional(xg=True)
+    def create_from_keys(cls, character_a_key, character_b_key):
+        characters = ndb.get_multi([character_a_key, character_b_key])
+        return cls.create(*characters)
+
+    @classmethod
     @ndb.transactional
     def create(cls, character_a, character_b):
-        # TODO: change to just take character keys
-
         if character_a == character_b:
             raise ValueError('"Friending" oneself is not allowed')
 
@@ -70,9 +78,11 @@ class Friendship(ndb.Model):
 
     @classmethod
     def ensure_friendship_not_in_datastore(cls, character_a, character_b):
-        q = cls.query(ndb.OR(ndb.AND(cls.character1 == character_a.key, cls.character2 == character_b.key),
-                             ndb.AND(cls.character1 == character_b.key, cls.character2 == character_a.key)),
-                      ancestor=root)
+        q = cls.query(ndb.OR(
+            ndb.AND(cls.character1 == character_a.key, cls.character2 == character_b.key),
+            ndb.AND(cls.character1 == character_b.key, cls.character2 == character_a.key)),
+            ancestor=root
+        )
 
         if q.count() > 0:
             raise ValueError('{}-{} friendship already exists'.format(character_a.name, character_b.name))
